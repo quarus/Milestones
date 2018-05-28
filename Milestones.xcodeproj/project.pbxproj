@@ -1,0 +1,777 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6952C1E86C02B001FFD3E /* GroupViewController.swift */; };
+		725B56911E3E166B00B86662 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B56901E3E166B00B86662 /* TimelineViewController.swift */; };
+		72CFD31E1E348E15002C6481 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31D1E348E15002C6481 /* Protocols.swift */; };
+		72CFD3201E34F927002C6481 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31F1E34F927002C6481 /* StateModel.swift */; };
+		AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */; };
+		AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */; };
+		AC00F191201BD3160057EF3F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
+		AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F1932025F71F0057EF3F /* Exporter.swift */; };
+		AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */; };
+		AC0FCB9F1FA3902300E803A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */; };
+		AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC10BEF92039B75700D4552A /* Zoom.swift */; };
+		AC1181591FFEC22D00BBC024 /* TimelineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */; };
+		AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337AF1D293BBB00637527 /* LineGraphic.swift */; };
+		AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337B31D3257F700637527 /* LabelGraphic.swift */; };
+		AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CA71FE83581001B25E9 /* DateTests.swift */; };
+		AC235CAA1FE976BC001B25E9 /* GraphicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CA91FE976BC001B25E9 /* GraphicTests.swift */; };
+		AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */; };
+		AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */; };
+		AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */; };
+		AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */; };
+		AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */; };
+		AC3A21841D64EFE700C0C682 /* GraphicsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */; };
+		AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21851D65018800C0C682 /* GraphicView.swift */; };
+		AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21871D69A6EF00C0C682 /* Date+Extensions.swift */; };
+		AC3A218A1D6A1C7C00C0C682 /* Calendar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21891D6A1C7C00C0C682 /* Calendar+Extensions.swift */; };
+		AC459E8A1E16CD9B0073D657 /* TimelinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC459E891E16CD9B0073D657 /* TimelinesViewController.swift */; };
+		AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC459EAA1E1709040073D657 /* MainWindowController.swift */; };
+		AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46310B207E6BF500312012 /* AddAdjustmentViewController.swift */; };
+		AC46310E207E7F3000312012 /* MilestoneTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46310D207E7F3000312012 /* MilestoneTabViewController.swift */; };
+		AC4631102081EF4C00312012 /* ArrowGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46310F2081EF4C00312012 /* ArrowGraphic.swift */; };
+		AC463112208286F400312012 /* LineGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC463111208286F400312012 /* LineGraphicController.swift */; };
+		AC477CAC1D437D5A00FB225C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AC477CAA1D437D5A00FB225C /* DataModel.xcdatamodeld */; };
+		AC477CBA1D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB31D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift */; };
+		AC477CBB1D4385A100FB225C /* Group+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB41D4385A100FB225C /* Group+CoreDataClass.swift */; };
+		AC477CBC1D4385A100FB225C /* Group+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB51D4385A100FB225C /* Group+CoreDataProperties.swift */; };
+		AC477CBD1D4385A100FB225C /* Timeline+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB61D4385A100FB225C /* Timeline+CoreDataClass.swift */; };
+		AC477CBE1D4385A100FB225C /* Timeline+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB71D4385A100FB225C /* Timeline+CoreDataProperties.swift */; };
+		AC477CBF1D4385A100FB225C /* Milestone+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB81D4385A100FB225C /* Milestone+CoreDataClass.swift */; };
+		AC477CC01D4385A100FB225C /* Milestone+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC477CB91D4385A100FB225C /* Milestone+CoreDataProperties.swift */; };
+		AC4D24641FE66B2A005F6CCB /* TimelineCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D24631FE66B2A005F6CCB /* TimelineCalculator.swift */; };
+		AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */; };
+		AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
+		AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */; };
+		AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */; };
+		AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */; };
+		AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */; };
+		AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */; };
+		AC6E14BB1D846E09001B3AB6 /* OverlapCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */; };
+		AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6FA6721DBD1107004C5137 /* IconGraphic.swift */; };
+		AC7419831E17DAE100B4E00A /* MilestonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */; };
+		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
+		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
+		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
+		AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */; };
+		AC8DD2D11E1C182900FDA246 /* GroupsmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */; };
+		ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC463111208286F400312012 /* LineGraphicController.swift */; };
+		ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
+		ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46310F2081EF4C00312012 /* ArrowGraphic.swift */; };
+		ACA58D97209CEDC700A39F7A /* LineGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337AF1D293BBB00637527 /* LineGraphic.swift */; };
+		ACAACD7F20668EBC00AAB6F6 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */; };
+		ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */; };
+		ACB5929A1E06F52E003945FE /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */; };
+		ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7941CE87048005F4872 /* AppDelegate.swift */; };
+		ACB7A7971CE87048005F4872 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7961CE87048005F4872 /* Document.swift */; };
+		ACB7A79C1CE87048005F4872 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB7A79B1CE87048005F4872 /* Assets.xcassets */; };
+		ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */; };
+		ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */; };
+		ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */; };
+		ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */; };
+		ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */; };
+		ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8C1FC06CA200D9E136 /* ClipView.swift */; };
+		ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC4D246E1FE66EEE005F6CCB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ACB7A7891CE87048005F4872 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ACB7A7901CE87048005F4872;
+			remoteInfo = Milestones;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		41D6952C1E86C02B001FFD3E /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
+		725B56901E3E166B00B86662 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		72CFD31D1E348E15002C6481 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		72CFD31F1E34F927002C6481 /* StateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
+		AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HorizontalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VerticalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC00F190201BD3160057EF3F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		AC00F1932025F71F0057EF3F /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfoViewController.swift; sourceTree = "<group>"; };
+		AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		AC10BEF92039B75700D4552A /* Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zoom.swift; sourceTree = "<group>"; };
+		AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInfoViewController.swift; sourceTree = "<group>"; };
+		AC1337AF1D293BBB00637527 /* LineGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LineGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC1337B31D3257F700637527 /* LabelGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC235CA71FE83581001B25E9 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		AC235CA91FE976BC001B25E9 /* GraphicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicTests.swift; sourceTree = "<group>"; };
+		AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectGraphic.swift; sourceTree = "<group>"; };
+		AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinesAndCalendarweeksView.swift; sourceTree = "<group>"; };
+		AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAdjustmentViewController.swift; sourceTree = "<group>"; };
+		AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GraphicsFactory.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC3A21851D65018800C0C682 /* GraphicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GraphicView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC3A21871D69A6EF00C0C682 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Date+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC3A21891D6A1C7C00C0C682 /* Calendar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Calendar+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC459E891E16CD9B0073D657 /* TimelinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesViewController.swift; sourceTree = "<group>"; };
+		AC459EAA1E1709040073D657 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		AC46310B207E6BF500312012 /* AddAdjustmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdjustmentViewController.swift; sourceTree = "<group>"; };
+		AC46310D207E7F3000312012 /* MilestoneTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTabViewController.swift; sourceTree = "<group>"; };
+		AC46310F2081EF4C00312012 /* ArrowGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowGraphic.swift; sourceTree = "<group>"; };
+		AC463111208286F400312012 /* LineGraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGraphicController.swift; sourceTree = "<group>"; };
+		AC477CAB1D437D5A00FB225C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		AC477CB31D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "___COREDATA_DATAMODELNAME___+CoreDataModel.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB41D4385A100FB225C /* Group+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Group+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB51D4385A100FB225C /* Group+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Group+CoreDataProperties.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB61D4385A100FB225C /* Timeline+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Timeline+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB71D4385A100FB225C /* Timeline+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Timeline+CoreDataProperties.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB81D4385A100FB225C /* Milestone+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Milestone+CoreDataClass.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC477CB91D4385A100FB225C /* Milestone+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Milestone+CoreDataProperties.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC4D24631FE66B2A005F6CCB /* TimelineCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCalculator.swift; sourceTree = "<group>"; };
+		AC4D24691FE66EEE005F6CCB /* TimelineCalculationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimelineCalculationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCalculationTests.swift; sourceTree = "<group>"; };
+		AC4D246D1FE66EEE005F6CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC5246E91CEC19A9003B4978 /* Graphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Graphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TextGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationProtocols.swift; sourceTree = "<group>"; };
+		AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePositioner.swift; sourceTree = "<group>"; };
+		AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OverlapCorrector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC6FA6721DBD1107004C5137 /* IconGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGraphic.swift; sourceTree = "<group>"; };
+		AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestonesViewController.swift; sourceTree = "<group>"; };
+		AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesManagementViewController.swift; sourceTree = "<group>"; };
+		AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsmanagementViewController.swift; sourceTree = "<group>"; };
+		ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
+		ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneGraphicController.swift; sourceTree = "<group>"; };
+		ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
+		ACB7A7911CE87048005F4872 /* Milestones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Milestones.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACB7A7941CE87048005F4872 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACB7A7961CE87048005F4872 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Document.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACB7A79B1CE87048005F4872 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ACB7A7A01CE87048005F4872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExportPanelViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "NSRect+Extension.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataNotificationManager.swift; sourceTree = "<group>"; };
+		ACF15B8C1FC06CA200D9E136 /* ClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipView.swift; sourceTree = "<group>"; };
+		ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC4D24661FE66EEE005F6CCB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACB7A78E1CE87048005F4872 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		72A2ECB51E3E33A20056C8EF /* Milestones */ = {
+			isa = PBXGroup;
+			children = (
+				ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */,
+				AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */,
+				AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */,
+				AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */,
+			);
+			name = Milestones;
+			sourceTree = "<group>";
+		};
+		72A2ECB61E3E33E10056C8EF /* Graphic */ = {
+			isa = PBXGroup;
+			children = (
+				AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */,
+				AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */,
+				AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */,
+				AC3A21851D65018800C0C682 /* GraphicView.swift */,
+				AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */,
+				ACF15B8C1FC06CA200D9E136 /* ClipView.swift */,
+				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
+			);
+			name = Graphic;
+			sourceTree = "<group>";
+		};
+		AC008B871D3BBF970086B54B /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */,
+				AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */,
+				ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */,
+				AC5246E91CEC19A9003B4978 /* Graphic.swift */,
+				AC1337AF1D293BBB00637527 /* LineGraphic.swift */,
+				AC46310F2081EF4C00312012 /* ArrowGraphic.swift */,
+				AC6FA6721DBD1107004C5137 /* IconGraphic.swift */,
+				AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */,
+				AC1337B31D3257F700637527 /* LabelGraphic.swift */,
+				AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */,
+				AC463111208286F400312012 /* LineGraphicController.swift */,
+				ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */,
+			);
+			name = Graphics;
+			sourceTree = "<group>";
+		};
+		AC00F1922025D92D0057EF3F /* Export */ = {
+			isa = PBXGroup;
+			children = (
+				ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */,
+				AC00F1932025F71F0057EF3F /* Exporter.swift */,
+			);
+			name = Export;
+			sourceTree = "<group>";
+		};
+		AC46310A207E6BC400312012 /* Adjustment */ = {
+			isa = PBXGroup;
+			children = (
+				AC46310B207E6BF500312012 /* AddAdjustmentViewController.swift */,
+			);
+			name = Adjustment;
+			sourceTree = "<group>";
+		};
+		AC4D246A1FE66EEE005F6CCB /* TimelineCalculationTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC235CA91FE976BC001B25E9 /* GraphicTests.swift */,
+				AC235CA71FE83581001B25E9 /* DateTests.swift */,
+				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
+				AC4D246D1FE66EEE005F6CCB /* Info.plist */,
+			);
+			path = TimelineCalculationTests;
+			sourceTree = "<group>";
+		};
+		AC5246E21CEC0F8B003B4978 /* Views & Windows */ = {
+			isa = PBXGroup;
+			children = (
+				AC459EAA1E1709040073D657 /* MainWindowController.swift */,
+				AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */,
+				AC46310D207E7F3000312012 /* MilestoneTabViewController.swift */,
+				AC00F1922025D92D0057EF3F /* Export */,
+				72A2ECB51E3E33A20056C8EF /* Milestones */,
+				AC46310A207E6BC400312012 /* Adjustment */,
+				AC8B2EE21E1AA3DC00F9605E /* Groupsmanagement */,
+				AC8B2EE11E1AA33C00F9605E /* Timelines  */,
+				72A2ECB61E3E33E10056C8EF /* Graphic */,
+				72CFD31D1E348E15002C6481 /* Protocols.swift */,
+			);
+			name = "Views & Windows";
+			sourceTree = "<group>";
+		};
+		AC8B2EE11E1AA33C00F9605E /* Timelines  */ = {
+			isa = PBXGroup;
+			children = (
+				AC459E891E16CD9B0073D657 /* TimelinesViewController.swift */,
+				725B56901E3E166B00B86662 /* TimelineViewController.swift */,
+				AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */,
+				ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */,
+			);
+			name = "Timelines ";
+			sourceTree = "<group>";
+		};
+		AC8B2EE21E1AA3DC00F9605E /* Groupsmanagement */ = {
+			isa = PBXGroup;
+			children = (
+				AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */,
+				AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */,
+				AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */,
+				41D6952C1E86C02B001FFD3E /* GroupViewController.swift */,
+			);
+			name = Groupsmanagement;
+			sourceTree = "<group>";
+		};
+		ACB7A7881CE87048005F4872 = {
+			isa = PBXGroup;
+			children = (
+				ACB7A7931CE87048005F4872 /* Milestones */,
+				AC4D246A1FE66EEE005F6CCB /* TimelineCalculationTests */,
+				ACB7A7921CE87048005F4872 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ACB7A7921CE87048005F4872 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ACB7A7911CE87048005F4872 /* Milestones.app */,
+				AC4D24691FE66EEE005F6CCB /* TimelineCalculationTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ACB7A7931CE87048005F4872 /* Milestones */ = {
+			isa = PBXGroup;
+			children = (
+				AC00F190201BD3160057EF3F /* Config.swift */,
+				ACEBBCC11D28EFD600474B81 /* Grid */,
+				AC5246E21CEC0F8B003B4978 /* Views & Windows */,
+				ACB7A7A61CE879A4005F4872 /* Datamodel */,
+				AC008B871D3BBF970086B54B /* Graphics */,
+				ACB7A7941CE87048005F4872 /* AppDelegate.swift */,
+				AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */,
+				AC3A21891D6A1C7C00C0C682 /* Calendar+Extensions.swift */,
+				AC3A21871D69A6EF00C0C682 /* Date+Extensions.swift */,
+				ACB7A79B1CE87048005F4872 /* Assets.xcassets */,
+				ACB7A7A01CE87048005F4872 /* Info.plist */,
+			);
+			path = Milestones;
+			sourceTree = "<group>";
+		};
+		ACB7A7A61CE879A4005F4872 /* Datamodel */ = {
+			isa = PBXGroup;
+			children = (
+				AC477CB31D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift */,
+				ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */,
+				ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */,
+				AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */,
+				AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */,
+				AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */,
+				AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */,
+				AC477CB41D4385A100FB225C /* Group+CoreDataClass.swift */,
+				AC477CB51D4385A100FB225C /* Group+CoreDataProperties.swift */,
+				AC477CB61D4385A100FB225C /* Timeline+CoreDataClass.swift */,
+				AC477CB71D4385A100FB225C /* Timeline+CoreDataProperties.swift */,
+				AC477CB81D4385A100FB225C /* Milestone+CoreDataClass.swift */,
+				AC477CB91D4385A100FB225C /* Milestone+CoreDataProperties.swift */,
+				AC477CAA1D437D5A00FB225C /* DataModel.xcdatamodeld */,
+				ACB7A7961CE87048005F4872 /* Document.swift */,
+				72CFD31F1E34F927002C6481 /* StateModel.swift */,
+				ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */,
+			);
+			name = Datamodel;
+			sourceTree = "<group>";
+		};
+		ACEBBCC11D28EFD600474B81 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				AC4D24631FE66B2A005F6CCB /* TimelineCalculator.swift */,
+				AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */,
+				AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */,
+				AC10BEF92039B75700D4552A /* Zoom.swift */,
+			);
+			name = Grid;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC4D24681FE66EEE005F6CCB /* TimelineCalculationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC4D24701FE66EEE005F6CCB /* Build configuration list for PBXNativeTarget "TimelineCalculationTests" */;
+			buildPhases = (
+				AC4D24651FE66EEE005F6CCB /* Sources */,
+				AC4D24661FE66EEE005F6CCB /* Frameworks */,
+				AC4D24671FE66EEE005F6CCB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC4D246F1FE66EEE005F6CCB /* PBXTargetDependency */,
+			);
+			name = TimelineCalculationTests;
+			productName = TimelineCalculationTests;
+			productReference = AC4D24691FE66EEE005F6CCB /* TimelineCalculationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		ACB7A7901CE87048005F4872 /* Milestones */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACB7A7A31CE87048005F4872 /* Build configuration list for PBXNativeTarget "Milestones" */;
+			buildPhases = (
+				ACB7A78D1CE87048005F4872 /* Sources */,
+				ACB7A78E1CE87048005F4872 /* Frameworks */,
+				ACB7A78F1CE87048005F4872 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Milestones;
+			productName = "MasterPlan-VE";
+			productReference = ACB7A7911CE87048005F4872 /* Milestones.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ACB7A7891CE87048005F4872 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0920;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Altay Cebe";
+				TargetAttributes = {
+					AC4D24681FE66EEE005F6CCB = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = ACB7A7901CE87048005F4872;
+					};
+					ACB7A7901CE87048005F4872 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = ACB7A78C1CE87048005F4872 /* Build configuration list for PBXProject "Milestones" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ACB7A7881CE87048005F4872;
+			productRefGroup = ACB7A7921CE87048005F4872 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ACB7A7901CE87048005F4872 /* Milestones */,
+				AC4D24681FE66EEE005F6CCB /* TimelineCalculationTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC4D24671FE66EEE005F6CCB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACB7A78F1CE87048005F4872 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC0FCB9F1FA3902300E803A3 /* MainStoryboard.storyboard in Resources */,
+				ACB7A79C1CE87048005F4872 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC4D24651FE66EEE005F6CCB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ACA58D97209CEDC700A39F7A /* LineGraphic.swift in Sources */,
+				ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */,
+				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
+				ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */,
+				ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */,
+				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
+				AC235CAA1FE976BC001B25E9 /* GraphicTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ACB7A78D1CE87048005F4872 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */,
+				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
+				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
+				AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */,
+				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
+				ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */,
+				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
+				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
+				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
+				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
+				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
+				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
+				72CFD3201E34F927002C6481 /* StateModel.swift in Sources */,
+				ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */,
+				ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */,
+				AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */,
+				72CFD31E1E348E15002C6481 /* Protocols.swift in Sources */,
+				ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */,
+				AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */,
+				AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */,
+				AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */,
+				AC46310E207E7F3000312012 /* MilestoneTabViewController.swift in Sources */,
+				ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */,
+				ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */,
+				ACB5929A1E06F52E003945FE /* MilestoneTableViewCell.swift in Sources */,
+				AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */,
+				AC463112208286F400312012 /* LineGraphicController.swift in Sources */,
+				AC477CAC1D437D5A00FB225C /* DataModel.xcdatamodeld in Sources */,
+				ACAACD7F20668EBC00AAB6F6 /* TimelineTableViewCell.swift in Sources */,
+				AC477CBD1D4385A100FB225C /* Timeline+CoreDataClass.swift in Sources */,
+				AC7419831E17DAE100B4E00A /* MilestonesViewController.swift in Sources */,
+				AC459E8A1E16CD9B0073D657 /* TimelinesViewController.swift in Sources */,
+				AC6E14BB1D846E09001B3AB6 /* OverlapCorrector.swift in Sources */,
+				AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */,
+				ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */,
+				AC4631102081EF4C00312012 /* ArrowGraphic.swift in Sources */,
+				AC3A21841D64EFE700C0C682 /* GraphicsFactory.swift in Sources */,
+				AC477CBA1D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift in Sources */,
+				AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */,
+				AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */,
+				AC1181591FFEC22D00BBC024 /* TimelineInfoViewController.swift in Sources */,
+				AC3A218A1D6A1C7C00C0C682 /* Calendar+Extensions.swift in Sources */,
+				AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */,
+				AC477CBE1D4385A100FB225C /* Timeline+CoreDataProperties.swift in Sources */,
+				AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */,
+				AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */,
+				AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */,
+				AC477CC01D4385A100FB225C /* Milestone+CoreDataProperties.swift in Sources */,
+				AC00F191201BD3160057EF3F /* Config.swift in Sources */,
+				AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */,
+				AC477CBB1D4385A100FB225C /* Group+CoreDataClass.swift in Sources */,
+				AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */,
+				AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */,
+				725B56911E3E166B00B86662 /* TimelineViewController.swift in Sources */,
+				AC4D24641FE66B2A005F6CCB /* TimelineCalculator.swift in Sources */,
+				AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */,
+				AC8DD2D11E1C182900FDA246 /* GroupsmanagementViewController.swift in Sources */,
+				AC477CBC1D4385A100FB225C /* Group+CoreDataProperties.swift in Sources */,
+				ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */,
+				ACB7A7971CE87048005F4872 /* Document.swift in Sources */,
+				AC477CBF1D4385A100FB225C /* Milestone+CoreDataClass.swift in Sources */,
+				AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */,
+				ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC4D246F1FE66EEE005F6CCB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ACB7A7901CE87048005F4872 /* Milestones */;
+			targetProxy = AC4D246E1FE66EEE005F6CCB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AC4D24711FE66EEE005F6CCB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TimelineCalculationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = org.altaycebe.TimelineCalculationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Milestones.app/Contents/MacOS/Milestones";
+			};
+			name = Debug;
+		};
+		AC4D24721FE66EEE005F6CCB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = TimelineCalculationTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = org.altaycebe.TimelineCalculationTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Milestones.app/Contents/MacOS/Milestones";
+			};
+			name = Release;
+		};
+		ACB7A7A11CE87048005F4872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ACB7A7A21CE87048005F4872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		ACB7A7A41CE87048005F4872 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Milestones/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.altaycebe.Milestones;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		ACB7A7A51CE87048005F4872 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Milestones/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.altaycebe.Milestones;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC4D24701FE66EEE005F6CCB /* Build configuration list for PBXNativeTarget "TimelineCalculationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC4D24711FE66EEE005F6CCB /* Debug */,
+				AC4D24721FE66EEE005F6CCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACB7A78C1CE87048005F4872 /* Build configuration list for PBXProject "Milestones" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACB7A7A11CE87048005F4872 /* Debug */,
+				ACB7A7A21CE87048005F4872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ACB7A7A31CE87048005F4872 /* Build configuration list for PBXNativeTarget "Milestones" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ACB7A7A41CE87048005F4872 /* Debug */,
+				ACB7A7A51CE87048005F4872 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AC477CAA1D437D5A00FB225C /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AC477CAB1D437D5A00FB225C /* DataModel.xcdatamodel */,
+			);
+			currentVersion = AC477CAB1D437D5A00FB225C /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = ACB7A7891CE87048005F4872 /* Project object */;
+}

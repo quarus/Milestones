@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="0.1.0">
+    <entity name="Adjustment" representedClassName=".Adjustment" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reason" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="milestone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Milestone" inverseName="adjustments" inverseEntity="Milestone" syncable="YES"/>
+        <relationship name="trackedMilestone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Milestone" syncable="YES"/>
+    </entity>
+    <entity name="DocumentInfo" representedClassName=".DocumentInfo" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="modificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="selectedGroup" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" syncable="YES"/>
+    </entity>
+    <entity name="ExportInfo" representedClassName=".ExportInfo" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastExport" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="endMilestone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Milestone" syncable="YES"/>
+        <relationship name="group" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Group" inverseName="exportInfo" inverseEntity="Group" syncable="YES"/>
+        <relationship name="startMilestone" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Milestone" syncable="YES"/>
+    </entity>
+    <entity name="Group" representedClassName=".Group" syncable="YES">
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="exportInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExportInfo" inverseName="group" inverseEntity="ExportInfo" syncable="YES"/>
+        <relationship name="timelines" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Timeline" inverseName="groups" inverseEntity="Timeline" syncable="YES"/>
+    </entity>
+    <entity name="Milestone" representedClassName=".Milestone" syncable="YES">
+        <attribute name="colorData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="showAdjustments" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="adjustments" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Adjustment" inverseName="milestone" inverseEntity="Adjustment" syncable="YES"/>
+        <relationship name="timeline" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Timeline" inverseName="milestones" inverseEntity="Timeline" syncable="YES"/>
+    </entity>
+    <entity name="Timeline" representedClassName=".Timeline" syncable="YES">
+        <attribute name="colorData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groups" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Group" inverseName="timelines" inverseEntity="Group" syncable="YES"/>
+        <relationship name="milestones" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Milestone" inverseName="timeline" inverseEntity="Milestone" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Adjustment" positionX="-299" positionY="-27" width="128" height="148"/>
+        <element name="DocumentInfo" positionX="-270" positionY="-216" width="128" height="133"/>
+        <element name="ExportInfo" positionX="160" positionY="-364" width="128" height="193"/>
+        <element name="Group" positionX="423" positionY="18" width="128" height="105"/>
+        <element name="Milestone" positionX="-54" positionY="-27" width="128" height="30"/>
+        <element name="Timeline" positionX="207" positionY="3" width="128" height="118"/>
+    </elements>
+</model>
