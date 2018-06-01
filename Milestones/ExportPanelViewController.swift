@@ -44,7 +44,7 @@ class ExportPanelViewController :NSViewController {
         }
     }
     
-    func setMilestones(milestones: [Milestone], withStartMilestone startMilestone: Milestone?, endMilestone endMilestone: Milestone?) {
+    func setMilestones(milestones: [Milestone], withStartMilestone startMilestone: Milestone?, endMilestone: Milestone?) {
         
         self.milestones = milestones
         

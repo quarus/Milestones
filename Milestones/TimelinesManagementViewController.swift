@@ -29,7 +29,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
 
-        guard let segueID = segue.identifier else { return }
+        guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? TimelineViewController  else { return }
 
         let timelineModel = TimelineModel()
@@ -72,7 +72,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
             guard let button = view as? NSButton else {return}
             guard let selectedGroup = dataModel()?.selectedGroup else {
                 //Disable member selection button if there is no group selected
-                button.state = 0
+                button.state = NSControl.StateValue(rawValue: 0)
                 button.isEnabled = false
                 return
 
@@ -90,7 +90,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
             
             }
             button.isEnabled = true
-            button.state = isMember
+            button.state = NSControl.StateValue(rawValue: isMember)
 
             
         case "Name_Column":
@@ -223,7 +223,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
     //MARK: UI Callbacks & more
     @objc public func onDoubleClickOfRow(_sender :AnyObject?) {
         if timelineTableView.selectedRow != -1 {
-            self.performSegue(withIdentifier: "EditTimelineSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "EditTimelineSegue"), sender: self)
         }
     }
 
@@ -249,7 +249,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
         newAlert.addButton(withTitle: "Entfernen")
         newAlert.addButton(withTitle: "Abbrechen")
 
-        return newAlert.runModal() == NSAlertFirstButtonReturn
+        return newAlert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
 
     @IBAction func onRemoveTimelineButtonClicked(_ sender: Any) {
@@ -281,7 +281,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
         guard let currentlySelectedGroup = dataModel()?.selectedGroup else { return }
         guard let currentlySelectedTimeline = fetchedResultsController()?.fetchedObjects?[rowNumber] else { return }
 
-        if (sender.state == 0) {
+        if (sender.state.rawValue == 0) {
 
             currentlySelectedGroup.removeTimeline(aTimeline: currentlySelectedTimeline)
 
@@ -318,7 +318,7 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
 
         guard let timelines = fetchedResultsController()?.fetchedObjects else { return nil }
         guard timelines.count > 0 else { return nil }
-        guard let tableColumnIdentifier = tableColumn?.identifier  else {return nil}
+        guard let tableColumnIdentifier = tableColumn?.identifier.rawValue  else {return nil}
 
         var view :NSView?
         
@@ -326,19 +326,19 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
 
         case "Color_Column":
 
-            view = tableView.make(withIdentifier: "Color_Column", owner: self) as? NSColorWell
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "Color_Column"), owner: self) as? NSColorWell
         
         case "Member_Column":
 
-            view = tableView.make(withIdentifier: "MemberCell", owner: self) as? NSButton
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MemberCell"), owner: self) as? NSButton
 
         case "Name_Column":
 
-            view = tableView.make(withIdentifier: "NameCell", owner: self) as? NSTableCellView
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "NameCell"), owner: self) as? NSTableCellView
 
         case "Orphan_Column":
 
-            view = tableView.make(withIdentifier: "OrphanCell", owner: self) as? NSTableCellView
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "OrphanCell"), owner: self) as? NSTableCellView
 
         default:
             return nil
@@ -365,12 +365,12 @@ class TimelinesManagementViewController :NSViewController, NSTableViewDataSource
 //          ToDo: Check why newIndexPath?.row is unknown
 
             guard let row = newIndexPath?.last else {return}
-            timelineTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            timelineTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
 
         case .delete:
             
             guard let row = indexPath?.last else {return}
-            timelineTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            timelineTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
             
         case .update:
             

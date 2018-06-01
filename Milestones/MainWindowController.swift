@@ -72,8 +72,8 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         guard let activeGroup = dependency()?.stateModel.selectedGroup else {return}
         guard let milestones = activeGroup.fetchAllMilestones() else {return}
         
-        let storyboard = NSStoryboard(name: "MainStoryboard", bundle: nil)
-        guard let exportPanelViewController = storyboard.instantiateController(withIdentifier: "ExportPanelViewController") as? ExportPanelViewController else {return}
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil)
+        guard let exportPanelViewController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "ExportPanelViewController")) as? ExportPanelViewController else {return}
         
         
         //Configure the exportPanel
@@ -93,9 +93,9 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         exportPanelViewController.descriptionForExport = activeGroup.exportInfo?.info ?? ""
         
         
-        exportPanel.beginSheetModal(for: window!, completionHandler: {(value: Int) in
+        exportPanel.beginSheetModal(for: window!, completionHandler: {(value: NSApplication.ModalResponse) in
             
-            if (value == NSFileHandlingPanelOKButton) {
+            if (value ==  NSApplication.ModalResponse.continue) {
                 
                 if let startDate = exportPanelViewController.selectedStartMilestone?.date,
                     let endDate = exportPanelViewController.selectedEndMilestone?.date,
@@ -123,7 +123,7 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         // Setting the windows autosavename with the Storyboard somehow doesn't work. Setting the autosavename programmatically however restores the window to its proper size
         
         shouldCascadeWindows = false
-        window?.setFrameAutosaveName("MainWindow")
+        window?.setFrameAutosaveName(NSWindow.FrameAutosaveName(rawValue: "MainWindow"))
         super.windowDidLoad()
     }
     
@@ -171,10 +171,10 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         dependency()?.stateModel.selectedGroup = currentlySelectedGroup()
     }
     
-    func onClickOfManageGroupsPopUpButton(_ sender: NSPopUpButton) {
+    @objc func onClickOfManageGroupsPopUpButton(_ sender: NSPopUpButton) {
 
         groupPopUpButton.select(nil)
-       let groupsManagementViewController = NSStoryboard(name: "MainStoryboard", bundle: nil).instantiateController(withIdentifier: "GroupsmanagementViewController") as! GroupsmanagementViewController
+       let groupsManagementViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "GroupsmanagementViewController")) as! GroupsmanagementViewController
         groupsManagementViewController.originalManagedObjectContext = self.document?.managedObjectContext
         
         self.window?.contentViewController?.presentViewControllerAsSheet(groupsManagementViewController)

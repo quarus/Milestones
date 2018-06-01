@@ -193,7 +193,7 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let adjustmentTableCellView = tableView.make(withIdentifier: "AdjustmentTableViewCell", owner: self) as? NSTableCellView else {return nil}
+        guard let adjustmentTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "AdjustmentTableViewCell"), owner: self) as? NSTableCellView else {return nil}
         configureCell(tableViewCell: adjustmentTableCellView, atRow: row)
         return adjustmentTableCellView
     }

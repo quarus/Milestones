@@ -85,7 +85,7 @@ class GroupsViewController :NSViewController, NSTableViewDataSource, NSTableView
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
-        guard let segueID = segue.identifier else { return }
+        guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? GroupViewController  else { return }
         
         let groupModel = GroupViewControllerModel()
@@ -109,7 +109,7 @@ class GroupsViewController :NSViewController, NSTableViewDataSource, NSTableView
     //MARK: UI Callbacks & more
     @objc public func onDoubleClickOfRow(_sender :AnyObject?) {
         if groupsTableView.selectedRow != -1 {
-            self.performSegue(withIdentifier: "EditGroupSegue", sender: self)
+            self.performSegue(withIdentifier: NSStoryboardSegue.Identifier(rawValue: "EditGroupSegue"), sender: self)
         }
     }
 
@@ -136,7 +136,7 @@ class GroupsViewController :NSViewController, NSTableViewDataSource, NSTableView
         newAlert.addButton(withTitle: "Entfernen")
         newAlert.addButton(withTitle: "Abbrechen")
         
-        return newAlert.runModal() == NSAlertFirstButtonReturn
+        return newAlert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
     
     @IBAction func onClickOfRemoveGroupButton(_ sender: NSButton) {
@@ -176,7 +176,7 @@ class GroupsViewController :NSViewController, NSTableViewDataSource, NSTableView
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let groupTableCellView = tableView.make(withIdentifier: "GroupTableCellView", owner: self) as? NSTableCellView else {return nil}
+        guard let groupTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GroupTableCellView"), owner: self) as? NSTableCellView else {return nil}
             
         configureCell(tableViewCell: groupTableCellView, atRow: row)
         
@@ -196,12 +196,12 @@ class GroupsViewController :NSViewController, NSTableViewDataSource, NSTableView
 //          indexPath / newIndexPath contains two entries. The first one for the the section the second for row
 //          ToDo: Check why newIndexPath?.row is unknown
             guard let row = newIndexPath?.last else {return}
-            groupsTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            groupsTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
             
         case .delete:
             
             guard let row = indexPath?.last else {return}
-            groupsTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            groupsTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
 
             //Check if the deletion caused a seletecd group to be deleted
             if (groupsTableView.selectedRow == -1) {

@@ -76,7 +76,7 @@ class TextGraphic :Graphic,NSTextStorageDelegate {
         return naturalSize
     }
 
-    func setHeightToMatchContents(){
+    @objc func setHeightToMatchContents(){
         let naturalSize = self.naturalSize()
         bounds = NSMakeRect(bounds.origin.x, bounds.origin.y, bounds.size.width, naturalSize.height)
     }
@@ -123,7 +123,7 @@ class TextGraphic :Graphic,NSTextStorageDelegate {
 
         //Draw the fill color
         fillColor.set()
-        NSRectFill(bounds)
+        bounds.fill()
 
         //Only draw the text if there is actually a text
         if (textStorage.length > 0)

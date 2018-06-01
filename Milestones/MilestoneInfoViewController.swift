@@ -31,7 +31,7 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     
     @IBOutlet weak var cwDateFormatter: DateFormatter!
     
-    var currentDate :Date = Date() {
+    @objc var currentDate :Date = Date() {
         willSet {
             
             if (newValue != currentDate) {
@@ -168,9 +168,9 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         //2. Setup the checkbox, which indicates wether to draw adjustemnts or not
         if let showAdjustments = milestone.showAdjustments?.boolValue {
             if showAdjustments {
-                showAdjustmentsCheckBox?.state = NSControlStateValueOn
+                showAdjustmentsCheckBox?.state = NSControl.StateValue.on
             } else {
-                showAdjustmentsCheckBox?.state = NSControlStateValueOff
+                showAdjustmentsCheckBox?.state = NSControl.StateValue.off
             }
             
         }
@@ -264,10 +264,10 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         guard let milestone = dataModel()?.selectedMilestone else {return}
         
         switch (showAdjustmentsCheckBox?.state) {
-        case NSControlStateValueOn:
+        case NSControl.StateValue.on:
             milestone.showAdjustments = true
             break
-        case NSControlStateValueOff:
+        case NSControl.StateValue.off:
             milestone.showAdjustments = false
             break
         default:
@@ -286,7 +286,7 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
-        guard let segueID = segue.identifier else { return }
+        guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? AddAdjustmentViewController  else { return }
 
         switch segueID {

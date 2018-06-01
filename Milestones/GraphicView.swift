@@ -47,10 +47,10 @@ class GraphicView :NSView {
         
         backgroundColor.set()
         
-        NSRectFill(dirtyRect)
+        dirtyRect.fill()
         
         //Fetch the current drawing context
-        let currentContext = NSGraphicsContext.current()
+        let currentContext = NSGraphicsContext.current
         
         //Loop through all graphics and draw them
         for aGraphic in graphics {

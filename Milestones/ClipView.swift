@@ -44,12 +44,12 @@ class ClipView: NSClipView {
         
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(viewGeometryChanged),
-                                                   name: NSNotification.Name.NSViewFrameDidChange,
+                                                   name: NSView.frameDidChangeNotification,
                                                    object: self)
         
             NotificationCenter.default.addObserver(self,
                                                    selector: #selector(viewGeometryChanged),
-                                                   name: NSNotification.Name.NSViewBoundsDidChange,
+                                                   name: NSView.boundsDidChangeNotification,
                                                    object: self)
         }
     }

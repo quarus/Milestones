@@ -190,7 +190,7 @@ class TimelinesAndCalendarWeeksView :GraphicView {
         }
         
         updateMilestoneLabel()
-        updateDateIndicatorLine()
+     //   updateDateIndicatorLine()
         
         lastMouseLocation = mouselocation
     }
@@ -221,7 +221,7 @@ class TimelinesAndCalendarWeeksView :GraphicView {
             self.removeTrackingArea(currentTrackingArea!)
         }
         
-        let trackingOptions :NSTrackingAreaOptions = [.mouseMoved,.activeAlways]
+        let trackingOptions :NSTrackingArea.Options = [NSTrackingArea.Options.mouseMoved,NSTrackingArea.Options.activeAlways]
         currentTrackingArea = NSTrackingArea(rect: self.bounds, options: trackingOptions, owner: self, userInfo: nil)
         self.addTrackingArea(currentTrackingArea!)
 

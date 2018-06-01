@@ -98,14 +98,14 @@ class MainSplitViewController :NSSplitViewController, StateObserverProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let storyBoard = NSStoryboard(name: "MainStoryboard", bundle: nil)
+        let storyBoard = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil)
         
-        if let timelineInfoViewController = storyBoard.instantiateController(withIdentifier: "TimelineInfoViewController") as? NSViewController {
+        if let timelineInfoViewController = storyBoard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "TimelineInfoViewController")) as? NSViewController {
             timelineInfoViewController.representedObject = dependency()
             timelineInfoSplitViewItem = NSSplitViewItem(viewController: timelineInfoViewController)
         }
         
-        if let milestoneTabViewController = storyBoard.instantiateController(withIdentifier: "MilestoneTabBar") as? MilestoneTabViewController {
+        if let milestoneTabViewController = storyBoard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MilestoneTabBar")) as? MilestoneTabViewController {
             milestoneTabViewController.representedObject = dependency()
             milestoneInfoSplitViewItem = NSSplitViewItem(viewController: milestoneTabViewController)
         }
@@ -117,7 +117,7 @@ class MainSplitViewController :NSSplitViewController, StateObserverProtocol {
         }
         // Setting the splitview autosavename with the Storyboard somehow doesn't work. Setting the autosavename programmatically however restores
         // the window to its proper size
-        splitView.autosaveName = "MainSplitView"
+        splitView.autosaveName = NSSplitView.AutosaveName(rawValue: "MainSplitView")
 
     }
     

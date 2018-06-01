@@ -58,9 +58,9 @@ class LabelGraphic: Graphic{
         let style = NSMutableParagraphStyle()
         style.alignment = textAlignment
 
-        let attributes :[String:Any] = [
-            NSParagraphStyleAttributeName: style,
-            NSFontAttributeName: font
+        let attributes :[NSAttributedStringKey:Any] = [
+            .paragraphStyle : style,
+            .font: font
         ]
         setAttributedString(string: NSMutableAttributedString(string: text, attributes: attributes))
     }
@@ -95,7 +95,7 @@ class LabelGraphic: Graphic{
             let glyphRange = layoutManager.glyphRange(for: textContainer)
             if isDrawingFill {
                 fillColor.set()
-                NSRectFill(bounds)
+                bounds.fill()
                 layoutManager.drawBackground(forGlyphRange: glyphRange, at: bounds.origin)
             }
             layoutManager.drawGlyphs(forGlyphRange: glyphRange, at: bounds.origin)

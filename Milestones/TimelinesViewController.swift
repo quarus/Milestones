@@ -85,7 +85,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     //MARK: View life cycle
     override func viewDidAppear() {
         
-        timelineTableView.register(forDraggedTypes: [TIMELINE_DRAG_TYPE])
+        timelineTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: TIMELINE_DRAG_TYPE)])
         updateButtons()
 
         MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
@@ -95,7 +95,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         
-        guard let segueID = segue.identifier else { return }
+        guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? TimelineViewController  else { return }
         
         let timelineModel = TimelineModel()
@@ -154,7 +154,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         newAlert.addButton(withTitle: "Entfernen")
         newAlert.addButton(withTitle: "Abbrechen")
                 
-        return newAlert.runModal() == NSAlertFirstButtonReturn
+        return newAlert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
         
     @IBAction func onEnterInTimelineTextField(_ sender: NSTextField) {
@@ -228,7 +228,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
 
         var configuredView: NSView?
         
-        if let view = tableView.make(withIdentifier: "TimelineRow", owner: self) as? NSTableCellView {
+        if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "TimelineRow"), owner: self) as? NSTableCellView {
             configureCell(tableViewCell: view, atRow: row)
             configuredView = view
         }
@@ -239,17 +239,17 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     //MARK: Timeline Dragging
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
-        item.setString(String(row), forType: TIMELINE_DRAG_TYPE)
+        item.setString(String(row), forType: NSPasteboard.PasteboardType(rawValue: TIMELINE_DRAG_TYPE))
         return item
     }
     
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableViewDropOperation) -> NSDragOperation {
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         
-        tableView.setDropRow(row, dropOperation: NSTableViewDropOperation.above)
+        tableView.setDropRow(row, dropOperation: NSTableView.DropOperation.above)
         return NSDragOperation.move
     }
     
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableViewDropOperation) -> Bool {
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         
         guard let activeGroup = dataModel()?.selectedGroup else { return false }
         guard let timelines = activeGroup.timelines else { return false }
@@ -259,7 +259,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:], using: {
             (draggingItem :NSDraggingItem, index :Int, stop :UnsafeMutablePointer<ObjCBool>) in
             
-            if let pasteboardItem = draggingItem.item as? NSPasteboardItem, let rowAsString = pasteboardItem.string(forType: self.TIMELINE_DRAG_TYPE){
+            if let pasteboardItem = draggingItem.item as? NSPasteboardItem, let rowAsString = pasteboardItem.string(forType: NSPasteboard.PasteboardType(rawValue: self.TIMELINE_DRAG_TYPE)){
                 
                 if let sourceRowNumber = Int(rowAsString){
                     

@@ -203,7 +203,7 @@ class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTable
         newAlert.addButton(withTitle: "Löschen")
         newAlert.addButton(withTitle: "Abbrechen")
         
-        return newAlert.runModal() == NSAlertFirstButtonReturn
+        return newAlert.runModal() == NSApplication.ModalResponse.alertFirstButtonReturn
     }
     
     private func createNewMilestone() -> Milestone?{
@@ -290,16 +290,16 @@ class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTable
 
         var configuredView :NSTableCellView?
 
-        if (tableColumnIdentifier == "DataColumn") {
+        if (tableColumnIdentifier.rawValue == "DataColumn") {
             
             let expansionInfo = needsExpandedCellAtRow(row: row)
             if (expansionInfo.needExpansion) {
-                if let view = tableView.make(withIdentifier: "MilestoneRow-Expanded", owner: self) as? NSTableCellView {
+                if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow-Expanded"), owner: self) as? NSTableCellView {
                     configureCell(tableViewCell: view, atRow: row, withTimeInterval: expansionInfo.timeInterval)
                     configuredView = view
                 }
             } else {
-                if let view = tableView.make(withIdentifier: "MilestoneRow", owner: self) as? NSTableCellView {
+                if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow"), owner: self) as? NSTableCellView {
                     configureCell(tableViewCell: view, atRow: row, withTimeInterval: nil)
                     configuredView = view
                 }
@@ -321,12 +321,12 @@ class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTable
         case .insert:
             
             guard let row = newIndexPath?.last else {return}
-            milestonesTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            milestonesTableView.insertRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
             
         case .delete:
             
             guard let row = indexPath?.last else {return}
-            milestonesTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableViewAnimationOptions.effectFade)
+            milestonesTableView.removeRows(at: IndexSet(integer: row), withAnimation: NSTableView.AnimationOptions.effectFade)
         
         case .update:
             

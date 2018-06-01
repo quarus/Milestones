@@ -42,7 +42,7 @@ class Document: NSPersistentDocument {
         MOCHandler.deregisterForMOCNotifications()
     }
     
-    override class func autosavesInPlace() -> Bool {
+    override class var autosavesInPlace: Bool {
         return true
     }
     
@@ -54,8 +54,8 @@ class Document: NSPersistentDocument {
 
 
         // Returns the Storyboard that contains your Document window.
-        let storyboard = NSStoryboard(name: "MainStoryboard", bundle: nil)
-        windowController = storyboard.instantiateController(withIdentifier: "MainWindowController") as? NSWindowController
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil)
+        windowController = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "MainWindowController")) as? NSWindowController
         
         //A WindowController only has a valid document after the following call
         addWindowController(windowController!)

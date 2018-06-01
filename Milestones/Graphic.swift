@@ -35,7 +35,8 @@ class Graphic :NSObject {
     class func translate(graphics:[Graphic], byX deltaX:CGFloat, byY deltaY:CGFloat){
 
         for aGraphic in graphics{
-            aGraphic.bounds = NSOffsetRect(aGraphic.bounds, deltaX, deltaY)
+            let offsetRect =  NSOffsetRect(aGraphic.bounds, deltaX, deltaY)
+            aGraphic.bounds = offsetRect
         }
     }
 
@@ -49,7 +50,7 @@ class Graphic :NSObject {
         return bounds
     }
 
-    class func drawingBoundsOf(graphics :[Graphic]) -> NSRect{
+    @objc class func drawingBoundsOf(graphics :[Graphic]) -> NSRect{
         // The drawing bounds of an array of graphics is the union of all of their drawing bounds.
         var drawingBounds = NSZeroRect
         for aGraphic in graphics{
@@ -64,7 +65,7 @@ class Graphic :NSObject {
 
     //TODO: init function mit stroke, fill color & bounds?
 
-    func drawingBounds() ->NSRect{
+  @objc func drawingBounds() ->NSRect{
 
         var strokeOutset :CGFloat = 0.0
         if (isDrawingStroke) {
@@ -109,7 +110,7 @@ class Graphic :NSObject {
     }
 
     //MARK: KVO
-    class func keyPathsForValuesAffectingDrawingBounds() -> NSSet{
+    @objc class func keyPathsForValuesAffectingDrawingBounds() -> NSSet{
         let setOfKeyPaths = NSSet(array: ["bounds"])
         return setOfKeyPaths
     }

@@ -15,7 +15,7 @@ import Cocoa
 
 class GroupsManagementModel :NSObject, GroupsManagementModelProtocol {
     
-    dynamic var selectedGroup: Group?
+    @objc dynamic var selectedGroup: Group?
     var selectedTimeline: Timeline?
     var managedObjectContext: NSManagedObjectContext?
 }
@@ -39,7 +39,7 @@ class GroupsmanagementViewController :NSViewController {
 
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
     
-        guard let segueID = segue.identifier else {return}
+        guard let segueID = segue.identifier?.rawValue else {return}
         
         switch segueID {
             
