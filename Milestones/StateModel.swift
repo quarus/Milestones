@@ -53,7 +53,7 @@ class StateModel : StateProtocol {
             documentInfo = fetchedDocumentInfo[0]
         } else {
             //there is no Documentinfo Object. We assume that this is because the document has been newly created.
-            documentInfo = NSEntityDescription.insertNewObject(forEntityName: "DocumentInfo", into: managedObjectContext) as! DocumentInfo
+            documentInfo = (NSEntityDescription.insertNewObject(forEntityName: "DocumentInfo", into: managedObjectContext) as! DocumentInfo)
             //Also let's create an initial group in order to let the user create timelines right away
             let initialGroup = NSEntityDescription.insertNewObject(forEntityName: "Group", into: managedObjectContext) as! Group
             initialGroup.name = "Erste Gruppe"            

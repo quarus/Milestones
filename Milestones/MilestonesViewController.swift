@@ -214,7 +214,7 @@ class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTable
         var newMilestone: Milestone?
         
         if (selectedTimelines.count > 0) {
-            newMilestone = NSEntityDescription.insertNewObject(forEntityName: "Milestone", into: moc) as! Milestone
+            newMilestone = (NSEntityDescription.insertNewObject(forEntityName: "Milestone", into: moc) as! Milestone)
             newMilestone?.name = "Neuer Meilenstein"
             
             let newAdjustment = newMilestone?.markAdjustment()
