@@ -12,7 +12,7 @@
 import Foundation
 import Cocoa
 
-class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserverProtocol {
+class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSTextViewDelegate, StateObserverProtocol {
     
     @IBOutlet weak var cwEntry: NSTextField?
     
@@ -24,7 +24,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     @IBOutlet weak var descriptionEntry: NSTextView?
     @IBOutlet weak var timeIntervalLabel: NSTextField?
     @IBOutlet weak var adjustmentButton: NSButton?
-//    @IBOutlet weak var showAdjustmentsCheckBox: NSButton?
     @IBOutlet weak var showAdjustmentsCheckBox: NSButton?
     
     @IBOutlet weak var timelinePopUpButton: NSPopUpButton?
@@ -33,8 +32,7 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     
     @objc var currentDate :Date = Date() {
         willSet {
-            
-            if (newValue != currentDate) {
+            if newValue != currentDate {
                 dataModel()?.selectedMilestone?.date = newValue
                 cwEntry?.stringValue = cwDateFormatter.string(from: newValue)
                 updateTimeIntervalSinceTodayLabel()
@@ -47,7 +45,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     var timelines :[Timeline] = [Timeline]()
     
     override var representedObject: Any? {
-        
         willSet {
             dataModel()?.remove(dataObserver: self)
         }
@@ -58,7 +55,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     private func dataModel() -> StateProtocol? {
-        
         //This casting chain is a workaround (?): https://bugs.swift.org/browse/SR-3871
         let dependencies = representedObject as? AnyObject as? Dependencies
         return dependencies?.stateModel
@@ -74,10 +70,8 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         
         var fetchResult :[Timeline]?
         do {
-            
             fetchResult = try moc.fetch(fetchRequest)
             return fetchResult!
-            
         } catch {
         }
         
@@ -85,7 +79,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     func timelinePopUpValue() -> Timeline? {
-        
         guard let indexOfSelectedIndex = timelinePopUpButton?.indexOfSelectedItem else {return nil}
         if (indexOfSelectedIndex > -1) && (timelines.count > 0) {
             
@@ -102,7 +95,7 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         let deltaComponents = Calendar.defaultCalendar().dateComponents([.year, .month, .weekOfYear,.day], from: today, to: milestoneDate)
         
         var usePastTense: Bool = true
-        if (today < milestoneDate) {
+        if today < milestoneDate {
             usePastTense = false
         }
         
@@ -112,25 +105,23 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         let years = deltaComponents.year ?? 0
 
         var deltaString: String = ""
-        if ((days == 0) && (weeks == 0) && (months == 0) && (years == 0)) {
+        if (days == 0) && (weeks == 0) && (months == 0) && (years == 0) {
             deltaString = "Heute"
         } else {
 
-            if (usePastTense) {
+            if usePastTense {
                 deltaString += "Vor "
             } else {
                 deltaString += "In "
             }
             
-            if (years != 0) {
+            if years != 0 {
                 deltaString += "\(abs(years)) Jahre "
             }
-            
-            if (months != 0) {
+            if months != 0 {
                 deltaString += "\(abs(months)) Monate "
             }
-            
-            if (weeks != 0) {
+            if weeks != 0 {
                 deltaString += "\(abs(weeks)) Wochen "
             }
             if (days != 0) {
@@ -143,7 +134,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     private func updateAdjustmentButtons() {
-      
         guard let milestone = dataModel()?.selectedMilestone else {return}
         guard let milestoneDate = milestone.date else {return}
         guard let adjustments = dataModel()?.selectedMilestone?.adjustments else {return}
@@ -151,7 +141,7 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
         //1. Setup the button to add adjustments
         
         //No existing adjustments? The user may add an adjustemnt without checks
-        if (adjustments.count == 0) {
+        if adjustments.count == 0 {
             adjustmentButton?.isEnabled = true
         } else {
             
@@ -178,9 +168,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     private func setupTimelinePopUpButtonFor(timeline :Timeline?) {
-        
-        //Populate the timeline PopUpButton and preselect the first active timeline
-        
         //Remove all current entries
         timelinePopUpButton?.removeAllItems()
         
@@ -212,7 +199,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     func update() {
-        
         timelines = fetchTimelines()
         
         if let timeline = dataModel()?.selectedMilestone?.timeline {
@@ -258,12 +244,10 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     
     //MARK: UI Callbacks & more
     
-    
     @IBAction func onShowAdjustmentCheck(_ sender: Any) {
-        
         guard let milestone = dataModel()?.selectedMilestone else {return}
         
-        switch (showAdjustmentsCheckBox?.state) {
+        switch showAdjustmentsCheckBox?.state {
         case NSControl.StateValue.on:
             milestone.showAdjustments = true
             break
@@ -276,7 +260,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     @IBAction func onTimelineChange(_ sender: Any) {
-        
         if let selectedTimeline = timelinePopUpValue() {
             dataModel()?.selectedMilestone?.timeline = selectedTimeline
         }
@@ -285,7 +268,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
   
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        
         guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? AddAdjustmentViewController  else { return }
 
@@ -299,7 +281,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
 
     private func hideDatePicker() {
-        
         datePickerPopOver?.performClose(self)
     }
     
@@ -322,7 +303,6 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
-        
         //Prevent the user from entering an empty name for a milestone
         if control == titleEntry {
             if titleEntry?.stringValue.count == 0 {
@@ -342,27 +322,8 @@ class MilestoneInfoViewController :NSViewController, NSTextDelegate, StateObserv
     }
     
     //MARK: NSTextDelegate (used for NSTextView)
-    func textDidEndEditing(_ notification: Notification) {
+    func textShouldEndEditing(_ textObject: NSText) -> Bool {
         dataModel()?.selectedMilestone?.info = descriptionEntry?.string
-    }
-    
-    //MARK: NSObject Notifications
-    override func controlTextDidBeginEditing(_ obj: Notification) {
-        
-    }
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        
-    }
-    override func controlTextDidChange(_ obj: Notification) {
-        
-        //Change of title?
-        if (obj.object as? NSTextField) === titleEntry {
-            
-            if titleEntry?.stringValue.count == 0 {
-                
-            } else {
-                
-            }
-        }
+        return true
     }
 }

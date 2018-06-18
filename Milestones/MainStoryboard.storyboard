@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14109"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="stacking Non-gravity area distributions on NSStackView" minToolsVersion="7.0" minSystemVersion="10.11"/>
     </dependencies>
@@ -2033,7 +2033,7 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <outlet property="delegate" destination="6xp-wc-COb" id="h0F-Td-Rx1"/>
+                                            <outlet property="delegate" destination="6xp-wc-COb" id="cig-ur-ghN"/>
                                         </connections>
                                     </textField>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aj-Bn-BWK">
@@ -2050,7 +2050,7 @@ Gw
                                                     <size key="maxSize" width="463" height="10000000"/>
                                                     <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="6xp-wc-COb" id="uHq-AS-enf"/>
+                                                        <outlet property="delegate" destination="6xp-wc-COb" id="WMt-Bt-Bzq"/>
                                                     </connections>
                                                 </textView>
                                             </subviews>
