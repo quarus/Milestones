@@ -12,20 +12,24 @@
 import Foundation
 import Cocoa
 
-class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSTextViewDelegate, StateObserverProtocol {
+class MilestoneInfoViewController:
+    NSViewController,
+    NSTextFieldDelegate,
+    NSTextViewDelegate,
+    StateObserverProtocol
+{
     
     @IBOutlet weak var cwEntry: NSTextField?
-    
+    @IBOutlet weak var titleEntry: NSTextField?
+    @IBOutlet weak var descriptionEntry: NSTextView?
+    @IBOutlet weak var timeIntervalLabel: NSTextField?
+
     @IBOutlet weak var graphicDatePicker: NSDatePicker?
     @IBOutlet weak var cwDatePicker: NSDatePicker?
     @IBOutlet weak var regularDatePicker: NSDatePicker?
     
-    @IBOutlet weak var titleEntry: NSTextField?
-    @IBOutlet weak var descriptionEntry: NSTextView?
-    @IBOutlet weak var timeIntervalLabel: NSTextField?
     @IBOutlet weak var adjustmentButton: NSButton?
     @IBOutlet weak var showAdjustmentsCheckBox: NSButton?
-    
     @IBOutlet weak var timelinePopUpButton: NSPopUpButton?
     
     @IBOutlet weak var cwDateFormatter: DateFormatter!
@@ -48,7 +52,6 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
         willSet {
             dataModel()?.remove(dataObserver: self)
         }
-        
         didSet {
             dataModel()?.add(dataObserver: self)
         }
@@ -61,7 +64,6 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
     }
 
     func fetchTimelines() -> [Timeline] {
-        
         guard let moc = dataModel()?.managedObjectContext else { return [Timeline]() }
         
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
@@ -74,17 +76,15 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
             return fetchResult!
         } catch {
         }
-        
+       
         return [Timeline]()
     }
     
     func timelinePopUpValue() -> Timeline? {
         guard let indexOfSelectedIndex = timelinePopUpButton?.indexOfSelectedItem else {return nil}
         if (indexOfSelectedIndex > -1) && (timelines.count > 0) {
-            
             return timelines[indexOfSelectedIndex]
         }
-        
         return nil
     }
     
@@ -105,10 +105,9 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
         let years = deltaComponents.year ?? 0
 
         var deltaString: String = ""
-        if (days == 0) && (weeks == 0) && (months == 0) && (years == 0) {
+        if days == 0 && weeks == 0 && months == 0 && years == 0 {
             deltaString = "Heute"
         } else {
-
             if usePastTense {
                 deltaString += "Vor "
             } else {
@@ -118,19 +117,20 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
             if years != 0 {
                 deltaString += "\(abs(years)) Jahre "
             }
+            
             if months != 0 {
                 deltaString += "\(abs(months)) Monate "
             }
+            
             if weeks != 0 {
                 deltaString += "\(abs(weeks)) Wochen "
             }
+            
             if (days != 0) {
                 deltaString += "\(abs(days)) Tage "
             }
         }
-        
         timeIntervalLabel?.stringValue = deltaString
-        
     }
     
     private func updateAdjustmentButtons() {
@@ -162,9 +162,7 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
             } else {
                 showAdjustmentsCheckBox?.state = NSControl.StateValue.off
             }
-            
         }
-        
     }
     
     private func setupTimelinePopUpButtonFor(timeline :Timeline?) {
@@ -173,7 +171,6 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
         
         //figure out the first active (selected) timeline
         let activeTimeline = timeline
-        
         var indexOfPreselectedTimeline = 0
         
         //populate the timeline PopUpButton
@@ -192,10 +189,9 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
                 indexOfPreselectedTimeline = index
             }
         }
-        
+ 
         //preselect the active timeline
         timelinePopUpButton?.selectItem(at: indexOfPreselectedTimeline)
-        
     }
     
     func update() {
@@ -204,7 +200,7 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
         if let timeline = dataModel()?.selectedMilestone?.timeline {
             setupTimelinePopUpButtonFor(timeline: timeline)
         }
-    
+        
         if let milestoneName = dataModel()?.selectedMilestone?.name {
             titleEntry?.stringValue = milestoneName
         }
@@ -213,7 +209,7 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
             descriptionEntry?.string = milestoneDescription
             descriptionEntry?.checkTextInDocument(nil)
         }
-
+        
         if let milestoneDate = dataModel()?.selectedMilestone?.date {
             
             //Update the date display
@@ -225,7 +221,6 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
         
         updateAdjustmentButtons()
         updateTimeIntervalSinceTodayLabel()
-
     }
     
     //MARK: View life cycle
@@ -238,10 +233,7 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
     override func viewWillAppear() {
         update()
     }
-    
-    override func viewWillDisappear() {
-    }
-    
+
     //MARK: UI Callbacks & more
     
     @IBAction func onShowAdjustmentCheck(_ sender: Any) {
@@ -309,9 +301,7 @@ class MilestoneInfoViewController :NSViewController, NSTextFieldDelegate, NSText
                 return false
             }
             dataModel()?.selectedMilestone?.name = titleEntry?.stringValue
-        
         } else if control == cwEntry {
-            
             if let date =  cwDateFormatter.date(from: cwEntry?.stringValue ?? "") {
                 if let enteredDate = date.normalized() {
                     self.setValue(enteredDate, forKey: "currentDate")
