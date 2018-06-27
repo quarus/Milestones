@@ -12,7 +12,12 @@
 import Foundation
 import Cocoa
 
-class TimelineInfoViewController: NSViewController, StateObserverProtocol {
+class TimelineInfoViewController:
+    NSViewController,
+    NSTextFieldDelegate,
+    NSTextViewDelegate,
+    StateObserverProtocol
+{
     
     @IBOutlet weak var nameTextField: NSTextField?
     @IBOutlet var descriptionTextView: NSTextView?
@@ -98,10 +103,6 @@ class TimelineInfoViewController: NSViewController, StateObserverProtocol {
     }
     
     //MARK: NSTextFieldDelegate
-    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        return true
-    }
-    
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         
         //Prevent the user from entering an empty name for a timeline
