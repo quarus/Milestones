@@ -195,7 +195,7 @@ class MilestoneInfoViewController:
     }
     
     
-    private func  updateCurrentDateForString(_ dateString: String) {
+    private func  updateCurrentDateForDateString(_ dateString: String) {
         guard let date = cwDateFormatter.date(from: dateString) else { return }
         guard let normalizedDate =  date.normalized() else { return }
         
@@ -265,8 +265,6 @@ class MilestoneInfoViewController:
         }
     }
     
-  
-    
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
         guard let segueID = segue.identifier?.rawValue else { return }
         guard let  destinationViewController = segue.destinationController as? AddAdjustmentViewController  else { return }
@@ -298,10 +296,6 @@ class MilestoneInfoViewController:
     }
     
     //MARK: NSTextFieldDelegate
-    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        return true
-    }
-    
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         //Prevent the user from entering an empty name for a milestone
         if control == titleEntry {
@@ -311,7 +305,7 @@ class MilestoneInfoViewController:
             dataModel()?.selectedMilestone?.name = titleEntry?.stringValue
         } else if control == cwEntry {
             guard let cwEntryText = cwEntry?.stringValue else { return false }
-            updateCurrentDateForString(cwEntryText)
+            updateCurrentDateForDateString(cwEntryText)
         }
         return true
     }
@@ -321,7 +315,7 @@ class MilestoneInfoViewController:
         
         if control == cwEntry {
             guard let cwEntryText = cwEntry?.stringValue else { return }
-            updateCurrentDateForString(cwEntryText)
+            updateCurrentDateForDateString(cwEntryText)
         }
     }
     
