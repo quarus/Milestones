@@ -81,7 +81,7 @@ class MilestoneInfoViewController:
     }
     
     func timelinePopUpValue() -> Timeline? {
-        guard let indexOfSelectedIndex = timelinePopUpButton?.indexOfSelectedItem else {return nil}
+        guard let indexOfSelectedIndex = timelinePopUpButton?.indexOfSelectedItem else { return nil }
         if (indexOfSelectedIndex > -1) && (timelines.count > 0) {
             return timelines[indexOfSelectedIndex]
         }
@@ -89,8 +89,8 @@ class MilestoneInfoViewController:
     }
     
     private func updateTimeIntervalSinceTodayLabel() {
-        guard let milestoneDate = dataModel()?.selectedMilestone?.date else {return}
-        guard let today = Date().normalized() else {return}
+        guard let milestoneDate = dataModel()?.selectedMilestone?.date else { return }
+        guard let today = Date().normalized() else { return }
         
         let deltaComponents = Calendar.defaultCalendar().dateComponents([.year, .month, .weekOfYear,.day], from: today, to: milestoneDate)
         
@@ -134,9 +134,9 @@ class MilestoneInfoViewController:
     }
     
     private func updateAdjustmentButtons() {
-        guard let milestone = dataModel()?.selectedMilestone else {return}
-        guard let milestoneDate = milestone.date else {return}
-        guard let adjustments = dataModel()?.selectedMilestone?.adjustments else {return}
+        guard let milestone = dataModel()?.selectedMilestone else { return }
+        guard let milestoneDate = milestone.date else { return }
+        guard let adjustments = dataModel()?.selectedMilestone?.adjustments else { return }
         
         //1. Setup the button to add adjustments
         
@@ -194,6 +194,14 @@ class MilestoneInfoViewController:
         timelinePopUpButton?.selectItem(at: indexOfPreselectedTimeline)
     }
     
+    
+    private func  updateCurrentDateForString(_ dateString: String) {
+        guard let date = cwDateFormatter.date(from: dateString) else { return }
+        guard let normalizedDate =  date.normalized() else { return }
+        
+        self.setValue(normalizedDate, forKey: "currentDate")
+    }
+    
     func update() {
         timelines = fetchTimelines()
         
@@ -237,7 +245,7 @@ class MilestoneInfoViewController:
     //MARK: UI Callbacks & more
     
     @IBAction func onShowAdjustmentCheck(_ sender: Any) {
-        guard let milestone = dataModel()?.selectedMilestone else {return}
+        guard let milestone = dataModel()?.selectedMilestone else { return }
         
         switch showAdjustmentsCheckBox?.state {
         case NSControl.StateValue.on:
@@ -302,13 +310,19 @@ class MilestoneInfoViewController:
             }
             dataModel()?.selectedMilestone?.name = titleEntry?.stringValue
         } else if control == cwEntry {
-            if let date =  cwDateFormatter.date(from: cwEntry?.stringValue ?? "") {
-                if let enteredDate = date.normalized() {
-                    self.setValue(enteredDate, forKey: "currentDate")
-                }
-            }
+            guard let cwEntryText = cwEntry?.stringValue else { return false }
+            updateCurrentDateForString(cwEntryText)
         }
         return true
+    }
+
+    override func controlTextDidChange(_ obj: Notification) {
+        guard let control = obj.object as? NSTextField else { return }
+        
+        if control == cwEntry {
+            guard let cwEntryText = cwEntry?.stringValue else { return }
+            updateCurrentDateForString(cwEntryText)
+        }
     }
     
     //MARK: NSTextDelegate (used for NSTextView)
