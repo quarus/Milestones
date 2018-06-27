@@ -261,9 +261,10 @@ class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTable
             if let milestone = fetchedResultsController()?.fetchedObjects?[milestonesTableView.selectedRow] {
                 selectedMilestone = milestone
             }
+            
+            dataModel()?.selectedMilestone = selectedMilestone
         }
 
-        dataModel()?.selectedMilestone = selectedMilestone
         updateButtons()
     }
     
