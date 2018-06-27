@@ -214,16 +214,15 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     //MARK: Managed Object Context Change Handling
-    func handleInsertion(ofObjects: NSSet) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
         update()
-
     }
 
-    func handleUpdate(ofObjects: NSSet) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
         update()
     }
     
-    func handleRemoval(ofObjects: NSSet) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
         update()
     }
     

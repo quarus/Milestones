@@ -155,20 +155,20 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
 
     
     //MARK: CoreDataNotificationManagerDelegate
-    func handleInsertion(ofObjects: NSSet) {
-        if adjustmentContainedInObjects(objects: ofObjects) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
+        if adjustmentContainedInObjects(objects: objects) {
             update()
         }
     }
     
-    func handleUpdate(ofObjects: NSSet) {
-        if adjustmentContainedInObjects(objects: ofObjects) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
+        if adjustmentContainedInObjects(objects: objects) {
             update()
         }
     }
     
-    func handleRemoval(ofObjects: NSSet) {
-        if adjustmentContainedInObjects(objects: ofObjects) {
+    func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
+        if adjustmentContainedInObjects(objects: objects) {
             selectedAdjustment = nil
             update()
         }

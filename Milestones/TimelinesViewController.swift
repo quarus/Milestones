@@ -316,8 +316,8 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     }
 
     //MARK: CoreDataNotificationDelegate
-    func handleInsertion(ofObjects: NSSet) {
-        for anObject in ofObjects{
+    func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
+        for anObject in objects{
             
             if (anObject is Timeline) {
                 timelineTableView.reloadData()
@@ -326,9 +326,8 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
-    func handleUpdate(ofObjects: NSSet) {
-        for anObject in ofObjects {
-            
+    func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
+        for anObject in objects {
             if (anObject is Timeline) {
                 
                 if let timeline = anObject as? Timeline {
@@ -360,9 +359,8 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
-    func handleRemoval(ofObjects: NSSet) {
-        for anObject in ofObjects {
-            
+    func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
+        for anObject in objects {
             if let _ = anObject as? Timeline {
                 timelineTableView.reloadData()
                 updateButtons()
