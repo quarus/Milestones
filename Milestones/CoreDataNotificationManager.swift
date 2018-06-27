@@ -17,7 +17,6 @@ protocol CoreDataNotificationManagerDelegate {
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet)
     func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet)
     func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet)
-
 }
 
 class CoreDataNotificationManager {

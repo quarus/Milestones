@@ -53,11 +53,10 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     
     private func adjustment(at index:Int) -> Adjustment?{
         
-        guard let milestone = dataModel()?.selectedMilestone else {return nil}
-        guard let adjustments =  milestone.adjustments else {return nil}
+        guard let milestone = dataModel()?.selectedMilestone else { return nil }
+        guard let adjustments =  milestone.adjustments else { return nil }
         
         var foundAdjustment :Adjustment?
-        
         if 0..<adjustments.count ~= index {
             foundAdjustment = adjustments.object(at: index) as? Adjustment
         }
@@ -76,12 +75,11 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
 
     private func configureCell(tableViewCell :NSTableCellView, atRow row :Int) {
         
-        guard let adjustment = adjustment(at: row) else {return}
+        guard let adjustment = adjustment(at: row) else { return }
+        guard let adjustmentDate = adjustment.date else { return }
         
-        if let adjustmentDate = adjustment.date {
-            let dateString = cwDateFormatter.string(from: adjustmentDate)
-            tableViewCell.textField?.stringValue = dateString
-        }
+        let dateString = cwDateFormatter.string(from: adjustmentDate)
+        tableViewCell.textField?.stringValue = dateString
     }
     
     private func update() {
@@ -127,8 +125,7 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     }
     
     @IBAction func onClickOfRemoveAdjustmentButton(_ sender: NSButton) {
-        
-        let indexOfSelectedEntry = adjustmentsTableView?.selectedRow ?? -1
+        guard let indexOfSelectedEntry = adjustmentsTableView?.selectedRow else { return }
     
         if (indexOfSelectedEntry >= 0) {
             if let selectedAdjustment = adjustment(at: indexOfSelectedEntry) {
@@ -176,8 +173,7 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     
     //MARK: NSTableViewDelegate
     func tableViewSelectionDidChange(_ notification: Notification) {
-        
-        let index = adjustmentsTableView?.selectedRow ?? -1
+        guard let index = adjustmentsTableView?.selectedRow else { return }
         if (index >= 0) {
             selectedAdjustment = adjustment(at: index)
         }
@@ -186,8 +182,8 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     //MARK: NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
         
-        guard let milestone = dataModel()?.selectedMilestone else {return 0}
-        guard let numberOfRows = milestone.adjustments?.count else {return 0}
+        guard let milestone = dataModel()?.selectedMilestone else { return 0 }
+        guard let numberOfRows = milestone.adjustments?.count else { return 0 }
         return numberOfRows
     }
     
