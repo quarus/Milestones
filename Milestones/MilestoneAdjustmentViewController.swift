@@ -64,7 +64,7 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
         return foundAdjustment
     }
     
-    func adjustmentContainedInObjects(objects: NSSet) -> Bool{
+    func adjustmentContainedInObjects(_ objects: NSSet) -> Bool{
         
         for anObject in objects {
             if anObject is Adjustment {
@@ -156,19 +156,19 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     
     //MARK: CoreDataNotificationManagerDelegate
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
-        if adjustmentContainedInObjects(objects: objects) {
+        if adjustmentContainedInObjects(objects) {
             update()
         }
     }
     
     func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
-        if adjustmentContainedInObjects(objects: objects) {
+        if adjustmentContainedInObjects(objects) {
             update()
         }
     }
     
     func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
-        if adjustmentContainedInObjects(objects: objects) {
+        if adjustmentContainedInObjects(objects) {
             selectedAdjustment = nil
             update()
         }
