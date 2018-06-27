@@ -18,14 +18,12 @@ class MilestoneInfoViewController:
     NSTextViewDelegate,
     StateObserverProtocol
 {
-    
     @IBOutlet weak var cwEntry: NSTextField?
     @IBOutlet weak var titleEntry: NSTextField?
     @IBOutlet weak var descriptionEntry: NSTextView?
     @IBOutlet weak var timeIntervalLabel: NSTextField?
 
     @IBOutlet weak var graphicDatePicker: NSDatePicker?
-    @IBOutlet weak var cwDatePicker: NSDatePicker?
     @IBOutlet weak var regularDatePicker: NSDatePicker?
     
     @IBOutlet weak var adjustmentButton: NSButton?

@@ -12,8 +12,13 @@
 import Foundation
 import Cocoa
 
-class MilestonesViewController :NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSFetchedResultsControllerDelegate, StateObserverProtocol  {
-
+class MilestonesViewController :
+    NSViewController,
+    NSTableViewDataSource,
+    NSTableViewDelegate,
+    NSFetchedResultsControllerDelegate,
+    StateObserverProtocol
+{
     @IBOutlet private weak var milestonesTableView: NSTableView!
     @IBOutlet private weak var addMilestoneButton: NSButton!
     @IBOutlet private weak var removeMilestoneButton: NSButton!
