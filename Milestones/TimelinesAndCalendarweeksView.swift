@@ -18,7 +18,7 @@ let MILESTONE_SELECTED_NOTIFICATION = "MILESTONE_SELECTED_NOTIFICATION"
 let MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY = "MILESTONE_SELECTED_KEY"
 
 
-class TimelinesAndCalendarWeeksView :GraphicView {
+class TimelinesAndCalendarWeeksView: GraphicView {
     
     
     var yOffset :CGFloat = 200;
@@ -26,23 +26,21 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     var timelineHorizontalCalculator: HorizontalCalculator?
     var timelineVerticalCalculator: VerticalCalculator?
 
-    private var currentTrackingArea :NSTrackingArea?
-    private weak var currentlySelectedMilestone :Milestone?
-    private var currentlyDisplayedInfoLabel :LabelGraphic?
-    private var dateIndictorLineGraphic :LineGraphic?
-    private var showInfoLabel :Bool = false
+    private var currentTrackingArea: NSTrackingArea?
+    private weak var currentlySelectedMilestone: Milestone?
+    private var currentlyDisplayedInfoLabel: LabelGraphic?
+    private var dateIndictorLineGraphic: LineGraphic?
+    private var showInfoLabel: Bool = false
 
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
 
-    
-    private var lastMouseLocation :NSPoint = NSZeroPoint
+    private var lastMouseLocation: NSPoint = NSZeroPoint
 
     //MARK: Life dycle
-    init(withLength length: CGFloat, horizontalCalculator :HorizontalCalculator, verticalCalculator :VerticalCalculator){
+    init(withLength length: CGFloat, horizontalCalculator: HorizontalCalculator, verticalCalculator: VerticalCalculator){
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
-        
     }
     
     
@@ -51,11 +49,11 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     }
 
     deinit {
-        if (currentlyDisplayedInfoLabel != nil) {
+        if currentlyDisplayedInfoLabel != nil {
             stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
         }
         
-        if (dateIndictorLineGraphic != nil){
+        if dateIndictorLineGraphic != nil {
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
         
@@ -71,26 +69,28 @@ class TimelinesAndCalendarWeeksView :GraphicView {
             }
         })
         
-        if (filteredArray.count > 0) {
+        if filteredArray.count > 0 {
             return filteredArray[0]
         }
-        
         return nil
     }
     
     
     //MARK: KVO
-    func startObservingGraphic(_ aGraphic :Graphic) {
+    func startObservingGraphic(_ aGraphic: Graphic) {
         let KVOOptions = NSKeyValueObservingOptions([.new, .old])
         aGraphic.addObserver(self, forKeyPath: "drawingBounds", options: KVOOptions, context: nil)
     }
     
-    func stopObservingKVOForGraphic(_ aGraphic :Graphic){
+    func stopObservingKVOForGraphic(_ aGraphic: Graphic){
         aGraphic.removeObserver(self, forKeyPath: "drawingBounds")
     }
     
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override func observeValue(forKeyPath keyPath: String?,
+                               of object: Any?,
+                               change: [NSKeyValueChangeKey : Any]?,
+                               context: UnsafeMutableRawPointer?) {
         
         if object is Graphic {
             if keyPath == "drawingBounds"{
@@ -100,7 +100,7 @@ class TimelinesAndCalendarWeeksView :GraphicView {
                     let oldValue = theChange[NSKeyValueChangeKey.oldKey]?.rectValue
                     let newValue = theChange[NSKeyValueChangeKey.newKey]?.rectValue
                     
-                    guard ((oldValue != nil) && (newValue != nil)) else {return}
+                    guard (oldValue != nil) && (newValue != nil) else {return}
                     
                     self.setNeedsDisplay(oldValue!)
                     self.setNeedsDisplay(newValue!)
@@ -110,10 +110,9 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     }
     
     //MARK: Mouse Handling
-    func graphicUnderPoint(_ aPoint :NSPoint) -> Graphic? {
-        
-        for aGraphic in graphics{
-            if (aGraphic.isContentUnderPoint(aPoint)){
+    func graphicUnderPoint(_ aPoint: NSPoint) -> Graphic? {
+        for aGraphic in graphics {
+            if aGraphic.isContentUnderPoint(aPoint) {
                 return aGraphic
             }
         }
@@ -121,17 +120,16 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     }
     
     override func mouseDown(with event: NSEvent) {
-        
         let mouselocation = self.convert(event.locationInWindow, from: nil)
-        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
-            
-            if let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-                
-                var info :[AnyHashable : Any] = [AnyHashable : Any]()
-                info[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] = milestoneGraphicController.milestone
-                NotificationCenter.default.post(name: Notification.Name(rawValue: MILESTONE_SELECTED_NOTIFICATION), object: self, userInfo: info)
-            }
-        }
+        
+        guard let graphicUnderPointer = self.graphicUnderPoint(mouselocation) else { return }
+        guard let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController else { return }
+
+        var info: [AnyHashable : Any] = [AnyHashable : Any]()
+        info[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] = milestoneGraphicController.milestone
+        NotificationCenter.default.post(name: Notification.Name(rawValue: MILESTONE_SELECTED_NOTIFICATION),
+                                        object: self,
+                                        userInfo: info)
     }
     
     override func mouseMoved(with event: NSEvent) {
