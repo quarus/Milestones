@@ -21,20 +21,19 @@ let MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY = "MILESTONE_SELECTED_KEY"
 class TimelinesAndCalendarWeeksView: GraphicView {
     
     
-    var yOffset :CGFloat = 200;
-    
+    private var showInfoLabel: Bool = false
+
     var timelineHorizontalCalculator: HorizontalCalculator?
     var timelineVerticalCalculator: VerticalCalculator?
 
     private var currentTrackingArea: NSTrackingArea?
-    private weak var currentlySelectedMilestone: Milestone?
     private var currentlyDisplayedInfoLabel: LabelGraphic?
     private var dateIndictorLineGraphic: LineGraphic?
-    private var showInfoLabel: Bool = false
-
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
-
+    
     private var lastMouseLocation: NSPoint = NSZeroPoint
+    
+    
 
     //MARK: Life dycle
     init(withLength length: CGFloat, horizontalCalculator: HorizontalCalculator, verticalCalculator: VerticalCalculator){
@@ -162,14 +161,14 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                 }
             }
             
-            if (showInfoLabel && !newShowInfoLabel) {
+            if showInfoLabel && !newShowInfoLabel {
                 if let index = graphics.index(of: currentlyDisplayedInfoLabel!) {
                     graphics.remove(at: index)
                     setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
                 }
             }
             
-            if (!showInfoLabel && newShowInfoLabel) {
+            if !showInfoLabel && newShowInfoLabel {
                 graphics.append(currentlyDisplayedInfoLabel!)
                 setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
             }
@@ -180,33 +179,26 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         
         func updateDateIndicatorLine() {
             if let lineGraphic = dateIndictorLineGraphic {
-                
                 let deltaX = mouselocation.x - lastMouseLocation.x
                 Graphic.translate(graphics: [lineGraphic], byX: deltaX, byY: 0)
-                
             }
         }
         
         updateMilestoneLabel()
      //   updateDateIndicatorLine()
-        
         lastMouseLocation = mouselocation
     }
     
     func updateForGroup(group :Group, firstVisibleDate date: Date, length: CGFloat) {
-        
-        guard let timelines = group.timelines?.array as? [Timeline] else {return}
+        guard let timelines = group.timelines?.array as? [Timeline] else { return }
         updateFrameFor(numberOfTimelines: timelines.count)
         updateContentForTimelines(timelines: timelines,
                                   startDate: date,
                                   length: length)
         
-
-
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
-
         //Update this views frame
         let height = timelineVerticalCalculator?.yPositionForTimelineAt(index: numberOfTimelines) ?? 100
         self.frame = NSMakeRect(frame.origin.x,
@@ -215,28 +207,29 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                                 height)
         
         //Update the tracking area
-        if (currentTrackingArea != nil) {
-            self.removeTrackingArea(currentTrackingArea!)
+        if let trackingArea = currentTrackingArea {
+            self.removeTrackingArea(trackingArea)
         }
         
         let trackingOptions :NSTrackingArea.Options = [NSTrackingArea.Options.mouseMoved,NSTrackingArea.Options.activeAlways]
-        currentTrackingArea = NSTrackingArea(rect: self.bounds, options: trackingOptions, owner: self, userInfo: nil)
+        currentTrackingArea = NSTrackingArea(rect: self.bounds,
+                                             options: trackingOptions,
+                                             owner: self,
+                                             userInfo: nil)
         self.addTrackingArea(currentTrackingArea!)
 
     }
     
     private func updateContentForTimelines(timelines :[Timeline], startDate: Date, length: CGFloat) {
-
+        guard let xPositionCalculator = timelineHorizontalCalculator else { return }
+        guard let yPositionCalculator = timelineVerticalCalculator else { return }
         
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
-        guard let yPositionCalculator = timelineVerticalCalculator else {return}
-        
-        if (currentlyDisplayedInfoLabel != nil) {
-            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
+        if let infoLabel = currentlyDisplayedInfoLabel {
+            stopObservingKVOForGraphic(infoLabel)
         }
 
-        if (dateIndictorLineGraphic != nil) {
-            stopObservingKVOForGraphic(dateIndictorLineGraphic!)
+        if let indicatorGraphic = dateIndictorLineGraphic {
+            stopObservingKVOForGraphic(indicatorGraphic)
         }
         
         graphics.removeAll()
