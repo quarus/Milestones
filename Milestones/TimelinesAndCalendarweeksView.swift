@@ -33,6 +33,9 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     
     private var lastMouseLocation: NSPoint = NSZeroPoint
     
+    //    userInitiated (async UI related tasks) -> high priority global queue
+    private var dispatchQueue = DispatchQueue.global(qos: .userInitiated)
+    private var graphicsWorkItem: DispatchWorkItem = DispatchWorkItem(block: {})
     
 
     //MARK: Life dycle
@@ -40,6 +43,8 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
+        
+        
     }
     
     
@@ -192,10 +197,18 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     func updateForGroup(group :Group, firstVisibleDate date: Date, length: CGFloat) {
         guard let timelines = group.timelines?.array as? [Timeline] else { return }
         updateFrameFor(numberOfTimelines: timelines.count)
-        updateContentForTimelines(timelines: timelines,
-                                  startDate: date,
-                                  length: length)
         
+        let viewBounds = self.bounds
+        graphicsWorkItem.cancel()
+        graphicsWorkItem = DispatchWorkItem {
+            self.updateContentForTimelines(timelines: timelines,
+                                           startDate: date,
+                                           length: length,
+                                           viewBounds: viewBounds)
+        }
+        
+        dispatchQueue.async(execute: graphicsWorkItem)
+        setNeedsDisplay(bounds)
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
@@ -220,7 +233,11 @@ class TimelinesAndCalendarWeeksView: GraphicView {
 
     }
     
-    private func updateContentForTimelines(timelines :[Timeline], startDate: Date, length: CGFloat) {
+    private func updateContentForTimelines(timelines :[Timeline],
+                                           startDate: Date,
+                                           length: CGFloat,
+                                           viewBounds: CGRect) {
+        
         guard let xPositionCalculator = timelineHorizontalCalculator else { return }
         guard let yPositionCalculator = timelineVerticalCalculator else { return }
         
@@ -256,18 +273,18 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         
         //Generate all vertical lines for months, calendarweeks, etc.
         let cwLineGraphics = GraphicsFactory.sharedInstance.graphicsForVerticalCalendarWeeksLinesStartingAt(startDate: startDate,
-                                                                                                            height: self.bounds.size.height,
-                                                                                                            length: self.bounds.size.width, usingCalculator: xPositionCalculator)
+                                                                                                            height: viewBounds.size.height,
+                                                                                                            length: viewBounds.size.width, usingCalculator: xPositionCalculator)
         graphics.append(contentsOf: cwLineGraphics)
         
         // Generate the line, which indicates the current date
-        let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
+        let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: viewBounds.size.height)
         let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)
         Graphic.translate(graphics: todayIndicatorGraphics, byX: relativeXPos, byY: 0)
         graphics.insert(contentsOf: todayIndicatorGraphics, at: 0)
 
         //Generate the line which follows the mouse curser
-        dateIndictorLineGraphic = GraphicsFactory.sharedInstance.graphicsForDateIndicatorLine(height: self.bounds.size.height)[0] as? LineGraphic
+        dateIndictorLineGraphic = GraphicsFactory.sharedInstance.graphicsForDateIndicatorLine(height: viewBounds.size.height)[0] as? LineGraphic
         lastMouseLocation = CGPoint(x: 0, y: 0)
         graphics.insert(dateIndictorLineGraphic!, at: 0)
         
@@ -279,7 +296,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         currentlyDisplayedInfoLabel?.textAlignment = .left
         startObservingGraphic(currentlyDisplayedInfoLabel!)
         
-        setNeedsDisplay(bounds)
     }
 }
 
