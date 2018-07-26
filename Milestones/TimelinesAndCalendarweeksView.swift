@@ -194,7 +194,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         lastMouseLocation = mouselocation
     }
     
-    func updateForGroup(group :Group, firstVisibleDate date: Date, length: CGFloat) {
+    func updateForGroup(group :Group, firstVisibleDate date: Date) {
         guard let timelines = group.timelines?.array as? [Timeline] else { return }
         updateFrameFor(numberOfTimelines: timelines.count)
         
@@ -203,7 +203,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         graphicsWorkItem = DispatchWorkItem {
             self.updateContentForTimelines(timelines: timelines,
                                            startDate: date,
-                                           length: length,
                                            viewBounds: viewBounds)
         }
         
@@ -235,7 +234,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     
     private func updateContentForTimelines(timelines :[Timeline],
                                            startDate: Date,
-                                           length: CGFloat,
                                            viewBounds: CGRect) {
         
         guard let xPositionCalculator = timelineHorizontalCalculator else { return }
@@ -258,7 +256,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
 
 
             let timelineGraphics = GraphicsFactory.sharedInstance.timelineGraphicsFor(timeline: aTimeline,
-                                                                                      length: length,
+                                                                                      length: viewBounds.size.width,
                                                                                       startDate: startDate,
                                                                                       usingCalculator: xPositionCalculator)
 
