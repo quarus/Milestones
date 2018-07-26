@@ -196,18 +196,22 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     
     func updateForGroup(group :Group, firstVisibleDate date: Date) {
         guard let timelines = group.timelines?.array as? [Timeline] else { return }
+        
         updateFrameFor(numberOfTimelines: timelines.count)
         
-        let viewBounds = self.bounds
         graphicsWorkItem.cancel()
+        
+        let viewBounds = self.bounds
         graphicsWorkItem = DispatchWorkItem {
             self.updateContentForTimelines(timelines: timelines,
                                            startDate: date,
                                            viewBounds: viewBounds)
         }
+        graphicsWorkItem.notify(queue: .main, execute: {
+            self.setNeedsDisplay(self.bounds)
+        })
         
         dispatchQueue.async(execute: graphicsWorkItem)
-        setNeedsDisplay(bounds)
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
