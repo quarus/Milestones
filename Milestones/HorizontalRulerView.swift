@@ -13,11 +13,14 @@
 import Foundation
 import Cocoa
 
-class HorizontalRulerView :GraphicView {
+class HorizontalRulerView: GraphicView {
 
-    var timelineCalculator :HorizontalCalculator
-    
-    init(withLength length: CGFloat, height: CGFloat, horizontalCalculator :HorizontalCalculator){
+    var timelineCalculator: HorizontalCalculator
+
+    private var dispatchQueue = DispatchQueue.global(qos: .userInitiated)
+    private var graphicsWorkItem = DispatchWorkItem(block: {})
+
+    init(withLength length: CGFloat, height: CGFloat, horizontalCalculator: HorizontalCalculator){
     
         timelineCalculator = horizontalCalculator
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: height))
@@ -30,19 +33,26 @@ class HorizontalRulerView :GraphicView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func updateForStartDate(date :Date) {
-        
-        
+    func updateForStartDate(date: Date) {
+
         let length = self.frame.size.width
         let height = self.frame.size.height
-        let rulerGraphics = GraphicsFactory.sharedInstance.horizonatlRulerGraphicsStartingAt(date: date,
-                                                                              totalLength: length,
-                                                                              height: height,
-                                                                              usingCalculator: timelineCalculator)
-        graphics.removeAll()
-        graphics.append(contentsOf: rulerGraphics)
-        setNeedsDisplay(bounds)
-            
+        
+        graphicsWorkItem.cancel()
+        graphicsWorkItem = DispatchWorkItem(block: {
+            let rulerGraphics = GraphicsFactory.sharedInstance.horizonatlRulerGraphicsStartingAt(date: date,
+                                                                                                 totalLength: length,
+                                                                                                 height: height,
+                                                                                                 usingCalculator: self.timelineCalculator)
+            self.graphics.removeAll()
+            self.graphics.append(contentsOf: rulerGraphics)
+        })
+        
+        graphicsWorkItem.notify(queue: .main, execute: {
+            self.setNeedsDisplay(self.bounds)
+        })
+        
+        dispatchQueue.async(execute: graphicsWorkItem)
     }
     
 }
