@@ -27,7 +27,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     var timelineVerticalCalculator: VerticalCalculator?
 
     private var currentTrackingArea: NSTrackingArea?
-    private var currentlyDisplayedInfoLabel: LabelGraphic?
+    private var infoLabel: LabelGraphic = LabelGraphic()
     private var dateIndictorLineGraphic: LineGraphic?
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
     
@@ -42,25 +42,31 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     init(withLength length: CGFloat, horizontalCalculator: HorizontalCalculator, verticalCalculator: VerticalCalculator){
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
+        
+        infoLabel.fillColor = NSColor.yellow
+        infoLabel.isDrawingFill = true
+        infoLabel.textAlignment = .left
+
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
         
-        
+        startObservingGraphic(infoLabel)
+
     }
     
     
     required init(coder: NSCoder) {
         super.init(coder: coder)
+
     }
 
     deinit {
-        if currentlyDisplayedInfoLabel != nil {
-            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
-        }
+        stopObservingKVOForGraphic(infoLabel)
         
         if dateIndictorLineGraphic != nil {
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
         
+        graphicsWorkItem.cancel()
     }
     
     func milestoneGraphicControllerForMilestone(_ milestone: Milestone) -> MilestoneGraphicController? {
@@ -153,12 +159,10 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                             
                             newShowInfoLabel = true
                             
-                            if (currentlyDisplayedInfoLabel != nil) {
-                                
-                                currentlyDisplayedInfoLabel!.bounds = NSRect(x: mouselocation.x + 5, y: mouselocation.y + 5 , width: 200, height: 0)
-                                currentlyDisplayedInfoLabel!.text = milestoneInfo
-                                currentlyDisplayedInfoLabel!.sizeToFit()
-                            }
+                            
+                            infoLabel.bounds = NSRect(x: mouselocation.x + 5, y: mouselocation.y + 5 , width: 200, height: 0)
+                            infoLabel.text = milestoneInfo
+                            infoLabel.sizeToFit()
                         }
                     }
                 } else {
@@ -167,15 +171,15 @@ class TimelinesAndCalendarWeeksView: GraphicView {
             }
             
             if showInfoLabel && !newShowInfoLabel {
-                if let index = graphics.index(of: currentlyDisplayedInfoLabel!) {
+                if let index = graphics.index(of: infoLabel) {
                     graphics.remove(at: index)
-                    setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
+                    setNeedsDisplay(infoLabel.bounds)
                 }
             }
             
             if !showInfoLabel && newShowInfoLabel {
-                graphics.append(currentlyDisplayedInfoLabel!)
-                setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
+                graphics.append(infoLabel)
+                setNeedsDisplay(infoLabel.bounds)
             }
             
             showInfoLabel = newShowInfoLabel
@@ -242,15 +246,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         
         guard let xPositionCalculator = timelineHorizontalCalculator else { return }
         guard let yPositionCalculator = timelineVerticalCalculator else { return }
-        
-        if let infoLabel = currentlyDisplayedInfoLabel {
-            stopObservingKVOForGraphic(infoLabel)
-        }
 
-        if let indicatorGraphic = dateIndictorLineGraphic {
-            stopObservingKVOForGraphic(indicatorGraphic)
-        }
-        
         graphics.removeAll()
         milestoneGraphicControllers.removeAll()
         
@@ -290,13 +286,8 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         lastMouseLocation = CGPoint(x: 0, y: 0)
         graphics.insert(dateIndictorLineGraphic!, at: 0)
         
-        startObservingGraphic(dateIndictorLineGraphic!)
+//        startObservingGraphic(dateIndictorLineGraphic!)
 
-        currentlyDisplayedInfoLabel = LabelGraphic()
-        currentlyDisplayedInfoLabel?.fillColor = NSColor.yellow
-        currentlyDisplayedInfoLabel?.isDrawingFill = true
-        currentlyDisplayedInfoLabel?.textAlignment = .left
-        startObservingGraphic(currentlyDisplayedInfoLabel!)
         
     }
 }
