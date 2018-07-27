@@ -32,6 +32,10 @@ class HorizontalRulerView: GraphicView {
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {
+        graphicsWorkItem.cancel()
+    }
 
     func updateForStartDate(date: Date) {
 
