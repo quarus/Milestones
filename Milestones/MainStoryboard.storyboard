@@ -225,6 +225,27 @@
                                 <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="qwp-Lh-ywt"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="ZA4-sC-Yjp"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="ZQi-ig-h8Q"/>
+                                <toolbarItem implicitItemIdentifier="0C59FD6B-06DF-4CF4-A9A0-F37A736940F1" label="View" paletteLabel="View" id="tjd-fo-oPI">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="103" height="23"/>
+                                    <size key="maxSize" width="300" height="24"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="XYA-vD-4CG">
+                                        <rect key="frame" x="0.0" y="14" width="265" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="mdg-IZ-fIC">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Weeks"/>
+                                                <segment label="Months" selected="YES" tag="1"/>
+                                                <segment label="Quarter"/>
+                                                <segment label="Year"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="onClickOfViewSegmentButton:" target="48w-aO-OKx" id="TqS-B1-9qy"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="OEz-JO-l5i"/>
                                 <toolbarItem implicitItemIdentifier="72E57E3B-7786-49C6-8BA1-A2DA1280EAD5" label="Custom View" paletteLabel="Custom View" id="gUC-An-0Tw">
                                     <nil key="toolTip"/>
@@ -259,8 +280,9 @@
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="iZr-Fj-qFJ"/>
-                                <toolbarItem reference="ZQi-ig-h8Q"/>
-                                <toolbarItem reference="ZQi-ig-h8Q"/>
+                                <toolbarItem reference="OEz-JO-l5i"/>
+                                <toolbarItem reference="tjd-fo-oPI"/>
+                                <toolbarItem reference="OEz-JO-l5i"/>
                                 <toolbarItem reference="gUC-An-0Tw"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -553,13 +575,6 @@
                                         <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hJO-5s-pmu" customClass="GraphicView" customModule="Milestones" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="450" height="299"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                            <gestureRecognizers>
-                                                <magnificationGestureRecognizer delaysMagnificationEvents="YES" magnification="0.0" id="paX-Pw-HQC">
-                                                    <connections>
-                                                        <action selector="handleMagnificationChangeWithGestureRecognizer:" target="5jl-rI-3PA" id="ZWy-NN-2Wf"/>
-                                                    </connections>
-                                                </magnificationGestureRecognizer>
-                                            </gestureRecognizers>
                                         </view>
                                     </subviews>
                                 </clipView>

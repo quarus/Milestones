@@ -167,8 +167,26 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
 
     //MARK: UI Callbacks
     @IBAction func onClickOfGroupPopUpButton(_ sender: NSPopUpButton) {
-
         dependency()?.stateModel.selectedGroup = currentlySelectedGroup()
+    }
+    
+    @IBAction func onClickOfViewSegmentButton(_ sender: Any) {
+        guard let zoomLevelController = sender as? NSSegmentedControl else { return }
+        
+        var selectedZoomLevel = ZoomLevel.week
+        switch zoomLevelController.selectedSegment {
+        case 0:
+            selectedZoomLevel = .week
+        case 1:
+            selectedZoomLevel = .month
+        case 2:
+            selectedZoomLevel = .quarter
+        case 3:
+            selectedZoomLevel = .year
+        default:
+            selectedZoomLevel = .week
+        }
+        dependency()?.stateModel.zoomLevel = selectedZoomLevel
     }
     
     @objc func onClickOfManageGroupsPopUpButton(_ sender: NSPopUpButton) {
@@ -187,14 +205,14 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
     
 
     //MARK: DataObserverProtocol
+
     func didChangeSelectedGroup(_ group :Group?) {
         updateGroupPopUpButton()
     }
-
-    func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {
-    }
-    func didChangeSelectedMilestone(_ milestone :Milestone?){
-    }
+    
+    func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {}
+    func didChangeSelectedMilestone(_ milestone :Milestone?){}
 
     //MARK: Helper
     private func currentlySelectedGroup() -> Group? {
