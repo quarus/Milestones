@@ -135,8 +135,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
                                                     clipViewOffset
         
         let date = xCalculator.dateForXPosition(position: absolutePositionOfCurrentlyCenteredDate)
-        Swift.print("currentlyVisibleCenterDate| \(date)")
-
         return date
     }
     
@@ -302,6 +300,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         updateViews()
 
+        //align the clipview so that the date is in its center.
         let numberOfDaysOffset = Int (clipView.frame.size.width / 2.0) / Int(currentLengthOfDay)
         let absolutePositionOfClipViewMinX = positionOfDate - CGFloat(numberOfDaysOffset) * currentLengthOfDay
         let relativePositionOfClipViewMinX = absolutePositionOfClipViewMinX - positionOfFirstDate
@@ -318,7 +317,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         updateViews()
         
         if let date = currentCenterDate {
-            Swift.print("applyZoomLevel| Center to: \(date)")
             centerAroundDate(date)
         }
     }
