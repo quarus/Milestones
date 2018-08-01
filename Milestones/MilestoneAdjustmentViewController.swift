@@ -144,7 +144,8 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group :Group?){}
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]){}
-    
+    func didChangeZoomLevel(_ level: ZoomLevel) {}
+
     func didChangeSelectedMilestone(_ milestone :Milestone?){
         selectedAdjustment = nil
         update()

@@ -127,9 +127,8 @@ class MainSplitViewController :NSSplitViewController, StateObserverProtocol {
     }
     
     //MARK: DataObserverProtocol
-    func didChangeSelectedGroup(_ group :Group?) {
-        
-    }
+    func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeSelectedGroup(_ group :Group?) {}
     
     func didChangeSelectedTimeline(_ selectedTimelines: [Timeline]){
         displayView(viewType: .Timeline)

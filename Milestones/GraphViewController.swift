@@ -26,24 +26,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
     var firstVisibleDate = Date().normalized() ?? Date()
-
     let length :CGFloat = 8000.0
-    
-    var currentLengthOfDay: CGFloat = 40 {
-        didSet {
+    var currentLengthOfDay: CGFloat = 40
 
-            if (currentLengthOfDay > 150) {
-                currentLengthOfDay = 150
-            
-            } else if (currentLengthOfDay < 10) {
-                currentLengthOfDay = 10
-            }
-        }
-    }
-    
-    var magnificationCenterDate: Date?
-    var magnificationClipViewDelta: CGFloat = 0
-    
     override var representedObject: Any? {
         
         didSet {
@@ -125,11 +110,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
     }
     
-
-    func update() {
-        updateViews()
-    }
-    
     private func isDateVisible(_ date: Date) -> Bool {
         
         guard let horizontalCalulator = timelineHorizontalCalculator() else {return false}
@@ -139,67 +119,75 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         let dateXPosition = horizontalCalulator.xPositionFor(date: date)
         
-        if ((dateXPosition >= clipViewStartX) && (dateXPosition <= clipViewEndX)) {
+        if (dateXPosition >= clipViewStartX) && (dateXPosition <= clipViewEndX) {
             return true
         }
-        
         return false
     }
 
     
-    private func lengthOfDayFor(magnifcation magnification: CGFloat) -> CGFloat {
-        
-        let slowingFactor: CGFloat = 0.25
-        let scaleFactor = 1 + magnification * slowingFactor
-        let newLengthOfDay = currentLengthOfDay * scaleFactor
+    private func currentlyVisibleCenterDate() -> Date? {
+        guard let xCalculator = timelineHorizontalCalculator() else { return nil }
 
-        return newLengthOfDay
+        let absolutePositionOfFirstVisibleDate = xCalculator.xPositionFor(date: firstVisibleDate)
+        let clipViewOffset = (clipView.frame.size.width / 2.0) + clipView.visibleRect.minX
+        let absolutePositionOfCurrentlyCenteredDate = absolutePositionOfFirstVisibleDate +
+                                                    clipViewOffset
+        
+        let date = xCalculator.dateForXPosition(position: absolutePositionOfCurrentlyCenteredDate)
+        return date
     }
     
-    @IBAction func handleMagnificationChange(gestureRecognizer: NSMagnificationGestureRecognizer) {
+    func updateViews() {
+        guard let currentGroup = dataModel()?.selectedGroup else {return}
+        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
         
-        guard var xCalculator = timelineHorizontalCalculator() else {return}
-    // The general idea is to scale the content, while always maintaing the same distance between the date on which the
-    // the zoom occured on and the left boundary of the clipview.
-   
-        switch gestureRecognizer.state {
-        case .began:
-            
-            let locationInView = gestureRecognizer.location(in: scrollView.documentView)
-            let absolutePosition = xCalculator.xPositionFor(date: firstVisibleDate) + locationInView.x
-            magnificationCenterDate = xCalculator.dateForXPosition(position: absolutePosition)
-            magnificationClipViewDelta = locationInView.x - clipView.visibleRect.minX
-       
-        case .changed:
-            
-            if magnificationCenterDate != nil {
-                
-                currentLengthOfDay = lengthOfDayFor(magnifcation: gestureRecognizer.magnification)
-                xCalculator.lengthOfDay = currentLengthOfDay
-                realginAfterScrollAround(magnificationCenterDate!)
-                
-                let relpos = xCalculator.lengthBetween(firstDate: firstVisibleDate, secondDate: magnificationCenterDate! )
-                clipView.bounds.origin.x = relpos - magnificationClipViewDelta
-                
-            }
-        case .ended:
-            magnificationCenterDate = nil
+        horizontalRulerView?.updateForStartDate(date: firstVisibleDate)
+        verticalRulerView?.updateFor(timelines: timelines)
         
-        default:
-            break
+        timelinesAndGraphicsView?.updateForGroup(group: currentGroup,
+                                                 firstVisibleDate: firstVisibleDate,
+                                                 length: length)
+        
+        
+        highlightCurrentlySelectedMilestone()
+        
+        
+        //recalculate the documents view new height
+        if let currentFrame = scrollView.documentView?.frame {
+            let newHeight = (timelinesAndGraphicsView?.frame.size.height ?? 0) + (horizontalRulerView?.frame.size.height ?? 0)
+            scrollView.documentView?.frame.size = NSSize(width: currentFrame.width, height: newHeight)
         }
- 
- 
     }
     
+    private func highlightCurrentlySelectedMilestone() {
+        
+        guard let selectedMilestone = dataModel()?.selectedMilestone else {return}
+        
+        if (currentlySelectedMilestoneGraphicController != nil) {
+            currentlySelectedMilestoneGraphicController!.iconGraphic.isSelected = false
+            view.setNeedsDisplay(currentlySelectedMilestoneGraphicController!.iconGraphic.bounds)
+            view.display()
+            
+        }
+        
+        currentlySelectedMilestoneGraphicController = timelinesAndGraphicsView?.milestoneGraphicControllerForMilestone(selectedMilestone)
+        if let mgc = currentlySelectedMilestoneGraphicController{
+            mgc.iconGraphic.isSelected = true
+            view.setNeedsDisplay(mgc.iconGraphic.bounds)
+            view.display()
+        }
+    }
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group: Group?) {
-        update()
+        updateViews()
     }
     
-    func didChangeSelectedTimeline(_ selectedTimelines: [Timeline]) {
-        
+    func didChangeZoomLevel(_ level: ZoomLevel) {
+        applyZoomLevel(level)
     }
+    
+    func didChangeSelectedTimeline(_ selectedTimelines: [Timeline]) {}
     
     func didChangeSelectedMilestone(_ milestone :Milestone?){
         
@@ -215,15 +203,15 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     //MARK: Managed Object Context Change Handling
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
-        update()
+        updateViews()
     }
 
     func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
-        update()
+        updateViews()
     }
     
     func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
-        update()
+        updateViews()
     }
     
     //MARK: ClipViewDelegate
@@ -261,22 +249,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     }
     
-    private func centerAroundDate(_ date: Date) {
-        
-        guard let xCalculator = timelineHorizontalCalculator() else {return}
-
-        
-        let positionOfDate = xCalculator.xPositionFor(date: date)
-        let positionOfFirstDate = positionOfDate - (length / 2.0)
-        firstVisibleDate = xCalculator.dateForXPosition(position: positionOfFirstDate)
-        
-        updateViews()
-        
-        let absolutePositionOfClipViewMinX = positionOfDate - (clipView.frame.size.width / 2.0)
-        let relativePositionOfClipViewMinX = absolutePositionOfClipViewMinX - positionOfFirstDate
-        clipView.bounds.origin.x = relativePositionOfClipViewMinX
-    }
-
+    //MARK: View Adjusting & Scrolling
+  
     private func realginAfterScrollAround(_ date: Date) {
         
         guard let xCalculator = timelineHorizontalCalculator() else {return}
@@ -317,46 +291,33 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
     }
 
-    //MARK: Helper funcions
-    func updateViews() {
+    private func centerAroundDate(_ date: Date) {
+        guard let xCalculator = timelineHorizontalCalculator() else {return}
         
-        guard let currentGroup = dataModel()?.selectedGroup else {return}
-        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
+        let positionOfDate = xCalculator.xPositionFor(date: date)
+        let positionOfFirstDate = positionOfDate - (length / 2.0)
+        firstVisibleDate = xCalculator.dateForXPosition(position: positionOfFirstDate)
         
-        horizontalRulerView?.updateForStartDate(date: firstVisibleDate)
-        verticalRulerView?.updateFor(timelines: timelines)
+        updateViews()
 
-        timelinesAndGraphicsView?.updateForGroup(group: currentGroup,
-                                firstVisibleDate: firstVisibleDate,
-                                length: length)
-                
-        
-        highlightCurrentlySelectedMilestone()
-        
-
-        //recalculate the documents view new height
-        if let currentFrame = scrollView.documentView?.frame {
-            let newHeight = (timelinesAndGraphicsView?.frame.size.height ?? 0) + (horizontalRulerView?.frame.size.height ?? 0)
-            scrollView.documentView?.frame.size = NSSize(width: currentFrame.width, height: newHeight)
-        }
+        //align the clipview so that the date is in its center.
+        let numberOfDaysOffset = Int (clipView.frame.size.width / 2.0) / Int(currentLengthOfDay)
+        let absolutePositionOfClipViewMinX = positionOfDate - CGFloat(numberOfDaysOffset) * currentLengthOfDay
+        let relativePositionOfClipViewMinX = absolutePositionOfClipViewMinX - positionOfFirstDate
+        clipView.bounds.origin.x = relativePositionOfClipViewMinX
     }
     
-    private func highlightCurrentlySelectedMilestone() {
+    private func applyZoomLevel(_ level: ZoomLevel) {
+        guard var xCalculator = timelineHorizontalCalculator() else {return}
         
-        guard let selectedMilestone = dataModel()?.selectedMilestone else {return}
+        let currentCenterDate = currentlyVisibleCenterDate()
+        currentLengthOfDay = CGFloat(level.rawValue)
+        xCalculator.lengthOfDay = currentLengthOfDay
         
-        if (currentlySelectedMilestoneGraphicController != nil) {
-            currentlySelectedMilestoneGraphicController!.iconGraphic.isSelected = false
-            view.setNeedsDisplay(currentlySelectedMilestoneGraphicController!.iconGraphic.bounds)
-            view.display()
-            
-        }
+        updateViews()
         
-        currentlySelectedMilestoneGraphicController = timelinesAndGraphicsView?.milestoneGraphicControllerForMilestone(selectedMilestone)
-        if let mgc = currentlySelectedMilestoneGraphicController{
-            mgc.iconGraphic.isSelected = true
-            view.setNeedsDisplay(mgc.iconGraphic.bounds)
-            view.display()
+        if let date = currentCenterDate {
+            centerAroundDate(date)
         }
     }
 

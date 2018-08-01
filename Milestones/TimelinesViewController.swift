@@ -311,9 +311,9 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
-    func didChangeSelectedMilestone(_ milestone: Milestone?){
+    func didChangeSelectedMilestone(_ milestone: Milestone?) {}
+    func didChangeZoomLevel(_ level: ZoomLevel) {}
 
-    }
 
     //MARK: CoreDataNotificationDelegate
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {

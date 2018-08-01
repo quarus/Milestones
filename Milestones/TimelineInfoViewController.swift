@@ -90,18 +90,15 @@ class TimelineInfoViewController:
     }
 
     //MARK: DataProtocol
-    func didChangeSelectedGroup(_ group: Group?) {
-        
-    }
+    func didChangeSelectedMilestone(_ milestone: Milestone?) {}
+    func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeSelectedGroup(_ group: Group?) {}
     
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {
         update()
     }
     
-    func didChangeSelectedMilestone(_ milestone: Milestone?) {
-        
-    }
-    
+
     //MARK: NSTextFieldDelegate
     func control(_ control: NSControl, textShouldEndEditing fieldEditor: NSText) -> Bool {
         

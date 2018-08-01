@@ -15,6 +15,13 @@ import Cocoa
 
 typealias Dependencies = HasStateModel & HasCalculators
 
+public enum ZoomLevel: Int{
+    //Values decribe the length of a day in pixels for each zoomlevel
+    case week = 30
+    case month = 15
+    case quarter = 10
+    case year = 5
+}
 
 protocol GroupsManagementModelProtocol {
     
@@ -25,6 +32,8 @@ protocol GroupsManagementModelProtocol {
 
 
 protocol StateProtocol: class {
+
+    var zoomLevel: ZoomLevel {get set}
 
     var selectedGroup: Group? {get set}
     var selectedTimelines: [Timeline] {get set}
@@ -41,6 +50,7 @@ protocol StateProtocol: class {
 
 protocol StateObserverProtocol {
 
+    func didChangeZoomLevel(_ level: ZoomLevel)
     func didChangeSelectedGroup(_ group: Group?)
     func didChangeSelectedTimeline(_ selectedTimelines: [Timeline])
     func didChangeSelectedMilestone(_ milestone: Milestone?)

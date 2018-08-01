@@ -14,10 +14,17 @@ import Cocoa
 
 class StateModel : StateProtocol {
     
+    
     var hasNotificationObserving = false
+    
+   
+    var zoomLevel: ZoomLevel = .week{
+        didSet {
+            notifyObserversAboutZoomLevelChange()
+        }
+    }
 
     var selectedGroup :Group? {
-        
         didSet {
             
             selectedTimelines.removeAll()
@@ -26,7 +33,6 @@ class StateModel : StateProtocol {
     }
     
     var selectedTimelines :[Timeline] = [Timeline]() {
-        
         didSet {
             notifyObserversAboutTimelineSelectionChange()
         }
@@ -37,7 +43,6 @@ class StateModel : StateProtocol {
             notifyObserversAboutMilestoneSelectionChange()
         }
     }
-    
     var managedObjectContext :NSManagedObjectContext
 
     
@@ -257,38 +262,35 @@ class StateModel : StateProtocol {
     }
 
     //MARK: Messaging
-    private func notifyObserversAboutGroupChange() {
-
+    
+    private func notifyObserversAboutZoomLevelChange() {
         for anObserver in dataObservers {
-            
             if let observer = anObserver as? StateObserverProtocol {
-                
+                observer.didChangeZoomLevel(zoomLevel)
+            }
+        }
+    }
+    
+    private func notifyObserversAboutGroupChange() {
+        for anObserver in dataObservers {
+            if let observer = anObserver as? StateObserverProtocol {
                 observer.didChangeSelectedGroup(selectedGroup)
-                
             }
         }
     }
 
     private func notifyObserversAboutTimelineSelectionChange() {
-        
         for anObserver in dataObservers {
-            
             if let observer = anObserver as? StateObserverProtocol {
-                
                 observer.didChangeSelectedTimeline(selectedTimelines)
-                
             }
         }
     }
 
     private func notifyObserversAboutMilestoneSelectionChange() {
-
         for anObserver in dataObservers {
-
             if let observer = anObserver as? StateObserverProtocol {
-
                 observer.didChangeSelectedMilestone(selectedMilestone)
-
             }
         }
     }
