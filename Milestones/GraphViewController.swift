@@ -133,7 +133,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         let clipViewOffset = (clipView.frame.size.width / 2.0) + clipView.visibleRect.minX
         let absolutePositionOfCurrentlyCenteredDate = absolutePositionOfFirstVisibleDate +
                                                     clipViewOffset
-        
+    
         let date = xCalculator.dateForXPosition(position: absolutePositionOfCurrentlyCenteredDate)
         return date
     }
@@ -297,6 +297,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         let positionOfDate = xCalculator.xPositionFor(date: date)
         let positionOfFirstDate = positionOfDate - (length / 2.0)
         firstVisibleDate = xCalculator.dateForXPosition(position: positionOfFirstDate)
+        print("New first visible date: \(firstVisibleDate)")
         
         updateViews()
 
@@ -311,12 +312,14 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard var xCalculator = timelineHorizontalCalculator() else {return}
         
         let currentCenterDate = currentlyVisibleCenterDate()
+        print("Current center Date \(currentCenterDate)")
         currentLengthOfDay = CGFloat(level.rawValue)
         xCalculator.lengthOfDay = currentLengthOfDay
         
         updateViews()
         
         if let date = currentCenterDate {
+            print("Centering around Date \(date)")
             centerAroundDate(date)
         }
     }
