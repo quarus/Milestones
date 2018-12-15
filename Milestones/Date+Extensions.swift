@@ -49,27 +49,10 @@ extension Date {
         return calendar.date(from: dateComponents)?.normalized()
     }
     
-    func normalized() -> Date? {
+    func normalized() -> Date {
         
         let normalizedDate = Calendar.defaultCalendar().startOfDay(for: self)
         return normalizedDate
-
-  /*      let dateComponents =  calendar.dateComponents([.hour, .minute, .second, .day, .month, .year], from: self)
-  
-        //normalizes a date to  00:00:00 UTC
-        var newDateComponents = DateComponents()
-        newDateComponents.hour = 0
-        newDateComponents.minute = 0
-        newDateComponents.second = 0
-        newDateComponents.year = dateComponents.year
-        newDateComponents.month = dateComponents.month
-        newDateComponents.day = dateComponents.day
-        newDateComponents.timeZone = TimeZone(abbreviation: "UTC")
-        
-        let newDate = calendar.date(from: newDateComponents)
-        return newDate
- */
- 
     }
     
     // There is a problem using quarters with datecomponents. This hacky extension is used as a stopgap.

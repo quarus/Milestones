@@ -88,8 +88,8 @@ class MilestoneInfoViewController:
     
     private func updateTimeIntervalSinceTodayLabel() {
         guard let milestoneDate = dataModel()?.selectedMilestone?.date else { return }
-        guard let today = Date().normalized() else { return }
         
+        let today = Date().normalized()
         let deltaComponents = Calendar.defaultCalendar().dateComponents([.year, .month, .weekOfYear,.day], from: today, to: milestoneDate)
         
         var usePastTense: Bool = true
@@ -195,8 +195,8 @@ class MilestoneInfoViewController:
     
     private func  updateCurrentDateForDateString(_ dateString: String) {
         guard let date = cwDateFormatter.date(from: dateString) else { return }
-        guard let normalizedDate =  date.normalized() else { return }
-        
+
+        let normalizedDate =  date.normalized()        
         self.setValue(normalizedDate, forKey: "currentDate")
     }
     

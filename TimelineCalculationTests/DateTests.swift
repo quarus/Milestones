@@ -97,13 +97,13 @@ class DateTests: XCTestCase {
         XCTAssertNotNil(enumerationStartDate)
 
         var expectedDates = [Date]()
-        expectedDates.append(dateFor(year: 2011, month: 1, day: 3, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2011, month: 1, day: 10, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2011, month: 1, day: 17, hour: 0, minute: 0, second: 0)!.normalized()!)
+        expectedDates.append(dateFor(year: 2011, month: 1, day: 3, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2011, month: 1, day: 10, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2011, month: 1, day: 17, hour: 0, minute: 0, second: 0)!.normalized())
 
         Calendar.defaultCalendar().enumerateFirstMondayOfCalendarWeeksStarting(fromDate: enumerationStartDate!, usingHandler: {(date :Date, stop: inout Bool) in
           
-            dates.append(date.normalized()!)
+            dates.append(date.normalized())
             if dates.count == 3 {
                 stop = true
             }
@@ -116,17 +116,17 @@ class DateTests: XCTestCase {
         
         var dates = [Date]()
         var enumerationStartDate = dateFor(year: 2013, month: 3, day: 1, hour: 0, minute: 0, second: 0)?.normalized();
-        enumerationStartDate = enumerationStartDate?.normalized()!
+        enumerationStartDate = enumerationStartDate?.normalized()
         XCTAssertNotNil(enumerationStartDate)
         
         var expectedDates = [Date]()
-        expectedDates.append(dateFor(year: 2013, month: 4, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2013, month: 5, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2013, month: 6, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
+        expectedDates.append(dateFor(year: 2013, month: 4, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2013, month: 5, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2013, month: 6, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
         
         Calendar.defaultCalendar().enumerateFirstDayOfMonthsStarting(fromDate: enumerationStartDate!, usingHandler: {(date :Date, stop: inout Bool) in
             
-            dates.append(date.normalized()!)
+            dates.append(date.normalized())
             if dates.count == 3 {
                 stop = true
             }
@@ -139,18 +139,18 @@ class DateTests: XCTestCase {
         
         var dates = [Date]()
         var enumerationStartDate = dateFor(year: 2013, month: 4, day: 10, hour: 0, minute: 0, second: 0)?.normalized();
-        enumerationStartDate = enumerationStartDate?.normalized()!
+        enumerationStartDate = enumerationStartDate?.normalized()
         XCTAssertNotNil(enumerationStartDate)
         
         var expectedDates = [Date]()
-        expectedDates.append(dateFor(year: 2013, month: 4, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2013, month: 7, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2013, month: 10, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
-        expectedDates.append(dateFor(year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0)!.normalized()!)
+        expectedDates.append(dateFor(year: 2013, month: 4, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2013, month: 7, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2013, month: 10, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
+        expectedDates.append(dateFor(year: 2014, month: 1, day: 1, hour: 0, minute: 0, second: 0)!.normalized())
 
         Calendar.defaultCalendar().enumerateFirstDayOfQuartersStarting(fromDate: enumerationStartDate!, usingHandler: {(date :Date, stop: inout Bool) in
             
-            dates.append(date.normalized()!)
+            dates.append(date.normalized())
             if dates.count == 4 {
                 stop = true
             }
