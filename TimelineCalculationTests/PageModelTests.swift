@@ -131,7 +131,7 @@ class PageModelTests: XCTestCase {
         pageModel.clipViewAbsoluteX = pageModel.absoluteStartPosition /*- pageModel.clipViewLength */+ 50000
     
         let oldClipViewStartDate = pageModel.clipViewStartDate
-        pageModel.recenterClipView()
+        pageModel.makePageModelCenteredAroundClipView()
         
         XCTAssertEqual(pageModel.clipViewStartDate, oldClipViewStartDate)
     }
@@ -147,9 +147,9 @@ class PageModelTests: XCTestCase {
         pageModel.clipViewRelativeX = 500
         
         let oldClipViewStartDate = pageModel.clipViewStartDate
-        pageModel.recenterClipView()
+        let model = pageModel.makePageModelCenteredAroundClipView()
         
-        XCTAssertEqual(pageModel.clipViewStartDate, oldClipViewStartDate)
+        XCTAssertEqual(model.clipViewStartDate, oldClipViewStartDate)
     }
 }
 

@@ -14,7 +14,7 @@ class PageModel {
     let endDate: Date
     let length: CGFloat
     
-    var absoluteStartPosition: CGFloat = 0.0
+    fileprivate(set) var absoluteStartPosition: CGFloat = 0.0
     
     var clipViewRelativeX: CGFloat = 0.0 {
         didSet {
@@ -53,13 +53,18 @@ class PageModel {
         return ((date >= startDate) && (date <= endDate))
     }
     
-    func recenterClipView() {
+    func makePageModelCenteredAroundClipView() -> PageModel{
         
         let absoluteStartPosition = clipViewAbsoluteX - (length/2.0)
         let absoluteStartDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition)
         self.absoluteStartPosition = horizontalCalculator.xPositionFor(date: absoluteStartDate)
         let dayOffset = absoluteStartPosition - self.absoluteStartPosition
-
-        self.clipViewRelativeX = (clipViewAbsoluteX - absoluteStartPosition) + dayOffset
+        
+        let newPageModel = PageModel(horizontalCalculator: horizontalCalculator,
+                                     startDate: absoluteStartDate,
+                                     length: length)
+        
+        newPageModel.clipViewRelativeX = (clipViewAbsoluteX - absoluteStartPosition) + dayOffset
+        return newPageModel
     }
 }
