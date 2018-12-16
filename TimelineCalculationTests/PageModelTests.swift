@@ -78,7 +78,7 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 11, day: 21, hour: 12, minute: 00, second: 00)!
         
-        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              endDate: endDate)
         
@@ -93,7 +93,7 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 02, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 10, day: 11, hour: 12, minute: 00, second: 00)!
       
-        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              endDate: endDate)
 
@@ -108,7 +108,7 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 02, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 10, day: 11, hour: 12, minute: 00, second: 00)!
         
-        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              endDate: endDate)
         
@@ -123,7 +123,7 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 02, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 10, day: 11, hour: 12, minute: 00, second: 00)!
         
-        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              endDate: endDate)
 
@@ -140,7 +140,7 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 02, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 10, day: 11, hour: 12, minute: 00, second: 00)!
         
-        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              endDate: endDate)
         pageModel.clipViewLength = 300.0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PageModel {
+struct PageModel {
     
     let startDate: Date
     let endDate: Date
@@ -43,7 +43,7 @@ class PageModel {
         length = endPosition - absoluteStartPosition
     }
     
-    convenience init(horizontalCalculator: HorizontalCalculator, startDate: Date, length: CGFloat) {
+    init(horizontalCalculator: HorizontalCalculator, startDate: Date, length: CGFloat) {
 
         let endDate = horizontalCalculator.dateForXPosition(position:(horizontalCalculator.xPositionFor(date: startDate) + length))
         self.init(horizontalCalculator: horizontalCalculator, startDate: startDate, endDate: endDate)
@@ -53,14 +53,14 @@ class PageModel {
         return ((date >= startDate) && (date <= endDate))
     }
     
-    func makePageModelCenteredAroundClipView() -> PageModel{
+    mutating func makePageModelCenteredAroundClipView() -> PageModel{
         
         let absoluteStartPosition = clipViewAbsoluteX - (length/2.0)
         let absoluteStartDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition)
         self.absoluteStartPosition = horizontalCalculator.xPositionFor(date: absoluteStartDate)
         let dayOffset = absoluteStartPosition - self.absoluteStartPosition
         
-        let newPageModel = PageModel(horizontalCalculator: horizontalCalculator,
+        var newPageModel = PageModel(horizontalCalculator: horizontalCalculator,
                                      startDate: absoluteStartDate,
                                      length: length)
         
