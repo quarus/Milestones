@@ -14,10 +14,8 @@ import Cocoa
 
 
 protocol ClipViewDelegate {
-    func clipViewWillRecenter(_ clipView: ClipView)
-    func clipViewDidRecenter(_ clipView: ClipView)
     func clipViewDidMove(_ clipView: ClipView)
-    func clipViewNeedsRecentering(_ clipView: ClipView)
+    func clipViewPassedEdgeTreshold(_ clipView: ClipView)
 }
 
 class ClipView: NSClipView {
@@ -25,7 +23,10 @@ class ClipView: NSClipView {
     var handlesBoundsChangeNotifications = false
     var delegate :ClipViewDelegate?
     
-    private var recentering = false;
+    private var recentering = false
+
+    private var previousMinXPosition: CGFloat = 0.0
+    private var previousMaxXPosition: CGFloat = 0.0
     
     override func awakeFromNib() {
         postsBoundsChangedNotifications = true
@@ -36,7 +37,7 @@ class ClipView: NSClipView {
         NotificationCenter.default.removeObserver(self)
     }
   
-    func registerForBoundsChangedNotifications() {
+    private func registerForBoundsChangedNotifications() {
         
         if !handlesBoundsChangeNotifications {
             
@@ -54,53 +55,30 @@ class ClipView: NSClipView {
         }
     }
 
-    private func calculateRepositionOffset() -> CGPoint {
-        
-        let recenterTreshold: CGFloat = 1500
-        
-        guard let documentFrame = self.documentView?.frame else {return CGPoint.zero}
-        let clipBounds = self.bounds
-        
-        let minHorizontalDistance = clipBounds.minX - documentFrame.minX
-        let maxHoritontalDistance = documentFrame.maxX - clipBounds.maxX
-        
-        
-        if ((minHorizontalDistance < recenterTreshold) ||
-            (maxHoritontalDistance < recenterTreshold)) {
-            
-            var recenterOffset = CGPoint.zero
-            recenterOffset.x = documentFrame.minX + round((documentFrame.width - bounds.width) / 2.0);
-            recenterOffset.y = documentFrame.maxY + round((documentFrame.height - bounds.height) / 2.0);
-            return recenterOffset
-            
-        }
-        return CGPoint.zero
-    }
-    
     @objc private func viewGeometryChanged() {
+        guard let documentFrame = self.documentView?.frame else {return}
+
+        let lowerTreshold = bounds.size.width / 2.0
+        let upperTreshold = documentFrame.size.width - (bounds.size.width / 2.0)
         
         delegate?.clipViewDidMove(self)
-        
-        if !recentering {
-            recentering = true
-            let offset = calculateRepositionOffset()
-        
-            if !CGPoint.zero.equalTo(offset) {
-                
-/*                delegate?.clipViewWillRecenter(self)
-                bounds.origin.x = offset.x
-                delegate?.clipViewDidRecenter(self)
- */
-                delegate?.clipViewNeedsRecentering(self)
-
-                
+    
+        if (bounds.minX < lowerTreshold) && (previousMinXPosition > lowerTreshold) {
+            if !recentering {
+                delegate?.clipViewPassedEdgeTreshold(self)
+                recentering = false
             }
-            
-            recentering = false
         }
+        
+        if (bounds.maxX > upperTreshold) && (previousMaxXPosition < upperTreshold) {
+            if !recentering {
+                delegate?.clipViewPassedEdgeTreshold(self)
+                recentering = false
+            }
+        }
+        
+        previousMinXPosition = bounds.minX
+        previousMaxXPosition = bounds.maxX
     }
-    
-    
-    //MARK: View life cycle
 }
 

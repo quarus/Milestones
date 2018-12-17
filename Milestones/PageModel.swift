@@ -31,8 +31,6 @@ struct PageModel {
     
     fileprivate let horizontalCalculator: HorizontalCalculator
     
-    
-    
     init(horizontalCalculator: HorizontalCalculator, startDate: Date, endDate: Date) {
         self.horizontalCalculator = horizontalCalculator
         self.startDate = startDate.normalized()
@@ -47,6 +45,7 @@ struct PageModel {
 
         let endDate = horizontalCalculator.dateForXPosition(position:(horizontalCalculator.xPositionFor(date: startDate) + length))
         self.init(horizontalCalculator: horizontalCalculator, startDate: startDate, endDate: endDate)
+        print ("Created PageModel with startDate:\(startDate) lenght:\(length)")
     }
     
     func contains(date :Date) -> Bool{
