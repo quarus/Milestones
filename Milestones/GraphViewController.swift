@@ -78,8 +78,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         pageModel = PageModel(horizontalCalculator: horizCalc,
                               startDate: firstVisibleDate,
-                              length: length)
-        pageModel?.clipViewLength = clipView.bounds.size.width
+                              length: length,
+                              clipViewLength:clipView.bounds.size.width)
         pageModel?.clipViewRelativeX = length/2.0
         
         if let clipView = scrollView.contentView as? ClipView {
@@ -261,9 +261,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     private func applyZoomLevel(_ level: ZoomLevel) {
         guard var xCalculator = timelineHorizontalCalculator() else {return}
+        guard let model = pageModel else {return}
         
-        let currentCenterDate = currentlyVisibleCenterDate()
-        print("Current center Date \(currentCenterDate)")
+        let currentCenterDate = model.clipViewCenterDate
         currentLengthOfDay = CGFloat(level.rawValue)
         xCalculator.lengthOfDay = currentLengthOfDay
         

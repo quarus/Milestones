@@ -37,7 +37,7 @@ class ClipView: NSClipView {
         NotificationCenter.default.removeObserver(self)
     }
   
-    private func registerForBoundsChangedNotifications() {
+    func registerForBoundsChangedNotifications() {
         
         if !handlesBoundsChangeNotifications {
             

@@ -48,21 +48,24 @@ class PageModelTests: XCTestCase {
         
         let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
+                                             endDate: endDate,
+                                             clipViewLength: 100)
         
         XCTAssertEqual(pageModel.absoluteStartPosition, xCalculator.xPositionFor(date: startDate))
         XCTAssertEqual(pageModel.length, lengthDelta)
+        XCTAssertEqual(pageModel.clipViewLength, 100)
     }
     
     func testInitializationWithLength() {
         let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
         let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             length: 5000)
+                                             length: 5000,
+                                             clipViewLength: 100)
 
         let endDate = xCalculator.dateForXPosition(position: pageModel.absoluteStartPosition + 5000).normalized()
         XCTAssertEqual(pageModel.endDate, endDate)
-        
+        XCTAssertEqual(pageModel.clipViewLength, 100)
     }
     
     func testLengthForEqualStartAndEndDate() {
@@ -70,7 +73,8 @@ class PageModelTests: XCTestCase {
         
         let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: startDate)
+                                             endDate: startDate,
+                                             clipViewLength: 100)
         XCTAssertEqual(pageModel.length, 0.0)
     }
     
@@ -78,9 +82,10 @@ class PageModelTests: XCTestCase {
         let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
         let endDate = dateFor(year: 2018, month: 11, day: 21, hour: 12, minute: 00, second: 00)!
         
-        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+        let pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
+                                             endDate: endDate,
+                                             clipViewLength: 100)
         
         var testDate = dateFor(year: 2018, month: 7, day: 10, hour: 14, minute: 56, second: 3)!
         XCTAssertEqual(pageModel.contains(date: testDate), true)
@@ -95,7 +100,8 @@ class PageModelTests: XCTestCase {
       
         var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
+                                             endDate: endDate,
+                                             clipViewLength: 100.0)
 
         pageModel.clipViewRelativeX = 0
         XCTAssertEqual(pageModel.clipViewAbsoluteX, pageModel.absoluteStartPosition)
@@ -110,7 +116,8 @@ class PageModelTests: XCTestCase {
         
         var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
+                                             endDate: endDate,
+                                             clipViewLength: 100.0)
         
         pageModel.clipViewRelativeX = 0
         XCTAssertEqual(pageModel.clipViewStartDate.normalized(), pageModel.startDate)
@@ -125,15 +132,16 @@ class PageModelTests: XCTestCase {
         
         var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
+                                             endDate: endDate,
+                                             clipViewLength: 200)
 
-        pageModel.clipViewLength = 200.0
-        pageModel.clipViewAbsoluteX = pageModel.absoluteStartPosition /*- pageModel.clipViewLength */+ 50000
+        //pageModel.clipViewAbsoluteX = pageModel.absoluteStartPosition /*- pageModel.clipViewLength */+ 50000
+        pageModel.clipViewRelativeX = 50000
     
         let oldClipViewStartDate = pageModel.clipViewStartDate
-        pageModel.makePageModelCenteredAroundClipView()
+        let model = pageModel.makePageModelCenteredAroundClipView()
         
-        XCTAssertEqual(pageModel.clipViewStartDate, oldClipViewStartDate)
+        XCTAssertEqual(model.clipViewStartDate, oldClipViewStartDate)
     }
   
     func testClipViewRecenteringWithinBounds(){
@@ -142,14 +150,44 @@ class PageModelTests: XCTestCase {
         
         var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
-                                             endDate: endDate)
-        pageModel.clipViewLength = 300.0
+                                             endDate: endDate,
+                                             clipViewLength: 300.0)
         pageModel.clipViewRelativeX = 500
         
         let oldClipViewStartDate = pageModel.clipViewStartDate
         let model = pageModel.makePageModelCenteredAroundClipView()
         
         XCTAssertEqual(model.clipViewStartDate, oldClipViewStartDate)
+    }
+    
+    func testClipViewCenteringAroundADate() {
+        
+        let centerDate = dateFor(year: 2012, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
+        let expectedStartDate =  xCalculator.dateForXPosition(position:(xCalculator.xPositionFor(date: centerDate) - 2500))
+        
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+                                             centerDate: centerDate,
+                                             length: 5000,
+                                             clipViewLength: 300.0)
+        pageModel.clipViewRelativeX = 500
+        
+        
+        XCTAssertEqual(expectedStartDate, pageModel.startDate)
+    }
+    
+    func testCenterDate() {
+
+        let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
+        
+        var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+                                             startDate: startDate,
+                                             length: 5000,
+                                             clipViewLength: 1000)
+        pageModel.clipViewRelativeX = 2346
+        var absoluteStartPosition = xCalculator.xPositionFor(date: startDate)
+        absoluteStartPosition = absoluteStartPosition + 2346 + 500
+        
+        XCTAssertEqual(pageModel.clipViewCenterDate, xCalculator.dateForXPosition(position: absoluteStartPosition))
     }
 }
 
