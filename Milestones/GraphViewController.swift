@@ -88,8 +88,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         if let clipView = scrollView.contentView as? ClipView {
             
-
-            clipView.scroll(to: NSPoint(x: length/2.0, y: 0))
+            clipView.bounds.origin = CGPoint(x: length/2.0, y: 0.0) 
             clipView.registerForBoundsChangedNotifications()
             clipView.delegate = self
         }
