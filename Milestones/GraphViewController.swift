@@ -198,11 +198,17 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     //MARK: ClipViewDelegate
+    
+    func clipViewFrameDidChange(_ clipView: ClipView) {
+        pageModel?.clipViewLength = clipView.bounds.size.width
+        
+    }
+
     func clipViewDidMove(_ clipView: ClipView) {
         pageModel?.clipViewRelativeX = clipView.bounds.origin.x
     }
     
-    func clipViewPassedEdgeTreshold(_ clipView: ClipView) {        
+    func clipViewPassedEdgeTreshold(_ clipView: ClipView) {
         pageModel = pageModel?.makePageModelCenteredAroundClipView()
         updateViews()
     }

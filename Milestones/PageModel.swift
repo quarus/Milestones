@@ -33,7 +33,7 @@ struct PageModel {
     }
     
     fileprivate(set) var clipViewAbsoluteX: CGFloat = 0.0
-    fileprivate(set) var clipViewLength: CGFloat = 0.0
+    var clipViewLength: CGFloat = 0.0
     
     fileprivate let horizontalCalculator: HorizontalCalculator
     

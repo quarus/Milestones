@@ -16,6 +16,7 @@ import Cocoa
 protocol ClipViewDelegate {
     func clipViewDidMove(_ clipView: ClipView)
     func clipViewPassedEdgeTreshold(_ clipView: ClipView)
+    func clipViewFrameDidChange(_ clipView: ClipView)
 }
 
 class ClipView: NSClipView {
@@ -43,19 +44,24 @@ class ClipView: NSClipView {
             
             handlesBoundsChangeNotifications = true
         
+            //called when the window is resized and resizing effects the containing scrolliew
             NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(viewGeometryChanged),
+                                                   selector: #selector(frameGeometryChanged),
                                                    name: NSView.frameDidChangeNotification,
                                                    object: self)
         
+            //called when the clipview is moved
             NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(viewGeometryChanged),
+                                                   selector: #selector(boundsGeometryChanged),
                                                    name: NSView.boundsDidChangeNotification,
                                                    object: self)
         }
     }
+    @objc private func frameGeometryChanged(){
+        delegate?.clipViewFrameDidChange(self)
+    }
 
-    @objc private func viewGeometryChanged() {
+    @objc private func boundsGeometryChanged() {
         guard let documentFrame = self.documentView?.frame else {return}
 
         let lowerTreshold = bounds.size.width / 2.0
