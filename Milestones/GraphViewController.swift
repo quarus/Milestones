@@ -137,13 +137,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         
         highlightCurrentlySelectedMilestone()
-        
- /*
-        //recalculate the documents view new height
-        if let currentFrame = scrollView.documentView?.frame {
-            let newHeight = (timelinesAndGraphicsView?.frame.size.height ?? 0) + (horizontalRulerView?.frame.size.height ?? 0)
-            scrollView.documentView?.frame.size = NSSize(width: currentFrame.width, height: newHeight)
-        }*/
     }
     
     private func highlightCurrentlySelectedMilestone() {
@@ -179,8 +172,12 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let model = pageModel else {return}
         
         if let date = milestone?.date {
-            centerAroundDate(date)
+            if !model.clipViewContains(date: date) {
+                centerAroundDate(date)
+            }
             highlightCurrentlySelectedMilestone()
+            pageModel?.printDescription()
+
         }
     }
     
@@ -201,7 +198,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     func clipViewFrameDidChange(_ clipView: ClipView) {
         pageModel?.clipViewLength = clipView.bounds.size.width
-        
     }
 
     func clipViewDidMove(_ clipView: ClipView) {

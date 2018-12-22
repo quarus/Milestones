@@ -175,6 +175,23 @@ class PageModelTests: XCTestCase {
         XCTAssertEqual(expectedStartDate, pageModel.startDate)
     }
     
+    func testClipViewDateVisibility() {
+        let startDate = dateFor(year: 2022, month: 02, day: 17, hour: 8, minute: 32, second: 00)!
+        let expectedStartDate =  xCalculator.dateForXPosition(position:(xCalculator.xPositionFor(date: startDate)))
+        
+        let pagelModel: PageModel = PageModel(horizontalCalculator: xCalculator,
+                                              startDate: startDate,
+                                              length: 5000,
+                                              clipViewLength: 700)
+        
+        var testDate = xCalculator.dateForXPosition(position: pagelModel.clipViewLength + 100)
+        XCTAssertFalse(pagelModel.clipViewContains(date: testDate))
+
+        testDate = xCalculator.dateForXPosition(position: pagelModel.clipViewLength - 200)
+        XCTAssertTrue(pagelModel.clipViewContains(date: testDate))
+
+    }
+    
     func testCenterDate() {
 
          let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!

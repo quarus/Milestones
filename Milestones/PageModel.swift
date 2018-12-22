@@ -28,7 +28,6 @@ struct PageModel {
     
     var clipViewCenterDate: Date {
         let clipViewCenterAbsolutePosition = absoluteStartPosition + clipViewRelativeX + (clipViewLength/2.0)
-        print(clipViewCenterAbsolutePosition)
         return horizontalCalculator.dateForXPosition(position: clipViewCenterAbsolutePosition).normalized()
     }
     
@@ -80,11 +79,22 @@ struct PageModel {
                   clipViewLength: clipViewLength)
         
         let centerDateRelativeX = horizontalCalculator.xPositionFor(date:centerDate) - self.absoluteStartPosition
-        clipViewRelativeX = centerDateRelativeX - (clipViewLength/2.0)
+        self.clipViewRelativeX = centerDateRelativeX - (clipViewLength/2.0)
+        //ToDo: The line below should have been called by the setter above - but it hasn't. Why?
+        clipViewAbsoluteX = absoluteStartPosition + clipViewRelativeX
+
     }
 
-    func contains(date :Date) -> Bool{
+    func contains(date :Date) -> Bool {
         return ((date >= startDate) && (date <= endDate))
+    }
+    
+    func clipViewContains(date: Date) -> Bool {        
+        let datePosition = horizontalCalculator.xPositionFor(date: date)
+        if (datePosition >= clipViewAbsoluteX) && (datePosition <= clipViewAbsoluteX + clipViewLength) {
+            return true
+        }
+        return false
     }
     
     mutating func makePageModelCenteredAroundClipView() -> PageModel {
@@ -102,4 +112,15 @@ struct PageModel {
         return newPageModel
     }
     
+    
+    func printDescription () {
+        print("StartDate :\(startDate)")
+        print("EndDate: \(endDate)")
+        print("Length: \(length)")
+        print("AbsoluteStartPosition: \(absoluteStartPosition)")
+        print("ClipViewAbsolutePosition: \(clipViewAbsoluteX)")
+        print("ClipViewRelativePosition: \(clipViewRelativeX)")
+        print("ClipViewLength: \(clipViewLength)")
+        print("\n")
+    }
 }
