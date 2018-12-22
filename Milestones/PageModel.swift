@@ -12,7 +12,7 @@ struct PageModel {
     
     let startDate: Date
     let endDate: Date
-    let length: CGFloat
+    fileprivate(set) var length: CGFloat
     
     fileprivate(set) var absoluteStartPosition: CGFloat = 0.0
     
@@ -28,6 +28,7 @@ struct PageModel {
     
     var clipViewCenterDate: Date {
         let clipViewCenterAbsolutePosition = absoluteStartPosition + clipViewRelativeX + (clipViewLength/2.0)
+        print(clipViewCenterAbsolutePosition)
         return horizontalCalculator.dateForXPosition(position: clipViewCenterAbsolutePosition).normalized()
     }
     
@@ -56,12 +57,13 @@ struct PageModel {
          length: CGFloat,
          clipViewLength: CGFloat) {
 
-        let endDate = horizontalCalculator.dateForXPosition(position:(horizontalCalculator.xPositionFor(date: startDate) + length))
-        self.init(horizontalCalculator: horizontalCalculator,
-                  startDate: startDate,
-                  endDate: endDate,
-            clipViewLength: clipViewLength)
+        self.horizontalCalculator = horizontalCalculator
+        self.startDate = startDate.normalized()
+        self.endDate = horizontalCalculator.dateForXPosition(position:(horizontalCalculator.xPositionFor(date: startDate) + length))
+        self.length = length
+        self.clipViewLength = clipViewLength
 
+        absoluteStartPosition = horizontalCalculator.xPositionFor(date: startDate)
     }
     
     init(horizontalCalculator: HorizontalCalculator,
@@ -70,13 +72,15 @@ struct PageModel {
          clipViewLength: CGFloat) {
         
         let absoluteStartPosition = horizontalCalculator.xPositionFor(date: centerDate) - (length / 2.0)
-        let startDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition)
+        let startDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition).normalized()
+        
         self.init(horizontalCalculator: horizontalCalculator,
                   startDate:startDate,
                   length: length,
                   clipViewLength: clipViewLength)
         
-        clipViewRelativeX = (length / 2.0) - (clipViewLength / 2.0)
+        let centerDateRelativeX = horizontalCalculator.xPositionFor(date:centerDate) - self.absoluteStartPosition
+        clipViewRelativeX = centerDateRelativeX - (clipViewLength/2.0)
     }
 
     func contains(date :Date) -> Bool{

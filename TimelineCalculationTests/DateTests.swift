@@ -43,6 +43,7 @@ class DateTests: XCTestCase {
         super.tearDown()
     }
 
+
     func testDateNormalisation1() {
         
         let date = dateFor(year: 2017, month: 6, day: 12, hour: 17, minute: 10, second: 0); XCTAssertNotNil(date)

@@ -25,11 +25,15 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
     private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
-    var firstVisibleDate = Date().normalized() ?? Date()
+    var firstVisibleDate = Date().normalized()
     let length :CGFloat = 8000.0
     var currentLengthOfDay: CGFloat = 40
 
-    var pageModel: PageModel?
+    var pageModel: PageModel? {
+        didSet {
+            clipView.bounds.origin.x = pageModel?.clipViewRelativeX ?? 0.0
+        }
+    }
     
     override var representedObject: Any? {
         
@@ -118,34 +122,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
     }
     
-    private func isDateVisible(_ date: Date) -> Bool {
-        
-        guard let horizontalCalulator = timelineHorizontalCalculator() else {return false}
-        
-        let clipViewStartX = clipView.bounds.minX + horizontalCalulator.xPositionFor(date: firstVisibleDate)
-        let clipViewEndX = clipViewStartX + clipView.bounds.size.width
-        
-        let dateXPosition = horizontalCalulator.xPositionFor(date: date)
-        
-        if (dateXPosition >= clipViewStartX) && (dateXPosition <= clipViewEndX) {
-            return true
-        }
-        return false
-    }
-
-    
-    private func currentlyVisibleCenterDate() -> Date? {
-        guard let xCalculator = timelineHorizontalCalculator() else { return nil }
-
-        let absolutePositionOfFirstVisibleDate = xCalculator.xPositionFor(date: firstVisibleDate)
-        let clipViewOffset = (clipView.frame.size.width / 2.0) + clipView.visibleRect.minX
-        let absolutePositionOfCurrentlyCenteredDate = absolutePositionOfFirstVisibleDate +
-                                                    clipViewOffset
-    
-        let date = xCalculator.dateForXPosition(position: absolutePositionOfCurrentlyCenteredDate)
-        return date
-    }
-    
     func updateViews() {
         guard let currentGroup = dataModel()?.selectedGroup else {return}
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
@@ -160,9 +136,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
                                                  length: pageModelLength)
         
         
- /*       highlightCurrentlySelectedMilestone()
+        highlightCurrentlySelectedMilestone()
         
-        
+ /*
         //recalculate the documents view new height
         if let currentFrame = scrollView.documentView?.frame {
             let newHeight = (timelinesAndGraphicsView?.frame.size.height ?? 0) + (horizontalRulerView?.frame.size.height ?? 0)
@@ -203,12 +179,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let model = pageModel else {return}
         
         if let date = milestone?.date {
-            
-            if model.contains(date: date) {
-                centerAroundDate(date)
-            }
-        
-//            highlightCurrentlySelectedMilestone()
+            centerAroundDate(date)
+            highlightCurrentlySelectedMilestone()
         }
     }
     
@@ -227,52 +199,33 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     //MARK: ClipViewDelegate
     func clipViewDidMove(_ clipView: ClipView) {
-        print(clipView.bounds.origin.x)
         pageModel?.clipViewRelativeX = clipView.bounds.origin.x
-
     }
     
-    func clipViewPassedEdgeTreshold(_ clipView: ClipView) {
-        
-        print("Recenter")
+    func clipViewPassedEdgeTreshold(_ clipView: ClipView) {        
         pageModel = pageModel?.makePageModelCenteredAroundClipView()
         updateViews()
-        clipView.bounds.origin.x = pageModel?.clipViewRelativeX ?? 0.0
     }
-    
-  
 
     private func centerAroundDate(_ date: Date) {
         guard let xCalculator = timelineHorizontalCalculator() else {return}
+        guard let model = pageModel else {return}
         
-        let positionOfDate = xCalculator.xPositionFor(date: date)
-        let positionOfFirstDate = positionOfDate - (length / 2.0)
-        firstVisibleDate = xCalculator.dateForXPosition(position: positionOfFirstDate)
-        print("New first visible date: \(firstVisibleDate)")
+        let newModel = PageModel(horizontalCalculator: xCalculator,
+                                 centerDate: date,
+                                 length: model.length,
+                                 clipViewLength: model.clipViewLength)
         
+        pageModel = newModel
         updateViews()
-
-        //align the clipview so that the date is in its center.
-        let numberOfDaysOffset = Int (clipView.frame.size.width / 2.0) / Int(currentLengthOfDay)
-        let absolutePositionOfClipViewMinX = positionOfDate - CGFloat(numberOfDaysOffset) * currentLengthOfDay
-        let relativePositionOfClipViewMinX = absolutePositionOfClipViewMinX - positionOfFirstDate
-        clipView.bounds.origin.x = relativePositionOfClipViewMinX
     }
     
     private func applyZoomLevel(_ level: ZoomLevel) {
         guard var xCalculator = timelineHorizontalCalculator() else {return}
         guard let model = pageModel else {return}
-        
-        let currentCenterDate = model.clipViewCenterDate
-        currentLengthOfDay = CGFloat(level.rawValue)
-        xCalculator.lengthOfDay = currentLengthOfDay
-        
-        updateViews()
-        
-        if let date = currentCenterDate {
-            print("Centering around Date \(date)")
-            centerAroundDate(date)
-        }
-    }
 
+        let currentCenterDate = model.clipViewCenterDate
+        xCalculator.lengthOfDay =  CGFloat(level.rawValue)
+        centerAroundDate(currentCenterDate)
+    }
 }

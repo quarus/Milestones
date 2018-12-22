@@ -177,17 +177,24 @@ class PageModelTests: XCTestCase {
     
     func testCenterDate() {
 
-        let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
+         let startDate = dateFor(year: 2018, month: 04, day: 10, hour: 12, minute: 00, second: 00)!
         
         var pageModel: PageModel = PageModel(horizontalCalculator: xCalculator,
                                              startDate: startDate,
                                              length: 5000,
                                              clipViewLength: 1000)
         pageModel.clipViewRelativeX = 2346
-        var absoluteStartPosition = xCalculator.xPositionFor(date: startDate)
-        absoluteStartPosition = absoluteStartPosition + 2346 + 500
+        let absoluteStartPosition = xCalculator.xPositionFor(date: startDate)
+        let centerDate = xCalculator.dateForXPosition(position: absoluteStartPosition + 2346 + 500).normalized()
         
-        XCTAssertEqual(pageModel.clipViewCenterDate, xCalculator.dateForXPosition(position: absoluteStartPosition))
+        print("centerDatePosition \(xCalculator.xPositionFor(date:centerDate))")
+        let centeredPageModel = PageModel(horizontalCalculator: xCalculator,
+                                          centerDate: centerDate,
+                                          length: 5000,
+                                          clipViewLength: pageModel.clipViewLength)
+        
+        XCTAssertEqual(centerDate, centeredPageModel.clipViewCenterDate)
+
     }
 }
 

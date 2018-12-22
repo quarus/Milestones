@@ -77,6 +77,15 @@ class TimelineCalculationTests: XCTestCase {
         
     }
     
+    func testDateToPositionConversions2 () {
+        let date = timelineCalculator.dateForXPosition(position: 265211).normalized()
+        
+        let datePosition = timelineCalculator.xPositionFor(date: date)
+        let calculatedDate = timelineCalculator.dateForXPosition(position: datePosition)
+        
+        XCTAssertEqual(date,calculatedDate)
+    }
+    
     func testCenterPosition() {
         
         let date = Date()
