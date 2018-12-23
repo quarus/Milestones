@@ -72,7 +72,7 @@ extension Date {
         default: newMonth = 1
         }
         components.month = newMonth
-        return Calendar.defaultCalendar().date(from: components)!
+        return Calendar.defaultCalendar().date(from: components)!.normalized()
     }
     
     public var endOfQuarter: Date {
@@ -87,7 +87,7 @@ extension Date {
         }
         
         let date = Calendar.defaultCalendar().startOfQuarter(withNumber: quarter, ofYear: year)?.normalized() ?? Date()
-        return date
+        return date.normalized()
         
     }
     

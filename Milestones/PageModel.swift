@@ -27,12 +27,12 @@ struct PageModel {
     }
     
     var clipViewStartDate: Date {
-        return horizontalCalculator.dateForXPosition(position: clipViewAbsoluteX).normalized()
+        return horizontalCalculator.dateForXPosition(position: clipViewAbsoluteX)
     }
     
     var clipViewCenterDate: Date {
         let clipViewCenterAbsolutePosition = absoluteStartPosition + clipViewRelativeX + (clipViewLength/2.0)
-        return horizontalCalculator.dateForXPosition(position: clipViewCenterAbsolutePosition).normalized()
+        return horizontalCalculator.dateForXPosition(position: clipViewCenterAbsolutePosition)
     }
     
     fileprivate(set) var clipViewAbsoluteX: CGFloat = 0.0
@@ -75,7 +75,7 @@ struct PageModel {
          clipViewLength: CGFloat) {
         
         let absoluteStartPosition = horizontalCalculator.xPositionFor(date: centerDate) - (length / 2.0)
-        let startDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition).normalized()
+        let startDate = horizontalCalculator.dateForXPosition(position: absoluteStartPosition)
         
         self.init(horizontalCalculator: horizontalCalculator,
                   startDate:startDate,

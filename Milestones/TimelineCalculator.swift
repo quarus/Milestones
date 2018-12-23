@@ -58,7 +58,7 @@ class TimelineCalculator : HorizontalCalculator {
         
         //2. create a date by adding the number of days to the reference date
         let newDate = referenceDate.addingTimeInterval(numberOfDays * dayInterval)
-        return newDate
+        return newDate.normalized()
     }
     
     func lengthBetween(firstDate: Date, secondDate: Date) -> CGFloat{
