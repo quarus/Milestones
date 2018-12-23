@@ -144,17 +144,17 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         if (currentlySelectedMilestoneGraphicController != nil) {
             currentlySelectedMilestoneGraphicController!.iconGraphic.isSelected = false
-            view.setNeedsDisplay(currentlySelectedMilestoneGraphicController!.iconGraphic.bounds)
-            view.display()
+            timelinesAndGraphicsView?.setNeedsDisplay(currentlySelectedMilestoneGraphicController!.iconGraphic.bounds)
             
         }
         
         currentlySelectedMilestoneGraphicController = timelinesAndGraphicsView?.milestoneGraphicControllerForMilestone(selectedMilestone)
         if let mgc = currentlySelectedMilestoneGraphicController{
             mgc.iconGraphic.isSelected = true
-            view.setNeedsDisplay(mgc.iconGraphic.bounds)
-            view.display()
+            timelinesAndGraphicsView?.setNeedsDisplay(mgc.iconGraphic.bounds)
         }
+        
+        timelinesAndGraphicsView?.display()
     }
     
     //MARK: DataObserverProtocol
