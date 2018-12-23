@@ -88,7 +88,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         if let clipView = scrollView.contentView as? ClipView {
             
-            clipView.bounds.origin = CGPoint(x: length/2.0, y: 0.0) 
+            clipView.bounds.origin = CGPoint(x: length/2.0, y: 0.0)
             clipView.registerForBoundsChangedNotifications()
             clipView.delegate = self
         }
@@ -156,6 +156,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             view.display()
         }
     }
+    
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group: Group?) {
         updateViews()
@@ -175,8 +176,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
                 centerAroundDate(date)
             }
             highlightCurrentlySelectedMilestone()
-            pageModel?.printDescription()
-
         }
     }
     
@@ -194,7 +193,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     //MARK: ClipViewDelegate
-    
     func clipViewFrameDidChange(_ clipView: ClipView) {
         pageModel?.clipViewLength = clipView.bounds.size.width
     }

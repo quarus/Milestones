@@ -84,9 +84,7 @@ struct PageModel {
         
         let centerDateRelativeX = horizontalCalculator.xPositionFor(date:centerDate) - self.absoluteStartPosition
         self.clipViewRelativeX = centerDateRelativeX - (clipViewLength/2.0)
-        //ToDo: The line below should have been called by the setter above - but it hasn't. Why?
         clipViewAbsoluteX = absoluteStartPosition + clipViewRelativeX
-
     }
 
     func contains(date :Date) -> Bool {
