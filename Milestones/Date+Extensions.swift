@@ -13,6 +13,22 @@
 import Foundation
 
 extension Date {
+    
+    public static func dateFor(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> Date? {
+        
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        dateComponents.hour = hour
+        dateComponents.minute = minute
+        dateComponents.second = second
+        dateComponents.timeZone = TimeZone(identifier: "UTC")
+        
+        let date = Calendar.defaultCalendar().date(from: dateComponents)?.normalized()
+        return date
+        
+    }
 
     func firstDayOfMonth() -> Date? {
         let calendar = Calendar.defaultCalendar()
