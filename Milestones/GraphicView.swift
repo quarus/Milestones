@@ -20,7 +20,7 @@ class GraphicView :NSView {
     
     override var isOpaque: Bool {
         get {
-            return true
+            return false
         }
     }
     
@@ -46,7 +46,10 @@ class GraphicView :NSView {
     override func draw(_ dirtyRect: NSRect) {
         
         backgroundColor.set()
-        dirtyRect.fill()
+        //this only works when "isOpaque" returns false
+        //used to be: dirtyRect.fill()
+        __NSRectFillUsingOperation(dirtyRect, .sourceOver);
+
         
         //Fetch the current drawing context
         let currentContext = NSGraphicsContext.current
