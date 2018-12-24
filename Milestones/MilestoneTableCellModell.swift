@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import Cocoa
 
-struct MilestoneCellModel {
+struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
     
     private let calendarWeekDateFormatter :DateFormatter
     private let dateFormatter :DateFormatter
@@ -18,6 +19,9 @@ struct MilestoneCellModel {
     private(set) var nameString: String = ""
     private(set) var timeIntervallString: String = ""
     private(set) var needsExpandedCell: Bool = false
+    private(set) var iconType: IconType
+    private(set) var iconColor: NSColor
+
     
     init(milestone: Milestone, nextMilestone :Milestone? = nil) {
         calendarWeekDateFormatter = DateFormatter()
@@ -45,5 +49,8 @@ struct MilestoneCellModel {
                 }
             }
         }
+        
+        iconType = IconType(rawValue: milestone.type.intValue) ?? .Diamond
+        iconColor = milestone.timeline?.color ?? .black
     }
 }

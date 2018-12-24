@@ -24,7 +24,7 @@
 		AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337AF1D293BBB00637527 /* LineGraphic.swift */; };
 		AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337B31D3257F700637527 /* LabelGraphic.swift */; };
 		AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */; };
-		AC1D7C5021D0BC30009DBACE /* MilestoneCellModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4F21D0BC30009DBACE /* MilestoneCellModell.swift */; };
+		AC1D7C5021D0BC30009DBACE /* MilestoneTableCellModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */; };
 		AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CA71FE83581001B25E9 /* DateTests.swift */; };
 		AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */; };
 		AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */; };
@@ -112,7 +112,7 @@
 		AC1337AF1D293BBB00637527 /* LineGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LineGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC1337B31D3257F700637527 /* LabelGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewModelTests.swift; sourceTree = "<group>"; };
-		AC1D7C4F21D0BC30009DBACE /* MilestoneCellModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCellModell.swift; sourceTree = "<group>"; };
+		AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableCellModell.swift; sourceTree = "<group>"; };
 		AC235CA71FE83581001B25E9 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectGraphic.swift; sourceTree = "<group>"; };
 		AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinesAndCalendarweeksView.swift; sourceTree = "<group>"; };
@@ -194,10 +194,10 @@
 			isa = PBXGroup;
 			children = (
 				ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */,
+				AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */,
 				AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */,
 				AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */,
 				AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */,
-				AC1D7C4F21D0BC30009DBACE /* MilestoneCellModell.swift */,
 			);
 			name = Milestones;
 			sourceTree = "<group>";
@@ -521,7 +521,7 @@
 				AC463112208286F400312012 /* LineGraphicController.swift in Sources */,
 				AC477CAC1D437D5A00FB225C /* DataModel.xcdatamodeld in Sources */,
 				ACAACD7F20668EBC00AAB6F6 /* TimelineTableViewCell.swift in Sources */,
-				AC1D7C5021D0BC30009DBACE /* MilestoneCellModell.swift in Sources */,
+				AC1D7C5021D0BC30009DBACE /* MilestoneTableCellModell.swift in Sources */,
 				AC477CBD1D4385A100FB225C /* Timeline+CoreDataClass.swift in Sources */,
 				AC7419831E17DAE100B4E00A /* MilestonesViewController.swift in Sources */,
 				AC459E8A1E16CD9B0073D657 /* TimelinesViewController.swift in Sources */,

@@ -12,6 +12,17 @@
 import Foundation
 import Cocoa
 
+protocol MilestoneTableCellDataSourceProtocol {
+
+    var dateString: String {get}
+    var cwString: String {get}
+    var nameString: String {get}
+    var timeIntervallString: String {get}
+    var needsExpandedCell: Bool {get}
+    var iconType: IconType {get}
+    var iconColor: NSColor {get}
+}
+
 class MilestoneTableCellView :NSTableCellView {
 
     @IBOutlet weak var iconView: GraphicView!
@@ -20,4 +31,22 @@ class MilestoneTableCellView :NSTableCellView {
     @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var intervalView: GraphicView?
     @IBOutlet weak var intervalTextField: NSTextField?
+    
+    func configureUsing(dataSource :MilestoneTableCellDataSourceProtocol) {
+        
+        nameTextField?.stringValue = dataSource.nameString
+        calendarWeekTextField?.stringValue = dataSource.cwString
+        dateTextField?.stringValue = dataSource.dateString
+        intervalTextField?.stringValue = dataSource.timeIntervallString
+        
+        let iconGraphic = IconGraphic(type: .Diamond)
+        iconGraphic.bounds.size = CGSize(width: 30, height: 30)
+        iconGraphic.isDrawingFill = true
+        iconGraphic.fillColor = dataSource.iconColor
+        
+        iconView.graphics.removeAll()
+        iconView.graphics.append(iconGraphic)
+        iconView.setNeedsDisplay(iconGraphic.bounds)
+    }
 }
+

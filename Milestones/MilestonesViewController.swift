@@ -81,32 +81,25 @@ class MilestonesViewController :
         
     }
     
-    private func needsExpandedCellAtRow(row: Int) -> (needExpansion: Bool, timeInterval: TimeInterval) {
+    private func milestoneCellModelFor(row: Int) -> MilestoneTableCellModel? {
+        guard let fetchedObjects = fetchedResultsController()?.fetchedObjects else {return nil}
         
-        guard let milestones = fetchedResultsController()?.fetchedObjects else {return (false,0.0)}
-        
-        let nextRow = row + 1
-        if (nextRow < milestones.count) {
-
-            let milestone = milestones[row]
-            let nextMilestone = milestones[nextRow]
-            
-            if let timeIntervalInSeconds = milestone.timeintervalSinceMilestone(nextMilestone) {
-                
-                if fabs(timeIntervalInSeconds) < (24 * 60*60) {
-                    return (false, timeIntervalInSeconds)
-                } else {
-                    return (true, timeIntervalInSeconds)
-                }
-                
-            }
-            
+        let milestone = fetchedObjects[row]
+        var nextMilestone :Milestone?
+        if (row + 1) < fetchedObjects.count {
+            nextMilestone = fetchedObjects[row + 1]
         }
-
-        return (false, 0.0)
+        
+        let milestoneCellModel = MilestoneTableCellModel(milestone: milestone,
+                                                    nextMilestone: nextMilestone)        
+        return milestoneCellModel
     }
     
-    
+    func configureCell(tableViewCell: NSTableCellView, forMilestoneCellModel model: MilestoneTableCellModel) {
+        guard let milestoneTableCellView = tableViewCell as? MilestoneTableCellView else {return}
+        milestoneTableCellView.configureUsing(dataSource: model)
+    }
+ /*
     func configureCell(tableViewCell :NSTableCellView, atRow row :Int, withTimeInterval interval: TimeInterval?) {
         
         guard let milestoneTableCellView = tableViewCell as? MilestoneTableCellView else {return}
@@ -153,7 +146,7 @@ class MilestonesViewController :
         
         
     }
-    
+*/
 
     //MARK: View Lifecycle
     override func viewDidAppear() {
@@ -276,8 +269,9 @@ class MilestonesViewController :
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         
-        let expansionInfo = needsExpandedCellAtRow(row: row)
-        if expansionInfo.needExpansion {
+        guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return 0.0}
+        
+        if milestoneCellModel.needsExpandedCell {
             return 105
         }
         return 40
@@ -292,28 +286,21 @@ class MilestonesViewController :
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
 
-        guard let tableColumnIdentifier = tableColumn?.identifier  else {return nil}
-
-        var configuredView :NSTableCellView?
-
-        if (tableColumnIdentifier.rawValue == "DataColumn") {
-            
-            let expansionInfo = needsExpandedCellAtRow(row: row)
-            if (expansionInfo.needExpansion) {
-                if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow-Expanded"), owner: self) as? NSTableCellView {
-                    configureCell(tableViewCell: view, atRow: row, withTimeInterval: expansionInfo.timeInterval)
-                    configuredView = view
-                }
-            } else {
-                if let view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow"), owner: self) as? NSTableCellView {
-                    configureCell(tableViewCell: view, atRow: row, withTimeInterval: nil)
-                    configuredView = view
-                }
-            }
+        guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return nil}
+        
+        var view :NSTableCellView?
+        
+        if (milestoneCellModel.needsExpandedCell) {
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow-Expanded"), owner: self) as? NSTableCellView
+        } else {
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow"), owner: self) as? NSTableCellView
         }
         
-        return configuredView
-    
+        if view != nil {
+            configureCell(tableViewCell: view!, forMilestoneCellModel: milestoneCellModel)
+        }
+        
+        return view
     }
 
     //MARK: NSFetchedResultsControllerDelegate
