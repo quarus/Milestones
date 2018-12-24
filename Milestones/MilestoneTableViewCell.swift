@@ -54,10 +54,9 @@ class MilestoneTableCellView :NSTableCellView {
         lineView?.backgroundColor = NSColor.clear
         lineView?.graphics.removeAll()
         if dataSource.needsExpandedCell {
-            let yOffset :CGFloat = 5.0
             let lineViewBounds = lineView?.bounds.size ?? CGSize(width: 0, height: 0)
-            let startPoint = CGPoint(x: lineViewBounds.width/2.0, y: 5.0)
-            let endPoint = CGPoint(x: lineViewBounds.width/2.0, y: lineViewBounds.height - yOffset)
+            let startPoint = CGPoint(x: lineViewBounds.width/2.0, y: 0)
+            let endPoint = CGPoint(x: lineViewBounds.width/2.0, y: lineViewBounds.height)
             
             let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: startPoint,
                                                            endPoint: endPoint,
