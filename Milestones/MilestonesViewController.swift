@@ -55,7 +55,6 @@ class MilestonesViewController :
     }
     
     //MARK: Helper functions
-
     var fetchRequest = NSFetchRequest<Milestone>(entityName: "Milestone")
     
     private func fetchedResultsController() -> NSFetchedResultsController<Milestone>? {
@@ -111,7 +110,6 @@ class MilestonesViewController :
     }
 
     //MARK: UI Callbacks & more
-
     func updateButtons() {
         
         if dataModel()?.selectedGroup == nil {
@@ -200,7 +198,6 @@ class MilestonesViewController :
         }
     }
 
-
     //MARK: TableViewDelegate
     func tableViewSelectionDidChange(_ notification: Notification) {
 
@@ -217,7 +214,6 @@ class MilestonesViewController :
 
         updateButtons()
     }
-    
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         

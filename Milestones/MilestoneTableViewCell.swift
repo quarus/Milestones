@@ -26,10 +26,11 @@ protocol MilestoneTableCellDataSourceProtocol {
 class MilestoneTableCellView :NSTableCellView {
 
     @IBOutlet weak var iconView: GraphicView!
+    @IBOutlet weak var lineView: GraphicView?
+
     @IBOutlet weak var calendarWeekTextField: NSTextField!
     @IBOutlet weak var dateTextField: NSTextField!
     @IBOutlet weak var nameTextField: NSTextField!
-    @IBOutlet weak var intervalView: GraphicView?
     @IBOutlet weak var intervalTextField: NSTextField?
     
     func configureUsing(dataSource :MilestoneTableCellDataSourceProtocol) {
@@ -39,23 +40,33 @@ class MilestoneTableCellView :NSTableCellView {
         dateTextField?.stringValue = dataSource.dateString
         intervalTextField?.stringValue = dataSource.timeIntervallString
         
+        iconView.backgroundColor = NSColor.clear
         let iconGraphic = IconGraphic(type: .Diamond)
-        iconGraphic.bounds.size = CGSize(width: 30, height: 30)
+        iconGraphic.bounds.size = iconView.bounds.size
         iconGraphic.isDrawingFill = true
         iconGraphic.fillColor = dataSource.iconColor
+        
         
         iconView.graphics.removeAll()
         iconView.graphics.append(iconGraphic)
         iconView.setNeedsDisplay(iconGraphic.bounds)
 
-        intervalView?.graphics.removeAll()
+        lineView?.backgroundColor = NSColor.clear
+        lineView?.graphics.removeAll()
         if dataSource.needsExpandedCell {
-            let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: CGPoint(x:15,y:0), endPoint: CGPoint(x:15,y:60), thickness: 2)
+            let yOffset :CGFloat = 5.0
+            let lineViewBounds = lineView?.bounds.size ?? CGSize(width: 0, height: 0)
+            let startPoint = CGPoint(x: lineViewBounds.width/2.0, y: 5.0)
+            let endPoint = CGPoint(x: lineViewBounds.width/2.0, y: lineViewBounds.height - yOffset)
+            
+            let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: startPoint,
+                                                           endPoint: endPoint,
+                                                           thickness: 0.5)
             lineGraphic.fillColor = NSColor.red
             lineGraphic.strokeColor = NSColor.black
         
-            intervalView?.graphics.append(lineGraphic)
-            intervalView?.setNeedsDisplay(lineGraphic.bounds)
+            lineView?.graphics.append(lineGraphic)
+            lineView?.setNeedsDisplay(lineGraphic.bounds)
         }        
     }
 }

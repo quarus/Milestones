@@ -46,7 +46,6 @@ class GraphicView :NSView {
     override func draw(_ dirtyRect: NSRect) {
         
         backgroundColor.set()
-        
         dirtyRect.fill()
         
         //Fetch the current drawing context
