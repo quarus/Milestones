@@ -47,6 +47,16 @@ class MilestoneTableCellView :NSTableCellView {
         iconView.graphics.removeAll()
         iconView.graphics.append(iconGraphic)
         iconView.setNeedsDisplay(iconGraphic.bounds)
+
+        intervalView?.graphics.removeAll()
+        if dataSource.needsExpandedCell {
+            let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: CGPoint(x:15,y:0), endPoint: CGPoint(x:15,y:60), thickness: 2)
+            lineGraphic.fillColor = NSColor.red
+            lineGraphic.strokeColor = NSColor.black
+        
+            intervalView?.graphics.append(lineGraphic)
+            intervalView?.setNeedsDisplay(lineGraphic.bounds)
+        }        
     }
 }
 

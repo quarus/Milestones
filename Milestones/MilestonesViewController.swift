@@ -99,55 +99,7 @@ class MilestonesViewController :
         guard let milestoneTableCellView = tableViewCell as? MilestoneTableCellView else {return}
         milestoneTableCellView.configureUsing(dataSource: model)
     }
- /*
-    func configureCell(tableViewCell :NSTableCellView, atRow row :Int, withTimeInterval interval: TimeInterval?) {
-        
-        guard let milestoneTableCellView = tableViewCell as? MilestoneTableCellView else {return}
-        guard let milestones = fetchedResultsController()?.fetchedObjects else {return}
-        
-        if (milestones.count == 0) {
-            return
-        }
-        
-        let milestone = milestones[row]
-        
-        if let date = milestone.date {
-            milestoneTableCellView.calendarWeekTextField?.stringValue = calendarWeekDateFormatter.string(from: date)
-            milestoneTableCellView.dateTextField?.stringValue = dateFormatter.string(from: date)
-            milestoneTableCellView.calendarWeekTextField.stringValue = calendarWeekDateFormatter.string(from: date)
-        }
-        
-        if let name = milestone.name {
-            milestoneTableCellView.nameTextField.stringValue = name
-        }
-        
-        let iconGraphic = IconGraphic(type: .Diamond)
-        iconGraphic.bounds.size = CGSize(width: 30, height: 30)
-        iconGraphic.isDrawingFill = true
-        iconGraphic.fillColor = milestone.timeline?.color ?? NSColor.black
-        
-        milestoneTableCellView.iconView.graphics.removeAll()
-        milestoneTableCellView.iconView.graphics.append(iconGraphic)
-        milestoneTableCellView.iconView.setNeedsDisplay(iconGraphic.bounds)
     
-        if let timeInterval = interval {
-            let timeIntervalInDays = fabs(timeInterval / (24*60*60))
-            
-            milestoneTableCellView.intervalTextField?.stringValue = String(format:"%.1f Days", timeIntervalInDays)
-            
-            let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: CGPoint(x:15,y:0), endPoint: CGPoint(x:15,y:60), thickness: 2)
-            lineGraphic.fillColor = NSColor.red
-            lineGraphic.strokeColor = NSColor.black
-            
-            milestoneTableCellView.intervalView?.graphics.removeAll()
-            milestoneTableCellView.intervalView?.graphics.append(lineGraphic)
-            milestoneTableCellView.intervalView?.setNeedsDisplay(lineGraphic.bounds)
-        }
-        
-        
-    }
-*/
-
     //MARK: View Lifecycle
     override func viewDidAppear() {
 
@@ -344,8 +296,6 @@ class MilestonesViewController :
 
             milestonesTableView.reloadData(forRowIndexes: relevantRowsIndices, columnIndexes: IndexSet([0]))
             milestonesTableView.noteHeightOfRows(withIndexesChanged: relevantRowsIndices)
-
-
             break
         }
     }
