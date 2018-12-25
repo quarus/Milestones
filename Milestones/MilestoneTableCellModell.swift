@@ -33,22 +33,18 @@ struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
         if let date = milestone.date {
             dateString = dateFormatter.string(from: date)
             cwString = "KW " + calendarWeekDateFormatter.string(from: date)
-        }
-        
-        nameString = milestone.name ?? ""
-
-        if let milestone2 = nextMilestone {
-            if let timeIntervalInSeconds = milestone.timeintervalSinceMilestone(milestone2) {
+            
+            if let date2 = nextMilestone?.date {
                 
-                if fabs(timeIntervalInSeconds) <= (24 * 60*60) {
-                    needsExpandedCell = false
-                } else {
+                if fabs(date.timeIntervalSince(date2)) > (24 * 60 * 60) {
                     needsExpandedCell = true
-                    let timeIntervalInDays = fabs(timeIntervalInSeconds / (24*60*60))
-                    timeIntervallString = String(format:"%.1f Days", timeIntervalInDays)
+                    let timeIntervalFormatter = TimeIntervalFormatter(startDate: date, endDate: date2)
+                    timeIntervallString = timeIntervalFormatter.intervalString()
                 }
             }
         }
+        
+        nameString = milestone.name ?? ""
         
         iconType = IconType(rawValue: milestone.type.intValue) ?? .Diamond
         iconColor = milestone.timeline?.color ?? .black

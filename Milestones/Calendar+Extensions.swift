@@ -11,8 +11,7 @@
 
 import Foundation
 
-extension Calendar {
-    
+public extension Calendar {
     
     static func defaultCalendar() -> Calendar {
         var calendar = Calendar(identifier: .iso8601)
