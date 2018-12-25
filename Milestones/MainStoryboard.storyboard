@@ -934,10 +934,10 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GUH-Dd-Sz0">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="444" height="105"/>
+                                                                            <rect key="frame" x="0.0" y="15" width="414" height="90"/>
                                                                             <subviews>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0hT-8y-9np">
-                                                                                    <rect key="frame" x="0.0" y="75" width="414" height="30"/>
+                                                                                    <rect key="frame" x="0.0" y="60" width="414" height="30"/>
                                                                                     <subviews>
                                                                                         <customView focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="KoS-zR-t2x" customClass="GraphicView" customModule="Milestones" customModuleProvider="target">
                                                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -998,17 +998,17 @@
                                                                                     </customSpacing>
                                                                                 </stackView>
                                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pUZ-0o-pwX">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="126" height="75"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="126" height="60"/>
                                                                                     <subviews>
                                                                                         <customView translatesAutoresizingMaskIntoConstraints="NO" id="aB4-Zh-D9O" customClass="GraphicView" customModule="Milestones" customModuleProvider="target">
-                                                                                            <rect key="frame" x="0.0" y="8" width="30" height="60"/>
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="30" height="60"/>
                                                                                             <constraints>
                                                                                                 <constraint firstAttribute="width" constant="30" id="dv7-UE-RN3"/>
                                                                                                 <constraint firstAttribute="height" constant="60" id="flY-vx-1tJ"/>
                                                                                             </constraints>
                                                                                         </customView>
                                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rQf-Is-uh8">
-                                                                                            <rect key="frame" x="36" y="29" width="92" height="17"/>
+                                                                                            <rect key="frame" x="36" y="22" width="92" height="17"/>
                                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Intervall String" id="LBh-dA-ApX">
                                                                                                 <font key="font" metaFont="system"/>
                                                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1037,10 +1037,8 @@
                                                                         </stackView>
                                                                     </subviews>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="bottom" secondItem="GUH-Dd-Sz0" secondAttribute="bottom" id="215-Ic-QJg"/>
                                                                         <constraint firstItem="GUH-Dd-Sz0" firstAttribute="top" secondItem="mDu-d8-bRb" secondAttribute="top" id="8KX-aq-3q5"/>
                                                                         <constraint firstItem="GUH-Dd-Sz0" firstAttribute="leading" secondItem="mDu-d8-bRb" secondAttribute="leading" id="dp3-Cc-GBE"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="GUH-Dd-Sz0" secondAttribute="trailing" id="pt2-29-dlZ"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="calendarWeekTextField" destination="zOe-Mk-hjz" id="sHs-pp-X6V"/>

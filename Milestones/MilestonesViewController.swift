@@ -218,10 +218,11 @@ class MilestonesViewController :
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         
         guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return 0.0}
-        
+
         if milestoneCellModel.needsExpandedCell {
             return 105
         }
+ 
         return 40
     }
 
@@ -237,13 +238,13 @@ class MilestonesViewController :
         guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return nil}
         
         var view :NSTableCellView?
-        
+
         if (milestoneCellModel.needsExpandedCell) {
             view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow-Expanded"), owner: self) as? NSTableCellView
         } else {
             view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow"), owner: self) as? NSTableCellView
         }
-        
+
         if view != nil {
             configureCell(tableViewCell: view!, forMilestoneCellModel: milestoneCellModel)
         }
