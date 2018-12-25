@@ -220,10 +220,10 @@ class MilestonesViewController :
         guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return 0.0}
 
         if milestoneCellModel.needsExpandedCell {
-            return 105
+            return MilestoneTableCellView.heightOfExpandedTableViewCell
         }
  
-        return 40
+        return MilestoneTableCellView.heightOfRegularTableViewCell
     }
 
     //MARK: TableView DataSource

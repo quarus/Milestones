@@ -33,6 +33,9 @@ class MilestoneTableCellView :NSTableCellView {
     @IBOutlet weak var nameTextField: NSTextField!
     @IBOutlet weak var intervalTextField: NSTextField?
     
+    public static let heightOfRegularTableViewCell: CGFloat = 40
+    public static let heightOfExpandedTableViewCell: CGFloat = 90
+    
     func configureUsing(dataSource :MilestoneTableCellDataSourceProtocol) {
         
         nameTextField?.stringValue = dataSource.nameString
