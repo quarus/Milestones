@@ -28,20 +28,14 @@ class TimeIntervalFormatterTest: XCTestCase {
         let thirdEndDate = Date.dateFor(year: 2014, month: 04, day: 24, hour: 15, minute: 23, second: 20)!
         let fortnightEndDate = Date.dateFor(year: 2014, month: 03, day: 19, hour: 15, minute: 23, second: 20)!
         
-        var timeIntervalFormatter = TimeIntervalFormatter(startDate: startDate, endDate: startDate)
-        XCTAssertEqual(timeIntervalFormatter.intervalString(), "")
         
-        timeIntervalFormatter = TimeIntervalFormatter(startDate: startDate, endDate: firstEndDate)
-        XCTAssertEqual(timeIntervalFormatter.intervalString(), "2 Days")
-
-        timeIntervalFormatter = TimeIntervalFormatter(startDate: startDate, endDate: secondEndDate)
-        XCTAssertEqual(timeIntervalFormatter.intervalString(), "1 Week, 2 Days")
+        XCTAssertEqual(DateInterval(start: startDate, end: startDate).intervalString(), "")
+        XCTAssertEqual(DateInterval(start: startDate, end: firstEndDate).intervalString(), "2 Days")
+        XCTAssertEqual(DateInterval(start: startDate,
+                                    end: secondEndDate).intervalString(), "1 Week, 2 Days")
+        XCTAssertEqual(DateInterval(start: startDate, end: fortnightEndDate).intervalString(), "2 Weeks")
         
-        timeIntervalFormatter = TimeIntervalFormatter(startDate: startDate, endDate: fortnightEndDate)
-        XCTAssertEqual(timeIntervalFormatter.intervalString(), "2 Weeks")
-        
-        timeIntervalFormatter = TimeIntervalFormatter(startDate: startDate, endDate: thirdEndDate)
-        XCTAssertEqual(timeIntervalFormatter.intervalString(), "1 Month, 2 Weeks, 5 Days")
+        XCTAssertEqual(DateInterval(start: startDate, end: thirdEndDate).intervalString(), "1 Month, 2 Weeks, 5 Days")
         
     }
     

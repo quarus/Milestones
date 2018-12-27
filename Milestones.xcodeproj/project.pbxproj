@@ -61,9 +61,7 @@
 		AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6FA6721DBD1107004C5137 /* IconGraphic.swift */; };
 		AC7419831E17DAE100B4E00A /* MilestonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */; };
 		AC758E9D21D4CDD1005B9A57 /* DateInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC758E9C21D4CDD1005B9A57 /* DateInterval+Extensions.swift */; };
-		AC7BC6C921D22BB900BD471D /* TimeIntervalFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BC6C821D22BB900BD471D /* TimeIntervalFormatter.swift */; };
 		AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */; };
-		AC7BC6CC21D22EB500BD471D /* TimeIntervalFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BC6C821D22BB900BD471D /* TimeIntervalFormatter.swift */; };
 		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
 		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
 		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
@@ -155,7 +153,6 @@
 		AC6FA6721DBD1107004C5137 /* IconGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGraphic.swift; sourceTree = "<group>"; };
 		AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestonesViewController.swift; sourceTree = "<group>"; };
 		AC758E9C21D4CDD1005B9A57 /* DateInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInterval+Extensions.swift"; sourceTree = "<group>"; };
-		AC7BC6C821D22BB900BD471D /* TimeIntervalFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalFormatter.swift; sourceTree = "<group>"; };
 		AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalFormatterTest.swift; sourceTree = "<group>"; };
 		AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -205,7 +202,6 @@
 				AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */,
 				AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */,
 				AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */,
-				AC7BC6C821D22BB900BD471D /* TimeIntervalFormatter.swift */,
 			);
 			name = Milestones;
 			sourceTree = "<group>";
@@ -493,7 +489,6 @@
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
-				AC7BC6CC21D22EB500BD471D /* TimeIntervalFormatter.swift in Sources */,
 				ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */,
 				ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */,
 				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
@@ -508,7 +503,6 @@
 				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
 				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
 				AC758E9D21D4CDD1005B9A57 /* DateInterval+Extensions.swift in Sources */,
-				AC7BC6C921D22BB900BD471D /* TimeIntervalFormatter.swift in Sources */,
 				AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */,
 				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
 				ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */,

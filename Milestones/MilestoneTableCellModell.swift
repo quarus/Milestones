@@ -34,8 +34,7 @@ struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
                 let dateInterval = DateInterval(start: date, end: date2)
                 if dateInterval.isDurationLongerThanOneDay() {
                     needsExpandedCell = true
-                    let timeIntervalFormatter = TimeIntervalFormatter(startDate: date, endDate: date2)
-                    timeIntervallString = timeIntervalFormatter.intervalString()
+                    timeIntervallString = DateInterval(start: date, end: date2).intervalString()
                 }
             }
         }
@@ -62,8 +61,7 @@ struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
                 let dateInterval = DateInterval(start: date, end: date2)
                 if dateInterval.isDurationLongerThanOneDay() {
                     needsExpandedCell = true
-                    let timeIntervalFormatter = TimeIntervalFormatter(startDate: date, endDate: date2)
-                    timeIntervallString = timeIntervalFormatter.intervalString()
+                    timeIntervallString = DateInterval(start: date, end: date2).intervalString()
                 }
             }
         }

@@ -80,8 +80,6 @@ class MilestoneTableViewModelTests: XCTestCase {
         XCTAssertEqual("Milestone 1", milestoneCellModel.nameString)
         XCTAssertEqual("", milestoneCellModel.timeIntervallString)
         XCTAssertEqual(false, milestoneCellModel.needsExpandedCell)
-        let expectedIconType = IconType.init(rawValue: milestone.type.intValue)
-        XCTAssertEqual(expectedIconType, milestoneCellModel.iconType)
         
     }
     
@@ -100,19 +98,18 @@ class MilestoneTableViewModelTests: XCTestCase {
                                                              into: managedObjectContext) as! Milestone
         distantMilestone.date = distantMilestoneDate
         
-        var milestoneCellModel = MilestoneTableCellModel(milestone: milestone, nextMilestone: distantMilestone)
+        var milestoneCellModel = MilestoneTableCellModel(milestone: milestone, nextDate: distantMilestone.date)
         XCTAssertEqual("12.06.2018", milestoneCellModel.dateString)
         XCTAssertEqual("KW 24.2/18", milestoneCellModel.cwString)
         XCTAssertEqual("Erster Meilenstein", milestoneCellModel.nameString)
         XCTAssertNotEqual("",milestoneCellModel.timeIntervallString)
         XCTAssertEqual(true, milestoneCellModel.needsExpandedCell)
-        XCTAssertEqual(IconType.TriangleUp, milestoneCellModel.iconType)
         
         let closeMilestone = NSEntityDescription.insertNewObject(forEntityName: "Milestone",
                                                                    into: managedObjectContext) as! Milestone
         closeMilestone.date = closeMilestoneDate
         
-        milestoneCellModel = MilestoneTableCellModel(milestone: milestone, nextMilestone: closeMilestone)
+        milestoneCellModel = MilestoneTableCellModel(milestone: milestone, nextDate: closeMilestone.date)
         XCTAssertEqual("12.06.2018", milestoneCellModel.dateString)
         XCTAssertEqual("KW 24.2/18", milestoneCellModel.cwString)
         XCTAssertEqual("Erster Meilenstein", milestoneCellModel.nameString)
