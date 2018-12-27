@@ -73,15 +73,6 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
         return false
     }
 
-    private func configureCell(tableViewCell :NSTableCellView, atRow row :Int) {
-        
-        guard let adjustment = adjustment(at: row) else { return }
-        guard let adjustmentDate = adjustment.date else { return }
-        
-        let dateString = cwDateFormatter.string(from: adjustmentDate)
-        tableViewCell.textField?.stringValue = dateString
-    }
-    
     private func update() {
         
         guard let adjustments = dataModel()?.selectedMilestone?.adjustments?.array else {return}
