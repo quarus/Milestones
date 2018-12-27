@@ -95,6 +95,19 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
         }
     }
     
+    private func milestoneCellModelFor(row: Int) -> MilestoneTableCellModel? {
+        
+        guard let currentAdjustment = adjustment(at: row) else {return nil}
+        let nextAdjustment = adjustment(at: row + 1)
+        
+        let milestoneCellModel = MilestoneTableCellModel(adjustment: currentAdjustment, nextDate: nextAdjustment?.date)
+        return milestoneCellModel
+    }
+    
+    func configureCell(tableViewCell: NSTableCellView, forMilestoneCellModel model: MilestoneTableCellModel) {
+        guard let milestoneTableCellView = tableViewCell as? MilestoneTableCellView else {return}
+        milestoneTableCellView.configureUsing(dataSource: model)
+    }
     
     //MARK: View Life Cycle
     override func viewDidLoad() {
@@ -179,6 +192,17 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
             selectedAdjustment = adjustment(at: index)
         }
     }
+   
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        
+        guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return 0.0}
+        
+        if milestoneCellModel.needsExpandedCell {
+            return MilestoneTableCellView.heightOfExpandedTableViewCell
+        }
+        
+        return MilestoneTableCellView.heightOfRegularTableViewCell
+    }
     
     //MARK: NSTableViewDataSource
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -187,11 +211,23 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
         guard let numberOfRows = milestone.adjustments?.count else { return 0 }
         return numberOfRows
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         
-        guard let adjustmentTableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "AdjustmentTableViewCell"), owner: self) as? NSTableCellView else {return nil}
-        configureCell(tableViewCell: adjustmentTableCellView, atRow: row)
-        return adjustmentTableCellView
+        guard let milestoneCellModel = milestoneCellModelFor(row: row) else {return nil}
+        
+        var view :NSTableCellView?
+        
+        if (milestoneCellModel.needsExpandedCell) {
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow-Expanded"), owner: self) as? NSTableCellView
+        } else {
+            view = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "MilestoneRow"), owner: self) as? NSTableCellView
+        }
+        
+        if view != nil {
+            configureCell(tableViewCell: view!, forMilestoneCellModel: milestoneCellModel)
+        }
+        
+        return view
     }
 }
