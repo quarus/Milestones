@@ -116,12 +116,13 @@ class GraphicsFactory {
                 graphics.append(iconGraphic)
                 
                 // ... then its line
-                let start = GLKVector2Make(Float(relativeSourceXPosition), 10.0)
+                let offset: CGFloat = iconGraphic.bounds.size.width
+                let start = GLKVector2Make(Float(relativeSourceXPosition + offset), 10.0)
                 let end = GLKVector2Make(Float(relativeDestinationXPosition), 10.0)
                 let direction = GLKVector2Normalize(GLKVector2Subtract(end, start))
-                let length = GLKVector2Length(GLKVector2Subtract(end, start))
+                let length = GLKVector2Length(GLKVector2Subtract(end, start)) - Float(offset)
 
-                let lineGraphicController = LineGraphicController.lineGraphicControllerWithLineFrom(StartPoint: start, inDirection: direction, withLength: length - 10)
+                let lineGraphicController = LineGraphicController.lineGraphicControllerWithLineFrom(StartPoint: start, inDirection: direction, withLength: length)
                 lineGraphicController.lineGraphic.isDrawingLineDash = true
                 lineGraphicController.lineGraphic.lineDash = [2.0, 3.0]
                 lineGraphicController.lineGraphic.lineDashCount = 2

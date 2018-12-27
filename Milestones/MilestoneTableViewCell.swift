@@ -19,8 +19,7 @@ protocol MilestoneTableCellDataSourceProtocol {
     var nameString: String {get}
     var timeIntervallString: String {get}
     var needsExpandedCell: Bool {get}
-    var iconType: IconType {get}
-    var iconColor: NSColor {get}
+    var iconGraphic: IconGraphic {get}
 }
 
 class MilestoneTableCellView :NSTableCellView {
@@ -43,13 +42,9 @@ class MilestoneTableCellView :NSTableCellView {
         dateTextField?.stringValue = dataSource.dateString
         intervalTextField?.stringValue = dataSource.timeIntervallString
         
-        iconView.backgroundColor = NSColor.clear
-        let iconGraphic = IconGraphic(type: .Diamond)
+        let iconGraphic = dataSource.iconGraphic
         iconGraphic.bounds.size = iconView.bounds.size
-        iconGraphic.isDrawingFill = true
-        iconGraphic.fillColor = dataSource.iconColor
-        
-        
+        iconView.backgroundColor = NSColor.clear
         iconView.graphics.removeAll()
         iconView.graphics.append(iconGraphic)
         iconView.setNeedsDisplay(iconGraphic.bounds)
@@ -64,7 +59,6 @@ class MilestoneTableCellView :NSTableCellView {
             let lineGraphic =  LineGraphic.lineGraphicWith(startPoint: startPoint,
                                                            endPoint: endPoint,
                                                            thickness: 0.5)
-            lineGraphic.fillColor = NSColor.red
             lineGraphic.strokeColor = NSColor.black
         
             lineView?.graphics.append(lineGraphic)

@@ -89,8 +89,7 @@ class MilestonesViewController :
             nextMilestone = fetchedObjects[row + 1]
         }
         
-        let milestoneCellModel = MilestoneTableCellModel(milestone: milestone,
-                                                    nextMilestone: nextMilestone)        
+        let milestoneCellModel = MilestoneTableCellModel(milestone: milestone, nextDate: nextMilestone?.date)        
         return milestoneCellModel
     }
     

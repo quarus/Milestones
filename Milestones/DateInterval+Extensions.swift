@@ -1,43 +1,42 @@
 //
-// This Source Code Form is subject to the terms of the Mozilla Public
-// License, v. 2.0. If a copy of the MPL was not distributed with this
-// file, You can obtain one at http://mozilla.org/MPL/2.0/.
+//  DateInterval+Extensions.swift
+//  Milestones
 //
-// TimeIntervalFormatter.swift
-// Milestones
-//
-//  Created by Altay Cebe on 25.12.18.
+//  Created by Altay Cebe on 27.12.18.
 //  Copyright © 2018 Altay Cebe. All rights reserved.
 //
 
 import Foundation
+import Cocoa
 
-struct TimeIntervalFormatter {
- 
-    let startDate: Date
-    let endDate: Date
+extension DateInterval {
     
-    init(startDate: Date, endDate: Date) {
-        self.startDate = startDate
-        self.endDate = endDate
+    func isDurationLongerThanOneDay() -> Bool {
+        
+        if duration > (24*60*60) {
+            return true
+        }
+        
+        return false
     }
+    
     private func dateIntervalComponents() -> DateComponents {
-       
+        
         let requiredIntervalDateComponents :Set<Calendar.Component> =  [Calendar.Component.day,
                                                                         Calendar.Component.weekOfYear,
                                                                         Calendar.Component.month,
                                                                         Calendar.Component.year]
         
         let dateIntervalComponents = Calendar.defaultCalendar().dateComponents( requiredIntervalDateComponents,
-                                                                                from: startDate,
-                                                                                to: endDate)
+                                                                                from: self.start,
+                                                                                to: self.end)
         return dateIntervalComponents
     }
     
     private func stringFor(components: DateComponents) -> String {
         
         var string = ""
-
+        
         func checkAndAdd(singularString: String, pluralString: String, forAmount amount: Int) {
             if amount != 0 {
                 if string.count > 0 {
@@ -77,6 +76,4 @@ struct TimeIntervalFormatter {
         
         return stringFor(components: components)
     }
-    
-    
 }

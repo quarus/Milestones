@@ -27,8 +27,7 @@ class ArrowHeadGraphic: Graphic {
         arrowHeadPath.move(to: CGPoint(x: -(width/2.0), y: (height/2)))
         arrowHeadPath.line(to: CGPoint(x: 0, y: 0))
         arrowHeadPath.line(to: CGPoint(x: (width/2.0), y: (height/2)))
- 
-
+        arrowHeadPath.line(to: CGPoint(x: -(width/2.0), y: (height/2)))
         return arrowHeadPath
     }
     

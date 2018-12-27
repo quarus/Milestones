@@ -46,7 +46,9 @@ class LineGraphicController {
     private(set) var lineGraphic = LineGraphic()
     private(set) var arrowHeadGraphic = ArrowHeadGraphic()
     
-    class func lineGraphicControllerWithLineFrom(StartPoint start: GLKVector2, inDirection direction: GLKVector2, withLength length: Float) ->
+    class func lineGraphicControllerWithLineFrom(StartPoint start: GLKVector2,
+                                                 inDirection direction: GLKVector2,
+                                                 withLength length: Float) ->
         LineGraphicController {
         
         let lineGraphicController = LineGraphicController()
@@ -56,7 +58,6 @@ class LineGraphicController {
         lineGraphicController.endPoint = CGPoint(x: CGFloat(endPoint.x), y: CGFloat(endPoint.y))
             
         return lineGraphicController
-            
     }
     
     init() {
@@ -64,9 +65,8 @@ class LineGraphicController {
         arrowHeadGraphic.userInfo = self
         
         arrowHeadGraphic.bounds = NSRect(x: endPoint.x, y: 0, width: 20, height: 20)
-        arrowHeadGraphic.strokeWidth = 2.0
-        arrowHeadGraphic.isDrawingStroke = true
-        arrowHeadGraphic.strokeColor = NSColor.red
+        arrowHeadGraphic.isDrawingFill = true
+        arrowHeadGraphic.fillColor = lineGraphic.strokeColor
     }
     
     private func update() {
@@ -86,9 +86,7 @@ class LineGraphicController {
             let angleInDegrees = GLKMathRadiansToDegrees(angleInRadians)
     
             arrowHeadGraphic.angleInDegree = CGFloat(angleInDegrees)
-            arrowHeadGraphic.bounds = NSRect(x: endPoint.x, y: endPoint.y, width: 20, height: 20)
+            arrowHeadGraphic.bounds = NSRect(x: endPoint.x, y: endPoint.y, width: 5, height: 10)
         }
-        
     }
-    
 }
