@@ -11,32 +11,28 @@ import Cocoa
 
 struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
     
-    private let calendarWeekDateFormatter :DateFormatter
-    private let dateFormatter :DateFormatter
+    private let calendarWeekDateFormatter :DateFormatter = DateFormatter()
+    private let dateFormatter :DateFormatter = DateFormatter()
     
     private(set) var dateString: String = ""
     private(set) var cwString: String = ""
     private(set) var nameString: String = ""
     private(set) var timeIntervallString: String = ""
     private(set) var needsExpandedCell: Bool = false
-    private(set) var iconType: IconType
-    private(set) var iconColor: NSColor
-
+    private(set) var iconGraphic: IconGraphic
     
-    init(milestone: Milestone, nextMilestone :Milestone? = nil) {
-        calendarWeekDateFormatter = DateFormatter()
+    
+    init(milestone: Milestone, nextDate :Date? = nil) {
         calendarWeekDateFormatter.dateFormat = "w.e/yy"
-        
-        dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         
         if let date = milestone.date {
             dateString = dateFormatter.string(from: date)
             cwString = "KW " + calendarWeekDateFormatter.string(from: date)
             
-            if let date2 = nextMilestone?.date {
-                
-                if fabs(date.timeIntervalSince(date2)) > (24 * 60 * 60) {
+            if let date2 = nextDate {
+                let dateInterval = DateInterval(start: date, end: date2)
+                if dateInterval.isDurationLongerThanOneDay() {
                     needsExpandedCell = true
                     let timeIntervalFormatter = TimeIntervalFormatter(startDate: date, endDate: date2)
                     timeIntervallString = timeIntervalFormatter.intervalString()
@@ -46,7 +42,37 @@ struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
         
         nameString = milestone.name ?? ""
         
-        iconType = IconType(rawValue: milestone.type.intValue) ?? .Diamond
-        iconColor = milestone.timeline?.color ?? .black
+        let iconType = IconType(rawValue: milestone.type.intValue) ?? .Diamond
+        let iconColor = milestone.timeline?.color ?? .black
+        iconGraphic = IconGraphic(type: iconType)
+        iconGraphic.fillColor = iconColor
+        iconGraphic.isDrawingFill = true
     }
+
+    init(adjustment: Adjustment, nextDate :Date? = nil) {
+        calendarWeekDateFormatter.dateFormat = "w.e/yy"
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
+        if let date = adjustment.date {
+            
+            dateString = dateFormatter.string(from: date)
+            cwString = "KW " + calendarWeekDateFormatter.string(from: date)
+            
+            if let date2 = nextDate {
+                let dateInterval = DateInterval(start: date, end: date2)
+                if dateInterval.isDurationLongerThanOneDay() {
+                    needsExpandedCell = true
+                    let timeIntervalFormatter = TimeIntervalFormatter(startDate: date, endDate: date2)
+                    timeIntervallString = timeIntervalFormatter.intervalString()
+                }
+            }
+        }
+        
+        let iconType = IconType(rawValue: adjustment.milestone?.type.intValue ?? 0) ?? .Diamond
+        iconGraphic = IconGraphic(type: iconType)
+        iconGraphic.isDrawingFill = false
+        iconGraphic.isDrawingStroke  = true
+        iconGraphic.strokeWidth = 2.0
+    }
+
 }
