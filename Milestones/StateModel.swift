@@ -93,7 +93,6 @@ class StateModel : StateProtocol {
         
         } catch {
         }
-        
         return [Group]()
     }
 
@@ -101,51 +100,11 @@ class StateModel : StateProtocol {
 
         var groups = allGroups()
         if (groups.count > 0) {
-
             selectedGroup = groups[0]
         } else {
             selectedGroup = nil
         }
-
     }
-
- /*
-    private func allTimelines() -> [CTimeline]{
-
-        let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        let fetchRequest: NSFetchRequest<CTimeline> = CTimeline.fetchRequest()
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        var fetchResult :[CTimeline]?
-        do {
-        
-            fetchResult = try managedObjectContext.fetch(fetchRequest)
-            return fetchResult!
-            
-        } catch {
-        }
-        
-        return [CTimeline]()
-    }*/
-/*
-    private func allMilestonesFor(timelines :[CTimeline]) -> NSMutableArray {
-
-        let accumulatedMilestones :NSMutableArray = NSMutableArray()
-
-        for aTimeline in timelines {
-            
-            if let timelineMilestones = aTimeline.milestones?.allObjects as? [Milestone] {
-                accumulatedMilestones.addObjects(from: timelineMilestones)
-            }
-        }
-        
-        
-        let sortDescriptor = NSSortDescriptor(key: "date", ascending: true)
-        accumulatedMilestones.sort(using: [sortDescriptor])
-        
-        return accumulatedMilestones
-    }
-    */
 
     //MARK: Notification Handling
     func registerNotifications() {
@@ -172,14 +131,12 @@ class StateModel : StateProtocol {
     func deregisterNotifications() {
         
         if hasNotificationObserving {
-            
             hasNotificationObserving = false
-            
             NotificationCenter.default.removeObserver(self)
         }
     }
 
-    @objc func handleMilestoneClickNotification(aNotification :Notification) {
+    @objc func handleMilestoneClickNotification(aNotification: Notification) {
 
         guard let aDict = aNotification.userInfo else {return}
         if let clickedMilestone = aDict[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] as? Milestone {
@@ -190,11 +147,10 @@ class StateModel : StateProtocol {
                 selectedTimelines = [timeline]
             } 
             selectedMilestone = clickedMilestone
-
         }
     }
 
-    @objc func handleMocNotifications(aNotification :Notification) {
+    @objc func handleMocNotifications(aNotification: Notification) {
 
         guard let aDict = aNotification.userInfo else {return}
 
@@ -202,16 +158,10 @@ class StateModel : StateProtocol {
         if let insertedObjects = aDict[NSInsertedObjectsKey] as? NSSet {
 
             for anObject in insertedObjects{
-
                 if (anObject is Group) {
-
                     if selectedGroup == nil {
-
                         resetActiveGroup()
                     }
-
-                } else if (anObject is Milestone) {
-                } else if (anObject is Timeline) {
                 }
             }
         }
@@ -223,12 +173,8 @@ class StateModel : StateProtocol {
 
                 if let deletedGroup = anObject as? Group {
                     if deletedGroup == selectedGroup {
-
                         resetActiveGroup()
                     }
-
-                } else if (anObject is Milestone) {
-                } else if (anObject is Timeline) {
                 }
             }
         }
@@ -236,10 +182,8 @@ class StateModel : StateProtocol {
         //Were any objects updated?
         if let updatedObjects = aDict[NSUpdatedObjectsKey] as? NSSet{
             for anObject in updatedObjects {
-
                 if (anObject is Group) {
-                } else if (anObject is Timeline) {
-                } else if (anObject is Milestone) {
+                    
                 }
             }
         }
@@ -247,15 +191,13 @@ class StateModel : StateProtocol {
 
 
 
-    func add(dataObserver :StateObserverProtocol) {
-        
+    func add(dataObserver: StateObserverProtocol) {        
         if !dataObservers.contains(dataObserver) {
             dataObservers.add(dataObserver)
         }
     }
     
-    func remove(dataObserver :StateObserverProtocol) {
-        
+    func remove(dataObserver: StateObserverProtocol) {
         if dataObservers.contains(dataObserver) {
             dataObservers.remove(dataObserver)
         }

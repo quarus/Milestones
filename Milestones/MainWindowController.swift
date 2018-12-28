@@ -21,7 +21,9 @@ import Cocoa
 
 }
 
-class MainWindowController :NSWindowController, StateObserverProtocol {
+class MainWindowController: NSWindowController,
+StateObserverProtocol,
+CoreDataNotificationManagerDelegate {
 
     @IBOutlet var groupPopUpButton :NSPopUpButton!
 
@@ -30,6 +32,8 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
     private var timelineVerticalCalculator = TimelinePositioner(heightOfTimeline: 100)
 
     private var dependencies :VCDependency?
+    
+    private var coreDataNotificationManagerDelegate: CoreDataNotificationManager?
     
     override var document: AnyObject? {
 
@@ -43,11 +47,15 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
                 dependency()?.stateModel.add(dataObserver: self)
                 
                 shouldCloseDocument = true
-
+                
+                if let moc = dependency()?.stateModel.managedObjectContext {
+                    coreDataNotificationManagerDelegate = CoreDataNotificationManager()
+                    coreDataNotificationManagerDelegate?.registerForNotificationsOn(moc: moc)
+                    coreDataNotificationManagerDelegate?.delegate = self
+                }
             }
         }
     }
-
 
     private func dependency() -> Dependencies? {
 
@@ -55,7 +63,6 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         let newDependency = VCDependency(xCalculator: timelineHorizontalCalculator, yCalculator: timelineVerticalCalculator, stateModel : model)
         return newDependency
     }
-    
     
     private func updateViewControllers() {
         
@@ -128,7 +135,6 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
     }
     
     //MARK: Update
-    
     private func highlightSelectedGroup() {
         guard let groups = dependency()?.stateModel.allGroups() else {return}
         if let activeGroup = dependency()?.stateModel.selectedGroup {
@@ -137,6 +143,7 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
             }
         }
     }
+    
     private func updateGroupPopUpButton(){
 
         guard let groups = dependency()?.stateModel.allGroups() else {return}
@@ -154,7 +161,6 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
                 groupPopUpButton.menu?.addItem(newMenuItem)
                 
                 idx += 1
-                
             }
         }
         
@@ -204,17 +210,42 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         showExportSheet()
     }
     
-
     //MARK: DataObserverProtocol
-
     func didChangeSelectedGroup(_ group :Group?) {
         updateGroupPopUpButton()
     }
-    
     func didChangeZoomLevel(_ level: ZoomLevel) {}
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {}
     func didChangeSelectedMilestone(_ milestone :Milestone?){}
 
+    //MARK: CoreDataNotificationManagerDelegate
+    func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {
+        for anObject in objects {
+            if let _ = anObject as? Group {
+                updateGroupPopUpButton()
+                return
+            }
+        }
+    }
+    
+    func managedObjectContext(_ moc: NSManagedObjectContext, didUpdateObjects objects: NSSet) {
+        for anObject in objects {
+            if let _ = anObject as? Group {
+                updateGroupPopUpButton()
+                return
+            }
+        }
+    }
+    
+    func managedObjectContext(_ moc: NSManagedObjectContext, didRemoveObjects objects: NSSet) {
+        for anObject in objects {
+            if let _ = anObject as? Group {
+                updateGroupPopUpButton()
+                return
+            }
+        }
+    }
+    
     //MARK: Helper
     private func currentlySelectedGroup() -> Group? {
 
