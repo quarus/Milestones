@@ -33,7 +33,7 @@ CoreDataNotificationManagerDelegate {
 
     private var dependencies :VCDependency?
     
-    private var coreDataNotificationManagerDelegate: CoreDataNotificationManager?
+    private var coreDataNotificationManager: CoreDataNotificationManager?
     
     override var document: AnyObject? {
 
@@ -49,12 +49,16 @@ CoreDataNotificationManagerDelegate {
                 shouldCloseDocument = true
                 
                 if let moc = dependency()?.stateModel.managedObjectContext {
-                    coreDataNotificationManagerDelegate = CoreDataNotificationManager()
-                    coreDataNotificationManagerDelegate?.registerForNotificationsOn(moc: moc)
-                    coreDataNotificationManagerDelegate?.delegate = self
+                    coreDataNotificationManager = CoreDataNotificationManager()
+                    coreDataNotificationManager?.registerForNotificationsOn(moc: moc)
+                    coreDataNotificationManager?.delegate = self
                 }
             }
         }
+    }
+    
+    deinit {
+        coreDataNotificationManager?.deregisterForMOCNotifications()
     }
 
     private func dependency() -> Dependencies? {
@@ -257,5 +261,5 @@ CoreDataNotificationManagerDelegate {
         }
         return selectedGroup
     }
-
 }
+
