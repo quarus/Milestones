@@ -23,28 +23,27 @@ class CoreDataNotificationManager {
     
     var delegate :CoreDataNotificationManagerDelegate?
     
-    private var hasMocNotificationObserving = false
+    private let managedObjectContext: NSManagedObjectContext
+    
+    init(managedObjectContext moc: NSManagedObjectContext) {
+        managedObjectContext = moc
+        registerForNotificationsOn(moc: moc)
+    }
     
     deinit {
         deregisterForMOCNotifications()
     }
     
     //MARK: NSManagedObjectContext Notification Handling
-    func registerForNotificationsOn(moc :NSManagedObjectContext?) {
-        if hasMocNotificationObserving == false {
-            hasMocNotificationObserving = true
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(handleMocNotification),
-                                                   name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
-                                                   object: moc)
-        }
+    private func registerForNotificationsOn(moc :NSManagedObjectContext?) {
+        NotificationCenter.default.addObserver(self,
+                                                selector: #selector(handleMocNotification),
+                                                name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
+                                                object: moc)
     }
     
-    func deregisterForMOCNotifications() {
-        if hasMocNotificationObserving {
-            hasMocNotificationObserving = false
-            NotificationCenter.default.removeObserver(self)
-        }
+    private func deregisterForMOCNotifications() {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc private func handleMocNotification(aNotification :Notification) {

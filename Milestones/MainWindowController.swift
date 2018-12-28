@@ -49,16 +49,11 @@ CoreDataNotificationManagerDelegate {
                 shouldCloseDocument = true
                 
                 if let moc = dependency()?.stateModel.managedObjectContext {
-                    coreDataNotificationManager = CoreDataNotificationManager()
-                    coreDataNotificationManager?.registerForNotificationsOn(moc: moc)
+                    coreDataNotificationManager = CoreDataNotificationManager(managedObjectContext: moc)
                     coreDataNotificationManager?.delegate = self
                 }
             }
         }
-    }
-    
-    deinit {
-        coreDataNotificationManager?.deregisterForMOCNotifications()
     }
 
     private func dependency() -> Dependencies? {

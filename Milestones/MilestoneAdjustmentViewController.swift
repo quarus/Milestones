@@ -15,7 +15,7 @@ import Cocoa
 class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, StateObserverProtocol, CoreDataNotificationManagerDelegate {
     
     
-    private let MOCManager: CoreDataNotificationManager = CoreDataNotificationManager()
+    private var MOCManager: CoreDataNotificationManager?
     private var fetchRequest = NSFetchRequest<Adjustment>(entityName: "Adjustment")
     private var cwDateFormatter: DateFormatter = DateFormatter()
     private var selectedAdjustment: Adjustment? {
@@ -106,17 +106,16 @@ class MilestoneAdjustmentViewController: NSViewController, NSTableViewDelegate, 
         cwDateFormatter.calendar = Calendar.defaultCalendar()
         cwDateFormatter.dateFormat = "w.e/yyyy"
         
-        MOCManager.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
-        MOCManager.delegate = self
+        if let moc = dataModel()?.managedObjectContext {
+            MOCManager = CoreDataNotificationManager(managedObjectContext: moc)
+            MOCManager?.delegate = self
+
+        }
         
     }
     
     override func viewWillAppear() {
         update()
-    }
-    
-    override func viewDidAppear() {
-        
     }
     
     //MARK: UI Callbacks

@@ -1725,7 +1725,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="OrphanCell" id="ml2-YH-HDB">
-                                                                    <rect key="frame" x="259" y="1" width="80" height="40"/>
+                                                                    <rect key="frame" x="258.5" y="1" width="80" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbA-U6-dew">

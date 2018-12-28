@@ -21,7 +21,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet private weak var removeTimelineButton: NSButton!
 
     private var hasNotificationObserving = false
-    private var MOCHandler = CoreDataNotificationManager()
+    private var MOCHandler: CoreDataNotificationManager?
     
     override var representedObject: Any? {
         
@@ -31,9 +31,10 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         
         didSet {
 
-            MOCHandler.deregisterForMOCNotifications()
-            MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
-            MOCHandler.delegate = self
+            if let moc = dataModel()?.managedObjectContext {
+                MOCHandler = CoreDataNotificationManager(managedObjectContext: moc)
+                MOCHandler?.delegate = self
+            }
             
             timelineTableView.reloadData()
             dataModel()?.add(dataObserver: self)
@@ -48,10 +49,7 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         //This casting chain is a workaround (?): https://bugs.swift.org/browse/SR-3871
         let dependencies = representedObject as? AnyObject as? Dependencies
         return dependencies?.stateModel
-        
     }
-
-    
 
     private func timelineAt(index :Int) -> Timeline? {
         
@@ -59,7 +57,6 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         guard 0..<timelines.count ~= index else {return nil}
         
         return timelines.object(at: index) as? Timeline
-        
     }
     
     private func indexOf(timeline :Timeline) -> Int {
@@ -79,7 +76,6 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     }
 
     deinit {
-        MOCHandler.deregisterForMOCNotifications()
     }
     
     //MARK: View life cycle
@@ -88,9 +84,8 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         timelineTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: TIMELINE_DRAG_TYPE)])
         updateButtons()
 
-        MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
-        MOCHandler.delegate = self
-        
+//        MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
+//        MOCHandler.delegate = self
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {

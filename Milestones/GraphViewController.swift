@@ -21,7 +21,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     var horizontalRulerView :HorizontalRulerView?
     var timelinesAndGraphicsView :TimelinesAndCalendarWeeksView?
 
-    private var MOCHandler = CoreDataNotificationManager()
+    private var MOCHandler: CoreDataNotificationManager?
 
     private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
@@ -38,9 +38,11 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     override var representedObject: Any? {
         
         didSet {
-            MOCHandler.deregisterForMOCNotifications()
-            MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
-            MOCHandler.delegate = self
+            
+            if let moc = dataModel()?.managedObjectContext {
+                MOCHandler = CoreDataNotificationManager(managedObjectContext: moc)
+                MOCHandler?.delegate = self
+            }
             
             dataModel()?.remove(dataObserver: self)
             dataModel()?.add(dataObserver: self)

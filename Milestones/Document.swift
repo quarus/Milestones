@@ -15,9 +15,7 @@ class Document: NSPersistentDocument {
     
     var dataModel :StateModel?
     var windowController :NSWindowController?
-    
-    private var MOCHandler = CoreDataNotificationManager()
-    
+
     override init() {
         
         super.init()
@@ -33,13 +31,10 @@ class Document: NSPersistentDocument {
         
         if let moc = managedObjectContext {
             dataModel = StateModel(moc: moc)
-            MOCHandler.registerForNotificationsOn(moc: moc)
-            
         }
     }
     
     deinit {
-        MOCHandler.deregisterForMOCNotifications()
     }
     
     override class var autosavesInPlace: Bool {
@@ -90,13 +85,6 @@ class Document: NSPersistentDocument {
             initialGroup.name = "Erste Gruppe"
         }
     }
-    
-    //MARK: Managed Object Context Change Handling
-    func handleInsertion(ofObjects: NSSet){}
-    func handleUpdate(ofObjects: NSSet){}
-    func handleRemoval(ofObjects: NSSet){}
-    
-    
     
 }
 
