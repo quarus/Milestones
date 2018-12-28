@@ -1383,22 +1383,25 @@
         <scene sceneID="eLR-0A-Da7">
             <objects>
                 <viewController storyboardIdentifier="GroupsmanagementViewController" id="Kk7-3Y-d4k" customClass="GroupsmanagementViewController" customModule="Milestones" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="5FX-8i-ZvS">
+                    <view key="view" misplaced="YES" id="5FX-8i-ZvS">
                         <rect key="frame" x="0.0" y="0.0" width="490" height="337"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mQa-KA-C6y">
-                                <rect key="frame" x="20" y="20" width="450" height="297"/>
+                                <rect key="frame" x="20" y="20" width="450" height="329"/>
                                 <subviews>
                                     <containerView translatesAutoresizingMaskIntoConstraints="NO" id="gou-9Y-rXh">
-                                        <rect key="frame" x="0.0" y="29" width="450" height="268"/>
+                                        <rect key="frame" x="0.0" y="29" width="450" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="2iH-4Y-aez" userLabel="height &gt;= 300"/>
+                                        </constraints>
                                         <connections>
                                             <segue destination="LCY-m5-UQ4" kind="embed" identifier="GroupsManagementSplitView" id="aEg-ds-im3"/>
                                         </connections>
                                     </containerView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zfp-2d-zdX">
-                                        <rect key="frame" x="-6" y="-7" width="81" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZVI-zo-OHB">
+                                        <rect key="frame" x="-6" y="-7" width="75" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZVI-zo-OHB">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -1514,10 +1517,14 @@
                                         </tableHeaderView>
                                     </scrollView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OXt-Tf-x3Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="146" height="21"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QmM-MN-UVU">
-                                                <rect key="frame" x="0.0" y="1" width="13" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="8t0-yc-F4Z"/>
+                                                    <constraint firstAttribute="width" constant="30" id="e4p-FO-Ihq" userLabel="width &gt;= 70"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lhr-vs-mgS">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1527,7 +1534,11 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hn7-fQ-ULk">
-                                                <rect key="frame" x="21" y="1" width="13" height="21"/>
+                                                <rect key="frame" x="38" y="0.0" width="30" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="LHt-vZ-i0l" userLabel="width &gt;= 70"/>
+                                                    <constraint firstAttribute="height" constant="20" id="cDF-vS-p52"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CdJ-9M-4bY">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1537,7 +1548,11 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SBj-3E-4rX">
-                                                <rect key="frame" x="42" y="-1" width="30" height="23"/>
+                                                <rect key="frame" x="76" y="0.0" width="70" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="ajr-2f-uqk" userLabel="width &gt;= 70"/>
+                                                    <constraint firstAttribute="height" constant="20" id="yGY-Kp-VOV"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" title="Edit" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7ec-NP-A4R">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1751,10 +1766,14 @@
                                         </tableHeaderView>
                                     </scrollView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VMR-QO-z20">
-                                        <rect key="frame" x="0.0" y="0.0" width="72" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="106" height="21"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CVQ-wi-E9G">
-                                                <rect key="frame" x="0.0" y="1" width="13" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="anQ-Ob-RVJ"/>
+                                                    <constraint firstAttribute="width" constant="30" id="eDP-GM-Hn1" userLabel="width &gt;= 70"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSAddTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HYA-wU-ygQ">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1764,7 +1783,11 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r1Y-di-Kyj">
-                                                <rect key="frame" x="21" y="1" width="13" height="21"/>
+                                                <rect key="frame" x="38" y="0.0" width="30" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="dTd-7O-CBE"/>
+                                                    <constraint firstAttribute="width" constant="30" id="oqc-vb-tWp" userLabel="width &gt;= 70"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W1L-wA-mLM">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -1774,7 +1797,11 @@
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QHB-IZ-FT5">
-                                                <rect key="frame" x="42" y="-1" width="30" height="23"/>
+                                                <rect key="frame" x="76" y="0.0" width="30" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="crr-xh-kxV" userLabel="width &gt;= 70"/>
+                                                    <constraint firstAttribute="height" constant="20" id="uR5-n1-ka8"/>
+                                                </constraints>
                                                 <buttonCell key="cell" type="smallSquare" title="Edit" bezelStyle="smallSquare" imagePosition="overlaps" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="CoT-lc-TVv">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>

@@ -128,6 +128,15 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
     }
     
     //MARK: Update
+    
+    private func highlightSelectedGroup() {
+        guard let groups = dependency()?.stateModel.allGroups() else {return}
+        if let activeGroup = dependency()?.stateModel.selectedGroup {
+            if let index = groups.index(of: activeGroup ) {
+                groupPopUpButton.selectItem(at: index)
+            }
+        }
+    }
     private func updateGroupPopUpButton(){
 
         guard let groups = dependency()?.stateModel.allGroups() else {return}
@@ -154,15 +163,7 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
         groupPopUpButton.menu?.addItem(separatorItem)
         groupPopUpButton.menu?.addItem(manageGroupsItem)
 
-        
-        //Select the active group
-        if let activeGroup = dependency()?.stateModel.selectedGroup {
-
-            if let index = groups.index(of: activeGroup ) {
-
-                groupPopUpButton.selectItem(at: index)
-            }
-        }
+        highlightSelectedGroup()
     }
 
     //MARK: UI Callbacks
@@ -191,16 +192,16 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
     
     @objc func onClickOfManageGroupsPopUpButton(_ sender: NSPopUpButton) {
 
-        groupPopUpButton.select(nil)
-       let groupsManagementViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "GroupsmanagementViewController")) as! GroupsmanagementViewController
-        groupsManagementViewController.originalManagedObjectContext = self.document?.managedObjectContext
+        highlightSelectedGroup()
+        
+        let groupsManagementViewController = NSStoryboard(name: NSStoryboard.Name(rawValue: "MainStoryboard"), bundle: nil).instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "GroupsmanagementViewController")) as! GroupsmanagementViewController
+            groupsManagementViewController.originalManagedObjectContext = self.document?.managedObjectContext
         
         self.window?.contentViewController?.presentViewControllerAsSheet(groupsManagementViewController)
     }
     
     @IBAction func onClickOfExportButton(_ sender: Any) {
         showExportSheet()
-        
     }
     
 
@@ -221,10 +222,8 @@ class MainWindowController :NSWindowController, StateObserverProtocol {
 
         var selectedGroup :Group?
         if groupPopUpButton.indexOfSelectedItem >= 0 {
-
             selectedGroup = allGroups[groupPopUpButton.indexOfSelectedItem]
         }
-
         return selectedGroup
     }
 
