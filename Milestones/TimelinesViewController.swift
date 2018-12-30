@@ -83,9 +83,6 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
         
         timelineTableView.registerForDraggedTypes([NSPasteboard.PasteboardType(rawValue: TIMELINE_DRAG_TYPE)])
         updateButtons()
-
-//        MOCHandler.registerForNotificationsOn(moc: dataModel()?.managedObjectContext)
-//        MOCHandler.delegate = self
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
