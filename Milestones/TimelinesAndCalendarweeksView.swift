@@ -38,11 +38,12 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
     //MARK: Life dycle
-    init(withLength length: CGFloat, horizontalCalculator :HorizontalCalculator, verticalCalculator :VerticalCalculator){
+    init(withLength length: CGFloat,
+         horizontalCalculator :HorizontalCalculator,
+         verticalCalculator :VerticalCalculator){
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
-        
     }
     
     
@@ -58,7 +59,6 @@ class TimelinesAndCalendarWeeksView :GraphicView {
         if (dateIndictorLineGraphic != nil){
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
-        
     }
     
     func milestoneGraphicControllerForMilestone(_ milestone: Milestone) -> MilestoneGraphicController? {
@@ -88,7 +88,6 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     func stopObservingKVOForGraphic(_ aGraphic :Graphic){
         aGraphic.removeObserver(self, forKeyPath: "drawingBounds")
     }
-    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
@@ -203,8 +202,6 @@ class TimelinesAndCalendarWeeksView :GraphicView {
                                   startDate: date,
                                   length: length)
         
-
-
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {

@@ -77,6 +77,8 @@
 		ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7941CE87048005F4872 /* AppDelegate.swift */; };
 		ACB7A7971CE87048005F4872 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7961CE87048005F4872 /* Document.swift */; };
 		ACB7A79C1CE87048005F4872 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB7A79B1CE87048005F4872 /* Assets.xcassets */; };
+		ACC3E75821D8EFE1003C0320 /* MarkerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */; };
+		ACC3E75A21D8F419003C0320 /* MarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC3E75921D8F419003C0320 /* MarkerModel.swift */; };
 		ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */; };
 		ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */; };
 		ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */; };
@@ -167,6 +169,8 @@
 		ACB7A7961CE87048005F4872 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Document.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACB7A79B1CE87048005F4872 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACB7A7A01CE87048005F4872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerModelTests.swift; sourceTree = "<group>"; };
+		ACC3E75921D8F419003C0320 /* MarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerModel.swift; sourceTree = "<group>"; };
 		ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExportPanelViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "NSRect+Extension.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -261,6 +265,7 @@
 			children = (
 				AC235CA71FE83581001B25E9 /* DateTests.swift */,
 				AC12813921BD7238006952D8 /* PageModelTests.swift */,
+				ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */,
 				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
 				AC4D246D1FE66EEE005F6CCB /* Info.plist */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
@@ -366,6 +371,7 @@
 				ACB7A7961CE87048005F4872 /* Document.swift */,
 				72CFD31F1E34F927002C6481 /* StateModel.swift */,
 				ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */,
+				ACC3E75921D8F419003C0320 /* MarkerModel.swift */,
 			);
 			name = Datamodel;
 			sourceTree = "<group>";
@@ -491,6 +497,7 @@
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
 				ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */,
 				ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */,
+				ACC3E75821D8EFE1003C0320 /* MarkerModelTests.swift in Sources */,
 				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,6 +518,7 @@
 				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
+				ACC3E75A21D8F419003C0320 /* MarkerModel.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
 				72CFD3201E34F927002C6481 /* StateModel.swift in Sources */,
 				ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */,

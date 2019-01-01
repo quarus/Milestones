@@ -25,7 +25,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
     private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
-    var firstVisibleDate = Date().normalized()
     let length :CGFloat = 8000.0
     var currentLengthOfDay: CGFloat = 40
 
@@ -83,7 +82,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         scrollView.addFloatingSubview(verticalRulerView!, for: .horizontal)
         
         pageModel = PageModel(horizontalCalculator: horizCalc,
-                              startDate: firstVisibleDate,
+                              startDate: Date(),
                               length: length,
                               clipViewLength:clipView.bounds.size.width)
         pageModel?.clipViewRelativeX = length/2.0
