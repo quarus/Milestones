@@ -13,7 +13,7 @@ import Foundation
 import Cocoa
 import GLKit
 
-class LineGraphicController {
+class LineGraphicController: GraphicController {
 
     var userInfo :AnyObject?
 
@@ -34,7 +34,7 @@ class LineGraphicController {
         }
     }
     
-    var allGraphics: [Graphic] {
+    var graphics: [Graphic] {
         var graphics: [Graphic] = [Graphic]()
         
         graphics.append(lineGraphic)

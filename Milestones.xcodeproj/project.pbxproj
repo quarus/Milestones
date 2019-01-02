@@ -83,6 +83,7 @@
 		ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */; };
 		ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */; };
 		ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */; };
+		ACEC7EC921DD42600055A803 /* GraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7EC821DD42600055A803 /* GraphicController.swift */; };
 		ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */; };
 		ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8C1FC06CA200D9E136 /* ClipView.swift */; };
 		ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */; };
@@ -175,6 +176,7 @@
 		ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "NSRect+Extension.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACEC7EC821DD42600055A803 /* GraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicController.swift; sourceTree = "<group>"; };
 		ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataNotificationManager.swift; sourceTree = "<group>"; };
 		ACF15B8C1FC06CA200D9E136 /* ClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipView.swift; sourceTree = "<group>"; };
 		ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */,
 				AC1337B31D3257F700637527 /* LabelGraphic.swift */,
 				AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */,
+				ACEC7EC821DD42600055A803 /* GraphicController.swift */,
 				AC463111208286F400312012 /* LineGraphicController.swift */,
 				ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */,
 			);
@@ -570,6 +573,7 @@
 				AC477CBC1D4385A100FB225C /* Group+CoreDataProperties.swift in Sources */,
 				ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */,
 				ACB7A7971CE87048005F4872 /* Document.swift in Sources */,
+				ACEC7EC921DD42600055A803 /* GraphicController.swift in Sources */,
 				AC477CBF1D4385A100FB225C /* Milestone+CoreDataClass.swift in Sources */,
 				AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */,
 				ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */,
