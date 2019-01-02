@@ -306,6 +306,8 @@ class MilestonesViewController :
 
     //MARK: DataObserverProtocol    
     func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
 
     func didChangeSelectedGroup(_ group: Group?) {
         updateButtons()

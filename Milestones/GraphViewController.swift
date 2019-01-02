@@ -63,6 +63,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView = TimelinesAndCalendarWeeksView(withLength: length,
                                                                  horizontalCalculator: horizCalc,
                                                                  verticalCalculator: vertCalc)
+        timelinesAndGraphicsView?.milestoneClickedHandler = userDidSelectMilestone
         
         scrollView.documentView?.addSubview(timelinesAndGraphicsView!)
         timelinesAndGraphicsView?.frame.origin.y = heightOfHorizontalRulerView
@@ -158,6 +159,12 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView?.display()
     }
     
+    //MARK: Event Handling
+    func userDidSelectMilestone(milestone: Milestone) -> () {
+        guard let stateModel = dataModel() else {return}
+        stateModel.selectedMilestone = milestone
+    }
+    
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group: Group?) {
         updateViews()
@@ -179,6 +186,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             highlightCurrentlySelectedMilestone()
         }
     }
+    
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
     
     //MARK: Managed Object Context Change Handling
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {

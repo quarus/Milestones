@@ -11,14 +11,11 @@ import Foundation
 struct MarkerModel {
     
     let startDate: Date
+    
     //the date currently marked ...
     private(set) var markedDate: Date?
     // ... within the timeline currently marked
-    var indexOfMarkedTimeline: Int {
-        get {
-            return Int(cursorPosition.y / yCalculator.heightOfTimeline)
-        }
-    }
+    var indexOfMarkedTimeline: Int
     
     var cursorDate: Date? {
         get {
@@ -42,11 +39,13 @@ struct MarkerModel {
         xCalculator = horizontalCalculator
         yCalculator = verticalCalculator
         cursorPosition = CGPoint(x: 0, y: 0)
+        indexOfMarkedTimeline = 0
         self.startDate = startDate
     }
     
     mutating func markDate() {
         let startDateAbsolutePosition = xCalculator.xPositionFor(date: startDate)
         markedDate = xCalculator.dateForXPosition(position: startDateAbsolutePosition + cursorPosition.x)
+        indexOfMarkedTimeline = Int(cursorPosition.y / yCalculator.heightOfTimeline)
     }
 }

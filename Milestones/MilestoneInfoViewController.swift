@@ -284,7 +284,9 @@ class MilestoneInfoViewController:
     func didChangeSelectedGroup(_ group :Group?) {}
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {}
     func didChangeZoomLevel(_ level: ZoomLevel) {}
-    
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
+
     func didChangeSelectedMilestone(_ milestone :Milestone?) {
         update()
     }

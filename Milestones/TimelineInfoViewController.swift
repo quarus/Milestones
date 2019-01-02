@@ -93,6 +93,8 @@ class TimelineInfoViewController:
     func didChangeSelectedMilestone(_ milestone: Milestone?) {}
     func didChangeZoomLevel(_ level: ZoomLevel) {}
     func didChangeSelectedGroup(_ group: Group?) {}
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
     
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {
         update()

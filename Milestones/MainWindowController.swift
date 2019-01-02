@@ -216,6 +216,9 @@ CoreDataNotificationManagerDelegate {
     func didChangeZoomLevel(_ level: ZoomLevel) {}
     func didChangeSelectedTimeline(_ selectedTimelines :[Timeline]) {}
     func didChangeSelectedMilestone(_ milestone :Milestone?){}
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
+
 
     //MARK: CoreDataNotificationManagerDelegate
     func managedObjectContext(_ moc: NSManagedObjectContext, didInsertObjects objects: NSSet) {

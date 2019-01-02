@@ -40,9 +40,18 @@ class StateModel : StateProtocol {
 
     var selectedMilestone :Milestone? {
         didSet {
+            if let timeline = selectedMilestone?.timeline {
+                if (!selectedTimelines.contains(timeline)) {
+                    selectedTimelines = [timeline]
+                }
+            }
             notifyObserversAboutMilestoneSelectionChange()
         }
     }
+    
+    var markedDate: Date?
+    var markedTimeline: Timeline?
+    
     var managedObjectContext :NSManagedObjectContext
 
     
@@ -118,13 +127,6 @@ class StateModel : StateProtocol {
                                                    selector: #selector(handleMocNotifications),
                                                    name: NSNotification.Name.NSManagedObjectContextObjectsDidChange,
                                                    object: managedObjectContext)
-
-
-           NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(handleMilestoneClickNotification),
-                                                   name: Notification.Name(rawValue: MILESTONE_SELECTED_NOTIFICATION),
-                                                   object: nil)
-
         }
     }
     
@@ -135,21 +137,7 @@ class StateModel : StateProtocol {
             NotificationCenter.default.removeObserver(self)
         }
     }
-
-    @objc func handleMilestoneClickNotification(aNotification: Notification) {
-
-        guard let aDict = aNotification.userInfo else {return}
-        if let clickedMilestone = aDict[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] as? Milestone {
-
-            guard let timeline = clickedMilestone.timeline else {return}
-            //only change the selected timeline when it is not already selected
-            if (!selectedTimelines.contains(timeline)) {
-                selectedTimelines = [timeline]
-            } 
-            selectedMilestone = clickedMilestone
-        }
-    }
-
+    
     @objc func handleMocNotifications(aNotification: Notification) {
 
         guard let aDict = aNotification.userInfo else {return}
@@ -188,9 +176,7 @@ class StateModel : StateProtocol {
             }
         }
     }
-
-
-
+    
     func add(dataObserver: StateObserverProtocol) {        
         if !dataObservers.contains(dataObserver) {
             dataObservers.add(dataObserver)
@@ -204,7 +190,6 @@ class StateModel : StateProtocol {
     }
 
     //MARK: Messaging
-    
     private func notifyObserversAboutZoomLevelChange() {
         for anObserver in dataObservers {
             if let observer = anObserver as? StateObserverProtocol {
@@ -233,6 +218,22 @@ class StateModel : StateProtocol {
         for anObserver in dataObservers {
             if let observer = anObserver as? StateObserverProtocol {
                 observer.didChangeSelectedMilestone(selectedMilestone)
+            }
+        }
+    }
+    
+    private func notifyObserversAboutMarkedDateChange() {
+        for anObserver in dataObservers {
+            if let observer = anObserver as? StateObserverProtocol {
+                observer.didChangeMarkedDate(markedDate)
+            }
+        }
+    }
+
+    private func notifyObserversAboutMarkedTimelineChange() {
+        for anObserver in dataObservers {
+            if let observer = anObserver as? StateObserverProtocol {
+                observer.didChangeMarkedTimeline(markedTimeline)
             }
         }
     }

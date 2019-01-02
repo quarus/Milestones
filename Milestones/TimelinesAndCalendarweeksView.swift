@@ -18,8 +18,10 @@ let MILESTONE_SELECTED_NOTIFICATION = "MILESTONE_SELECTED_NOTIFICATION"
 let MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY = "MILESTONE_SELECTED_KEY"
 
 
-class TimelinesAndCalendarWeeksView :GraphicView {
+class TimelinesAndCalendarWeeksView: GraphicView {
     
+    var milestoneClickedHandler: ((_ selectedMilestone: Milestone) -> ())?
+    var dateMarkedHandler: ((_ markedDate: Date, _ markedTimeline: Timeline) -> ())?
     
     var yOffset :CGFloat = 200;
     
@@ -126,9 +128,9 @@ class TimelinesAndCalendarWeeksView :GraphicView {
             
             if let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController {
                 
-                var info :[AnyHashable : Any] = [AnyHashable : Any]()
-                info[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] = milestoneGraphicController.milestone
-                NotificationCenter.default.post(name: Notification.Name(rawValue: MILESTONE_SELECTED_NOTIFICATION), object: self, userInfo: info)
+                if let handler = milestoneClickedHandler {
+                    handler(milestoneGraphicController.milestone!)
+                }                
             }
         }
     }
