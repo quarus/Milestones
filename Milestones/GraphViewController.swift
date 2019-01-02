@@ -64,6 +64,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
                                                                  horizontalCalculator: horizCalc,
                                                                  verticalCalculator: vertCalc)
         timelinesAndGraphicsView?.milestoneClickedHandler = userDidSelectMilestone
+        timelinesAndGraphicsView?.dateMarkedHandler = userDidMarkDate
         
         scrollView.documentView?.addSubview(timelinesAndGraphicsView!)
         timelinesAndGraphicsView?.frame.origin.y = heightOfHorizontalRulerView
@@ -160,9 +161,14 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     //MARK: Event Handling
-    func userDidSelectMilestone(milestone: Milestone) -> () {
+    func userDidSelectMilestone(milestone: Milestone) {
         guard let stateModel = dataModel() else {return}
         stateModel.selectedMilestone = milestone
+    }
+    
+    func userDidMarkDate(date: Date, timeline: Timeline) {
+        print(date)
+        print(timeline.name)
     }
     
     //MARK: DataObserverProtocol

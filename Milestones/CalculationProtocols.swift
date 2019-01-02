@@ -41,4 +41,6 @@ protocol VerticalCalculator {
     
     var heightOfTimeline: CGFloat {get set}
     func yPositionForTimelineAt(index :Int) -> CGFloat
+    func centerYPositionForTimelineAt(index :Int) -> CGFloat
+    func timelineIndexForYPosition(yPosition: CGFloat) -> Int
 }

@@ -26,40 +26,24 @@ class MarkModelTests: XCTestCase {
     override func tearDown() {
     }
     
-    func testMarkDate() {
+    func testXPositioning() {
         let date = Date.dateFor(year: 2011, month: 04, day: 12, hour: 0, minute: 0, second: 1)!
-        let date2 = xCalculator.dateForXPosition(position: xCalculator.xPositionFor(date: date) + 500)
+        let lengthFor100Days = xCalculator.lengthOfDay * 100 + 12
+        let heightOf3Timelines = yCalculator.heightOfTimeline * 3 + 13
+        let date2Position = xCalculator.xPositionFor(date: date) + lengthFor100Days
+        let date2 = xCalculator.dateForXPosition(position: date2Position)
         
         var markerModel = MarkerModel(horizontalCalculator: xCalculator,
                                       verticalCalculator: yCalculator,
                                       startDate: date)
         
         markerModel.cursorPosition = CGPoint(x: 0, y: 0)
-        markerModel.markDate()
-        markerModel.cursorPosition = CGPoint(x: 500, y: 0)
-        XCTAssertEqual(markerModel.markedDate, date)
-        XCTAssertEqual(markerModel.indexOfMarkedTimeline, 0)
-        
-        markerModel.cursorPosition = CGPoint(x: 500, y: 66)
-        markerModel.markDate()
-        XCTAssertEqual(markerModel.markedDate, date2)
-        XCTAssertEqual(markerModel.indexOfMarkedTimeline, 2)
-    }
-    
-    func testCursorDate() {
-        let date = Date.dateFor(year: 2019, month: 03, day: 07, hour: 10, minute: 43, second: 44)!
-        let date2 = xCalculator.dateForXPosition(position: xCalculator.xPositionFor(date: date) + 576)
-        
-
-        var markerModel = MarkerModel(horizontalCalculator: xCalculator,
-                                      verticalCalculator: yCalculator,
-                                      startDate: date)
-
         XCTAssertEqual(markerModel.cursorDate, date)
-        XCTAssertEqual(markerModel.indexOfCursorTimeline, 0)
-
-        markerModel.cursorPosition = CGPoint(x: 576, y: 103)
+        XCTAssertEqual(markerModel.cursorPosition.x, xCalculator.lengthOfDay/2.0)
+        XCTAssertEqual(markerModel.cursorPosition.y, yCalculator.heightOfTimeline/2.0)
+        
+        markerModel.cursorPosition = CGPoint(x: lengthFor100Days, y: heightOf3Timelines)
         XCTAssertEqual(markerModel.cursorDate, date2)
-        XCTAssertEqual(markerModel.indexOfCursorTimeline, 3)
+        XCTAssertEqual(markerModel.cursorPosition.y, yCalculator.heightOfTimeline * 3 + (yCalculator.heightOfTimeline/2.0))
     }
 }

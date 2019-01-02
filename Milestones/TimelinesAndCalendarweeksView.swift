@@ -13,11 +13,6 @@ import Foundation
 import Cocoa
 
 
-
-let MILESTONE_SELECTED_NOTIFICATION = "MILESTONE_SELECTED_NOTIFICATION"
-let MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY = "MILESTONE_SELECTED_KEY"
-
-
 class TimelinesAndCalendarWeeksView: GraphicView {
     
     var milestoneClickedHandler: ((_ selectedMilestone: Milestone) -> ())?
@@ -33,9 +28,11 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     private var currentlyDisplayedInfoLabel :LabelGraphic?
     private var dateIndictorLineGraphic :LineGraphic?
     private var showInfoLabel :Bool = false
-
+    
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
 
+    var absoluteX: CGFloat = 0.0
+    var timelines: [Timeline]?
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
@@ -127,10 +124,20 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
             
             if let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-                
                 if let handler = milestoneClickedHandler {
                     handler(milestoneGraphicController.milestone!)
-                }                
+                }
+            }
+        } else {
+            guard let lines = timelines else {return}
+            guard let xCalculator = timelineHorizontalCalculator else {return}
+            if let handler = dateMarkedHandler {
+                let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
+                if indexOfTimeline < lines.count {
+                    let timeline = lines[indexOfTimeline]
+                    let date = xCalculator.dateForXPosition(position: mouselocation.x + absoluteX)
+                    handler(date, timeline)
+                }
             }
         }
     }
@@ -198,12 +205,14 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     
     func updateForGroup(group :Group, firstVisibleDate date: Date, length: CGFloat) {
         
-        guard let timelines = group.timelines?.array as? [Timeline] else {return}
-        updateFrameFor(numberOfTimelines: timelines.count)
-        updateContentForTimelines(timelines: timelines,
-                                  startDate: date,
-                                  length: length)
-        
+        timelines = group.timelines?.array as? [Timeline]
+        absoluteX = timelineHorizontalCalculator?.xPositionFor(date: date) ?? 0
+        if timelines != nil {
+            updateFrameFor(numberOfTimelines: timelines!.count)
+            updateContentForTimelines(timelines: timelines!,
+                                      startDate: date,
+                                      length: length)
+        }
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
@@ -228,7 +237,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     
     private func updateContentForTimelines(timelines :[Timeline], startDate: Date, length: CGFloat) {
 
-        
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
         guard let yPositionCalculator = timelineVerticalCalculator else {return}
         
@@ -252,7 +260,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                                                                                       length: length,
                                                                                       startDate: startDate,
                                                                                       usingCalculator: xPositionCalculator)
-
             
             let yPos = yPositionCalculator.yPositionForTimelineAt(index: idx)
             Graphic.translate(graphics: timelineGraphics.allGraphics, byX: 0.0, byY: yPos)
