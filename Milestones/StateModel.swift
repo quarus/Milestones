@@ -49,8 +49,17 @@ class StateModel : StateProtocol {
         }
     }
     
-    var markedDate: Date?
-    var markedTimeline: Timeline?
+    var markedDate: Date? {
+        didSet {
+            notifyObserversAboutMarkedDateChange()
+        }
+    }
+    
+    var markedTimeline: Timeline? {
+        didSet {
+            notifyObserversAboutMarkedTimelineChange()
+        }
+    }
     
     var managedObjectContext :NSManagedObjectContext
 
