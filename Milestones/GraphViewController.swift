@@ -125,7 +125,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func updateViews() {
-        guard let currentGroup = dataModel()?.selectedGroup else {return}
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
         guard let pageModelFirstVisibleDate = pageModel?.startDate else {return}
         guard let pageModelLength = pageModel?.length else {return}
@@ -133,11 +132,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
         verticalRulerView?.updateFor(timelines: timelines)
         
-        timelinesAndGraphicsView?.updateForGroup(group: currentGroup,
-                                                 firstVisibleDate: pageModelFirstVisibleDate,
-                                                 length: pageModelLength)
-        
-        
+        timelinesAndGraphicsView?.updateForTimelines(timelines: timelines,
+                                                      firstVisibleDate: pageModelFirstVisibleDate,
+                                                      length: pageModelLength)
         highlightCurrentlySelectedMilestone()
     }
     
@@ -196,7 +193,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {
-        
+
     }
     
     func didChangeMarkedDate(_ markedDate: Date?) {
