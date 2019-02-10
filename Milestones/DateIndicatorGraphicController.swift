@@ -29,7 +29,7 @@ class DateIndicatorController: GraphicController {
     init(height: CGFloat, xPosition: CGFloat = 0.0) {
 
         datelineGraphicController = LineGraphicController.lineGraphicControllerWithLineFrom(StartPoint: GLKVector2Make(0, 0),
-                                                                                  inDirection: GLKVector2Make(0, -1),
+                                                                                  inDirection: GLKVector2Make(0, 1),
                                                                                   withLength: Float(height))
         self.xPosition = xPosition
         update()

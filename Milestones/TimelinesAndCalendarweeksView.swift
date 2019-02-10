@@ -289,7 +289,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         
         //Generate the graphic, which indicates the currently selected date
         if let markedDateGraphic = markedDateGraphicController?.graphics {
-            graphics.insert(contentsOf: markedDateGraphic, at: 0)
+            graphics.insert(contentsOf: markedDateGraphic, at: graphics.count)
         }
         
         // Generate the line, which indicates the current date

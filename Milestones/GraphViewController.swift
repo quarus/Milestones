@@ -193,11 +193,19 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {
-
+        guard let markedDate = dataModel()?.markedDate else {return}
+        guard let markedTimeline = dataModel()?.markedTimeline else {return}
+        
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate,
+                                                      timeline: markedTimeline)
     }
     
     func didChangeMarkedDate(_ markedDate: Date?) {
+        guard let markedDate = dataModel()?.markedDate else {return}
+        guard let markedTimeline = dataModel()?.markedTimeline else {return}
         
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate,
+                                                      timeline: markedTimeline)
     }
     
     //MARK: Managed Object Context Change Handling
