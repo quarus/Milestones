@@ -16,14 +16,25 @@ import Cocoa
 class HorizontalRulerView :GraphicView {
 
     var timelineCalculator :HorizontalCalculator
+    private var startDate: Date?
+    private var dateLabel: LabelGraphic
+    private var dateFormatter: DateFormatter
+
     
     init(withLength length: CGFloat, height: CGFloat, horizontalCalculator :HorizontalCalculator){
     
+        dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar.defaultCalendar()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        
         timelineCalculator = horizontalCalculator
+        dateLabel = LabelGraphic()
+        dateLabel.bounds.size.width = 100
+        dateLabel.textAlignment = .center
+
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: height))
         
         backgroundColor = NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
-
     }
     
     required init(coder: NSCoder) {
@@ -32,17 +43,30 @@ class HorizontalRulerView :GraphicView {
 
     func updateForStartDate(date :Date) {
         
+        startDate = date
         
         let length = self.frame.size.width
         let height = self.frame.size.height
         let rulerGraphics = GraphicsFactory.sharedInstance.horizonatlRulerGraphicsStartingAt(date: date,
                                                                               totalLength: length,
-                                                                              height: height,
+                                                                              height: height * 0.75,
                                                                               usingCalculator: timelineCalculator)
         graphics.removeAll()
         graphics.append(contentsOf: rulerGraphics)
+        graphics.append(dateLabel)
         setNeedsDisplay(bounds)
-            
     }
     
+    func displayMarkerAtDate(date: Date) {
+        guard let firstDate = startDate else {return}
+        let absoluteStartDateX = timelineCalculator.xPositionFor(date: firstDate)
+        let centerDateX = timelineCalculator.centerXPositionFor(date: date)
+        let relativPositionX = centerDateX - absoluteStartDateX
+
+        setNeedsDisplay(dateLabel.bounds)
+        dateLabel.text = dateFormatter.string(from: date)
+        dateLabel.bounds.origin.x = relativPositionX - (dateLabel.bounds.size.width / 2.0)
+        dateLabel.bounds.origin.y = bounds.size.height * 0.75
+        setNeedsDisplay(dateLabel.bounds)
+    }
 }

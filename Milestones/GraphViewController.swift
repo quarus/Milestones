@@ -58,7 +58,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let horizCalc = timelineHorizontalCalculator() else {return}
         guard let vertCalc = timelineVerticalCalculator() else {return}
         
-        let heightOfHorizontalRulerView :CGFloat = 50
+        let heightOfHorizontalRulerView :CGFloat = 75
         
         timelinesAndGraphicsView = TimelinesAndCalendarWeeksView(withLength: length,
                                                                  horizontalCalculator: horizCalc,
@@ -206,6 +206,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
         let idx = timelines.firstIndex(of: markedTimeline) ?? 0
         timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
+        horizontalRulerView?.displayMarkerAtDate(date: markedDate)
     }
     
     //MARK: Managed Object Context Change Handling

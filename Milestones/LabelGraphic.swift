@@ -27,7 +27,11 @@ class LabelGraphic: Graphic{
 
     var textAlignment :NSTextAlignment = .center
     var font :NSFont = NSFont(name: "Helvetica", size: 14)!
-    var text :String = " "
+    var text :String = " " {
+        didSet {
+            sizeToFit()
+        }
+    }
 
     override dynamic var bounds :NSRect {
         didSet {
