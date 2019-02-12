@@ -14,6 +14,7 @@ class DateIndicatorController: GraphicController {
     var graphics: [Graphic] {
         var allGraphics = [Graphic]()
         allGraphics.append(contentsOf: datelineGraphicController.graphics)
+        allGraphics.append(milestoneGraphic)
         return allGraphics
     }
     
@@ -22,9 +23,16 @@ class DateIndicatorController: GraphicController {
             update()
         }
     }
+    
+    var yPosition: CGFloat = 0.0 {
+        didSet {
+            update()
+        }
+    }
 
     private(set) var datelineGraphicController: LineGraphicController
-    
+    private let milestoneGraphic: IconGraphic
+    private let iconSize: CGFloat = 20.0
     
     init(height: CGFloat, xPosition: CGFloat = 0.0) {
 
@@ -32,13 +40,20 @@ class DateIndicatorController: GraphicController {
                                                                                   inDirection: GLKVector2Make(0, 1),
                                                                                   withLength: Float(height))
         self.xPosition = xPosition
+        
+        milestoneGraphic = IconGraphic(type: .Diamond)
+        milestoneGraphic.strokeColor = NSColor.gray
+        milestoneGraphic.fillColor = NSColor.white
+        milestoneGraphic.isDrawingStroke = true
+        milestoneGraphic.isDrawingFill = true
+        milestoneGraphic.bounds = NSMakeRect(0, 0, iconSize, iconSize)
         update()
     }
     
     private func update() {
         datelineGraphicController.startPoint.x = xPosition
-        datelineGraphicController.endPoint.x = xPosition
+        datelineGraphicController.endPoint.x = datelineGraphicController.startPoint.x
+        milestoneGraphic.bounds.origin = CGPoint(x: datelineGraphicController.startPoint.x - (iconSize/2.0),
+                                                 y: yPosition)
     }
-
-    
 }

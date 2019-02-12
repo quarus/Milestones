@@ -284,12 +284,15 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         if let currentlyMarkedDate = markedDate,
             let currentlyMarkedTimeline = indexOfMarkedTimeline {
             
-            let absoluteDateX = timelineHorizontalCalculator?.xPositionFor(date: currentlyMarkedDate) ?? 0
+            let absoluteDateX = timelineHorizontalCalculator?.centerXPositionFor(date: currentlyMarkedDate) ?? 0
             if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
                 
                 let relativeX = absoluteDateX - absoluteX
                 let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
                                                                           xPosition: relativeX)
+                
+                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
+
                 
                 graphics.append(contentsOf: markedDateGraphicController.graphics)
             }
