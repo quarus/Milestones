@@ -164,8 +164,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func userDidMarkDate(date: Date, timeline: Timeline) {
-        print(date)
-        print(timeline.name)
         dataModel()?.markedDate = date
         dataModel()?.markedTimeline = timeline
     }
@@ -196,16 +194,15 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let markedDate = dataModel()?.markedDate else {return}
         guard let markedTimeline = dataModel()?.markedTimeline else {return}
         
-        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate,
-                                                      timeline: markedTimeline)
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: 0)
     }
     
     func didChangeMarkedDate(_ markedDate: Date?) {
         guard let markedDate = dataModel()?.markedDate else {return}
         guard let markedTimeline = dataModel()?.markedTimeline else {return}
         
-        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate,
-                                                      timeline: markedTimeline)
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: 0)
+        
     }
     
     //MARK: Managed Object Context Change Handling

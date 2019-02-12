@@ -35,6 +35,8 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     var absoluteX: CGFloat = 0.0
     var timelines: [Timeline] = [Timeline]()
     var startDate: Date = Date()
+    var markedDate: Date?
+    var indexOfMarkedTimeline: Int?
     
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
@@ -200,7 +202,6 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         }
         
         updateMilestoneLabel()
-     //   updateDateIndicatorLine()
         
         lastMouseLocation = mouselocation
     }
@@ -212,18 +213,11 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         updateFrameFor(numberOfTimelines: timelines.count)
         updateContent()
     }
+ 
+    func updateForMarkedDate(date: Date, timelineAtIndex idx: Int) {
+        markedDate = date
+        indexOfMarkedTimeline = idx
 
-    func updateForMarkedDate(date: Date, timeline: Timeline) {
-        let absoluteDateX = timelineHorizontalCalculator?.xPositionFor(date: date) ?? 0
-        let relativeX = absoluteDateX - absoluteX
-        
-        if relativeX >= 0 && relativeX <= bounds.size.width {
-            markedDateGraphicController = DateIndicatorController(height: bounds.size.height,
-                                                                  xPosition: relativeX)
-            
-        } else {
-            markedDateGraphicController = nil
-        }
         updateContent()
     }
     
@@ -286,12 +280,22 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                                                                                                             height: self.bounds.size.height,
                                                                                                             length: self.bounds.size.width, usingCalculator: xPositionCalculator)
         graphics.append(contentsOf: cwLineGraphics)
-        
-        //Generate the graphic, which indicates the currently selected date
-        if let markedDateGraphic = markedDateGraphicController?.graphics {
-            graphics.insert(contentsOf: markedDateGraphic, at: graphics.count)
+   
+        if let currentlyMarkedDate = markedDate,
+            let currentlyMarkedTimeline = indexOfMarkedTimeline {
+            
+            let absoluteDateX = timelineHorizontalCalculator?.xPositionFor(date: currentlyMarkedDate) ?? 0
+            if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
+                
+                let relativeX = absoluteDateX - absoluteX
+                let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
+                                                                          xPosition: relativeX)
+                
+                graphics.append(contentsOf: markedDateGraphicController.graphics)
+            }
+
         }
-        
+   
         // Generate the line, which indicates the current date
         let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
         let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)
