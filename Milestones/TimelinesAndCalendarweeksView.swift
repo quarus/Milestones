@@ -291,6 +291,9 @@ class TimelinesAndCalendarWeeksView: GraphicView {
                 let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
                                                                           xPosition: relativeX)
                 
+                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
+
+                
                 graphics.append(contentsOf: markedDateGraphicController.graphics)
             }
 
