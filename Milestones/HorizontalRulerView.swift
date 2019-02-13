@@ -59,14 +59,33 @@ class HorizontalRulerView :GraphicView {
     
     func displayMarkerAtDate(date: Date) {
         guard let firstDate = startDate else {return}
+
+        if isDateVisible(date: date) {
+            let absoluteStartDateX = timelineCalculator.xPositionFor(date: firstDate)
+            let centerDateX = timelineCalculator.centerXPositionFor(date: date)
+            let relativPositionX = centerDateX - absoluteStartDateX
+
+            setNeedsDisplay(dateLabel.bounds)
+            dateLabel.text = dateFormatter.string(from: date)
+            dateLabel.bounds.origin.x = relativPositionX - (dateLabel.bounds.size.width / 2.0)
+            dateLabel.bounds.origin.y = bounds.size.height * 0.75
+            setNeedsDisplay(dateLabel.bounds)
+
+        } else {
+            dateLabel.text = ""
+            setNeedsDisplay(dateLabel.bounds)
+        }
+    }
+    
+    private func isDateVisible(date: Date) -> Bool {
+        guard let firstDate = startDate else {return false}
         let absoluteStartDateX = timelineCalculator.xPositionFor(date: firstDate)
         let centerDateX = timelineCalculator.centerXPositionFor(date: date)
-        let relativPositionX = centerDateX - absoluteStartDateX
 
-        setNeedsDisplay(dateLabel.bounds)
-        dateLabel.text = dateFormatter.string(from: date)
-        dateLabel.bounds.origin.x = relativPositionX - (dateLabel.bounds.size.width / 2.0)
-        dateLabel.bounds.origin.y = bounds.size.height * 0.75
-        setNeedsDisplay(dateLabel.bounds)
+        if centerDateX >= absoluteStartDateX && centerDateX <= absoluteStartDateX + frame.size.width {
+            return true
+        }
+        
+        return false
     }
 }
