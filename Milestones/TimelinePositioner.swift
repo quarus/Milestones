@@ -19,11 +19,19 @@ class TimelinePositioner: VerticalCalculator {
     }
     
     func yPositionForTimelineAt(index: Int) -> CGFloat {
-        
         if index < 0 {
             return 0
         }
-            
         return CGFloat(index) * heightOfTimeline
     }
+    
+    func centerYPositionForTimelineAt(index: Int) -> CGFloat {
+        return yPositionForTimelineAt(index: index) + (heightOfTimeline/2.0)
+    }
+    
+    func timelineIndexForYPosition(yPosition: CGFloat) -> Int {
+        return Int(yPosition / heightOfTimeline)
+    }
+
+    
 }

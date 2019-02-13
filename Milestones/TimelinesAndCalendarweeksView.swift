@@ -13,36 +13,41 @@ import Foundation
 import Cocoa
 
 
-
-let MILESTONE_SELECTED_NOTIFICATION = "MILESTONE_SELECTED_NOTIFICATION"
-let MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY = "MILESTONE_SELECTED_KEY"
-
-
-class TimelinesAndCalendarWeeksView :GraphicView {
+class TimelinesAndCalendarWeeksView: GraphicView {
     
+    var milestoneClickedHandler: ((_ selectedMilestone: Milestone) -> ())?
+    var dateMarkedHandler: ((_ markedDate: Date, _ markedTimeline: Timeline) -> ())?
     
     var yOffset :CGFloat = 200;
     
     var timelineHorizontalCalculator: HorizontalCalculator?
     var timelineVerticalCalculator: VerticalCalculator?
 
-    private var currentTrackingArea :NSTrackingArea?
-    private weak var currentlySelectedMilestone :Milestone?
-    private var currentlyDisplayedInfoLabel :LabelGraphic?
-    private var dateIndictorLineGraphic :LineGraphic?
+    private var currentTrackingArea: NSTrackingArea?
+    private weak var currentlySelectedMilestone: Milestone?
+    private var currentlyDisplayedInfoLabel: LabelGraphic?
+    private var dateIndictorLineGraphic: LineGraphic?
+    private var markedDateGraphicController: DateIndicatorController?
     private var showInfoLabel :Bool = false
-
+    
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
 
+    var absoluteX: CGFloat = 0.0
+    var timelines: [Timeline] = [Timeline]()
+    var startDate: Date = Date()
+    var markedDate: Date?
+    var indexOfMarkedTimeline: Int?
+    
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
     //MARK: Life dycle
-    init(withLength length: CGFloat, horizontalCalculator :HorizontalCalculator, verticalCalculator :VerticalCalculator){
+    init(withLength length: CGFloat,
+         horizontalCalculator :HorizontalCalculator,
+         verticalCalculator :VerticalCalculator){
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
-        
     }
     
     
@@ -58,7 +63,6 @@ class TimelinesAndCalendarWeeksView :GraphicView {
         if (dateIndictorLineGraphic != nil){
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
-        
     }
     
     func milestoneGraphicControllerForMilestone(_ milestone: Milestone) -> MilestoneGraphicController? {
@@ -88,7 +92,6 @@ class TimelinesAndCalendarWeeksView :GraphicView {
     func stopObservingKVOForGraphic(_ aGraphic :Graphic){
         aGraphic.removeObserver(self, forKeyPath: "drawingBounds")
     }
-    
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
@@ -126,10 +129,19 @@ class TimelinesAndCalendarWeeksView :GraphicView {
         if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
             
             if let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-                
-                var info :[AnyHashable : Any] = [AnyHashable : Any]()
-                info[MILESTONE_SELECTED_NOTIFICATION_PAYLOAD_KEY] = milestoneGraphicController.milestone
-                NotificationCenter.default.post(name: Notification.Name(rawValue: MILESTONE_SELECTED_NOTIFICATION), object: self, userInfo: info)
+                if let handler = milestoneClickedHandler {
+                    handler(milestoneGraphicController.milestone!)
+                }
+            }
+        } else {
+            guard let xCalculator = timelineHorizontalCalculator else {return}
+            if let handler = dateMarkedHandler {
+                let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
+                if indexOfTimeline < timelines.count {
+                    let timeline = timelines[indexOfTimeline]
+                    let date = xCalculator.dateForXPosition(position: mouselocation.x + absoluteX)
+                    handler(date, timeline)
+                }
             }
         }
     }
@@ -190,21 +202,23 @@ class TimelinesAndCalendarWeeksView :GraphicView {
         }
         
         updateMilestoneLabel()
-     //   updateDateIndicatorLine()
         
         lastMouseLocation = mouselocation
     }
-    
-    func updateForGroup(group :Group, firstVisibleDate date: Date, length: CGFloat) {
-        
-        guard let timelines = group.timelines?.array as? [Timeline] else {return}
+    func updateForTimelines(timelines: [Timeline], firstVisibleDate date: Date, length: CGFloat) {
+        self.timelines = timelines
+        self.startDate = date
+
+        absoluteX = timelineHorizontalCalculator?.xPositionFor(date: date) ?? 0
         updateFrameFor(numberOfTimelines: timelines.count)
-        updateContentForTimelines(timelines: timelines,
-                                  startDate: date,
-                                  length: length)
-        
+        updateContent()
+    }
+ 
+    func updateForMarkedDate(date: Date, timelineAtIndex idx: Int) {
+        markedDate = date
+        indexOfMarkedTimeline = idx
 
-
+        updateContent()
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
@@ -227,9 +241,8 @@ class TimelinesAndCalendarWeeksView :GraphicView {
 
     }
     
-    private func updateContentForTimelines(timelines :[Timeline], startDate: Date, length: CGFloat) {
+    private func updateContent() {
 
-        
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
         guard let yPositionCalculator = timelineVerticalCalculator else {return}
         
@@ -250,10 +263,9 @@ class TimelinesAndCalendarWeeksView :GraphicView {
 
 
             let timelineGraphics = GraphicsFactory.sharedInstance.timelineGraphicsFor(timeline: aTimeline,
-                                                                                      length: length,
+                                                                                      length: bounds.size.width,
                                                                                       startDate: startDate,
                                                                                       usingCalculator: xPositionCalculator)
-
             
             let yPos = yPositionCalculator.yPositionForTimelineAt(index: idx)
             Graphic.translate(graphics: timelineGraphics.allGraphics, byX: 0.0, byY: yPos)
@@ -268,7 +280,25 @@ class TimelinesAndCalendarWeeksView :GraphicView {
                                                                                                             height: self.bounds.size.height,
                                                                                                             length: self.bounds.size.width, usingCalculator: xPositionCalculator)
         graphics.append(contentsOf: cwLineGraphics)
-        
+   
+        if let currentlyMarkedDate = markedDate,
+            let currentlyMarkedTimeline = indexOfMarkedTimeline {
+            
+            let absoluteDateX = timelineHorizontalCalculator?.centerXPositionFor(date: currentlyMarkedDate) ?? 0
+            if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
+                
+                let relativeX = absoluteDateX - absoluteX
+                let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
+                                                                          xPosition: relativeX)
+                
+                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
+
+                
+                graphics.append(contentsOf: markedDateGraphicController.graphics)
+            }
+
+        }
+   
         // Generate the line, which indicates the current date
         let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
         let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)

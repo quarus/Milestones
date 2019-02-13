@@ -137,4 +137,8 @@ class MainSplitViewController :NSSplitViewController, StateObserverProtocol {
     func didChangeSelectedMilestone(_ milestone: Milestone?){
         displayView(viewType: .Milestone)
     }
+    
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
+
 }

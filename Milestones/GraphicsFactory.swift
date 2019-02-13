@@ -129,7 +129,7 @@ class GraphicsFactory {
                 lineGraphicController.lineGraphic.lineDashPhase = 0
                 lineGraphicController.drawsArrowHead = true
                 
-                graphics.append(contentsOf: lineGraphicController.allGraphics)
+                graphics.append(contentsOf: lineGraphicController.graphics)
             }
         }
         return graphics
@@ -177,7 +177,7 @@ class GraphicsFactory {
 
                         milestoneIconGraphics.append([milestoneGraphicController.iconGraphic])
                         milestoneLabelGraphics.append([milestoneGraphicController.nameLabel])
-                        graphics.append(contentsOf: milestoneGraphicController.allGraphics)
+                        graphics.append(contentsOf: milestoneGraphicController.graphics)
 
                         milestoneGraphicControllers.append(milestoneGraphicController)
                         

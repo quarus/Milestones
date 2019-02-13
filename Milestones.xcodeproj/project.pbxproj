@@ -77,10 +77,14 @@
 		ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7941CE87048005F4872 /* AppDelegate.swift */; };
 		ACB7A7971CE87048005F4872 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7961CE87048005F4872 /* Document.swift */; };
 		ACB7A79C1CE87048005F4872 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACB7A79B1CE87048005F4872 /* Assets.xcassets */; };
+		ACC3E75821D8EFE1003C0320 /* MarkerModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */; };
+		ACC3E75A21D8F419003C0320 /* MarkerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC3E75921D8F419003C0320 /* MarkerModel.swift */; };
 		ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */; };
 		ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */; };
 		ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */; };
 		ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */; };
+		ACEC7EC921DD42600055A803 /* GraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7EC821DD42600055A803 /* GraphicController.swift */; };
+		ACEC7ECB21DD4A660055A803 /* DateIndicatorGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */; };
 		ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */; };
 		ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8C1FC06CA200D9E136 /* ClipView.swift */; };
 		ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */; };
@@ -167,10 +171,14 @@
 		ACB7A7961CE87048005F4872 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Document.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACB7A79B1CE87048005F4872 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACB7A7A01CE87048005F4872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerModelTests.swift; sourceTree = "<group>"; };
+		ACC3E75921D8F419003C0320 /* MarkerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerModel.swift; sourceTree = "<group>"; };
 		ACE27F2E1D78B6BB00CEC5F6 /* ExportPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ExportPanelViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "NSRect+Extension.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		ACEC7EC821DD42600055A803 /* GraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicController.swift; sourceTree = "<group>"; };
+		ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndicatorGraphicController.swift; sourceTree = "<group>"; };
 		ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataNotificationManager.swift; sourceTree = "<group>"; };
 		ACF15B8C1FC06CA200D9E136 /* ClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipView.swift; sourceTree = "<group>"; };
 		ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -233,7 +241,9 @@
 				AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */,
 				AC1337B31D3257F700637527 /* LabelGraphic.swift */,
 				AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */,
+				ACEC7EC821DD42600055A803 /* GraphicController.swift */,
 				AC463111208286F400312012 /* LineGraphicController.swift */,
+				ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */,
 				ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */,
 			);
 			name = Graphics;
@@ -261,6 +271,7 @@
 			children = (
 				AC235CA71FE83581001B25E9 /* DateTests.swift */,
 				AC12813921BD7238006952D8 /* PageModelTests.swift */,
+				ACC3E75721D8EFE1003C0320 /* MarkerModelTests.swift */,
 				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
 				AC4D246D1FE66EEE005F6CCB /* Info.plist */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
@@ -366,6 +377,7 @@
 				ACB7A7961CE87048005F4872 /* Document.swift */,
 				72CFD31F1E34F927002C6481 /* StateModel.swift */,
 				ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */,
+				ACC3E75921D8F419003C0320 /* MarkerModel.swift */,
 			);
 			name = Datamodel;
 			sourceTree = "<group>";
@@ -491,6 +503,7 @@
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
 				ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */,
 				ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */,
+				ACC3E75821D8EFE1003C0320 /* MarkerModelTests.swift in Sources */,
 				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +512,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACEC7ECB21DD4A660055A803 /* DateIndicatorGraphicController.swift in Sources */,
 				41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */,
 				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
 				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
@@ -511,6 +525,7 @@
 				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
+				ACC3E75A21D8F419003C0320 /* MarkerModel.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
 				72CFD3201E34F927002C6481 /* StateModel.swift in Sources */,
 				ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */,
@@ -562,6 +577,7 @@
 				AC477CBC1D4385A100FB225C /* Group+CoreDataProperties.swift in Sources */,
 				ACE27F2F1D78B6BB00CEC5F6 /* ExportPanelViewController.swift in Sources */,
 				ACB7A7971CE87048005F4872 /* Document.swift in Sources */,
+				ACEC7EC921DD42600055A803 /* GraphicController.swift in Sources */,
 				AC477CBF1D4385A100FB225C /* Milestone+CoreDataClass.swift in Sources */,
 				AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */,
 				ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */,

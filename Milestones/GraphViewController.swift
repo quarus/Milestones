@@ -25,7 +25,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
     private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
-    var firstVisibleDate = Date().normalized()
     let length :CGFloat = 8000.0
     var currentLengthOfDay: CGFloat = 40
 
@@ -59,11 +58,13 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let horizCalc = timelineHorizontalCalculator() else {return}
         guard let vertCalc = timelineVerticalCalculator() else {return}
         
-        let heightOfHorizontalRulerView :CGFloat = 50
+        let heightOfHorizontalRulerView :CGFloat = 75
         
         timelinesAndGraphicsView = TimelinesAndCalendarWeeksView(withLength: length,
                                                                  horizontalCalculator: horizCalc,
                                                                  verticalCalculator: vertCalc)
+        timelinesAndGraphicsView?.milestoneClickedHandler = userDidSelectMilestone
+        timelinesAndGraphicsView?.dateMarkedHandler = userDidMarkDate
         
         scrollView.documentView?.addSubview(timelinesAndGraphicsView!)
         timelinesAndGraphicsView?.frame.origin.y = heightOfHorizontalRulerView
@@ -83,7 +84,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         scrollView.addFloatingSubview(verticalRulerView!, for: .horizontal)
         
         pageModel = PageModel(horizontalCalculator: horizCalc,
-                              startDate: firstVisibleDate,
+                              startDate: Date(),
                               length: length,
                               clipViewLength:clipView.bounds.size.width)
         pageModel?.clipViewRelativeX = length/2.0
@@ -124,7 +125,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func updateViews() {
-        guard let currentGroup = dataModel()?.selectedGroup else {return}
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
         guard let pageModelFirstVisibleDate = pageModel?.startDate else {return}
         guard let pageModelLength = pageModel?.length else {return}
@@ -132,11 +132,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
         verticalRulerView?.updateFor(timelines: timelines)
         
-        timelinesAndGraphicsView?.updateForGroup(group: currentGroup,
-                                                 firstVisibleDate: pageModelFirstVisibleDate,
-                                                 length: pageModelLength)
-        
-        
+        timelinesAndGraphicsView?.updateForTimelines(timelines: timelines,
+                                                      firstVisibleDate: pageModelFirstVisibleDate,
+                                                      length: pageModelLength)
         highlightCurrentlySelectedMilestone()
     }
     
@@ -159,6 +157,17 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView?.display()
     }
     
+    //MARK: Event Handling
+    func userDidSelectMilestone(milestone: Milestone) {
+        guard let stateModel = dataModel() else {return}
+        stateModel.selectedMilestone = milestone
+    }
+    
+    func userDidMarkDate(date: Date, timeline: Timeline) {
+        dataModel()?.markedDate = date
+        dataModel()?.markedTimeline = timeline
+    }
+    
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group: Group?) {
         updateViews()
@@ -179,6 +188,25 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             }
             highlightCurrentlySelectedMilestone()
         }
+    }
+    
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {
+        guard let markedDate = dataModel()?.markedDate else {return}
+        guard let markedTimeline = dataModel()?.markedTimeline else {return}
+        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return}
+        
+        let idx = timelines.firstIndex(of: markedTimeline) ?? 0
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
+    }
+    
+    func didChangeMarkedDate(_ markedDate: Date?) {
+        guard let markedDate = dataModel()?.markedDate else {return}
+        guard let markedTimeline = dataModel()?.markedTimeline else {return}
+        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return}
+
+        let idx = timelines.firstIndex(of: markedTimeline) ?? 0
+        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
+        horizontalRulerView?.displayMarkerAtDate(date: markedDate)
     }
     
     //MARK: Managed Object Context Change Handling

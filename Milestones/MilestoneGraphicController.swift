@@ -12,8 +12,10 @@
 import Foundation
 import Cocoa
 
-class MilestoneGraphicController{
-    
+class MilestoneGraphicController: GraphicController {
+
+    var userInfo: AnyObject?
+        
     weak var milestone: Milestone?
     var color: NSColor = NSColor.red
     var iconHeight: CGFloat = 20
@@ -22,7 +24,7 @@ class MilestoneGraphicController{
     private(set) var dateLabel: LabelGraphic = LabelGraphic()
     private(set) var nameLabel: LabelGraphic = LabelGraphic()
     
-    var allGraphics: [Graphic] {
+    var graphics: [Graphic] {
         var graphics: [Graphic] = [Graphic]()
         
         graphics.append(iconGraphic)

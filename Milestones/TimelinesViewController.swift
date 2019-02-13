@@ -305,6 +305,8 @@ class TimelinesViewController :NSViewController, NSTableViewDataSource, NSTableV
     
     func didChangeSelectedMilestone(_ milestone: Milestone?) {}
     func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
 
 
     //MARK: CoreDataNotificationDelegate

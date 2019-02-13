@@ -163,12 +163,13 @@ class MilestonesViewController :
         if (selectedTimelines.count > 0) {
             newMilestone = (NSEntityDescription.insertNewObject(forEntityName: "Milestone", into: moc) as! Milestone)
             newMilestone?.name = "Neuer Meilenstein"
+            newMilestone?.date = dataModel()?.markedDate ?? Date()
             
             let newAdjustment = newMilestone?.markAdjustment()
             newAdjustment?.name = "Init"
             newAdjustment?.reason = "Meilenstein wurde erstellt"
             
-            let timeline = dataModel()?.selectedTimelines[0]
+            let timeline = dataModel()?.markedTimeline ?? dataModel()?.selectedTimelines[0]
             newMilestone?.timeline = timeline
             moc.processPendingChanges()
             dataModel()?.selectedMilestone = newMilestone
@@ -306,6 +307,8 @@ class MilestonesViewController :
 
     //MARK: DataObserverProtocol    
     func didChangeZoomLevel(_ level: ZoomLevel) {}
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {}
+    func didChangeMarkedDate(_ markedDate: Date?) {}
 
     func didChangeSelectedGroup(_ group: Group?) {
         updateButtons()
@@ -318,16 +321,12 @@ class MilestonesViewController :
                 
                 let fetchPredicate = NSPredicate(format: "timeline IN %@", selectedTimelines)
                 fetchRequest.predicate = fetchPredicate
-                
                 try frc.performFetch()
             }
         } catch {
-            
         }
-        
         updateButtons()
         milestonesTableView.reloadData()
- 
     }
 
     func didChangeSelectedMilestone(_ milestone: Milestone?) {

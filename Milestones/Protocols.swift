@@ -39,6 +39,9 @@ protocol StateProtocol: class {
     var selectedTimelines: [Timeline] {get set}
     var selectedMilestone: Milestone? {get set}
 
+    var markedTimeline: Timeline? {get set}
+    var markedDate: Date? {get set}
+    
     var managedObjectContext: NSManagedObjectContext {get set}
 
     func add(dataObserver: StateObserverProtocol)
@@ -54,6 +57,8 @@ protocol StateObserverProtocol {
     func didChangeSelectedGroup(_ group: Group?)
     func didChangeSelectedTimeline(_ selectedTimelines: [Timeline])
     func didChangeSelectedMilestone(_ milestone: Milestone?)
+    func didChangeMarkedTimeline(_ markedTimeline: Timeline?)
+    func didChangeMarkedDate(_ markedDate: Date?)
 }
 
 protocol HasStateModel {
