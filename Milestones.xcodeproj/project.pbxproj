@@ -65,6 +65,7 @@
 		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
 		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
 		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
+		AC8C2B112215E60500F98135 /* GraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7EC821DD42600055A803 /* GraphicController.swift */; };
 		AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */; };
 		AC8DD2D11E1C182900FDA246 /* GroupsmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */; };
 		ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC463111208286F400312012 /* LineGraphicController.swift */; };
@@ -498,6 +499,7 @@
 				ACA58D97209CEDC700A39F7A /* LineGraphic.swift in Sources */,
 				ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */,
 				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
+				AC8C2B112215E60500F98135 /* GraphicController.swift in Sources */,
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
