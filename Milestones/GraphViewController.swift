@@ -133,8 +133,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         verticalRulerView?.updateFor(timelines: timelines)
         
         timelinesAndGraphicsView?.updateForTimelines(timelines: timelines,
-                                                      firstVisibleDate: pageModelFirstVisibleDate,
-                                                      length: pageModelLength)
+                                                      firstVisibleDate: pageModelFirstVisibleDate)
         highlightCurrentlySelectedMilestone()
     }
     

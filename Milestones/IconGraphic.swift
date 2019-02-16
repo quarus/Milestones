@@ -20,7 +20,9 @@ class IconGraphic: Graphic {
     var isSelected: Bool = false
     
     init(type: IconType = .Diamond) {
-
+        super.init()
+        
+        isDrawingFill = true
         self.type = type
     }
 
