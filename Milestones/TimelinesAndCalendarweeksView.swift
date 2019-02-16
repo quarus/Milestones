@@ -241,59 +241,11 @@ class TimelinesAndCalendarWeeksView: GraphicView {
 
     }
     
-    private func graphicsForBackground() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-
-        //Generate all vertical lines for months, calendarweeks, etc.
-        let cwLineGraphics = GraphicsFactory.sharedInstance.graphicsForVerticalCalendarWeeksLinesStartingAt(startDate: startDate,
-                                                                                                            height: self.bounds.size.height,
-                                                                                                            length: self.bounds.size.width, usingCalculator: xPositionCalculator)
-        return cwLineGraphics
-    }
-    
-    private func graphicsForCurrentlyMarkedDate() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-        guard let yPositionCalculator = timelineVerticalCalculator else {return [Graphic]()}
-
-        if let currentlyMarkedDate = markedDate {
-            
-            let absoluteDateX = xPositionCalculator.centerXPositionFor(date: currentlyMarkedDate)
-            if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
-                
-                let relativeX = absoluteDateX - absoluteX
-                let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
-                                                                          xPosition: relativeX)
-                
-                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
-                
-                return markedDateGraphicController.graphics
-            }
-        }
-        return [Graphic]()
-    }
-    
-    private func graphicsForTodayIndicator() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-
-        let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
-        let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)
-        Graphic.translate(graphics: todayIndicatorGraphics, byX: relativeXPos, byY: 0)
-        
-        return todayIndicatorGraphics
-    }
-    
     private func updateContent() {
 
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
         guard let yPositionCalculator = timelineVerticalCalculator else {return}
-        
-        if (currentlyDisplayedInfoLabel != nil) {
-            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
-        }
 
-        if (dateIndictorLineGraphic != nil) {
-            stopObservingKVOForGraphic(dateIndictorLineGraphic!)
-        }
         
         graphics.removeAll()
         milestoneGraphicControllers.removeAll()
@@ -316,25 +268,81 @@ class TimelinesAndCalendarWeeksView: GraphicView {
             idx = idx + 1
         }
         
-    
+        
+        resetDescriptionLabel()
+//        resetDateIndicator()
+
         graphics.append(contentsOf: graphicsForBackground())
         graphics.append(contentsOf: graphicsForCurrentlyMarkedDate())
         graphics.append(contentsOf: graphicsForTodayIndicator())
-      
-        //Generate the line which follows the mouse curser
-        dateIndictorLineGraphic = GraphicsFactory.sharedInstance.graphicsForDateIndicatorLine(height: self.bounds.size.height)[0] as? LineGraphic
-        lastMouseLocation = CGPoint(x: 0, y: 0)
-        graphics.insert(dateIndictorLineGraphic!, at: 0)
-        startObservingGraphic(dateIndictorLineGraphic!)
-
-        //Generate the text label, which displays a milestones description
+        
+        setNeedsDisplay(bounds)
+    }
+    
+    //MARK: Drawing
+    private func graphicsForCurrentlyMarkedDate() -> [Graphic] {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
+        guard let yPositionCalculator = timelineVerticalCalculator else {return [Graphic]()}
+        
+        if let currentlyMarkedDate = markedDate {
+            
+            let absoluteDateX = xPositionCalculator.centerXPositionFor(date: currentlyMarkedDate)
+            if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
+                
+                let relativeX = absoluteDateX - absoluteX
+                let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
+                                                                          xPosition: relativeX)
+                
+                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
+                
+                return markedDateGraphicController.graphics
+            }
+        }
+        return [Graphic]()
+    }
+    
+    private func graphicsForTodayIndicator() -> [Graphic] {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
+        
+        let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
+        let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)
+        Graphic.translate(graphics: todayIndicatorGraphics, byX: relativeXPos, byY: 0)
+        
+        return todayIndicatorGraphics
+    }
+    
+    private func graphicsForBackground() -> [Graphic] {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
+        
+        //Generate all vertical lines for months, calendarweeks, etc.
+        let cwLineGraphics = GraphicsFactory.sharedInstance.graphicsForVerticalCalendarWeeksLinesStartingAt(startDate: startDate,
+                                                                                                            height: self.bounds.size.height,
+                                                                                                            length: self.bounds.size.width, usingCalculator: xPositionCalculator)
+        return cwLineGraphics
+    }
+    
+    func resetDescriptionLabel() {
+    
+        if (currentlyDisplayedInfoLabel != nil) {
+            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
+        }
+    
         currentlyDisplayedInfoLabel = LabelGraphic()
         currentlyDisplayedInfoLabel?.fillColor = NSColor.yellow
         currentlyDisplayedInfoLabel?.isDrawingFill = true
         currentlyDisplayedInfoLabel?.textAlignment = .left
         startObservingGraphic(currentlyDisplayedInfoLabel!)
+    }
+    
+    func resetDateIndicator() {
         
-        setNeedsDisplay(bounds)
+        if (dateIndictorLineGraphic != nil) {
+            stopObservingKVOForGraphic(dateIndictorLineGraphic!)
+        }
+        dateIndictorLineGraphic = GraphicsFactory.sharedInstance.graphicsForDateIndicatorLine(height: self.bounds.size.height)[0] as? LineGraphic
+        lastMouseLocation = CGPoint(x: 0, y: 0)
+        graphics.insert(dateIndictorLineGraphic!, at: 0)
+        startObservingGraphic(dateIndictorLineGraphic!)
     }
 }
 
