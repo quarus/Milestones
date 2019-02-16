@@ -15,6 +15,24 @@ import Cocoa
 
 typealias Dependencies = HasStateModel & HasCalculators
 
+protocol MilestoneTableCellDataSourceProtocol {
+    
+    var dateString: String {get}
+    var cwString: String {get}
+    var nameString: String {get}
+    var timeIntervallString: String {get}
+    var needsExpandedCell: Bool {get}
+    var iconGraphic: IconGraphic {get}
+}
+
+enum IconType: Int {
+    case Diamond = 0
+    case Circle = 1
+    case Square = 2
+    case TriangleUp = 3
+    
+}
+
 public enum ZoomLevel: Int{
     //Values decribe the length of a day in pixels for each zoomlevel
     case week = 30

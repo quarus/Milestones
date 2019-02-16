@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D6952C1E86C02B001FFD3E /* GroupViewController.swift */; };
 		725B56911E3E166B00B86662 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B56901E3E166B00B86662 /* TimelineViewController.swift */; };
-		72CFD31E1E348E15002C6481 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31D1E348E15002C6481 /* Protocols.swift */; };
+		72CFD31E1E348E15002C6481 /* ProtocolsAndEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */; };
 		72CFD3201E34F927002C6481 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31F1E34F927002C6481 /* StateModel.swift */; };
 		AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */; };
 		AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */; };
@@ -65,13 +65,12 @@
 		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
 		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
 		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
-		AC8C2B112215E60500F98135 /* GraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7EC821DD42600055A803 /* GraphicController.swift */; };
+		AC8C2B1822172EC600F98135 /* TimeGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */; };
+		AC8C2B1A22173D9F00F98135 /* TimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1922173D9F00F98135 /* TimeGraph.swift */; };
+		AC8C2B1C221753B100F98135 /* MilestoneProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */; };
+		AC8C2B542218148A00F98135 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
 		AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */; };
 		AC8DD2D11E1C182900FDA246 /* GroupsmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */; };
-		ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC463111208286F400312012 /* LineGraphicController.swift */; };
-		ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
-		ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC46310F2081EF4C00312012 /* ArrowGraphic.swift */; };
-		ACA58D97209CEDC700A39F7A /* LineGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337AF1D293BBB00637527 /* LineGraphic.swift */; };
 		ACAACD7F20668EBC00AAB6F6 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */; };
 		ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */; };
 		ACB5929A1E06F52E003945FE /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */; };
@@ -104,7 +103,7 @@
 /* Begin PBXFileReference section */
 		41D6952C1E86C02B001FFD3E /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		725B56901E3E166B00B86662 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		72CFD31D1E348E15002C6481 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolsAndEnums.swift; sourceTree = "<group>"; };
 		72CFD31F1E34F927002C6481 /* StateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
 		AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HorizontalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VerticalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -162,6 +161,9 @@
 		AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
+		AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphTests.swift; sourceTree = "<group>"; };
+		AC8C2B1922173D9F00F98135 /* TimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraph.swift; sourceTree = "<group>"; };
+		AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneProtocol.swift; sourceTree = "<group>"; };
 		AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesManagementViewController.swift; sourceTree = "<group>"; };
 		AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsmanagementViewController.swift; sourceTree = "<group>"; };
 		ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				AC4D246D1FE66EEE005F6CCB /* Info.plist */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
 				AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */,
+				AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */,
 			);
 			path = TimelineCalculationTests;
 			sourceTree = "<group>";
@@ -293,8 +296,9 @@
 				AC8B2EE21E1AA3DC00F9605E /* Groupsmanagement */,
 				AC8B2EE11E1AA33C00F9605E /* Timelines  */,
 				72A2ECB61E3E33E10056C8EF /* Graphic */,
-				72CFD31D1E348E15002C6481 /* Protocols.swift */,
+				72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */,
 				AC12813C21BD73FC006952D8 /* PageModel.swift */,
+				AC8C2B1922173D9F00F98135 /* TimeGraph.swift */,
 			);
 			name = "Views & Windows";
 			sourceTree = "<group>";
@@ -379,6 +383,7 @@
 				72CFD31F1E34F927002C6481 /* StateModel.swift */,
 				ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */,
 				ACC3E75921D8F419003C0320 /* MarkerModel.swift */,
+				AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */,
 			);
 			name = Datamodel;
 			sourceTree = "<group>";
@@ -496,15 +501,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACA58D97209CEDC700A39F7A /* LineGraphic.swift in Sources */,
-				ACA58D94209CED3C00A39F7A /* LineGraphicController.swift in Sources */,
+				AC8C2B542218148A00F98135 /* Config.swift in Sources */,
 				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
-				AC8C2B112215E60500F98135 /* GraphicController.swift in Sources */,
+				AC8C2B1822172EC600F98135 /* TimeGraphTests.swift in Sources */,
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
-				ACA58D96209CEDB500A39F7A /* ArrowGraphic.swift in Sources */,
-				ACA58D95209CED8200A39F7A /* Graphic.swift in Sources */,
 				ACC3E75821D8EFE1003C0320 /* MarkerModelTests.swift in Sources */,
 				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
 			);
@@ -525,6 +527,7 @@
 				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
 				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
 				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
+				AC8C2B1A22173D9F00F98135 /* TimeGraph.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
 				ACC3E75A21D8F419003C0320 /* MarkerModel.swift in Sources */,
@@ -533,7 +536,7 @@
 				ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */,
 				ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */,
 				AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */,
-				72CFD31E1E348E15002C6481 /* Protocols.swift in Sources */,
+				72CFD31E1E348E15002C6481 /* ProtocolsAndEnums.swift in Sources */,
 				ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */,
 				AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */,
 				AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */,
@@ -558,6 +561,7 @@
 				AC477CBA1D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift in Sources */,
 				AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */,
 				AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */,
+				AC8C2B1C221753B100F98135 /* MilestoneProtocol.swift in Sources */,
 				AC1181591FFEC22D00BBC024 /* TimelineInfoViewController.swift in Sources */,
 				AC12813D21BD73FC006952D8 /* PageModel.swift in Sources */,
 				AC3A218A1D6A1C7C00C0C682 /* Calendar+Extensions.swift in Sources */,

@@ -12,15 +12,6 @@
 import Foundation
 import Cocoa
 
-protocol MilestoneTableCellDataSourceProtocol {
-
-    var dateString: String {get}
-    var cwString: String {get}
-    var nameString: String {get}
-    var timeIntervallString: String {get}
-    var needsExpandedCell: Bool {get}
-    var iconGraphic: IconGraphic {get}
-}
 
 class MilestoneTableCellView :NSTableCellView {
 

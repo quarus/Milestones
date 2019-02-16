@@ -14,15 +14,6 @@
 import Foundation
 import Cocoa
 
-enum IconType :Int {
-    case Diamond = 0
-    case Circle = 1
-    case Square = 2
-    case TriangleUp = 3
-
-}
-
-
 class IconGraphic: Graphic {
 
     var type :IconType = .Diamond
