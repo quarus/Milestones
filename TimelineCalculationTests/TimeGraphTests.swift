@@ -16,14 +16,6 @@ var numberOfMilestonesCall: String = ""
 var numberOfMilestonesInfoCall = ""
 
 
-struct MilestoneInfo: MilestoneProtocol {
-    
-    var type: IconType = .Diamond
-    var name: String = ""
-    var info: String?
-    var date: Date = Date()
-}
-
 class TimeGraphTests: XCTestCase {
 
     

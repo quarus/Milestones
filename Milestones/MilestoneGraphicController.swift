@@ -49,38 +49,54 @@ class MilestoneGraphicController: GraphicController {
     
     init(_ milestone: Milestone?) {
         
-        
         self.milestone = milestone
         
-        let calendarWeekAndDayFormatter = DateFormatter()
-        calendarWeekAndDayFormatter.dateFormat = "w.e"
-
-        iconGraphic.fillColor = self.milestone?.timeline?.color ?? NSColor.red
-        iconGraphic.isDrawingFill = true
+        let fillColor = self.milestone?.timeline?.color ?? NSColor.red
+        setupIconFor(color: fillColor)
         iconGraphic.userInfo = self
 
-        let milestoneGraphicBounds = NSMakeRect(0, 0, iconHeight, iconHeight)
-        iconGraphic.bounds = milestoneGraphicBounds.centeredHorizontally()
-        
+        iconGraphic.bounds = NSMakeRect(0, 0, iconHeight, iconHeight)
         if let date = milestone?.date {
-            dateLabel.text = calendarWeekAndDayFormatter.string(from: date)
-            dateLabel.bounds = NSMakeRect(0, 0, 100, 0).centeredHorizontally()
-            dateLabel.isDrawingFill = false
-            dateLabel.fillColor = NSColor.white
-            dateLabel.sizeToFit()
-            dateLabel.userInfo = self
+            setupDateLabelFor(date: date)
         }
         
         if let name = milestone?.name {
-            nameLabel.text = name
-            nameLabel.bounds = NSMakeRect(0, 0, 100, 0)
-            nameLabel.isDrawingFill = true
-            nameLabel.fillColor = NSColor.white
-            nameLabel.sizeToFit()
-            nameLabel.userInfo = self
+            setupNameLabelFor(name: name)
         }
-        
-        self.position = CGPoint(x: 0, y: 0)
     }
     
+    init(_ milestone: MilestoneProtocol) {
+        
+        setupIconFor(color: milestone.color)
+        setupDateLabelFor(date: milestone.date)
+        setupNameLabelFor(name: milestone.name)
+    }
+    
+    private func setupIconFor(color: NSColor) {
+        iconGraphic.fillColor = color
+        iconGraphic.bounds = NSMakeRect(0, 0, iconHeight, iconHeight)
+    }
+    
+    private func setupDateLabelFor(date: Date) {
+        let calendarWeekAndDayFormatter = DateFormatter()
+        calendarWeekAndDayFormatter.dateFormat = "w.e"
+
+        dateLabel.text = calendarWeekAndDayFormatter.string(from: date)
+        dateLabel.bounds = NSMakeRect(0, 0, 100, 0).centeredHorizontally()
+        dateLabel.isDrawingFill = false
+        dateLabel.fillColor = NSColor.white
+        dateLabel.sizeToFit()
+        dateLabel.userInfo = self
+    }
+    
+    private func setupNameLabelFor(name: String) {
+        nameLabel.text = name
+        nameLabel.bounds = NSMakeRect(0, 0, 100, 0)
+        nameLabel.isDrawingFill = true
+        nameLabel.fillColor = NSColor.white
+        nameLabel.sizeToFit()
+        nameLabel.userInfo = self
+    }
 }
+
+
