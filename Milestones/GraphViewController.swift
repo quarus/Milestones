@@ -19,7 +19,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     
     var verticalRulerView :VerticalRulerview?
     var horizontalRulerView :HorizontalRulerView?
-    var timelinesAndGraphicsView :TimelinesAndCalendarWeeksView?
+    var timelinesAndGraphicsView :TimeGraph?
 
     private var MOCHandler: CoreDataNotificationManager?
 
@@ -60,11 +60,13 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         let heightOfHorizontalRulerView :CGFloat = 75
         
-        timelinesAndGraphicsView = TimelinesAndCalendarWeeksView(withLength: length,
+        timelinesAndGraphicsView = TimeGraph(withLength: length,
                                                                  horizontalCalculator: horizCalc,
                                                                  verticalCalculator: vertCalc)
         timelinesAndGraphicsView?.milestoneClickedHandler = userDidSelectMilestone
         timelinesAndGraphicsView?.dateMarkedHandler = userDidMarkDate
+        timelinesAndGraphicsView?.delegate = self
+        timelinesAndGraphicsView?.dataSource = self
         
         scrollView.documentView?.addSubview(timelinesAndGraphicsView!)
         timelinesAndGraphicsView?.frame.origin.y = heightOfHorizontalRulerView
@@ -131,10 +133,12 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             
         horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
         verticalRulerView?.updateFor(timelines: timelines)
-        
+        /*
         timelinesAndGraphicsView?.updateForTimelines(timelines: timelines,
                                                       firstVisibleDate: pageModelFirstVisibleDate)
         highlightCurrentlySelectedMilestone()
+        */
+        timelinesAndGraphicsView?.reloadData()
     }
     
     private func highlightCurrentlySelectedMilestone() {
@@ -255,5 +259,33 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         let currentCenterDate = model.clipViewCenterDate
         xCalculator.lengthOfDay =  CGFloat(level.rawValue)
         centerAroundDate(currentCenterDate)
+    }
+}
+
+extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
+
+    //TimeGraphDataSource
+    func timeGraph(graph: TimeGraph, milestoneAtIndex index: Int, inTimelineAtIndex tmIndex: Int) -> MilestoneProtocol {
+        guard let timelineArray = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return MilestoneInfo()}
+        if let milestone = timelineArray[tmIndex].milestones?.allObjects[index] as? Milestone {
+            return MilestoneInfo(milestone)
+        }        
+        return MilestoneInfo()
+    }
+    
+    //TimeGraphDelegate
+    func timeGraphNumberOfTimelines(graph: TimeGraph) -> Int {
+        let count = dataModel()?.selectedGroup?.timelines?.array.count ?? 0
+        return count
+
+    }
+    
+    func timeGraph(graph: TimeGraph, numberOfMilestonesForTimelineAt index: Int) -> Int {
+        guard let timelineArray = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return 0}
+        return timelineArray[index].milestones?.count ?? 0
+    }
+    
+    func timeGraphStartDate(graph: TimeGraph) -> Date {
+        return pageModel?.startDate ?? Date()
     }
 }

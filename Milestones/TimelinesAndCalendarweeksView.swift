@@ -12,8 +12,17 @@
 import Foundation
 import Cocoa
 
+protocol TimeGraphDelegate {
+    func timeGraphNumberOfTimelines(graph :TimeGraph) -> Int
+    func timeGraph(graph: TimeGraph, numberOfMilestonesForTimelineAt index: Int) -> Int
+    func timeGraphStartDate(graph: TimeGraph) -> Date
+}
 
-class TimelinesAndCalendarWeeksView: GraphicView {
+protocol TimeGraphDataSource {
+    func timeGraph(graph: TimeGraph, milestoneAtIndex index: Int, inTimelineAtIndex msIndex: Int) -> MilestoneProtocol
+}
+
+class TimeGraph: GraphicView {
     
     var milestoneClickedHandler: ((_ selectedMilestone: Milestone) -> ())?
     var dateMarkedHandler: ((_ markedDate: Date, _ markedTimeline: Timeline) -> ())?
@@ -38,6 +47,8 @@ class TimelinesAndCalendarWeeksView: GraphicView {
     var markedDate: Date?
     var indexOfMarkedTimeline: Int?
     
+    var delegate: TimeGraphDelegate?
+    var dataSource: TimeGraphDataSource?
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
@@ -211,14 +222,14 @@ class TimelinesAndCalendarWeeksView: GraphicView {
 
         absoluteX = timelineHorizontalCalculator?.xPositionFor(date: date) ?? 0
         updateFrameFor(numberOfTimelines: timelines.count)
-        updateContent()
+//        updateContent()
     }
  
     func updateForMarkedDate(date: Date, timelineAtIndex idx: Int) {
         markedDate = date
         indexOfMarkedTimeline = idx
 
-        updateContent()
+  //      updateContent()
     }
     
     private func updateFrameFor(numberOfTimelines :Int) {
@@ -240,7 +251,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         self.addTrackingArea(currentTrackingArea!)
 
     }
-    
+/*
     private func updateContent() {
 
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
@@ -278,6 +289,46 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         
         setNeedsDisplay(bounds)
     }
+*/
+    func reloadData() {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
+        guard let yPositionCalculator = timelineVerticalCalculator else {return}
+        
+        startDate = delegate?.timeGraphStartDate(graph: self) ?? Date()
+
+        let numberOfTimelines = delegate?.timeGraphNumberOfTimelines(graph: self) ?? 0
+        updateFrameFor(numberOfTimelines: numberOfTimelines)
+        
+        
+        graphics.removeAll()
+        milestoneGraphicControllers.removeAll()
+        
+        for timelineIdx in 0..<numberOfTimelines {
+            let numberOfMilestones = delegate?.timeGraph(graph: self,
+                                                         numberOfMilestonesForTimelineAt: timelineIdx) ?? 0
+            for milestoneIdx in 0..<numberOfMilestones {
+                if let info = dataSource?.timeGraph(graph: self,
+                                                    milestoneAtIndex: milestoneIdx,
+                                                    inTimelineAtIndex: timelineIdx) {
+                    //initiate a MilestoneGraphic and append it to all graphics
+                    let milestoneGraphicController = MilestoneGraphicController(info)
+                    let relativeX =  relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: info.date))
+                    milestoneGraphicController.position.x = relativeX
+                    milestoneGraphicController.position.y = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
+                    graphics.append(contentsOf: milestoneGraphicController.graphics)
+                }
+            }
+        }
+        
+        resetDescriptionLabel()
+        //        resetDateIndicator()
+        
+        graphics.append(contentsOf: graphicsForBackground())
+        graphics.append(contentsOf: graphicsForCurrentlyMarkedDate())
+        graphics.append(contentsOf: graphicsForTodayIndicator())
+        
+        setNeedsDisplay(bounds)
+    }
     
     //MARK: Drawing
     private func graphicsForCurrentlyMarkedDate() -> [Graphic] {
@@ -305,7 +356,7 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
         
         let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
-        let relativeXPos = xPositionCalculator.centerXPositionFor(date: Date()) - xPositionCalculator.xPositionFor(date: startDate)
+        let relativeXPos = relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: Date()))
         Graphic.translate(graphics: todayIndicatorGraphics, byX: relativeXPos, byY: 0)
         
         return todayIndicatorGraphics
@@ -343,6 +394,16 @@ class TimelinesAndCalendarWeeksView: GraphicView {
         lastMouseLocation = CGPoint(x: 0, y: 0)
         graphics.insert(dateIndictorLineGraphic!, at: 0)
         startObservingGraphic(dateIndictorLineGraphic!)
+    }
+    
+    
+    //MARK: Helper
+    
+    private func relativePositionForAbsolute(xPosition :CGFloat) -> CGFloat{
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return 0.0}
+        
+        let absoluteStartX = xPositionCalculator.xPositionFor(date: startDate)
+        return xPosition - absoluteStartX
     }
 }
 
