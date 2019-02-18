@@ -16,8 +16,8 @@ class OverlapCorrector {
     var milestoneLabelGraphics :[[Graphic]] = [[Graphic]]()
     var milestoneIconGraphics :[[Graphic]] = [[Graphic]]()
     var lineGraphics :[Graphic] = [Graphic]()
-    var indicesOfTranslatedGraphics = [Int]()
-
+    private var indicesOfTranslatedGraphics = [Int]()
+    
     func correctForOverlap(milestoneLabelGraphics :[[Graphic]], milestoneIconGraphics :[[Graphic]]) {
         self.milestoneLabelGraphics = milestoneLabelGraphics
         self.milestoneIconGraphics = milestoneIconGraphics
@@ -136,4 +136,20 @@ class OverlapCorrector {
         return graphics
     }
 
+}
+
+extension OverlapCorrector {
+    
+    func correctForOverlapFor(milestoneGraphicControllers: [MilestoneGraphicController]) {
+        
+        var labelGraphics = [[Graphic]]()
+        var iconGraphics = [[Graphic]]()
+        
+        for aController in milestoneGraphicControllers {
+            labelGraphics.append([aController.nameLabel])
+            iconGraphics.append([aController.iconGraphic])
+        }
+        
+        correctForOverlap(milestoneLabelGraphics: labelGraphics, milestoneIconGraphics: iconGraphics)
+    }
 }

@@ -286,6 +286,10 @@ class TimeGraph: GraphicView {
                     msDict[milestoneGraphicController] = IndexPath(indexes: [timelineIdx, milestoneIdx])
                     msgArray.append(milestoneGraphicController)
                 }
+                let overlapCorrector = OverlapCorrector()
+                overlapCorrector.correctForOverlapFor(milestoneGraphicControllers: msgArray)
+                graphics.insert(contentsOf: overlapCorrector.lineGraphics, at: 0)
+
                 msArray.append(msgArray)
             }
         }
@@ -368,7 +372,6 @@ class TimeGraph: GraphicView {
     
     
     //MARK: Helper
-    
     private func relativePositionForAbsolute(xPosition :CGFloat) -> CGFloat{
         guard let xPositionCalculator = timelineHorizontalCalculator else {return 0.0}
         
