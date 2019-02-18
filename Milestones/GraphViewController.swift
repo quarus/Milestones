@@ -63,7 +63,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView = TimeGraph(withLength: length,
                                                                  horizontalCalculator: horizCalc,
                                                                  verticalCalculator: vertCalc)
-        timelinesAndGraphicsView?.milestoneClickedHandler = userDidSelectMilestone
+
         timelinesAndGraphicsView?.dateMarkedHandler = userDidMarkDate
         timelinesAndGraphicsView?.delegate = self
         timelinesAndGraphicsView?.dataSource = self
@@ -161,11 +161,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     //MARK: Event Handling
-    func userDidSelectMilestone(milestone: Milestone) {
-        guard let stateModel = dataModel() else {return}
-        stateModel.selectedMilestone = milestone
-    }
-    
     func userDidMarkDate(date: Date, timeline: Timeline) {
         dataModel()?.markedDate = date
         dataModel()?.markedTimeline = timeline
@@ -199,7 +194,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return}
         
         let idx = timelines.firstIndex(of: markedTimeline) ?? 0
-        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
+//        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
     }
     
     func didChangeMarkedDate(_ markedDate: Date?) {
@@ -208,7 +203,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return}
 
         let idx = timelines.firstIndex(of: markedTimeline) ?? 0
-        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
+//        timelinesAndGraphicsView?.updateForMarkedDate(date: markedDate, timelineAtIndex: idx)
         horizontalRulerView?.displayMarkerAtDate(date: markedDate)
     }
     
@@ -272,6 +267,13 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
         }        
         return MilestoneInfo()
     }
+    
+    func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
+//        guard let stateModel = dataModel() else {return}
+//        stateModel.selectedMilestone = milestone
+
+    }
+
     
     //TimeGraphDelegate
     func timeGraphNumberOfTimelines(graph: TimeGraph) -> Int {

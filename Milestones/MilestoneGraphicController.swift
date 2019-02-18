@@ -12,11 +12,10 @@
 import Foundation
 import Cocoa
 
-class MilestoneGraphicController: GraphicController {
+class MilestoneGraphicController: NSObject, GraphicController {
 
     var userInfo: AnyObject?
         
-    weak var milestone: Milestone?
     var color: NSColor = NSColor.red
     var iconHeight: CGFloat = 20
 
@@ -49,11 +48,9 @@ class MilestoneGraphicController: GraphicController {
     
     init(_ milestone: Milestone?) {
         
-        self.milestone = milestone
-        
-        let fillColor = self.milestone?.timeline?.color ?? NSColor.red
+        super.init()
+        let fillColor = milestone?.timeline?.color ?? NSColor.red
         setupIconFor(color: fillColor)
-        iconGraphic.userInfo = self
 
         iconGraphic.bounds = NSMakeRect(0, 0, iconHeight, iconHeight)
         if let date = milestone?.date {
@@ -66,13 +63,15 @@ class MilestoneGraphicController: GraphicController {
     }
     
     init(_ milestone: MilestoneProtocol) {
-        
+        super.init()
+
         setupIconFor(color: milestone.color)
         setupDateLabelFor(date: milestone.date)
         setupNameLabelFor(name: milestone.name)
     }
     
     private func setupIconFor(color: NSColor) {
+        iconGraphic.userInfo = self
         iconGraphic.fillColor = color
         iconGraphic.bounds = NSMakeRect(0, 0, iconHeight, iconHeight)
     }
