@@ -18,6 +18,17 @@ class MilestoneGraphicController: NSObject, GraphicController {
         
     var color: NSColor = NSColor.red
     var iconHeight: CGFloat = 20
+    var isSelected: Bool = false {
+        didSet {
+            iconGraphic.isSelected = isSelected
+        }
+    }
+    
+    var bounds: CGRect {
+        get {
+            return iconGraphic.bounds
+        }
+    }
 
     private(set) var iconGraphic: IconGraphic = IconGraphic()
     private(set) var dateLabel: LabelGraphic = LabelGraphic()

@@ -50,6 +50,8 @@ class TimeGraph: GraphicView {
     var markedDate: Date?
     var indexOfMarkedTimeline: Int?
     
+    var markedMilestoneGC: MilestoneGraphicController?
+    
     var delegate: TimeGraphDelegate?
     var dataSource: TimeGraphDataSource?
     
@@ -78,25 +80,6 @@ class TimeGraph: GraphicView {
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
     }
-    
-    func milestoneGraphicControllerForMilestone(_ milestone: Milestone) -> MilestoneGraphicController? {
-       
-  /*      let filteredArray = milestoneGraphicControllers.filter({
-            if ($0.milestone == milestone) {
-                return true
-            } else {
-                return false
-            }
-        })
-        
-        if (filteredArray.count > 0) {
-            return filteredArray[0]
-        }
-        */
-        return nil
-    }
-    
-    
     
     //MARK: KVO
     func startObservingGraphic(_ aGraphic :Graphic) {
@@ -229,9 +212,25 @@ class TimeGraph: GraphicView {
   //      updateContent()
     }
  */
-    func markMilestoneAt(indexPath: IndexPath) {
-        if indexPath.count == 2 {
-            let controller = msArray[indexPath[0]][indexPath[1]]
+    func selectMilestoneAt(indexPath: IndexPath? ) {
+        
+        func deselectCurrentMilestone() {
+            if markedMilestoneGC != nil {
+                markedMilestoneGC?.isSelected = false
+                setNeedsDisplay(markedMilestoneGC!.bounds)
+            }
+        }
+        
+        guard let path = indexPath else {
+            deselectCurrentMilestone()
+            return
+        }
+        
+        if path.count == 2 {
+            deselectCurrentMilestone()
+            markedMilestoneGC = msArray[path[0]][path[1]]
+            markedMilestoneGC!.isSelected = true
+            setNeedsDisplay(markedMilestoneGC!.bounds)
         }
     }
     
@@ -276,6 +275,7 @@ class TimeGraph: GraphicView {
                 if let info = dataSource?.timeGraph(graph: self,
                                                     milestoneAtIndex: milestoneIdx,
                                                     inTimelineAtIndex: timelineIdx) {
+                   
                     //initiate a MilestoneGraphic and append it to all graphics
                     let milestoneGraphicController = MilestoneGraphicController(info)
                     let relativeX =  relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: info.date))
@@ -289,9 +289,8 @@ class TimeGraph: GraphicView {
                 let overlapCorrector = OverlapCorrector()
                 overlapCorrector.correctForOverlapFor(milestoneGraphicControllers: msgArray)
                 graphics.insert(contentsOf: overlapCorrector.lineGraphics, at: 0)
-
-                msArray.append(msgArray)
             }
+            msArray.append(msgArray)
         }
         
         resetDescriptionLabel()

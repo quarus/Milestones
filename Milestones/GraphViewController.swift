@@ -141,7 +141,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView?.reloadData()
     }
     
-    private func highlightCurrentlySelectedMilestone() {
+   /* private func highlightCurrentlySelectedMilestone() {
         
         guard let selectedMilestone = dataModel()?.selectedMilestone else {return}
         
@@ -158,7 +158,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         }
         
         timelinesAndGraphicsView?.display()
-    }
+    }*/
     
     //MARK: Event Handling
     func userDidMarkDate(date: Date, timeline: Timeline) {
@@ -184,7 +184,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             if !model.clipViewContains(date: date) {
                 centerAroundDate(date)
             }
-            highlightCurrentlySelectedMilestone()
+      //      highlightCurrentlySelectedMilestone()
         }
     }
     
@@ -271,7 +271,7 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
     func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
 //        guard let stateModel = dataModel() else {return}
 //        stateModel.selectedMilestone = milestone
-
+        timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
     }
 
     
