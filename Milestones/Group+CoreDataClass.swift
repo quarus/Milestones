@@ -54,6 +54,16 @@ class Group :NSManagedObject {
         return nil
     }
     
+    func indexPathFor(milestone: Milestone) -> IndexPath? {
+        guard let timeline = milestone.timeline else {return nil}
+        let orderedMilestones = timeline.milestonesOrderedByDate()
+
+        guard let timelineIndex = timelines?.index(of: timeline) else {return nil}
+        guard let milestoneIndex = orderedMilestones?.index(of: milestone) else {return nil}
+        
+        return IndexPath(indexes: [timelineIndex, milestoneIndex])
+    }
+    
     override func awakeFromInsert() {
         name = "New Group"
         if let moc = self.managedObjectContext{

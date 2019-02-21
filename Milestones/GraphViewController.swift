@@ -22,11 +22,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     var timelinesAndGraphicsView :TimeGraph?
 
     private var MOCHandler: CoreDataNotificationManager?
-
-    private weak var currentlySelectedMilestoneGraphicController: MilestoneGraphicController?
     
     let length :CGFloat = 8000.0
-    var currentLengthOfDay: CGFloat = 40
 
     var pageModel: PageModel? {
         didSet {
@@ -141,25 +138,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         timelinesAndGraphicsView?.reloadData()
     }
     
-   /* private func highlightCurrentlySelectedMilestone() {
-        
-        guard let selectedMilestone = dataModel()?.selectedMilestone else {return}
-        
-        if (currentlySelectedMilestoneGraphicController != nil) {
-            currentlySelectedMilestoneGraphicController!.iconGraphic.isSelected = false
-            timelinesAndGraphicsView?.setNeedsDisplay(currentlySelectedMilestoneGraphicController!.iconGraphic.bounds)
-            
-        }
-        
-        currentlySelectedMilestoneGraphicController = timelinesAndGraphicsView?.milestoneGraphicControllerForMilestone(selectedMilestone)
-        if let mgc = currentlySelectedMilestoneGraphicController{
-            mgc.iconGraphic.isSelected = true
-            timelinesAndGraphicsView?.setNeedsDisplay(mgc.iconGraphic.bounds)
-        }
-        
-        timelinesAndGraphicsView?.display()
-    }*/
-    
     //MARK: Event Handling
     func userDidMarkDate(date: Date, timeline: Timeline) {
         dataModel()?.markedDate = date
@@ -184,7 +162,12 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             if !model.clipViewContains(date: date) {
                 centerAroundDate(date)
             }
-      //      highlightCurrentlySelectedMilestone()
+
+            if milestone != nil {
+                if let path = dataModel()?.selectedGroup?.indexPathFor(milestone: milestone!) {
+                    timelinesAndGraphicsView?.selectMilestoneAt(indexPath: path)
+                }
+            }
         }
     }
     
