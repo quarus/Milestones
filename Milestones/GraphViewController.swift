@@ -261,25 +261,25 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
 
     //TimeGraphDataSource
     func timeGraph(graph: TimeGraph, milestoneAtIndex index: Int, inTimelineAtIndex tmIndex: Int) -> MilestoneProtocol {
-        guard let timelineArray = dataModel()?.selectedGroup?.timelines?.array as? [Timeline] else {return MilestoneInfo()}
-        if let milestoneArray = timelineArray[tmIndex].milestonesOrderedByDate() {
-            return MilestoneInfo(milestoneArray[index])
-        }        
+        guard let selectedGroup = dataModel()?.selectedGroup else {return MilestoneInfo()}
+        if let milestone = selectedGroup.milestoneAt(indexPath: IndexPath(indexes: [tmIndex, index])) {
+            return MilestoneInfo(milestone)
+        }
         return MilestoneInfo()
     }
     
     func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
-//        guard let stateModel = dataModel() else {return}
-//        stateModel.selectedMilestone = milestone
-        timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
+        guard let selectedGroup = dataModel()?.selectedGroup else {return}
+        if let milestone = selectedGroup.milestoneAt(indexPath: indexPath) {
+            dataModel()?.selectedMilestone = milestone
+            timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
+        }
     }
-
     
     //TimeGraphDelegate
     func timeGraphNumberOfTimelines(graph: TimeGraph) -> Int {
         let count = dataModel()?.selectedGroup?.timelines?.array.count ?? 0
         return count
-
     }
     
     func timeGraph(graph: TimeGraph, numberOfMilestonesForTimelineAt index: Int) -> Int {

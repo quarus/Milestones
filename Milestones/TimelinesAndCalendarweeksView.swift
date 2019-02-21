@@ -41,8 +41,8 @@ class TimeGraph: GraphicView {
     
     private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
     
-    private var msDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
-    private var msArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
+    private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
+    private var msgcArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
     
     var absoluteX: CGFloat = 0.0
     var timelines: [Timeline] = [Timeline]()
@@ -127,7 +127,7 @@ class TimeGraph: GraphicView {
         if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
             
             guard let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController else {return}
-            guard let indexPath = msDict[milestoneGraphicController] else {return}
+            guard let indexPath = msgcDict[milestoneGraphicController] else {return}
             guard let handler = delegate else {return}
             handler.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
             
@@ -228,7 +228,7 @@ class TimeGraph: GraphicView {
         
         if path.count == 2 {
             deselectCurrentMilestone()
-            markedMilestoneGC = msArray[path[0]][path[1]]
+            markedMilestoneGC = msgcArray[path[0]][path[1]]
             markedMilestoneGC!.isSelected = true
             setNeedsDisplay(markedMilestoneGC!.bounds)
         }
@@ -264,8 +264,8 @@ class TimeGraph: GraphicView {
         updateFrameFor(numberOfTimelines: numberOfTimelines)
         
         graphics.removeAll()
-        msDict = [MilestoneGraphicController:IndexPath]()
-        msArray = [[MilestoneGraphicController]]()
+        msgcDict = [MilestoneGraphicController:IndexPath]()
+        msgcArray = [[MilestoneGraphicController]]()
 
         for timelineIdx in 0..<numberOfTimelines {
             let numberOfMilestones = delegate?.timeGraph(graph: self,
@@ -283,14 +283,14 @@ class TimeGraph: GraphicView {
                     milestoneGraphicController.position.y = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
                     graphics.append(contentsOf: milestoneGraphicController.graphics)
                     
-                    msDict[milestoneGraphicController] = IndexPath(indexes: [timelineIdx, milestoneIdx])
+                    msgcDict[milestoneGraphicController] = IndexPath(indexes: [timelineIdx, milestoneIdx])
                     msgArray.append(milestoneGraphicController)
                 }
                 let overlapCorrector = OverlapCorrector()
                 overlapCorrector.correctForOverlapFor(milestoneGraphicControllers: msgArray)
                 graphics.insert(contentsOf: overlapCorrector.lineGraphics, at: 0)
             }
-            msArray.append(msgArray)
+            msgcArray.append(msgArray)
         }
         
         resetDescriptionLabel()
