@@ -112,6 +112,7 @@ class GraphicsFactory {
                 iconGraphic.bounds = iconGraphic.bounds.centeredHorizontally()
                 iconGraphic.strokeColor = NSColor.gray
                 iconGraphic.isDrawingStroke = true
+                iconGraphic.isDrawingFill = false
                 graphics.append(iconGraphic)
                 
                 // ... then its line

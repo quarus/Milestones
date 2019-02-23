@@ -18,7 +18,7 @@ protocol MilestoneProtocol {
     var type: IconType {get set}
     var color: NSColor {get set}
     var name: String {get set}
-    var info: String? {get set}
+    var info: String {get set}
     var date: Date {get set}
 
 }
@@ -35,12 +35,13 @@ struct MilestoneInfo: MilestoneProtocol {
     var type: IconType
     var color: NSColor
     var name: String
-    var info: String?
+    var info: String
     var date: Date
     
     init () {
         type = .Diamond
         color = .red
+        info = ""
         name = ""
         date = Date()
     }
@@ -49,7 +50,7 @@ struct MilestoneInfo: MilestoneProtocol {
         type = IconType(rawValue: milestone.type.intValue) ?? .Diamond
         color = milestone.timeline?.color ?? .red
         name = milestone.name ?? ""
-        info = milestone.info 
+        info = milestone.info ?? ""
         date = milestone.date ?? Date(timeIntervalSince1970: 0)
     }
 }

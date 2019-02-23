@@ -41,13 +41,10 @@ class TimeGraph: GraphicView {
     private var markedDateGraphicController: DateIndicatorController?
     private var showInfoLabel :Bool = false
     
-    private var milestoneGraphicControllers: [MilestoneGraphicController] = [MilestoneGraphicController]()
-    
     private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
     private var msgcArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
     
     var absoluteX: CGFloat = 0.0
-    var timelines: [Timeline] = [Timeline]()
     var startDate: Date = Date()
     var markedDate: Date?
     var indexOfMarkedTimeline: Int?
@@ -135,7 +132,7 @@ class TimeGraph: GraphicView {
             
             
         } else {
-            guard let xCalculator = timelineHorizontalCalculator else {return}
+/*            guard let xCalculator = timelineHorizontalCalculator else {return}
             if let handler = dateMarkedHandler {
                 let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
                 if indexOfTimeline < timelines.count {
@@ -144,34 +141,33 @@ class TimeGraph: GraphicView {
                     handler(date, timeline)
                 }
             }
+ */
         }
     }
     
     override func mouseMoved(with event: NSEvent) {
         
         let mouselocation = self.convert(event.locationInWindow, from: nil)
-        
+        var newShowInfoLabel = false
+
         func updateMilestoneLabel() {
-            
-            var newShowInfoLabel = false
             
             if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
                 
                 if let milestoneGC = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-                
-                /*    if let milestoneInfo = milestoneGC.milestone?.info {
-                        if milestoneInfo.count > 0 {
-                            
+                    
+                    if let milestone = dataSource?.timeGraph(graph: self,
+                                                                 milstoneAt: msgcDict[milestoneGC]!) {
+                        if milestone.info.count > 0 {
                             newShowInfoLabel = true
                             
                             if (currentlyDisplayedInfoLabel != nil) {
-                                
                                 currentlyDisplayedInfoLabel!.bounds = NSRect(x: mouselocation.x + 5, y: mouselocation.y + 5 , width: 200, height: 0)
-                                currentlyDisplayedInfoLabel!.text = milestoneInfo
+                                currentlyDisplayedInfoLabel!.text = milestone.info 
                                 currentlyDisplayedInfoLabel!.sizeToFit()
                             }
                         }
-                    }*/
+                    }
                 } else {
                     newShowInfoLabel = false
                 }
@@ -312,7 +308,7 @@ class TimeGraph: GraphicView {
         
         setNeedsDisplay(bounds)
     }
-    
+
     //MARK: Drawing
     private func graphicsForCurrentlyMarkedDate() -> [Graphic] {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
