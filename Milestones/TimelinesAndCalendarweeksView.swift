@@ -21,6 +21,8 @@ protocol TimeGraphDelegate {
 
 protocol TimeGraphDataSource {
     func timeGraph(graph: TimeGraph, milstoneAt indexPath: IndexPath) ->MilestoneProtocol
+    func timeGraph(graph: TimeGraph, adjustmentsForMilestoneAt indexPath: IndexPath) -> [AdjustmentProtocol]
+    
 }
 
 class TimeGraph: GraphicView {
@@ -274,6 +276,7 @@ class TimeGraph: GraphicView {
             for milestoneIdx in 0..<numberOfMilestones {
                 if let info = dataSource?.timeGraph(graph: self, milstoneAt: IndexPath(indexes:[timelineIdx, milestoneIdx])) {
                    
+                    let currentIndexPath = IndexPath(indexes: [timelineIdx, milestoneIdx])
                     //initiate a MilestoneGraphic and append it to all graphics
                     let milestoneGraphicController = MilestoneGraphicController(info)
                     let relativeX =  relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: info.date))
@@ -281,8 +284,17 @@ class TimeGraph: GraphicView {
                     milestoneGraphicController.position.y = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
                     graphics.append(contentsOf: milestoneGraphicController.graphics)
                     
-                    msgcDict[milestoneGraphicController] = IndexPath(indexes: [timelineIdx, milestoneIdx])
+                    msgcDict[milestoneGraphicController] = currentIndexPath
                     msgArray.append(milestoneGraphicController)
+                    
+                    //get all adjustment graphic
+                    if let adjustments = dataSource?.timeGraph(graph: self,
+                                                               adjustmentsForMilestoneAt: currentIndexPath) {
+                        let adjustmentGraphics = graphicsFor(adjustments: adjustments,
+                                                          of: info)
+                        
+                        graphics.append(contentsOf: adjustmentGraphics)
+                    }
                 }
                 let overlapCorrector = OverlapCorrector()
                 overlapCorrector.correctForOverlapFor(milestoneGraphicControllers: msgArray)
@@ -358,7 +370,18 @@ class TimeGraph: GraphicView {
         return cwLineGraphics
     }
     
-    func resetDescriptionLabel() {
+    private func graphicsFor(adjustments :[AdjustmentProtocol],
+                             of milestone :MilestoneProtocol) -> [Graphic] {
+        guard let xCalculator = timelineHorizontalCalculator else {return [Graphic]()}
+        
+        let graphics = GraphicsFactory.sharedInstance.adjustmentGraphicsFor(milestone: milestone,
+                                                                            adjustments: adjustments,
+                                                                            forStartDate: startDate,
+                                                                            usingCalculator: xCalculator)
+        return graphics
+    }
+    
+    private func resetDescriptionLabel() {
     
         if (currentlyDisplayedInfoLabel != nil) {
             stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
@@ -371,7 +394,7 @@ class TimeGraph: GraphicView {
         startObservingGraphic(currentlyDisplayedInfoLabel!)
     }
     
-    func resetDateIndicator() {
+    private func resetDateIndicator() {
         
         if (dateIndictorLineGraphic != nil) {
             stopObservingKVOForGraphic(dateIndictorLineGraphic!)

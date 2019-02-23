@@ -23,6 +23,13 @@ protocol MilestoneProtocol {
 
 }
 
+protocol AdjustmentProtocol {
+    var creationDate: Date? {get set}
+    var date: Date? {get set}
+    var name: String? {get set}
+    var reason: String? {get set}
+}
+
 struct MilestoneInfo: MilestoneProtocol {
     
     var type: IconType
@@ -44,5 +51,20 @@ struct MilestoneInfo: MilestoneProtocol {
         name = milestone.name ?? ""
         info = milestone.info 
         date = milestone.date ?? Date(timeIntervalSince1970: 0)
+    }
+}
+
+struct AdjustmentInfo: AdjustmentProtocol {
+    
+    var creationDate: Date?
+    var date: Date?
+    var name: String?
+    var reason: String?
+    
+    init(_ adjustment: Adjustment) {
+        creationDate = adjustment.creationDate
+        date = adjustment.date
+        name = adjustment.name
+        reason = adjustment.reason
     }
 }

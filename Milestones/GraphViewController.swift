@@ -241,6 +241,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 }
 
 extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
+    
 
     //TimeGraphDataSource
     func timeGraph(graph: TimeGraph, milstoneAt indexPath: IndexPath) -> MilestoneProtocol {
@@ -251,7 +252,23 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
         return MilestoneInfo()
     }
     
-  
+    func timeGraph(graph: TimeGraph, adjustmentsForMilestoneAt indexPath: IndexPath) -> [AdjustmentProtocol] {
+        guard let selectedGroup = dataModel()?.selectedGroup else {return [AdjustmentProtocol]()}
+        guard let adjustments = selectedGroup.milestoneAt(indexPath: indexPath)?.adjustments?.array as? [Adjustment] else {return [AdjustmentProtocol]()}
+        
+        var returnAdjustments = [AdjustmentProtocol]()
+        
+        if let ms = dataModel()?.selectedGroup?.milestoneAt(indexPath: indexPath) {
+            if (ms.showAdjustments?.boolValue ?? false) {
+                for anAdjustment in adjustments {
+                    let newAdjustment = AdjustmentInfo(anAdjustment)
+                    returnAdjustments.append(newAdjustment)
+                }
+            }
+        }
+        return returnAdjustments
+    }
+    
     //TimeGraphDelegate
     func timeGraphNumberOfTimelines(graph: TimeGraph) -> Int {
         let count = dataModel()?.selectedGroup?.timelines?.array.count ?? 0
@@ -274,5 +291,4 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
             timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
         }
     }
-    
 }
