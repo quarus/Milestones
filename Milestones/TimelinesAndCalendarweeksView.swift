@@ -20,7 +20,7 @@ protocol TimeGraphDelegate {
 }
 
 protocol TimeGraphDataSource {
-    func timeGraph(graph: TimeGraph, milestoneAtIndex index: Int, inTimelineAtIndex msIndex: Int) -> MilestoneProtocol
+    func timeGraph(graph: TimeGraph, milstoneAt indexPath: IndexPath) ->MilestoneProtocol
 }
 
 class TimeGraph: GraphicView {
@@ -272,9 +272,7 @@ class TimeGraph: GraphicView {
                                                          numberOfMilestonesForTimelineAt: timelineIdx) ?? 0
             var msgArray = [MilestoneGraphicController]()
             for milestoneIdx in 0..<numberOfMilestones {
-                if let info = dataSource?.timeGraph(graph: self,
-                                                    milestoneAtIndex: milestoneIdx,
-                                                    inTimelineAtIndex: timelineIdx) {
+                if let info = dataSource?.timeGraph(graph: self, milstoneAt: IndexPath(indexes:[timelineIdx, milestoneIdx])) {
                    
                     //initiate a MilestoneGraphic and append it to all graphics
                     let milestoneGraphicController = MilestoneGraphicController(info)

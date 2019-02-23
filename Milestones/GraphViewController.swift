@@ -243,22 +243,15 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
 
     //TimeGraphDataSource
-    func timeGraph(graph: TimeGraph, milestoneAtIndex index: Int, inTimelineAtIndex tmIndex: Int) -> MilestoneProtocol {
+    func timeGraph(graph: TimeGraph, milstoneAt indexPath: IndexPath) -> MilestoneProtocol {
         guard let selectedGroup = dataModel()?.selectedGroup else {return MilestoneInfo()}
-        if let milestone = selectedGroup.milestoneAt(indexPath: IndexPath(indexes: [tmIndex, index])) {
+        if let milestone = selectedGroup.milestoneAt(indexPath: indexPath) {
             return MilestoneInfo(milestone)
         }
         return MilestoneInfo()
     }
     
-    func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
-        guard let selectedGroup = dataModel()?.selectedGroup else {return}
-        if let milestone = selectedGroup.milestoneAt(indexPath: indexPath) {
-            dataModel()?.selectedMilestone = milestone
-            timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
-        }
-    }
-    
+  
     //TimeGraphDelegate
     func timeGraphNumberOfTimelines(graph: TimeGraph) -> Int {
         let count = dataModel()?.selectedGroup?.timelines?.array.count ?? 0
@@ -273,4 +266,13 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
     func timeGraphStartDate(graph: TimeGraph) -> Date {
         return pageModel?.startDate ?? Date()
     }
+    
+    func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
+        guard let selectedGroup = dataModel()?.selectedGroup else {return}
+        if let milestone = selectedGroup.milestoneAt(indexPath: indexPath) {
+            dataModel()?.selectedMilestone = milestone
+            timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
+        }
+    }
+    
 }
