@@ -17,17 +17,15 @@ protocol TimeGraphDelegate {
     func timeGraph(graph: TimeGraph, numberOfMilestonesForTimelineAt index: Int) -> Int
     func timeGraphStartDate(graph: TimeGraph) -> Date
     func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath)
+    func timeGraph(graph: TimeGraph, didSelectDate date: Date, inTimelineAtIndex index: Int)
 }
 
 protocol TimeGraphDataSource {
     func timeGraph(graph: TimeGraph, milstoneAt indexPath: IndexPath) ->MilestoneProtocol
     func timeGraph(graph: TimeGraph, adjustmentsForMilestoneAt indexPath: IndexPath) -> [AdjustmentProtocol]
-    
 }
 
 class TimeGraph: GraphicView {
-    
-    var dateMarkedHandler: ((_ markedDate: Date, _ markedTimeline: Timeline) -> ())?
     
     var yOffset :CGFloat = 200;
     
@@ -44,8 +42,13 @@ class TimeGraph: GraphicView {
     private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
     private var msgcArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
     
-    var absoluteX: CGFloat = 0.0
-    var startDate: Date = Date()
+    private(set) var absoluteX: CGFloat = 0.0
+    private(set) var startDate: Date = Date() {
+        didSet {
+            absoluteX = timelineHorizontalCalculator?.xPositionFor(date: startDate) ?? 0.0
+        }
+    }
+    
     var markedDate: Date?
     var indexOfMarkedTimeline: Int?
     
@@ -56,7 +59,7 @@ class TimeGraph: GraphicView {
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
-    //MARK: Life dycle
+    //MARK: Life cycle
     init(withLength length: CGFloat,
          horizontalCalculator :HorizontalCalculator,
          verticalCalculator :VerticalCalculator){
@@ -127,21 +130,16 @@ class TimeGraph: GraphicView {
             
             guard let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController else {return}
             guard let indexPath = msgcDict[milestoneGraphicController] else {return}
-            guard let handler = delegate else {return}
-            handler.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
+            delegate?.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
             
             
         } else {
-/*            guard let xCalculator = timelineHorizontalCalculator else {return}
-            if let handler = dateMarkedHandler {
-                let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
-                if indexOfTimeline < timelines.count {
-                    let timeline = timelines[indexOfTimeline]
-                    let date = xCalculator.dateForXPosition(position: mouselocation.x + absoluteX)
-                    handler(date, timeline)
-                }
-            }
- */
+            guard let xCalculator = timelineHorizontalCalculator else {return}
+            let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
+            let date = xCalculator.dateForXPosition(position: mouselocation.x + absoluteX)
+            delegate?.timeGraph(graph:self,
+                                didSelectDate: date,
+                                inTimelineAtIndex: indexOfTimeline)
         }
     }
     
@@ -202,14 +200,13 @@ class TimeGraph: GraphicView {
         
         lastMouseLocation = mouselocation
     }
- /*
-    func updateForMarkedDate(date: Date, timelineAtIndex idx: Int) {
+ 
+    func setMarkedDate(date: Date, andTimelineAtIndex idx: Int) {
         markedDate = date
         indexOfMarkedTimeline = idx
-
-  //      updateContent()
     }
- */
+
+ 
     func selectMilestoneAt(indexPath: IndexPath? ) {
         
         func deselectCurrentMilestone() {
@@ -300,7 +297,7 @@ class TimeGraph: GraphicView {
         }
         
         resetDescriptionLabel()
-        //        resetDateIndicator()
+        resetDateIndicator()
         
         graphics.append(contentsOf: graphicsForBackground())
         graphics.append(contentsOf: graphicsForCurrentlyMarkedDate())
