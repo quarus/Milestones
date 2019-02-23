@@ -125,15 +125,10 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     func updateViews() {
         guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
         guard let pageModelFirstVisibleDate = pageModel?.startDate else {return}
-        guard let pageModelLength = pageModel?.length else {return}
             
         horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
         verticalRulerView?.updateFor(timelines: timelines)
-        /*
-        timelinesAndGraphicsView?.updateForTimelines(timelines: timelines,
-                                                      firstVisibleDate: pageModelFirstVisibleDate)
-        highlightCurrentlySelectedMilestone()
-        */
+
         timelinesAndGraphicsView?.reloadData()
     }
     
