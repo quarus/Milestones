@@ -83,16 +83,6 @@ class TimeGraph: GraphicView {
     }
     
     //MARK: Mouse Handling
-    func graphicUnderPoint(_ aPoint :NSPoint) -> Graphic? {
-        
-        for aGraphic in graphics{
-            if (aGraphic.isContentUnderPoint(aPoint)){
-                return aGraphic
-            }
-        }
-        return nil
-    }
-    
     override func mouseDown(with event: NSEvent) {
         
         let mouselocation = self.convert(event.locationInWindow, from: nil)
@@ -124,7 +114,6 @@ class TimeGraph: GraphicView {
                     if let milestone = dataSource?.timeGraph(graph: self,
                                                                  milstoneAt: msgcDict[milestoneGC]!) {
                         if milestone.info.count > 0 {
-                            newShowInfoLabel = true
                             if let label = labelView {
                                 label.text = milestone.info
                                 if label.superview == nil {
@@ -134,15 +123,16 @@ class TimeGraph: GraphicView {
                         }
                     }
                 } else {
-                    labelView?.removeFromSuperview()
                 }
+            } else {
+                labelView?.removeFromSuperview()
             }
             
             labelView?.frame.origin = mouselocation
         }
         
         updateDateMarkerFor(mouseLocation: lastMouseLocation)
-        updateMilestoneLabel()        
+        updateMilestoneLabel()
         lastMouseLocation = mouselocation
     }
  

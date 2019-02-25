@@ -66,4 +66,14 @@ class GraphicView :NSView {
         }
     }
     
+    func graphicUnderPoint(_ aPoint :NSPoint) -> Graphic? {
+        
+        for aGraphic in graphics{
+            if (aGraphic.isContentUnderPoint(aPoint)){
+                return aGraphic
+            }
+        }
+        return nil
+    }
+    
 }
