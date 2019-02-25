@@ -33,8 +33,6 @@ class TimeGraph: GraphicView {
     var timelineVerticalCalculator: VerticalCalculator?
 
     private var currentTrackingArea: NSTrackingArea?
-    private var currentlyDisplayedInfoLabel: LabelGraphic?
-    private var showInfoLabel :Bool = false
     
     private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
     private var msgcArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
@@ -56,6 +54,7 @@ class TimeGraph: GraphicView {
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
+    var labelView: LabelView?
     var dateMarker: DateMarkerView?
     var staticDateMarker: DateMarkerView?
     
@@ -68,6 +67,7 @@ class TimeGraph: GraphicView {
         
         dateMarker = DateMarkerView(withLength: 800)
         staticDateMarker = DateMarkerView(withLength: 800)
+        labelView = LabelView(frame: NSMakeRect(0, 0, 200, 200))
         
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
         
@@ -80,38 +80,6 @@ class TimeGraph: GraphicView {
     }
 
     deinit {
-        if (currentlyDisplayedInfoLabel != nil) {
-            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
-        }
-    }
-    
-    //MARK: KVO
-    func startObservingGraphic(_ aGraphic :Graphic) {
-        let KVOOptions = NSKeyValueObservingOptions([.new, .old])
-        aGraphic.addObserver(self, forKeyPath: "drawingBounds", options: KVOOptions, context: nil)
-    }
-    
-    func stopObservingKVOForGraphic(_ aGraphic :Graphic){
-        aGraphic.removeObserver(self, forKeyPath: "drawingBounds")
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        
-        if object is Graphic {
-            if keyPath == "drawingBounds"{
-                // Redraw the part of the view that the graphic used to occupy, and the part that it now occupies.
-                if let theChange = change as? [NSKeyValueChangeKey: NSValue] {
-                    
-                    let oldValue = theChange[NSKeyValueChangeKey.oldKey]?.rectValue
-                    let newValue = theChange[NSKeyValueChangeKey.newKey]?.rectValue
-                    
-                    guard ((oldValue != nil) && (newValue != nil)) else {return}
-                    
-                    self.setNeedsDisplay(oldValue!)
-                    self.setNeedsDisplay(newValue!)
-                }
-            }
-        }
     }
     
     //MARK: Mouse Handling
@@ -148,51 +116,33 @@ class TimeGraph: GraphicView {
     override func mouseMoved(with event: NSEvent) {
         
         let mouselocation = self.convert(event.locationInWindow, from: nil)
-        var newShowInfoLabel = false
 
         func updateMilestoneLabel() {
             
             if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
-                
                 if let milestoneGC = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-
                     if let milestone = dataSource?.timeGraph(graph: self,
                                                                  milstoneAt: msgcDict[milestoneGC]!) {
                         if milestone.info.count > 0 {
                             newShowInfoLabel = true
-                            
-                            if (currentlyDisplayedInfoLabel != nil) {
-                                currentlyDisplayedInfoLabel!.bounds = NSRect(x: mouselocation.x + 5, y: mouselocation.y + 5 , width: 200, height: 0)
-                                currentlyDisplayedInfoLabel!.text = milestone.info 
-                                currentlyDisplayedInfoLabel!.sizeToFit()
+                            if let label = labelView {
+                                label.text = milestone.info
+                                if label.superview == nil {
+                                    addSubview(label)
+                                }
                             }
                         }
                     }
                 } else {
-                    newShowInfoLabel = false
+                    labelView?.removeFromSuperview()
                 }
             }
             
-            if (showInfoLabel && !newShowInfoLabel) {
-                if let index = graphics.index(of: currentlyDisplayedInfoLabel!) {
-                    graphics.remove(at: index)
-                    setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
-                }
-            }
-            
-            if (!showInfoLabel && newShowInfoLabel) {
-                graphics.append(currentlyDisplayedInfoLabel!)
-                setNeedsDisplay(currentlyDisplayedInfoLabel!.bounds)
-            }
-            
-            showInfoLabel = newShowInfoLabel
- 
+            labelView?.frame.origin = mouselocation
         }
         
         updateDateMarkerFor(mouseLocation: lastMouseLocation)
-
-        updateMilestoneLabel()
-        
+        updateMilestoneLabel()        
         lastMouseLocation = mouselocation
     }
  
@@ -305,8 +255,6 @@ class TimeGraph: GraphicView {
             msgcArray.append(msgArray)
         }
         
-        resetDescriptionLabel()
-        
         graphics.append(contentsOf: graphicsForBackground())
         graphics.append(contentsOf: graphicsForTodayIndicator())
         
@@ -358,19 +306,6 @@ class TimeGraph: GraphicView {
                                                                             forStartDate: startDate,
                                                                             usingCalculator: xCalculator)
         return graphics
-    }
-    
-    private func resetDescriptionLabel() {
-    
-        if (currentlyDisplayedInfoLabel != nil) {
-            stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
-        }
-    
-        currentlyDisplayedInfoLabel = LabelGraphic()
-        currentlyDisplayedInfoLabel?.fillColor = NSColor.yellow
-        currentlyDisplayedInfoLabel?.isDrawingFill = true
-        currentlyDisplayedInfoLabel?.textAlignment = .left
-        startObservingGraphic(currentlyDisplayedInfoLabel!)
     }
     
     private func updateDateMarkerFor(mouseLocation: CGPoint) {
