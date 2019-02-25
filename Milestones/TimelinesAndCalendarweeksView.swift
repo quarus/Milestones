@@ -34,7 +34,6 @@ class TimeGraph: GraphicView {
 
     private var currentTrackingArea: NSTrackingArea?
     private var currentlyDisplayedInfoLabel: LabelGraphic?
-    private var dateIndictorLineGraphic: LineGraphic?
     private var showInfoLabel :Bool = false
     
     private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
@@ -83,10 +82,6 @@ class TimeGraph: GraphicView {
     deinit {
         if (currentlyDisplayedInfoLabel != nil) {
             stopObservingKVOForGraphic(currentlyDisplayedInfoLabel!)
-        }
-        
-        if (dateIndictorLineGraphic != nil){
-            stopObservingKVOForGraphic(dateIndictorLineGraphic!)
         }
     }
     
@@ -192,15 +187,6 @@ class TimeGraph: GraphicView {
             
             showInfoLabel = newShowInfoLabel
  
-        }
-        
-        func updateDateIndicatorLine() {
-            if let lineGraphic = dateIndictorLineGraphic {
-                
-                let deltaX = mouselocation.x - lastMouseLocation.x
-                Graphic.translate(graphics: [lineGraphic], byX: deltaX, byY: 0)
-                
-            }
         }
         
         updateDateMarkerFor(mouseLocation: lastMouseLocation)
@@ -320,7 +306,6 @@ class TimeGraph: GraphicView {
         }
         
         resetDescriptionLabel()
-        resetDateIndicator()
         
         graphics.append(contentsOf: graphicsForBackground())
         graphics.append(contentsOf: graphicsForTodayIndicator())
@@ -387,18 +372,6 @@ class TimeGraph: GraphicView {
         currentlyDisplayedInfoLabel?.textAlignment = .left
         startObservingGraphic(currentlyDisplayedInfoLabel!)
     }
-    
-    private func resetDateIndicator() {
-        
-        if (dateIndictorLineGraphic != nil) {
-            stopObservingKVOForGraphic(dateIndictorLineGraphic!)
-        }
-        dateIndictorLineGraphic = GraphicsFactory.sharedInstance.graphicsForDateIndicatorLine(height: self.bounds.size.height)[0] as? LineGraphic
-        lastMouseLocation = CGPoint(x: 0, y: 0)
-        graphics.insert(dateIndictorLineGraphic!, at: 0)
-        startObservingGraphic(dateIndictorLineGraphic!)
-    }
-    
     
     private func updateDateMarkerFor(mouseLocation: CGPoint) {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
