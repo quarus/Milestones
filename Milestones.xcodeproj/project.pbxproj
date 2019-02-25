@@ -25,6 +25,7 @@
 		AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337B31D3257F700637527 /* LabelGraphic.swift */; };
 		AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */; };
 		AC1D7C5021D0BC30009DBACE /* MilestoneTableCellModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */; };
+		AC1E17442224551200E4372B /* DateMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1E17432224551200E4372B /* DateMarkerView.swift */; };
 		AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CA71FE83581001B25E9 /* DateTests.swift */; };
 		AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */; };
 		AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */; };
@@ -119,6 +120,7 @@
 		AC1337B31D3257F700637527 /* LabelGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewModelTests.swift; sourceTree = "<group>"; };
 		AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableCellModell.swift; sourceTree = "<group>"; };
+		AC1E17432224551200E4372B /* DateMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMarkerView.swift; sourceTree = "<group>"; };
 		AC235CA71FE83581001B25E9 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectGraphic.swift; sourceTree = "<group>"; };
 		AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinesAndCalendarweeksView.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */,
 				ACF15B8C1FC06CA200D9E136 /* ClipView.swift */,
 				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
+				AC1E17432224551200E4372B /* DateMarkerView.swift */,
 			);
 			name = Graphic;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				AC12813D21BD73FC006952D8 /* PageModel.swift in Sources */,
 				AC3A218A1D6A1C7C00C0C682 /* Calendar+Extensions.swift in Sources */,
 				AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */,
+				AC1E17442224551200E4372B /* DateMarkerView.swift in Sources */,
 				AC477CBE1D4385A100FB225C /* Timeline+CoreDataProperties.swift in Sources */,
 				AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */,
 				AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */,

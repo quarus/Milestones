@@ -33,10 +33,8 @@ class TimeGraph: GraphicView {
     var timelineVerticalCalculator: VerticalCalculator?
 
     private var currentTrackingArea: NSTrackingArea?
-    private weak var currentlySelectedMilestone: Milestone?
     private var currentlyDisplayedInfoLabel: LabelGraphic?
     private var dateIndictorLineGraphic: LineGraphic?
-    private var markedDateGraphicController: DateIndicatorController?
     private var showInfoLabel :Bool = false
     
     private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
@@ -59,13 +57,22 @@ class TimeGraph: GraphicView {
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
+    var dateMarker: DateMarkerView?
+    var staticDateMarker: DateMarkerView?
+    
     //MARK: Life cycle
     init(withLength length: CGFloat,
          horizontalCalculator :HorizontalCalculator,
          verticalCalculator :VerticalCalculator){
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
+        
+        dateMarker = DateMarkerView(withLength: 800)
+        staticDateMarker = DateMarkerView(withLength: 800)
+        
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
+        
+        addSubview(dateMarker!)
     }
     
     
@@ -153,7 +160,7 @@ class TimeGraph: GraphicView {
             if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
                 
                 if let milestoneGC = graphicUnderPointer.userInfo as? MilestoneGraphicController {
-                    
+
                     if let milestone = dataSource?.timeGraph(graph: self,
                                                                  milstoneAt: msgcDict[milestoneGC]!) {
                         if milestone.info.count > 0 {
@@ -196,17 +203,33 @@ class TimeGraph: GraphicView {
             }
         }
         
+        updateDateMarkerFor(mouseLocation: lastMouseLocation)
+
         updateMilestoneLabel()
         
         lastMouseLocation = mouselocation
     }
  
     func setMarkedDate(date: Date, andTimelineAtIndex idx: Int) {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
+        guard let yPositionCalculator = timelineVerticalCalculator else {return}
+
         markedDate = date
         indexOfMarkedTimeline = idx
+        let xPos = xPositionCalculator.xPositionFor(date: date)
+        let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
+        let yPos = yPositionCalculator.yPositionForTimelineAt(index: idx)
+        
+
+        staticDateMarker?.iconYPosition = yPos
+        staticDateMarker?.frame.origin = CGPoint(x: relativeXPos, y: 0)
+        if let markerView = staticDateMarker {
+            if markerView.superview == nil {
+                addSubview(markerView)
+            }
+        }
     }
 
- 
     func selectMilestoneAt(indexPath: IndexPath? ) {
         
         func deselectCurrentMilestone() {
@@ -300,34 +323,12 @@ class TimeGraph: GraphicView {
         resetDateIndicator()
         
         graphics.append(contentsOf: graphicsForBackground())
-        graphics.append(contentsOf: graphicsForCurrentlyMarkedDate())
         graphics.append(contentsOf: graphicsForTodayIndicator())
         
         setNeedsDisplay(bounds)
     }
 
     //MARK: Drawing
-    private func graphicsForCurrentlyMarkedDate() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-        guard let yPositionCalculator = timelineVerticalCalculator else {return [Graphic]()}
-        
-        if let currentlyMarkedDate = markedDate {
-            
-            let absoluteDateX = xPositionCalculator.centerXPositionFor(date: currentlyMarkedDate)
-            if absoluteDateX > absoluteX && absoluteDateX < absoluteX + bounds.size.width {
-                
-                let relativeX = absoluteDateX - absoluteX
-                let markedDateGraphicController = DateIndicatorController(height:bounds.size.height,
-                                                                          xPosition: relativeX)
-                
-                markedDateGraphicController.yPosition = yPositionCalculator.yPositionForTimelineAt(index: indexOfMarkedTimeline ?? 0)
-                
-                return markedDateGraphicController.graphics
-            }
-        }
-        return [Graphic]()
-    }
-    
     private func graphicsForTodayIndicator() -> [Graphic] {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
         
@@ -398,6 +399,21 @@ class TimeGraph: GraphicView {
         startObservingGraphic(dateIndictorLineGraphic!)
     }
     
+    
+    private func updateDateMarkerFor(mouseLocation: CGPoint) {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
+        guard let yPositionCalculator = timelineVerticalCalculator else {return}
+
+        let y = yPositionCalculator.timelineIndexForYPosition(yPosition: lastMouseLocation.y)
+        let x = lastMouseLocation.x
+        
+        let numberOfDays = Int(x/xPositionCalculator.lengthOfDay)
+        let dayX = CGFloat(numberOfDays) * xPositionCalculator.lengthOfDay
+        let pos = dayX + (xPositionCalculator.lengthOfDay/2.0 - (dateMarker?.length ?? 0.0))
+        
+        dateMarker?.iconYPosition = CGFloat(y) * (timelineVerticalCalculator?.heightOfTimeline ?? 0.0)
+        dateMarker?.frame.origin = CGPoint(x: dayX, y: 0)
+    }
     
     //MARK: Helper
     private func relativePositionForAbsolute(xPosition :CGFloat) -> CGFloat{
