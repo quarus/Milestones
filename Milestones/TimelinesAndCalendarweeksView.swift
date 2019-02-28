@@ -137,23 +137,10 @@ class TimeGraph: GraphicView {
     }
  
     func setMarkedDate(date: Date, andTimelineAtIndex idx: Int) {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
-        guard let yPositionCalculator = timelineVerticalCalculator else {return}
-
         markedDate = date
         indexOfMarkedTimeline = idx
-        let xPos = xPositionCalculator.xPositionFor(date: date)
-        let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
-        let yPos = yPositionCalculator.yPositionForTimelineAt(index: idx)
+        checkAndPlaceStaticDateMarker()
         
-
-        staticDateMarker?.iconYPosition = yPos
-        staticDateMarker?.frame.origin = CGPoint(x: relativeXPos, y: 0)
-        if let markerView = staticDateMarker {
-            if markerView.superview == nil {
-                addSubview(markerView)
-            }
-        }
     }
 
     func selectMilestoneAt(indexPath: IndexPath? ) {
@@ -247,8 +234,9 @@ class TimeGraph: GraphicView {
         
         graphics.append(contentsOf: graphicsForBackground())
         graphics.append(contentsOf: graphicsForTodayIndicator())
-        
         setNeedsDisplay(bounds)
+        
+        checkAndPlaceStaticDateMarker()
     }
 
     //MARK: Drawing
@@ -311,6 +299,30 @@ class TimeGraph: GraphicView {
         
         dateMarker?.iconYPosition = CGFloat(y) * (timelineVerticalCalculator?.heightOfTimeline ?? 0.0)
         dateMarker?.frame.origin = CGPoint(x: dayX, y: 0)
+    }
+    
+    private func checkAndPlaceStaticDateMarker() {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
+        guard let yPositionCalculator = timelineVerticalCalculator else {return}
+        guard let markerView = staticDateMarker else {return}
+        guard let md = markedDate else {return}
+        guard let mTimeline = indexOfMarkedTimeline else {return}
+        
+        let xPos = xPositionCalculator.xPositionFor(date: md)
+        let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
+        let yPos = yPositionCalculator.yPositionForTimelineAt(index: mTimeline)
+        
+        if (xPos > absoluteX) && (xPos < absoluteX + bounds.width) {
+            if markerView.superview == nil {
+                addSubview(markerView)
+            }
+            markerView.frame.origin = CGPoint(x: relativeXPos, y: 0)
+            markerView.iconYPosition = yPos
+        } else {
+            if markerView.superview != nil {
+                markerView.removeFromSuperview()
+            }
+        }
     }
     
     //MARK: Helper

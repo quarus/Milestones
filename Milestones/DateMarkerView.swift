@@ -52,12 +52,14 @@ class DateMarkerView: GraphicView {
     
     private func setup() {
         iconGraphic = IconGraphic(type: .Diamond)
-        iconGraphic.fillColor = color
+        iconGraphic.strokeColor = Config.sharedInstance.strokeColor
+        iconGraphic.isDrawingStroke = true
         iconGraphic.isDrawingFill = true
+        iconGraphic.fillColor = .white
         iconGraphic.bounds.size = CGSize(width: width, height: width)
         
         lineGraphic = LineGraphic()
-        lineGraphic.fillColor = .gray
+        lineGraphic.strokeColor = Config.sharedInstance.strokeColor
         lineGraphic.bounds.size = CGSize(width: width, height: length)
         lineGraphic.beginPoint = CGPoint(x: width/2.0, y: 0)
         lineGraphic.endPoint = CGPoint(x: width/2.0, y: length)

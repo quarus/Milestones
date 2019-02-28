@@ -202,8 +202,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     }
     
     func clipViewPassedEdgeTreshold(_ clipView: ClipView) {
-//        pageModel = pageModel?.makePageModelCenteredAroundClipView()
-//        updateViews()
+        pageModel = pageModel?.makePageModelCenteredAroundClipView()
+        updateViews()
     }
 
     private func centerAroundDate(_ date: Date) {
