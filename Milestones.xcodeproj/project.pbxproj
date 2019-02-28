@@ -29,7 +29,7 @@
 		AC1E1746222487FE00E4372B /* LabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1E1745222487FE00E4372B /* LabelView.swift */; };
 		AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CA71FE83581001B25E9 /* DateTests.swift */; };
 		AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */; };
-		AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */; };
+		AC235CAE1FED6E13001B25E9 /* TimeGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */; };
 		AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */; };
 		AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */; };
 		AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */; };
@@ -124,7 +124,7 @@
 		AC1E1745222487FE00E4372B /* LabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelView.swift; sourceTree = "<group>"; };
 		AC235CA71FE83581001B25E9 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectGraphic.swift; sourceTree = "<group>"; };
-		AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinesAndCalendarweeksView.swift; sourceTree = "<group>"; };
+		AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraph.swift; sourceTree = "<group>"; };
 		AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAdjustmentViewController.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 		72A2ECB61E3E33E10056C8EF /* Graphic */ = {
 			isa = PBXGroup;
 			children = (
-				AC235CAD1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift */,
+				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
 				AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */,
 				AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */,
 				AC3A21851D65018800C0C682 /* GraphicView.swift */,
@@ -576,7 +576,7 @@
 				AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */,
 				AC477CC01D4385A100FB225C /* Milestone+CoreDataProperties.swift in Sources */,
 				AC00F191201BD3160057EF3F /* Config.swift in Sources */,
-				AC235CAE1FED6E13001B25E9 /* TimelinesAndCalendarweeksView.swift in Sources */,
+				AC235CAE1FED6E13001B25E9 /* TimeGraph.swift in Sources */,
 				AC477CBB1D4385A100FB225C /* Group+CoreDataClass.swift in Sources */,
 				AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */,
 				AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */,
