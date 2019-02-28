@@ -283,17 +283,6 @@ class GraphicsFactory {
         return graphics
     }
 
-
-    func graphicsForDateIndicatorLine(height :CGFloat) -> [Graphic]{
-
-        var graphics :[Graphic] = [Graphic]()
-        let lineGraphic = lineGraphicWith(height: height, color: NSColor(red: 0.7, green: 0.7, blue: 0.7, alpha: 1.0))
-        graphics.append(lineGraphic)
-
-        return graphics
-    }
-
-
     //MARK:
     func graphicsFor(milestone :Milestone, withColor color:NSColor = Config.sharedInstance.defaultMilestoneColor) -> MilestoneGraphicController{
 
