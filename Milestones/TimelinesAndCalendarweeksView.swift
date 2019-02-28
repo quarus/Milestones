@@ -295,7 +295,6 @@ class TimeGraph: GraphicView {
         
         let numberOfDays = Int(x/xPositionCalculator.lengthOfDay)
         let dayX = CGFloat(numberOfDays) * xPositionCalculator.lengthOfDay
-        let pos = dayX + (xPositionCalculator.lengthOfDay/2.0 - (dateMarker?.length ?? 0.0))
         
         dateMarker?.iconYPosition = CGFloat(y) * (timelineVerticalCalculator?.heightOfTimeline ?? 0.0)
         dateMarker?.frame.origin = CGPoint(x: dayX, y: 0)

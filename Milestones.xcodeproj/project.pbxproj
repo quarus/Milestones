@@ -86,7 +86,6 @@
 		ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */; };
 		ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */; };
 		ACEC7EC921DD42600055A803 /* GraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7EC821DD42600055A803 /* GraphicController.swift */; };
-		ACEC7ECB21DD4A660055A803 /* DateIndicatorGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */; };
 		ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */; };
 		ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8C1FC06CA200D9E136 /* ClipView.swift */; };
 		ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */; };
@@ -185,7 +184,6 @@
 		ACEC5C00205E460500270FE8 /* DocumentInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		ACEC5C01205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DocumentInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		ACEC7EC821DD42600055A803 /* GraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphicController.swift; sourceTree = "<group>"; };
-		ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateIndicatorGraphicController.swift; sourceTree = "<group>"; };
 		ACF0CCA11FA9DF94003A4FBC /* CoreDataNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataNotificationManager.swift; sourceTree = "<group>"; };
 		ACF15B8C1FC06CA200D9E136 /* ClipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipView.swift; sourceTree = "<group>"; };
 		ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentView.swift; sourceTree = "<group>"; };
@@ -252,7 +250,6 @@
 				AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */,
 				ACEC7EC821DD42600055A803 /* GraphicController.swift */,
 				AC463111208286F400312012 /* LineGraphicController.swift */,
-				ACEC7ECA21DD4A660055A803 /* DateIndicatorGraphicController.swift */,
 				ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */,
 			);
 			name = Graphics;
@@ -522,7 +519,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACEC7ECB21DD4A660055A803 /* DateIndicatorGraphicController.swift in Sources */,
 				41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */,
 				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
 				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
