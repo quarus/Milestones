@@ -11,7 +11,6 @@
 		725B56911E3E166B00B86662 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725B56901E3E166B00B86662 /* TimelineViewController.swift */; };
 		72CFD31E1E348E15002C6481 /* ProtocolsAndEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */; };
 		72CFD3201E34F927002C6481 /* StateModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72CFD31F1E34F927002C6481 /* StateModel.swift */; };
-		AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */; };
 		AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */; };
 		AC00F191201BD3160057EF3F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
 		AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F1932025F71F0057EF3F /* Exporter.swift */; };
@@ -105,7 +104,6 @@
 		725B56901E3E166B00B86662 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtocolsAndEnums.swift; sourceTree = "<group>"; };
 		72CFD31F1E34F927002C6481 /* StateModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateModel.swift; sourceTree = "<group>"; };
-		AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HorizontalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VerticalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC00F190201BD3160057EF3F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		AC00F1932025F71F0057EF3F /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
@@ -307,7 +305,6 @@
 			isa = PBXGroup;
 			children = (
 				AC6B6868222A65FB00E3DA8A /* RulerView.swift */,
-				AC008B851D3B8B490086B54B /* HorizontalRulerView.swift */,
 			);
 			name = Rulers;
 			sourceTree = "<group>";
@@ -575,7 +572,6 @@
 				AC1E17442224551200E4372B /* DateMarkerView.swift in Sources */,
 				AC477CBE1D4385A100FB225C /* Timeline+CoreDataProperties.swift in Sources */,
 				AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */,
-				AC008B861D3B8B490086B54B /* HorizontalRulerView.swift in Sources */,
 				AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */,
 				AC477CC01D4385A100FB225C /* Milestone+CoreDataProperties.swift in Sources */,
 				AC6B6869222A65FB00E3DA8A /* RulerView.swift in Sources */,

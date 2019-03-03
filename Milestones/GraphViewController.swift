@@ -18,7 +18,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     @IBOutlet weak var clipView: NSClipView!
     
     var verticalRulerView :VerticalRulerview?
-    var horizontalRulerView :HorizontalRulerView?
+    var horizontalRulerView :RulerView?
     var timelinesAndGraphicsView :TimeGraph?
 
     private var MOCHandler: CoreDataNotificationManager?
@@ -73,7 +73,9 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         let yOffSet = heightOfHorizontalRulerView
         
-        horizontalRulerView = HorizontalRulerView(withLength: length, height: heightOfHorizontalRulerView, horizontalCalculator: horizCalc)
+        horizontalRulerView = RulerView(withLength: length,
+                                        height: heightOfHorizontalRulerView,
+                                        horizontalCalculator: horizCalc)
         verticalRulerView = VerticalRulerview(withLength: 120, positionCalculator: vertCalc)
         
         verticalRulerView?.frame.origin = CGPoint(x: 0, y: yOffSet)

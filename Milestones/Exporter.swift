@@ -61,14 +61,14 @@ class Exporter {
     private func graphicsForGroup(group :Group, startDate: Date, endDate: Date) -> [Graphic] {
 
         var graphics: [Graphic] = [Graphic]()
-        
+/*
         guard let allTimelines = group.timelines?.array as? [Timeline] else {return graphics}
         
         
         let widthOfVerticalRuler: CGFloat = 120.0
         let heightOfHorizontalRuler: CGFloat = 100.0
         let length = dependencies.xCalculator.xPositionFor(date: endDate) - dependencies.xCalculator.xPositionFor(date: startDate)
-        
+  
         let horizontalRulerGraphics = GraphicsFactory.sharedInstance.horizonatlRulerGraphicsStartingAt(date: startDate,
                                                                                                        totalLength: length,
                                                                                                        height: heightOfHorizontalRuler,
@@ -117,7 +117,7 @@ class Exporter {
             Graphic.translate(graphics: groupInfoLabel, byX: widthOfVerticalRuler, byY: yOffset)
             graphics.append(contentsOf: groupInfoLabel)
         }
-
+*/
         return graphics
     }
 }

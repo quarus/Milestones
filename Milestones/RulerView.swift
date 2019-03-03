@@ -117,10 +117,18 @@ struct RulerGraphicsGenerator {
         
         switch zoomLevel {
         case .MonthAndWeeks:
-            let monthAndCWGraphics = monthGraphicsFor(length: length,
-                                                      height: height,
+            
+            let monthGraphics = monthGraphicsFor(length: length,
+                                                      height: height / 2.0,
                                                       usingCalculator: timelineCalculator)
-            graphics.append(contentsOf: monthAndCWGraphics)
+            
+            let yearGraphics = calendarWeekGraphicsFor(length: length,
+                                                       height: height/2.0,
+                                                       usingCalculator: timelineCalculator)
+            
+            Graphic.translate(graphics: yearGraphics, byX: 0.0, byY: height/2.0)
+            graphics.append(contentsOf: yearGraphics)
+            graphics.append(contentsOf: monthGraphics)
         default:
             break
             
