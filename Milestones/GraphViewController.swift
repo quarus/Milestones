@@ -76,6 +76,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         horizontalRulerView = RulerView(withLength: length,
                                         height: heightOfHorizontalRulerView,
                                         horizontalCalculator: horizCalc)
+        
         verticalRulerView = VerticalRulerview(withLength: 120, positionCalculator: vertCalc)
         
         verticalRulerView?.frame.origin = CGPoint(x: 0, y: yOffSet)
@@ -224,9 +225,22 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     private func applyZoomLevel(_ level: ZoomLevel) {
         guard var xCalculator = timelineHorizontalCalculator() else {return}
         guard let model = pageModel else {return}
-
+        
         let currentCenterDate = model.clipViewCenterDate
         xCalculator.lengthOfDay =  CGFloat(level.rawValue)
+        
+        switch level {
+        case .quarter:
+            let source = QuarterAndMonthGraphicsSource()
+            horizontalRulerView?.dataSource = source
+        case .month:
+            let source = MonthAndCalendarGraphicsSource()
+            horizontalRulerView?.dataSource = source
+        default:
+            break
+        }
+        
+        //Update all views
         centerAroundDate(currentCenterDate)
     }
 }

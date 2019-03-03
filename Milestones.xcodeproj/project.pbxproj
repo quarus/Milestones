@@ -58,6 +58,8 @@
 		AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */; };
 		AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */; };
 		AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */; };
+		AC61CFE1222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */; };
+		AC61CFE3222C194100397607 /* MonthAndCalendarGraphicsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE2222C194100397607 /* MonthAndCalendarGraphicsSource.swift */; };
 		AC6B6869222A65FB00E3DA8A /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B6868222A65FB00E3DA8A /* RulerView.swift */; };
 		AC6E14BB1D846E09001B3AB6 /* OverlapCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */; };
 		AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6FA6721DBD1107004C5137 /* IconGraphic.swift */; };
@@ -153,6 +155,8 @@
 		AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePositioner.swift; sourceTree = "<group>"; };
 		AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterAndMonthGraphicsSource.swift; sourceTree = "<group>"; };
+		AC61CFE2222C194100397607 /* MonthAndCalendarGraphicsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthAndCalendarGraphicsSource.swift; sourceTree = "<group>"; };
 		AC6B6868222A65FB00E3DA8A /* RulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OverlapCorrector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC6FA6721DBD1107004C5137 /* IconGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGraphic.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 			isa = PBXGroup;
 			children = (
 				AC6B6868222A65FB00E3DA8A /* RulerView.swift */,
+				AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */,
+				AC61CFE2222C194100397607 /* MonthAndCalendarGraphicsSource.swift */,
 			);
 			name = Rulers;
 			sourceTree = "<group>";
@@ -524,6 +530,7 @@
 				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
 				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
 				AC758E9D21D4CDD1005B9A57 /* DateInterval+Extensions.swift in Sources */,
+				AC61CFE3222C194100397607 /* MonthAndCalendarGraphicsSource.swift in Sources */,
 				AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */,
 				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
 				ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */,
@@ -540,6 +547,7 @@
 				AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */,
 				72CFD31E1E348E15002C6481 /* ProtocolsAndEnums.swift in Sources */,
 				ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */,
+				AC61CFE1222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift in Sources */,
 				AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */,
 				AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */,
 				AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */,
