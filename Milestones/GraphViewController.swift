@@ -97,6 +97,17 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         updateViews()
     }
     
+    func updateViews() {
+        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
+        guard let pageModelFirstVisibleDate = pageModel?.startDate else {return}
+        
+        horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
+        verticalRulerView?.updateFor(timelines: timelines)
+        
+        timelinesAndGraphicsView?.reloadData()
+    }
+    
+    
     //MARK: Helper Functions
     private func dataModel() -> StateProtocol? {
         
@@ -121,17 +132,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         return dependencies?.yCalculator
         
     }
-    
-    func updateViews() {
-        guard let timelines = dataModel()?.selectedGroup?.timelines?.array as? [Timeline]  else {return}
-        guard let pageModelFirstVisibleDate = pageModel?.startDate else {return}
-            
-        horizontalRulerView?.updateForStartDate(date: pageModelFirstVisibleDate)
-        verticalRulerView?.updateFor(timelines: timelines)
-
-        timelinesAndGraphicsView?.reloadData()
-    }
-    
 
     //MARK: DataObserverProtocol
     func didChangeSelectedGroup(_ group: Group?) {
