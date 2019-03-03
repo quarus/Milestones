@@ -97,7 +97,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             clipView.delegate = self
         }
         
-        updateViews()
+        applyZoomLevel(.month)
     }
     
     func updateViews() {
