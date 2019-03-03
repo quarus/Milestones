@@ -48,32 +48,6 @@ class GraphicsFactory {
         return graphics
     }
 
-    //MARK: Functions for rulers
-    func graphicsForVerticalRulerWith(timelines :[Timeline], width :CGFloat, usingCalculator calculator :VerticalCalculator)  -> [Graphic]{
-        
-        var graphics :[Graphic] = [Graphic]()
-
-        let height = calculator.heightOfTimeline
-        
-        for index in 0..<timelines.count {
-            
-            let aTimeline = timelines[index]
-            
-            if let timelineName = aTimeline.name {
-                
-                let labelGraphic = LabelGraphic()
-                labelGraphic.text = timelineName
-                labelGraphic.isDrawingFill = false
-                
-                let yPos = calculator.yPositionForTimelineAt(index: index)
-                labelGraphic.bounds = NSMakeRect(0, yPos , width, height)
-                graphics.append(labelGraphic)
-            }
-        }
-        
-        return graphics
-    }
-    
     //MARK: adjustments
     func adjustmentGraphicsFor(milestone: MilestoneProtocol,
                                adjustments: [AdjustmentProtocol],
@@ -133,7 +107,7 @@ class GraphicsFactory {
             }
         }
         return graphics
-    }   
+    }
  
     //MARK: Export
     func graphicsForExportLabelWith(title :String?, description :String?) -> [Graphic]{

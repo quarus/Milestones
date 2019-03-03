@@ -34,15 +34,41 @@ class VerticalRulerview :GraphicView{
     func updateFor(timelines :[Timeline]) {
         
         graphics.removeAll()
-        graphics = GraphicsFactory.sharedInstance.graphicsForVerticalRulerWith(timelines: timelines,
-                                                                               width: totalWidthOfBar,
-                                                                               usingCalculator: yPositionCalculator)
+        graphics = graphicsForTimelines(timelines: timelines,
+                                        width: totalWidthOfBar,
+                                        usingCalculator: yPositionCalculator)
         
-    
         let totalHeightOfGraphics = Graphic.boundsOf(graphics: graphics).size.height + yPositionCalculator.heightOfTimeline + yOffset
         let currentOrigin = self.frame.origin
         self.frame = NSRect(x: currentOrigin.x, y: currentOrigin.y, width: totalWidthOfBar, height: totalHeightOfGraphics)
         self.setNeedsDisplay(self.bounds)
 
+    }
+    
+    private func graphicsForTimelines(timelines :[Timeline],
+                                                 width :CGFloat,
+                                                 usingCalculator calculator :VerticalCalculator)  -> [Graphic] {
+        
+        var graphics :[Graphic] = [Graphic]()
+        
+        let height = calculator.heightOfTimeline
+        
+        for index in 0..<timelines.count {
+            
+            let aTimeline = timelines[index]
+            
+            if let timelineName = aTimeline.name {
+                
+                let labelGraphic = LabelGraphic()
+                labelGraphic.text = timelineName
+                labelGraphic.isDrawingFill = false
+                
+                let yPos = calculator.yPositionForTimelineAt(index: index)
+                labelGraphic.bounds = NSMakeRect(0, yPos , width, height)
+                graphics.append(labelGraphic)
+            }
+        }
+        
+        return graphics
     }
 }
