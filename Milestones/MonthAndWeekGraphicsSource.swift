@@ -25,12 +25,12 @@ struct MonthAndWeekGraphicsSource: RulerViewGraphicsSource {
                    using calculator: HorizontalCalculator) -> [Graphic] {
      
         let monthGraphics = monthGraphicsFor(length: length,
-                                             height: height,
+                                             height: height/2.0,
                                              withStartDate: date,
                                              usingCalculator: calculator)
         
         let weeksGraphic = calendarWeekGraphicsFor(length: length,
-                                                   height: height,
+                                                   height: height/2.0,
                                                    withStartDate: date,
                                                    usingCalculator: calculator)
         
