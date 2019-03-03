@@ -55,6 +55,7 @@ class TimeGraph: GraphicView {
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
     var labelView: LabelView?
+    var todayIndicatorView: TodayIndicatorView?
     var dateMarker: DateMarkerView?
     var staticDateMarker: DateMarkerView?
     
@@ -65,8 +66,9 @@ class TimeGraph: GraphicView {
         self.timelineVerticalCalculator = verticalCalculator
         self.timelineHorizontalCalculator = horizontalCalculator
         
-        dateMarker = DateMarkerView(withLength: 800)
-        staticDateMarker = DateMarkerView(withLength: 800)
+        dateMarker = DateMarkerView(withHeight: 800)
+        staticDateMarker = DateMarkerView(withHeight: 800)
+        todayIndicatorView = TodayIndicatorView(withHeight: 800)
         labelView = LabelView(frame: NSMakeRect(0, 0, 200, 200))
         
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
@@ -233,23 +235,13 @@ class TimeGraph: GraphicView {
         }
         
         graphics.append(contentsOf: graphicsForBackground())
-        graphics.append(contentsOf: graphicsForTodayIndicator())
         setNeedsDisplay(bounds)
         
         checkAndPlaceStaticDateMarker()
+        checkAndPlaceTodayIndicator()
     }
 
     //MARK: Drawing
-    private func graphicsForTodayIndicator() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-        
-        let todayIndicatorGraphics = GraphicsFactory.sharedInstance.graphicsForTodayIndicatorLine(height: self.bounds.size.height)
-        let relativeXPos = relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: Date()))
-        Graphic.translate(graphics: todayIndicatorGraphics, byX: relativeXPos, byY: 0)
-        
-        return todayIndicatorGraphics
-    }
-    
     private func graphicsForBackground() -> [Graphic] {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
         guard let yPositionCalculator = timelineVerticalCalculator else {return [Graphic]()}
@@ -307,19 +299,38 @@ class TimeGraph: GraphicView {
         guard let md = markedDate else {return}
         guard let mTimeline = indexOfMarkedTimeline else {return}
         
-        let xPos = xPositionCalculator.xPositionFor(date: md)
-        let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
-        let yPos = yPositionCalculator.yPositionForTimelineAt(index: mTimeline)
         
-        if (xPos > absoluteX) && (xPos < absoluteX + bounds.width) {
+        if (isDateVisible(date: md)) {
             if markerView.superview == nil {
                 addSubview(markerView)
             }
+            let xPos = xPositionCalculator.xPositionFor(date: md)
+            let yPos = yPositionCalculator.yPositionForTimelineAt(index: mTimeline)
+            let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
             markerView.frame.origin = CGPoint(x: relativeXPos, y: 0)
             markerView.iconYPosition = yPos
         } else {
             if markerView.superview != nil {
                 markerView.removeFromSuperview()
+            }
+        }
+    }
+    
+    private func checkAndPlaceTodayIndicator() {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return}
+        guard let todayIndicator = todayIndicatorView else {return}
+        
+        
+        if (isDateVisible(date: Date())) {
+            if todayIndicator.superview == nil {
+                addSubview(todayIndicator)
+            }
+            let xPos = xPositionCalculator.xPositionFor(date: Date())
+            let relativeXPos = relativePositionForAbsolute(xPosition: xPos)
+            todayIndicatorView?.frame.origin = CGPoint(x: relativeXPos, y: 0)
+        } else {
+            if todayIndicator.superview != nil {
+                todayIndicator.removeFromSuperview()
             }
         }
     }
@@ -330,6 +341,17 @@ class TimeGraph: GraphicView {
         
         let absoluteStartX = xPositionCalculator.xPositionFor(date: startDate)
         return xPosition - absoluteStartX
+    }
+    
+    private func isDateVisible(date: Date) -> Bool {
+        guard let xPositionCalculator = timelineHorizontalCalculator else {return false}
+        let xPos = xPositionCalculator.xPositionFor(date: date)
+        
+        if (xPos > absoluteX) && (xPos < absoluteX + bounds.width) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 

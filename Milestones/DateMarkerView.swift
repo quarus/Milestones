@@ -23,8 +23,8 @@ class DateMarkerView: GraphicView {
         }
     }
     
-    var width: CGFloat = 20
-    var length: CGFloat = 100
+    private var width: CGFloat = 20
+    private var height: CGFloat = 100
     
     var color: NSColor = .red{
         didSet {
@@ -32,9 +32,9 @@ class DateMarkerView: GraphicView {
         }
     }
 
-    init(withLength length: CGFloat) {
-        super.init(frame: NSRect(x: 0, y: 0, width: width, height: length))
-        self.length = length
+    init(withHeight height: CGFloat) {
+        super.init(frame: NSRect(x: 0, y: 0, width: width, height: height))
+        self.height = height
         setup()
 
     }
@@ -60,9 +60,9 @@ class DateMarkerView: GraphicView {
         
         lineGraphic = LineGraphic()
         lineGraphic.strokeColor = Config.sharedInstance.strokeColor
-        lineGraphic.bounds.size = CGSize(width: width, height: length)
+        lineGraphic.bounds.size = CGSize(width: width, height: height)
         lineGraphic.beginPoint = CGPoint(x: width/2.0, y: 0)
-        lineGraphic.endPoint = CGPoint(x: width/2.0, y: length)
+        lineGraphic.endPoint = CGPoint(x: width/2.0, y: height)
         
         graphics.append(lineGraphic)
         graphics.append(iconGraphic)
