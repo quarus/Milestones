@@ -234,7 +234,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             let source = QuarterAndMonthGraphicsSource()
             horizontalRulerView?.dataSource = source
         case .month:
-            let source = MonthAndCalendarGraphicsSource()
+            let source = MonthAndWeekGraphicsSource()
             horizontalRulerView?.dataSource = source
         default:
             break

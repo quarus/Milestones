@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-struct MonthAndCalendarGraphicsSource: RulerViewGraphicsSource {
+struct MonthAndWeekGraphicsSource: RulerViewGraphicsSource {
 
     fileprivate let oneHourInterval :TimeInterval = 60 * 60
     fileprivate let calendar = Calendar.defaultCalendar()
