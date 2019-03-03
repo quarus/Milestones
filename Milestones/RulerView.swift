@@ -28,7 +28,7 @@ class RulerView: GraphicView {
     private var startDate: Date = Date()
     private var dateLabel: LabelGraphic
     private var dateFormatter: DateFormatter
-
+    private let heightScaleFactor: CGFloat = 0.75
 
     init(withLength length: CGFloat, height: CGFloat, horizontalCalculator :HorizontalCalculator){
     
@@ -57,7 +57,7 @@ class RulerView: GraphicView {
         
         let rulerGraphics = source.rulerView(rulerview: self,
                                              graphicsForLength: frame.size.width,
-                                             height: frame.size.height,
+                                             height: frame.size.height * heightScaleFactor,
                                              withStartDate: startDate,
                                              using: timelineCalculator)
         
@@ -77,7 +77,7 @@ class RulerView: GraphicView {
             setNeedsDisplay(dateLabel.bounds)
             dateLabel.text = dateFormatter.string(from: date)
             dateLabel.bounds.origin.x = relativPositionX - (dateLabel.bounds.size.width / 2.0)
-            dateLabel.bounds.origin.y = bounds.size.height * 0.75
+            dateLabel.bounds.origin.y = bounds.size.height * heightScaleFactor
             setNeedsDisplay(dateLabel.bounds)
 
         } else {
