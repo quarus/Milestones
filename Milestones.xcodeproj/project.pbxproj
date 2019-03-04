@@ -70,7 +70,6 @@
 		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
 		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
 		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
-		AC8C2B1822172EC600F98135 /* TimeGraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */; };
 		AC8C2B1A22173D9F00F98135 /* TimeGraphing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1922173D9F00F98135 /* TimeGraphing.swift */; };
 		AC8C2B1C221753B100F98135 /* MilestoneProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */; };
 		AC8C2B542218148A00F98135 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
@@ -168,7 +167,6 @@
 		AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
-		AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphTests.swift; sourceTree = "<group>"; };
 		AC8C2B1922173D9F00F98135 /* TimeGraphing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphing.swift; sourceTree = "<group>"; };
 		AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneProtocol.swift; sourceTree = "<group>"; };
 		AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesManagementViewController.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
 				AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */,
-				AC8C2B1722172EC600F98135 /* TimeGraphTests.swift */,
 			);
 			path = TimelineCalculationTests;
 			sourceTree = "<group>";
@@ -517,7 +514,6 @@
 			files = (
 				AC8C2B542218148A00F98135 /* Config.swift in Sources */,
 				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
-				AC8C2B1822172EC600F98135 /* TimeGraphTests.swift in Sources */,
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
