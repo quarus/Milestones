@@ -197,6 +197,8 @@ class TimeGraph: GraphicView {
         updateFrameFor(numberOfTimelines: numberOfTimelines)
         
         graphics.removeAll()
+        graphics.append(contentsOf: graphicsForBackground())
+
         msgcDict = [MilestoneGraphicController:IndexPath]()
         msgcArray = [[MilestoneGraphicController]]()
 
@@ -234,7 +236,6 @@ class TimeGraph: GraphicView {
             msgcArray.append(msgArray)
         }
         
-        graphics.append(contentsOf: graphicsForBackground())
         setNeedsDisplay(bounds)
         
         checkAndPlaceStaticDateMarker()
