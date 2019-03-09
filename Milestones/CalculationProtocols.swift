@@ -33,8 +33,8 @@ protocol HorizontalCalculator {
     func lengthBetween(firstDate: Date, secondDate: Date) -> CGFloat
 
     func lengthOfQuarter(containing date: Date) -> CGFloat
+    func lengthOfYear(containing date: Date) -> CGFloat
     func lengthOf(Quarter quarter: Int, inYear year: Int) -> CGFloat
-
 }
 
 protocol VerticalCalculator {

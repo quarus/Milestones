@@ -74,6 +74,28 @@ public extension Calendar {
         }
     }
     
+    func ennumerateFirstDayOfYearStarting(fromDate enumerationStartDate: Date,
+                                          usingHandler dateHandler: (Date, inout Bool) -> ()) {
+        
+        
+        var stop = false
+        guard var startDate = enumerationStartDate.firstDayOfYear() else {return}
+        
+        while !stop {
+            dateHandler(startDate.normalized(), &stop)
+            let nextDate = startDate.firstDayOfYear()
+            if nextDate == nil {
+                return
+            } else {
+                startDate = Calendar.defaultCalendar().date(byAdding: .year ,
+                                                            value: 1,
+                                                            to: nextDate!)!
+            }
+        }
+        
+    }
+    
+    
     public func startOfQuarter(ContainingDate date: Date) -> Date? {
         
         let dateComponents = Calendar.defaultCalendar().dateComponents([.day,.month,.year,.quarter], from: date)

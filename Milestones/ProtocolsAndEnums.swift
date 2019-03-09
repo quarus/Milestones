@@ -38,7 +38,7 @@ public enum ZoomLevel: Int{
     case week = 30
     case month = 15
     case quarter = 10
-    case year = 5
+    case year = 1
 }
 
 protocol GroupsManagementModelProtocol {

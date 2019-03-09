@@ -54,6 +54,21 @@ class TimelineCalculationTests: XCTestCase {
         XCTAssertEqual((xPosition - referenceXPosition), lengthOfOneWeek, accuracy: 0.0)
     }
     
+    func testLengthOfOneYear() {
+        
+        let dateInRegularYear = Date.dateFor(year: 2013, month: 3, day: 10, hour: 9, minute: 17, second: 12);
+        XCTAssertNotNil(dateInRegularYear)
+        let dateInLeapYear =  Date.dateFor(year: 2016, month: 7, day: 21, hour: 17, minute: 37, second: 55);
+        XCTAssertNotNil(dateInLeapYear)
+        
+        let regularYearLength = timelineCalculator.lengthOfYear(containing: dateInRegularYear!)
+        let leapYearLength =  timelineCalculator.lengthOfYear(containing: dateInLeapYear!)
+        
+        XCTAssertEqual(regularYearLength, 365.0 * timelineCalculator.lengthOfDay)
+        XCTAssertEqual(leapYearLength, 366.0 * timelineCalculator.lengthOfDay)
+    }
+    
+    
     func testDateToPositionConversions() {
 
         //One day later

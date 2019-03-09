@@ -65,6 +65,17 @@ extension Date {
         return calendar.date(from: dateComponents)?.normalized()
     }
     
+    func lastDayOfYear() -> Date? {
+        let calendar = Calendar.defaultCalendar()
+        let requestedComponents : Set<Calendar.Component> = [.month, .year, .weekOfMonth, .weekday]
+        var dateComponents = calendar.dateComponents(requestedComponents, from: self)
+        
+        dateComponents.month = 12
+        dateComponents.day = 31
+        
+        return calendar.date(from: dateComponents)?.normalized()
+    }
+    
     func normalized() -> Date {
         
         let normalizedDate = Calendar.defaultCalendar().startOfDay(for: self)

@@ -229,17 +229,27 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         let currentCenterDate = model.clipViewCenterDate
         xCalculator.lengthOfDay =  CGFloat(level.rawValue)
         
+        var source: RulerViewGraphicsSource?
+        var lengthOfDay = CGFloat(ZoomLevel.month.rawValue)
+        
         switch level {
         case .quarter:
-            let source = QuarterAndMonthGraphicsSource()
-            horizontalRulerView?.dataSource = source
+            lengthOfDay = CGFloat(ZoomLevel.quarter.rawValue)
+            source = QuarterAndMonthGraphicsSource()
         case .month:
-            let source = MonthAndWeekGraphicsSource()
-            horizontalRulerView?.dataSource = source
+            lengthOfDay = CGFloat(ZoomLevel.month.rawValue)
+            source = MonthAndWeekGraphicsSource()
+            
+        case .year:
+            lengthOfDay = CGFloat(ZoomLevel.year.rawValue)
+            source = YearAndQuarterGraphicsSource()
         default:
             break
         }
         
+        xCalculator.lengthOfDay = lengthOfDay
+        horizontalRulerView?.dataSource = source
+
         //Update all views
         centerAroundDate(currentCenterDate)
     }

@@ -99,4 +99,11 @@ class TimelineCalculator : HorizontalCalculator {
         
         return lengthOfQuarter
     }
+    
+    func lengthOfYear(containing date: Date) -> CGFloat {
+        guard let interval = Calendar.defaultCalendar().dateInterval(of: .year, for: date) else {return 0.0}
+        let numberOfDays = calendar.dateComponents([.day], from: interval.start, to: interval.end).day!
+
+        return CGFloat(numberOfDays) * lengthOfDay
+    }
 }

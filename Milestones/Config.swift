@@ -24,6 +24,10 @@ class Config {
     var quarterBackgroundColorEven = NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
     var quarterBackgroundColorOdd = NSColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
 
+    var yearBackgroundColorEven = NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
+    var yearBackgroundColorOdd = NSColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.0)
+
+    
     var timelineBackgroundColor = NSColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1.0)
     
     var strokeColor = NSColor(deviceRed: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
@@ -62,4 +66,14 @@ class Config {
             return quarterBackgroundColorOdd
         }
     }
+    
+    func yearBackgroundColorForYear(_ year: Int) -> NSColor {
+        
+        if (year % 2) == 0 {
+            return yearBackgroundColorEven
+        } else {
+            return yearBackgroundColorOdd
+        }
+    }
+
 }

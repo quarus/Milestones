@@ -61,6 +61,7 @@
 		AC61CFE1222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */; };
 		AC61CFE3222C194100397607 /* MonthAndWeekGraphicsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE2222C194100397607 /* MonthAndWeekGraphicsSource.swift */; };
 		AC61CFE5222C26C600397607 /* TodayIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE4222C26C600397607 /* TodayIndicatorView.swift */; };
+		AC61CFE7223450F400397607 /* YearAndQuarterGraphicsSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC61CFE6223450F400397607 /* YearAndQuarterGraphicsSource.swift */; };
 		AC6B6869222A65FB00E3DA8A /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B6868222A65FB00E3DA8A /* RulerView.swift */; };
 		AC6E14BB1D846E09001B3AB6 /* OverlapCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */; };
 		AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6FA6721DBD1107004C5137 /* IconGraphic.swift */; };
@@ -158,6 +159,7 @@
 		AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuarterAndMonthGraphicsSource.swift; sourceTree = "<group>"; };
 		AC61CFE2222C194100397607 /* MonthAndWeekGraphicsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthAndWeekGraphicsSource.swift; sourceTree = "<group>"; };
 		AC61CFE4222C26C600397607 /* TodayIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayIndicatorView.swift; sourceTree = "<group>"; };
+		AC61CFE6223450F400397607 /* YearAndQuarterGraphicsSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearAndQuarterGraphicsSource.swift; sourceTree = "<group>"; };
 		AC6B6868222A65FB00E3DA8A /* RulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OverlapCorrector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC6FA6721DBD1107004C5137 /* IconGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGraphic.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 				AC6B6868222A65FB00E3DA8A /* RulerView.swift */,
 				AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */,
 				AC61CFE2222C194100397607 /* MonthAndWeekGraphicsSource.swift */,
+				AC61CFE6223450F400397607 /* YearAndQuarterGraphicsSource.swift */,
 			);
 			name = Rulers;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				AC4631102081EF4C00312012 /* ArrowGraphic.swift in Sources */,
 				AC3A21841D64EFE700C0C682 /* GraphicsFactory.swift in Sources */,
 				AC477CBA1D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift in Sources */,
+				AC61CFE7223450F400397607 /* YearAndQuarterGraphicsSource.swift in Sources */,
 				AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */,
 				AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */,
 				AC8C2B1C221753B100F98135 /* MilestoneProtocol.swift in Sources */,
