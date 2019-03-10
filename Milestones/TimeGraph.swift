@@ -25,6 +25,17 @@ protocol TimeGraphDataSource {
     func timeGraph(graph: TimeGraph, adjustmentsForMilestoneAt indexPath: IndexPath) -> [AdjustmentProtocol]
 }
 
+protocol TimeGraphGraphicsSource {
+   
+    func timeGraph(graph: TimeGraph,
+                   backgroundGraphicsStartingAt date: Date,
+                   forSize: CGSize,
+                   numberOfTimeline timelinesCount: Int,
+                   usingHorizontalCalculator horizCalculator: HorizontalCalculator,
+                   verticalCalculator verCalculator: VerticalCalculator) -> [Graphic]
+    
+}
+
 class TimeGraph: GraphicView {
     
     var yOffset :CGFloat = 200;
@@ -51,6 +62,7 @@ class TimeGraph: GraphicView {
     
     var delegate: TimeGraphDelegate?
     var dataSource: TimeGraphDataSource?
+    var graphicsSource: TimeGraphGraphicsSource?
     
     private var lastMouseLocation :NSPoint = NSZeroPoint
 
@@ -197,7 +209,15 @@ class TimeGraph: GraphicView {
         updateFrameFor(numberOfTimelines: numberOfTimelines)
         
         graphics.removeAll()
-        graphics.append(contentsOf: graphicsForBackground())
+        let bgGraphics = graphicsSource?.timeGraph(graph: self,
+                                  backgroundGraphicsStartingAt: startDate,
+                                  forSize: frame.size,
+                                  numberOfTimeline: numberOfTimelines,
+                                  usingHorizontalCalculator: xPositionCalculator,
+                                  verticalCalculator: yPositionCalculator)
+        if bgGraphics != nil {
+            graphics.append(contentsOf: bgGraphics!)
+        }
 
         msgcDict = [MilestoneGraphicController:IndexPath]()
         msgcArray = [[MilestoneGraphicController]]()
@@ -240,32 +260,6 @@ class TimeGraph: GraphicView {
         
         checkAndPlaceStaticDateMarker()
         checkAndPlaceTodayIndicator()
-    }
-
-    //MARK: Drawing
-    private func graphicsForBackground() -> [Graphic] {
-        guard let xPositionCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-        guard let yPositionCalculator = timelineVerticalCalculator else {return [Graphic]()}
-        
-        let length = self.bounds.size.width
-        let height = self.bounds.size.height
-        
-        //Generate all vertical lines for months, calendarweeks, etc.
-        let cwLineGraphics = GraphicsFactory.sharedInstance.graphicsForVerticalCalendarWeeksLinesStartingAt(startDate: startDate,
-                                                                                                            height: height,
-                                                                                                            length: length, usingCalculator: xPositionCalculator)
-        
-        for idx in 0..<(delegate?.timeGraphNumberOfTimelines(graph:self) ?? 0) {
-            let yPosition = yPositionCalculator.yPositionForTimelineAt(index: idx)
-            let separatorGraphic = LineGraphic.lineGraphicWith(startPoint: CGPoint(x: 0, y: yPosition),
-                                                               endPoint: CGPoint(x: length, y: yPosition),
-                                                               thickness: 1.0)
-        
-            separatorGraphic.strokeColor = Config.sharedInstance.strokeColor
-            graphics.append(separatorGraphic)
-        }
-        
-        return cwLineGraphics
     }
     
     private func graphicsFor(adjustments :[AdjustmentProtocol],

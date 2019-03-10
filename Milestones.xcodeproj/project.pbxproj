@@ -54,6 +54,7 @@
 		AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */; };
 		AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
 		AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */; };
+		AC52A2232234F4FE00B7A44E /* TimeGraphBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */; };
 		AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */; };
 		AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */; };
 		AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */; };
@@ -151,6 +152,7 @@
 		AC4D246D1FE66EEE005F6CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC5246E91CEC19A9003B4978 /* Graphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Graphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TextGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphBackground.swift; sourceTree = "<group>"; };
 		AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationProtocols.swift; sourceTree = "<group>"; };
 		AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePositioner.swift; sourceTree = "<group>"; };
 		AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
 				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
 				AC12813C21BD73FC006952D8 /* PageModel.swift */,
+				AC52A2242234FC7000B7A44E /* GraphicsSource */,
 				AC52A21F2234F02900B7A44E /* Markers & Labels */,
 				AC6B6867222A637400E3DA8A /* Rulers */,
 			);
@@ -336,6 +339,14 @@
 				AC61CFE6223450F400397607 /* YearAndQuarterGraphicsSource.swift */,
 			);
 			name = Horizontal;
+			sourceTree = "<group>";
+		};
+		AC52A2242234FC7000B7A44E /* GraphicsSource */ = {
+			isa = PBXGroup;
+			children = (
+				AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */,
+			);
+			name = GraphicsSource;
 			sourceTree = "<group>";
 		};
 		AC6B6867222A637400E3DA8A /* Rulers */ = {
@@ -580,6 +591,7 @@
 				ACE6E2731D3814F100D0C0F7 /* NSRect+Extension.swift in Sources */,
 				AC61CFE1222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift in Sources */,
 				AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */,
+				AC52A2232234F4FE00B7A44E /* TimeGraphBackground.swift in Sources */,
 				AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */,
 				AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */,
 				AC46310E207E7F3000312012 /* MilestoneTabViewController.swift in Sources */,

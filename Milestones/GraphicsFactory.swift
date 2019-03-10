@@ -22,32 +22,6 @@ class GraphicsFactory {
     private init() {
     }
 
-    
-    func graphicsForVerticalCalendarWeeksLinesStartingAt(startDate: Date, height: CGFloat, length: CGFloat, usingCalculator calculator: HorizontalCalculator) -> [Graphic] {
-
-        let oneHourInterval :TimeInterval = 60 * 60
-        let calendar = Calendar.defaultCalendar()
-        var graphics :[Graphic] = [Graphic]()
-        let xOffset = calculator.xPositionFor(date: startDate)
-        
-        calendar.enumerateFirstMondayOfCalendarWeeksStarting(fromDate: startDate.addingTimeInterval(-1 * oneHourInterval), usingHandler:  {(date: Date?, stop: inout Bool) in
-            
-            if let date = date?.normalized() {
-                let xPos = calculator.xPositionFor(date: date) - xOffset
-
-                let lineGraphic = LineGraphic.lineGraphicWith(startPoint: CGPoint(x: xPos, y: 0), endPoint: CGPoint(x: xPos, y: height), thickness: 1.0)
-                lineGraphic.strokeColor = Config.sharedInstance.strokeColor
-                graphics.append(lineGraphic)
-
-                if xPos > length {
-                stop = true
-                }
-            }
-        })
-        
-        return graphics
-    }
-
     //MARK: adjustments
     func adjustmentGraphicsFor(milestone: MilestoneProtocol,
                                adjustments: [AdjustmentProtocol],

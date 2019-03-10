@@ -249,6 +249,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         
         xCalculator.lengthOfDay = lengthOfDay
         horizontalRulerView?.dataSource = source
+        timelinesAndGraphicsView?.graphicsSource = TimeGraphBackground()
 
         //Update all views
         centerAroundDate(currentCenterDate)
