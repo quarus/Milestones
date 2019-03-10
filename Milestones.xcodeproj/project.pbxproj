@@ -32,7 +32,6 @@
 		AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */; };
 		AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */; };
 		AC3231851FAE17720046E940 /* MilestoneAdjustmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */; };
-		AC3A21841D64EFE700C0C682 /* GraphicsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */; };
 		AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21851D65018800C0C682 /* GraphicView.swift */; };
 		AC3A21881D69A6EF00C0C682 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21871D69A6EF00C0C682 /* Date+Extensions.swift */; };
 		AC3A218A1D6A1C7C00C0C682 /* Calendar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3A21891D6A1C7C00C0C682 /* Calendar+Extensions.swift */; };
@@ -128,7 +127,6 @@
 		AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAdjustmentViewController.swift; sourceTree = "<group>"; };
-		AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GraphicsFactory.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC3A21851D65018800C0C682 /* GraphicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = GraphicView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC3A21871D69A6EF00C0C682 /* Date+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Date+Extensions.swift"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC3A21891D6A1C7C00C0C682 /* Calendar+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = "Calendar+Extensions.swift"; sourceTree = "<group>"; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -233,7 +231,6 @@
 		AC008B871D3BBF970086B54B /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				AC3A21831D64EFE700C0C682 /* GraphicsFactory.swift */,
 				AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */,
 				ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */,
 				AC5246E91CEC19A9003B4978 /* Graphic.swift */,
@@ -610,7 +607,6 @@
 				AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */,
 				ACEC5C02205E460500270FE8 /* DocumentInfo+CoreDataClass.swift in Sources */,
 				AC4631102081EF4C00312012 /* ArrowGraphic.swift in Sources */,
-				AC3A21841D64EFE700C0C682 /* GraphicsFactory.swift in Sources */,
 				AC477CBA1D4385A100FB225C /* ___COREDATA_DATAMODELNAME___+CoreDataModel.swift in Sources */,
 				AC61CFE7223450F400397607 /* YearAndQuarterGraphicsSource.swift in Sources */,
 				AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */,

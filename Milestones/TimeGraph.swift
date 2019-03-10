@@ -34,6 +34,12 @@ protocol TimeGraphGraphicsSource {
                    usingHorizontalCalculator horizCalculator: HorizontalCalculator,
                    verticalCalculator verCalculator: VerticalCalculator) -> [Graphic]
     
+    func timeGraph(graph: TimeGraph,
+                   adjustmentGraphicsFor milestone: MilestoneProtocol,
+                   adjustments: [AdjustmentProtocol],
+                   startDate date: Date,
+                   usingCalculator timelineCalculator: HorizontalCalculator) -> [Graphic]
+    
 }
 
 class TimeGraph: GraphicView {
@@ -243,10 +249,14 @@ class TimeGraph: GraphicView {
                     //get all adjustment graphic
                     if let adjustments = dataSource?.timeGraph(graph: self,
                                                                adjustmentsForMilestoneAt: currentIndexPath) {
-                        let adjustmentGraphics = graphicsFor(adjustments: adjustments,
-                                                          of: info)
-                        
-                        graphics.append(contentsOf: adjustmentGraphics)
+                       
+                        let adjustmentGraphics = graphicsSource?.timeGraph(graph: self,
+                                                                           adjustmentGraphicsFor: info, adjustments: adjustments,
+                                                                           startDate: startDate,
+                                                                           usingCalculator: xPositionCalculator)
+                        if adjustmentGraphics != nil {
+                            graphics.append(contentsOf: adjustmentGraphics!)
+                        }
                     }
                 }
                 let overlapCorrector = OverlapCorrector()
@@ -261,18 +271,7 @@ class TimeGraph: GraphicView {
         checkAndPlaceStaticDateMarker()
         checkAndPlaceTodayIndicator()
     }
-    
-    private func graphicsFor(adjustments :[AdjustmentProtocol],
-                             of milestone :MilestoneProtocol) -> [Graphic] {
-        guard let xCalculator = timelineHorizontalCalculator else {return [Graphic]()}
-        
-        let graphics = GraphicsFactory.sharedInstance.adjustmentGraphicsFor(milestone: milestone,
-                                                                            adjustments: adjustments,
-                                                                            forStartDate: startDate,
-                                                                            usingCalculator: xCalculator)
-        return graphics
-    }
-    
+
     private func updateDateMarkerFor(mouseLocation: CGPoint) {
         guard let xPositionCalculator = timelineHorizontalCalculator else {return}
         guard let yPositionCalculator = timelineVerticalCalculator else {return}
