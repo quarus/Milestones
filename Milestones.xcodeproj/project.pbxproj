@@ -71,7 +71,6 @@
 		AC8758E31E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */; };
 		AC8758E41E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */; };
 		AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */; };
-		AC8C2B1A22173D9F00F98135 /* TimeGraphing.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1922173D9F00F98135 /* TimeGraphing.swift */; };
 		AC8C2B1C221753B100F98135 /* MilestoneProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */; };
 		AC8C2B542218148A00F98135 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
 		AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */; };
@@ -169,7 +168,6 @@
 		AC8758E11E0AEC5B00745EE8 /* Adjustment+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC8758E21E0AEC5B00745EE8 /* Adjustment+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Adjustment+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		AC8B2EE31E1AA44500F9605E /* GroupsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsViewController.swift; sourceTree = "<group>"; };
-		AC8C2B1922173D9F00F98135 /* TimeGraphing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphing.swift; sourceTree = "<group>"; };
 		AC8C2B1B221753B100F98135 /* MilestoneProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneProtocol.swift; sourceTree = "<group>"; };
 		AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesManagementViewController.swift; sourceTree = "<group>"; };
 		AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsmanagementViewController.swift; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 				72A2ECB61E3E33E10056C8EF /* Graphic */,
 				72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */,
 				AC12813C21BD73FC006952D8 /* PageModel.swift */,
-				AC8C2B1922173D9F00F98135 /* TimeGraphing.swift */,
 			);
 			name = "Views & Windows";
 			sourceTree = "<group>";
@@ -540,7 +537,6 @@
 				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
 				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
 				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
-				AC8C2B1A22173D9F00F98135 /* TimeGraphing.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
