@@ -222,16 +222,8 @@
 		72A2ECB61E3E33E10056C8EF /* Graphic */ = {
 			isa = PBXGroup;
 			children = (
-				AC6B6867222A637400E3DA8A /* Rulers */,
-				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
-				AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */,
 				AC3A21851D65018800C0C682 /* GraphicView.swift */,
-				AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */,
-				ACF15B8C1FC06CA200D9E136 /* ClipView.swift */,
-				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
-				AC1E17432224551200E4372B /* DateMarkerView.swift */,
-				AC1E1745222487FE00E4372B /* LabelView.swift */,
-				AC61CFE4222C26C600397607 /* TodayIndicatorView.swift */,
+				AC52A21E2234EFDA00B7A44E /* Timegraph */,
 			);
 			name = Graphic;
 			sourceTree = "<group>";
@@ -299,18 +291,58 @@
 				AC8B2EE11E1AA33C00F9605E /* Timelines  */,
 				72A2ECB61E3E33E10056C8EF /* Graphic */,
 				72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */,
-				AC12813C21BD73FC006952D8 /* PageModel.swift */,
 			);
 			name = "Views & Windows";
 			sourceTree = "<group>";
 		};
-		AC6B6867222A637400E3DA8A /* Rulers */ = {
+		AC52A21E2234EFDA00B7A44E /* Timegraph */ = {
+			isa = PBXGroup;
+			children = (
+				AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */,
+				ACF15B8C1FC06CA200D9E136 /* ClipView.swift */,
+				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
+				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
+				AC12813C21BD73FC006952D8 /* PageModel.swift */,
+				AC52A21F2234F02900B7A44E /* Markers & Labels */,
+				AC6B6867222A637400E3DA8A /* Rulers */,
+			);
+			name = Timegraph;
+			sourceTree = "<group>";
+		};
+		AC52A21F2234F02900B7A44E /* Markers & Labels */ = {
+			isa = PBXGroup;
+			children = (
+				AC1E17432224551200E4372B /* DateMarkerView.swift */,
+				AC61CFE4222C26C600397607 /* TodayIndicatorView.swift */,
+				AC1E1745222487FE00E4372B /* LabelView.swift */,
+			);
+			name = "Markers & Labels";
+			sourceTree = "<group>";
+		};
+		AC52A2202234F27B00B7A44E /* Vertical */ = {
+			isa = PBXGroup;
+			children = (
+				AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */,
+			);
+			name = Vertical;
+			sourceTree = "<group>";
+		};
+		AC52A2212234F28700B7A44E /* Horizontal */ = {
 			isa = PBXGroup;
 			children = (
 				AC6B6868222A65FB00E3DA8A /* RulerView.swift */,
 				AC61CFE0222C0FAC00397607 /* QuarterAndMonthGraphicsSource.swift */,
 				AC61CFE2222C194100397607 /* MonthAndWeekGraphicsSource.swift */,
 				AC61CFE6223450F400397607 /* YearAndQuarterGraphicsSource.swift */,
+			);
+			name = Horizontal;
+			sourceTree = "<group>";
+		};
+		AC6B6867222A637400E3DA8A /* Rulers */ = {
+			isa = PBXGroup;
+			children = (
+				AC52A2212234F28700B7A44E /* Horizontal */,
+				AC52A2202234F27B00B7A44E /* Vertical */,
 			);
 			name = Rulers;
 			sourceTree = "<group>";
