@@ -12,6 +12,13 @@ import Cocoa
 class LabelView: GraphicView {
     
     private var labelGraphic: LabelGraphic = LabelGraphic()
+
+    var textAlignment: NSTextAlignment = .left {
+        didSet {
+            labelGraphic.textAlignment = textAlignment
+            setNeedsDisplay(bounds)
+        }
+    }
     
     var text: String = "" {
         didSet {

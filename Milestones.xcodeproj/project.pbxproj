@@ -22,6 +22,7 @@
 		AC12813D21BD73FC006952D8 /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12813C21BD73FC006952D8 /* PageModel.swift */; };
 		AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337AF1D293BBB00637527 /* LineGraphic.swift */; };
 		AC1337B41D3257F700637527 /* LabelGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1337B31D3257F700637527 /* LabelGraphic.swift */; };
+		AC1A588A22358E0F004A166D /* NSView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1A588922358E0F004A166D /* NSView+Extension.swift */; };
 		AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */; };
 		AC1D7C5021D0BC30009DBACE /* MilestoneTableCellModell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */; };
 		AC1E17442224551200E4372B /* DateMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1E17432224551200E4372B /* DateMarkerView.swift */; };
@@ -54,6 +55,7 @@
 		AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
 		AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */; };
 		AC52A2232234F4FE00B7A44E /* TimeGraphBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */; };
+		AC52A22822351F3300B7A44E /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A22722351F3300B7A44E /* MilestoneView.swift */; };
 		AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */; };
 		AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */; };
 		AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */; };
@@ -117,6 +119,7 @@
 		AC12813C21BD73FC006952D8 /* PageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageModel.swift; sourceTree = "<group>"; };
 		AC1337AF1D293BBB00637527 /* LineGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LineGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC1337B31D3257F700637527 /* LabelGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LabelGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		AC1A588922358E0F004A166D /* NSView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSView+Extension.swift"; sourceTree = "<group>"; };
 		AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewModelTests.swift; sourceTree = "<group>"; };
 		AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneTableCellModell.swift; sourceTree = "<group>"; };
 		AC1E17432224551200E4372B /* DateMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateMarkerView.swift; sourceTree = "<group>"; };
@@ -151,6 +154,7 @@
 		AC5246E91CEC19A9003B4978 /* Graphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Graphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TextGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphBackground.swift; sourceTree = "<group>"; };
+		AC52A22722351F3300B7A44E /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 		AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationProtocols.swift; sourceTree = "<group>"; };
 		AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePositioner.swift; sourceTree = "<group>"; };
 		AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -233,6 +237,7 @@
 			children = (
 				AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */,
 				ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */,
+				AC1A588922358E0F004A166D /* NSView+Extension.swift */,
 				AC5246E91CEC19A9003B4978 /* Graphic.swift */,
 				AC1337AF1D293BBB00637527 /* LineGraphic.swift */,
 				AC46310F2081EF4C00312012 /* ArrowGraphic.swift */,
@@ -315,6 +320,7 @@
 				AC1E17432224551200E4372B /* DateMarkerView.swift */,
 				AC61CFE4222C26C600397607 /* TodayIndicatorView.swift */,
 				AC1E1745222487FE00E4372B /* LabelView.swift */,
+				AC52A22722351F3300B7A44E /* MilestoneView.swift */,
 			);
 			name = "Markers & Labels";
 			sourceTree = "<group>";
@@ -581,6 +587,7 @@
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
 				72CFD3201E34F927002C6481 /* StateModel.swift in Sources */,
+				AC52A22822351F3300B7A44E /* MilestoneView.swift in Sources */,
 				ACEC5C03205E460500270FE8 /* DocumentInfo+CoreDataProperties.swift in Sources */,
 				ACF0CCA21FA9DF94003A4FBC /* CoreDataNotificationManager.swift in Sources */,
 				AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */,
@@ -593,6 +600,7 @@
 				AC1337B01D293BBB00637527 /* LineGraphic.swift in Sources */,
 				AC46310E207E7F3000312012 /* MilestoneTabViewController.swift in Sources */,
 				ACF15B8D1FC06CA200D9E136 /* ClipView.swift in Sources */,
+				AC1A588A22358E0F004A166D /* NSView+Extension.swift in Sources */,
 				ACF15B8F1FCB26BD00D9E136 /* DocumentView.swift in Sources */,
 				ACB5929A1E06F52E003945FE /* MilestoneTableViewCell.swift in Sources */,
 				AC8B2EE41E1AA44500F9605E /* GroupsViewController.swift in Sources */,

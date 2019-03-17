@@ -75,5 +75,4 @@ class GraphicView :NSView {
         }
         return nil
     }
-    
 }

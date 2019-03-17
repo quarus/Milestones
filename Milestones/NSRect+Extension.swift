@@ -34,4 +34,23 @@ extension NSRect {
 
         return CGPoint(x: centerX, y: centerY)
     }
+    
+    static func rectOf(rects :[NSRect]) -> NSRect{
+        
+        var bounds = NSZeroRect;
+        for aRect in rects{
+            bounds = NSUnionRect(bounds, aRect)
+        }
+        return bounds
+    }
+    
+    static func translate(rects:[NSRect], byX deltaX:CGFloat, byY deltaY:CGFloat){
+        
+        for var aRect in rects {
+            let offsetRect =  NSOffsetRect(aRect, deltaX, deltaY)
+            aRect.origin = offsetRect.origin
+            aRect.size = offsetRect.size
+        }
+    }
+
 }

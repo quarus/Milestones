@@ -77,6 +77,8 @@ class TimeGraph: GraphicView {
     var dateMarker: DateMarkerView?
     var staticDateMarker: DateMarkerView?
     
+    var milestoneViews: [GraphicView] = [GraphicView]()
+    
     //MARK: Life cycle
     init(withLength length: CGFloat,
          horizontalCalculator :HorizontalCalculator,
@@ -178,10 +180,11 @@ class TimeGraph: GraphicView {
         }
         
         if path.count == 2 {
-            deselectCurrentMilestone()
+    /*        deselectCurrentMilestone()
             markedMilestoneGC = msgcArray[path[0]][path[1]]
             markedMilestoneGC!.isSelected = true
             setNeedsDisplay(markedMilestoneGC!.bounds)
+ */
         }
     }
     
@@ -215,6 +218,9 @@ class TimeGraph: GraphicView {
         updateFrameFor(numberOfTimelines: numberOfTimelines)
         
         graphics.removeAll()
+        for aView in milestoneViews {
+            aView.removeFromSuperview()
+        }
         let bgGraphics = graphicsSource?.timeGraph(graph: self,
                                   backgroundGraphicsStartingAt: startDate,
                                   forSize: frame.size,
@@ -224,7 +230,7 @@ class TimeGraph: GraphicView {
         if bgGraphics != nil {
             graphics.append(contentsOf: bgGraphics!)
         }
-
+        
         msgcDict = [MilestoneGraphicController:IndexPath]()
         msgcArray = [[MilestoneGraphicController]]()
 
@@ -239,9 +245,32 @@ class TimeGraph: GraphicView {
                     //initiate a MilestoneGraphic and append it to all graphics
                     let milestoneGraphicController = MilestoneGraphicController(info)
                     let relativeX =  relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: info.date))
+                    let relativeY = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
+                    
                     milestoneGraphicController.position.x = relativeX
                     milestoneGraphicController.position.y = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
-                    graphics.append(contentsOf: milestoneGraphicController.graphics)
+
+                    let position = CGPoint(x: relativeX, y: relativeY)
+
+//                    graphics.append(contentsOf: milestoneGraphicController.graphics)
+                    
+                  
+                    
+                    let milestoneView = MilestoneView(milestone: info)
+                    milestoneView.frame.origin = position
+                    milestoneView.centerHorizontally()
+                    milestoneViews.append(milestoneView)
+                    
+
+                    let milestoneLabelView = LabelView(frame: NSMakeRect(0, 0, 100, 0))
+                    milestoneLabelView.text = info.name
+                    milestoneLabelView.textAlignment = .center
+                    milestoneLabelView.frame.origin = CGPoint(x: position.x,
+                                                              y: position.y + milestoneView.frame.size.height)
+                    milestoneLabelView.centerHorizontally()
+                    
+                    addSubview(milestoneView)
+                    addSubview(milestoneLabelView)
                     
                     msgcDict[milestoneGraphicController] = currentIndexPath
                     msgArray.append(milestoneGraphicController)
