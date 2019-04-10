@@ -116,25 +116,6 @@ class OverlapCorrector {
             }
         }
     }
-/*
-    private func lineForGraphics(atIndices indices :[Int]) -> [Graphic]{
-
-        var graphics = [Graphic]()
-
-        for index in indices {
-            let labelGraphicBounds = Graphic.boundsOf(graphics: milestoneLabelGraphics[index])
-            let iconGraphicBounds = Graphic.boundsOf(graphics: milestoneIconGraphics[index])
-
-            let startPoint = iconGraphicBounds.center()
-            let endPoint = CGPoint(x: labelGraphicBounds.center().x,y: labelGraphicBounds.origin.y)
-            let lineGraphic = LineGraphic.lineGraphicWith(startPoint: startPoint, endPoint: endPoint, thickness: 1.0)
-
-            graphics.append(lineGraphic)
-        }
-        return graphics
-    }
- */
-
 }
 
 extension OverlapCorrector {
