@@ -12,7 +12,7 @@
 import Foundation
 import Cocoa
 
-class LabelGraphic: Graphic{
+class LabelGraphic: Graphic {
 
     //The NSTextStorage class defines the fundamental storage mechanism of TextKit.
     //A text storage object notifies its layout managers of changes to its characters or attributes, which lets the layout managers redisplay the text as needed.

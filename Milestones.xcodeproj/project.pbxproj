@@ -67,6 +67,7 @@
 		AC6B6869222A65FB00E3DA8A /* RulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6B6868222A65FB00E3DA8A /* RulerView.swift */; };
 		AC6E14BB1D846E09001B3AB6 /* OverlapCorrector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */; };
 		AC6FA6731DBD1107004C5137 /* IconGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6FA6721DBD1107004C5137 /* IconGraphic.swift */; };
+		AC711FEB223EA313006AB19A /* OverlapTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC711FEA223EA313006AB19A /* OverlapTests.swift */; };
 		AC7419831E17DAE100B4E00A /* MilestonesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */; };
 		AC758E9D21D4CDD1005B9A57 /* DateInterval+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC758E9C21D4CDD1005B9A57 /* DateInterval+Extensions.swift */; };
 		AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */; };
@@ -166,6 +167,7 @@
 		AC6B6868222A65FB00E3DA8A /* RulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulerView.swift; sourceTree = "<group>"; };
 		AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = OverlapCorrector.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC6FA6721DBD1107004C5137 /* IconGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconGraphic.swift; sourceTree = "<group>"; };
+		AC711FEA223EA313006AB19A /* OverlapTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlapTests.swift; sourceTree = "<group>"; };
 		AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestonesViewController.swift; sourceTree = "<group>"; };
 		AC758E9C21D4CDD1005B9A57 /* DateInterval+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateInterval+Extensions.swift"; sourceTree = "<group>"; };
 		AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalFormatterTest.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
 				AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */,
+				AC711FEA223EA313006AB19A /* OverlapTests.swift */,
 			);
 			path = TimelineCalculationTests;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC8C2B542218148A00F98135 /* Config.swift in Sources */,
+				AC711FEB223EA313006AB19A /* OverlapTests.swift in Sources */,
 				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,

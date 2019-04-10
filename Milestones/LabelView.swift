@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class LabelView: GraphicView {
+class LabelView: GraphicView, Overlappable {
     
     private var labelGraphic: LabelGraphic = LabelGraphic()
 
@@ -44,5 +44,15 @@ class LabelView: GraphicView {
         labelGraphic.textAlignment = .left
         
         graphics.append(labelGraphic)
+    }
+    
+    //MARK. Overlappable Protocol
+    var rect: NSRect {
+        get {
+            return frame
+        }
+        set(newRect) {
+            frame = newRect
+        }
     }
 }

@@ -13,7 +13,7 @@
 import Foundation
 import Cocoa
 
-class Graphic :NSObject {
+class Graphic :NSObject, Overlappable {
 
 
     var userInfo :AnyObject?
@@ -114,4 +114,15 @@ class Graphic :NSObject {
         let setOfKeyPaths = NSSet(array: ["bounds"])
         return setOfKeyPaths
     }
+    
+    //MARK. Overlappable Protocol
+    var rect: NSRect {
+        get {
+            return bounds
+        }
+        set(newRect) {
+            bounds = newRect
+        }
+    }
 }
+

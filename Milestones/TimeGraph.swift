@@ -78,6 +78,7 @@ class TimeGraph: GraphicView {
     var staticDateMarker: DateMarkerView?
     
     var milestoneViews: [GraphicView] = [GraphicView]()
+    var milestoneLabelViews: [GraphicView] = [GraphicView]()
     
     //MARK: Life cycle
     init(withLength length: CGFloat,
@@ -221,6 +222,11 @@ class TimeGraph: GraphicView {
         for aView in milestoneViews {
             aView.removeFromSuperview()
         }
+        
+        for aView in milestoneLabelViews {
+            aView.removeFromSuperview()
+        }
+        
         let bgGraphics = graphicsSource?.timeGraph(graph: self,
                                   backgroundGraphicsStartingAt: startDate,
                                   forSize: frame.size,
@@ -235,6 +241,7 @@ class TimeGraph: GraphicView {
         msgcArray = [[MilestoneGraphicController]]()
 
         for timelineIdx in 0..<numberOfTimelines {
+            var labelViews: [Overlappable] = [Overlappable]()
             let numberOfMilestones = delegate?.timeGraph(graph: self,
                                                          numberOfMilestonesForTimelineAt: timelineIdx) ?? 0
             var msgArray = [MilestoneGraphicController]()
@@ -260,7 +267,6 @@ class TimeGraph: GraphicView {
                     milestoneView.frame.origin = position
                     milestoneView.centerHorizontally()
                     milestoneViews.append(milestoneView)
-                    
 
                     let milestoneLabelView = LabelView(frame: NSMakeRect(0, 0, 100, 0))
                     milestoneLabelView.text = info.name
@@ -268,7 +274,10 @@ class TimeGraph: GraphicView {
                     milestoneLabelView.frame.origin = CGPoint(x: position.x,
                                                               y: position.y + milestoneView.frame.size.height)
                     milestoneLabelView.centerHorizontally()
-                    
+                    labelViews.append(milestoneLabelView)
+                    milestoneLabelViews.append(milestoneLabelView)
+
+
                     addSubview(milestoneView)
                     addSubview(milestoneLabelView)
                     
@@ -287,11 +296,12 @@ class TimeGraph: GraphicView {
                             graphics.append(contentsOf: adjustmentGraphics!)
                         }
                     }
-                }
+                } //milestones
                 let overlapCorrector = OverlapCorrector()
-                overlapCorrector.correctForOverlapFor(milestoneGraphicControllers: msgArray)
-                graphics.insert(contentsOf: overlapCorrector.lineGraphics, at: 0)
-            }
+                overlapCorrector.correctOverlapFor(&labelViews)
+
+            } // timelines
+            
             msgcArray.append(msgArray)
         }
         
