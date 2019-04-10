@@ -17,12 +17,10 @@ protocol Overlappable: AnyObject {
 
 class OverlapCorrector {
 
-    var milestoneLabelGraphics :[Overlappable] = [Overlappable]()
-    var milestoneIconGraphics :[Overlappable] = [Overlappable]()
+    var overlappables :[Overlappable] = [Overlappable]()
     var lineGraphics :[Graphic] = [Graphic]()
-    private var indicesOfTranslatedGraphics = [Int]()
+    private var indicesOfTranslatedOverlappables = [Int]()
     
-
     func horizontallyCorrectOverlapFor(_ overlappables: inout [Overlappable]) {
         
         var positions = [CGPoint]()
@@ -31,29 +29,29 @@ class OverlapCorrector {
             positions.append(aOverlappable.rect.center())
         }
         
-        self.milestoneLabelGraphics = overlappables
-        let secondIndex = milestoneLabelGraphics.count - 1
+        self.overlappables = overlappables
+        let secondIndex = overlappables.count - 1
         let firstIndex = secondIndex - 1
         var indices :[Int] = [Int]()
-        recursivelyCorrectForOverlap(indexOfFirstGraphics: firstIndex,
-                                     indexOfSecondGraphics: secondIndex,
+        recursivelyCorrectForOverlap(indexOfFirstOverlappable: firstIndex,
+                                     indexOfSecondOverlappable: secondIndex,
                                      touchedIndices: &indices)
         
-        var milestoneLabelGraphicsToTranslate = [Overlappable]()
+        var overlappablesToTranslate = [Overlappable]()
         var accummulatedCenterX :CGFloat = 0
         for index in indices {
-            milestoneLabelGraphicsToTranslate.append(milestoneLabelGraphics[index])
+            overlappablesToTranslate.append(overlappables[index])
             accummulatedCenterX += positions[index].x
         }
         
         let averagedCenterXPosition = accummulatedCenterX / CGFloat (indices.count)
-        let boundsOfMilestoneLabelGraphicsToTranslate = milestoneLabelGraphicsToTranslate.reduce(NSZeroRect) {NSUnionRect($0,$1.rect)}
-        let deltaXIconsAndLabels = averagedCenterXPosition - boundsOfMilestoneLabelGraphicsToTranslate.origin.x
+        let boundsOfOverlappableToTranslate = overlappablesToTranslate.reduce(NSZeroRect) {NSUnionRect($0,$1.rect)}
+        let deltaXIconsAndLabels = averagedCenterXPosition - boundsOfOverlappableToTranslate.origin.x
         
-        for idx in 0..<milestoneLabelGraphicsToTranslate.count {
-            let dX: CGFloat = deltaXIconsAndLabels - (boundsOfMilestoneLabelGraphicsToTranslate.size.width / 2)
+        for idx in 0..<overlappablesToTranslate.count {
+            let dX: CGFloat = deltaXIconsAndLabels - (boundsOfOverlappableToTranslate.size.width / 2)
             let dY: CGFloat = 0
-            milestoneLabelGraphicsToTranslate[idx].rect = NSOffsetRect(milestoneLabelGraphicsToTranslate[idx].rect,dX, dY)
+            overlappablesToTranslate[idx].rect = NSOffsetRect(overlappablesToTranslate[idx].rect,dX, dY)
         }
     }
     /*
@@ -108,7 +106,9 @@ class OverlapCorrector {
  */
 
     // first index always smaller than second index
-    private func recursivelyCorrectForOverlap(indexOfFirstGraphics :Int, indexOfSecondGraphics :Int, touchedIndices :inout[Int]){
+    private func recursivelyCorrectForOverlap(indexOfFirstOverlappable: Int,
+                                              indexOfSecondOverlappable: Int,
+                                              touchedIndices: inout[Int]){
 
 
         func correctionNeeded(_ firstBound :CGRect,_ secondBound :CGRect) -> Bool {
@@ -116,8 +116,7 @@ class OverlapCorrector {
             let endPositionOfSecondBound = secondBound.origin.x + secondBound.size.width
             let startPositionOfFirstBound = firstBound.origin.x
 
-            if (NSIntersectsRect(firstBound, secondBound)) {
-
+            if (NSIntersectsRect(firstBound, secondBound)){
                 return true
             }
 
@@ -128,61 +127,43 @@ class OverlapCorrector {
             return false
         }
 
-        if (indexOfFirstGraphics >= 0) {
+        if (indexOfFirstOverlappable >= 0) {
 
 
-            var firstGraphics = milestoneLabelGraphics[indexOfFirstGraphics]
-            var secondGraphics = milestoneLabelGraphics[indexOfSecondGraphics]
+            let firstOverlappable = overlappables[indexOfFirstOverlappable]
+            let secondOverlappable = overlappables[indexOfSecondOverlappable]
 
-            let boundsOfFirstGraphics = firstGraphics.rect
-            let boundsOfSecondGraphics = secondGraphics.rect
+            let boundsOfFirstOverlappable = firstOverlappable.rect
+            let boundsOfSecondOverlappable = secondOverlappable.rect
 
+            if (correctionNeeded(boundsOfFirstOverlappable, boundsOfSecondOverlappable)){
 
+                let newRect = NSRect(x: secondOverlappable.rect.origin.x - firstOverlappable.rect.size.width,
+                                     y: firstOverlappable.rect.origin.y,
+                                     width: firstOverlappable.rect.size.width,
+                                     height:firstOverlappable.rect.size.height)
 
-            if (correctionNeeded(boundsOfFirstGraphics, boundsOfSecondGraphics)) {
-                var correctionTranslate :CGFloat = 0.0
-            /*    if ( boundsOfFirstGraphics.origin.x > boundsOfSecondGraphics.origin.x ) {
-                    let xDelta = boundsOfFirstGraphics.origin.x - boundsOfSecondGraphics.origin.x
-                    correctionTranslate = (xDelta + boundsOfFirstGraphics.size.width)
-
-                } else {
-                    correctionTranslate = NSIntersectionRect(boundsOfFirstGraphics, boundsOfSecondGraphics).size.width
-                }
+                firstOverlappable.rect = newRect
                 
-                print("\(firstGraphics.rect)")
-                print ("\(correctionTranslate)")
-                let offsetedRect = NSOffsetRect(firstGraphics.rect, -1 * correctionTranslate, 0)
-                print("\(offsetedRect)")
-                firstGraphics.rect = offsetedRect
-//                Graphic.translate(graphics: firstGraphics, byX: -correctionTranslate, byY: 0)
-                print("\(firstGraphics.rect)")
-                print("\n")
-*/
-                let newRect = NSRect(x: secondGraphics.rect.origin.x - firstGraphics.rect.size.width,
-                                     y: firstGraphics.rect.origin.y,
-                                     width: firstGraphics.rect.size.width,
-                                     height:firstGraphics.rect.size.height)
-
-                firstGraphics.rect = newRect
-                
-                if (!indicesOfTranslatedGraphics.contains(indexOfFirstGraphics)) {
-                    indicesOfTranslatedGraphics.append(indexOfFirstGraphics)
+                if (!indicesOfTranslatedOverlappables.contains(indexOfFirstOverlappable)) {
+                    indicesOfTranslatedOverlappables.append(indexOfFirstOverlappable)
                 }
 
-                if (!indicesOfTranslatedGraphics.contains(indexOfSecondGraphics)) {
-                    indicesOfTranslatedGraphics.append(indexOfSecondGraphics)
+                if (!indicesOfTranslatedOverlappables.contains(indexOfSecondOverlappable)) {
+                    indicesOfTranslatedOverlappables.append(indexOfSecondOverlappable)
                 }
 
-                if (!touchedIndices.contains(indexOfSecondGraphics)) {
-                    touchedIndices.append(indexOfSecondGraphics)
+                if (!touchedIndices.contains(indexOfSecondOverlappable)) {
+                    touchedIndices.append(indexOfSecondOverlappable)
                 }
 
-                if (!touchedIndices.contains(indexOfFirstGraphics)) {
-                    touchedIndices.append(indexOfFirstGraphics)
+                if (!touchedIndices.contains(indexOfFirstOverlappable)) {
+                    touchedIndices.append(indexOfFirstOverlappable)
                 }
 
-
-                recursivelyCorrectForOverlap(indexOfFirstGraphics: indexOfFirstGraphics - 1, indexOfSecondGraphics: indexOfFirstGraphics, touchedIndices: &touchedIndices)
+                recursivelyCorrectForOverlap(indexOfFirstOverlappable: indexOfFirstOverlappable - 1,
+                                             indexOfSecondOverlappable: indexOfFirstOverlappable,
+                                             touchedIndices: &touchedIndices)
             }
         }
     }
@@ -209,21 +190,7 @@ class OverlapCorrector {
 
 extension OverlapCorrector {
     
-    func correctForOverlapFor(milestoneGraphicControllers: [MilestoneGraphicController]) {
-        
-        var labelGraphics = [Overlappable]()
-        var iconGraphics = [Overlappable]()
-        
-        for aController in milestoneGraphicControllers {
-            labelGraphics.append(aController.nameLabel)
-            iconGraphics.append(aController.iconGraphic)
-        }
-        
-//        correctForOverlap(milestoneLabelGraphics: &labelGraphics, milestoneIconGraphics: &iconGraphics)
-        horizontallyCorrectOverlapFor(&labelGraphics)
-    }
-
-    func correctOverlapFor(_ overlappables: inout [Overlappable]) {        
+    func correctOverlapFor(_ overlappables: inout [Overlappable]) {
         horizontallyCorrectOverlapFor(&overlappables)
     }
 }
