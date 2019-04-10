@@ -54,56 +54,6 @@ class OverlapCorrector {
             overlappablesToTranslate[idx].rect = NSOffsetRect(overlappablesToTranslate[idx].rect,dX, dY)
         }
     }
-    /*
-    func correctForOverlap(milestoneLabelGraphics: inout [Overlappable], milestoneIconGraphics: inout [Overlappable]) {
-        self.milestoneLabelGraphics = milestoneLabelGraphics
-        self.milestoneIconGraphics = milestoneIconGraphics
-
-        let secondIndex = milestoneLabelGraphics.count - 1
-        let firstIndex = secondIndex - 1
-        var indices :[Int] = [Int]()
-        recursivelyCorrectForOverlap(indexOfFirstGraphics: firstIndex, indexOfSecondGraphics: secondIndex, touchedIndices: &indices)
-
-//        Swift.print("Indices \(indices)")
-
-        var milestoneLabelGraphicsToTranslate = [Overlappable]()
-        var averagedCenterOfMilestones :CGFloat = 0
-        for index in indices {
-            milestoneLabelGraphicsToTranslate.append(milestoneLabelGraphics[index])
-            averagedCenterOfMilestones += milestoneIconGraphics[index].rect.center().x
-        }
-        averagedCenterOfMilestones = averagedCenterOfMilestones / CGFloat(indices.count)
-        let boundsOfMilestoneLabelGraphicsToTranslate = milestoneLabelGraphics.reduce(NSZeroRect) {NSUnionRect($0,$1.rect)}
-        
-//        let boundsOfMilestoneLabelGraphicsToTranslate = NSRect.boundsOf(milestoneLabelGraphicsToTranslate)
-
-        let deltaXIconsAndLabels = averagedCenterOfMilestones - boundsOfMilestoneLabelGraphicsToTranslate.origin.x
-
-        for idx in 0..<milestoneLabelGraphicsToTranslate.count {
-            let dX: CGFloat = deltaXIconsAndLabels - (boundsOfMilestoneLabelGraphicsToTranslate.size.width / 2)
-            let dY: CGFloat = 0
-            milestoneLabelGraphicsToTranslate[idx].rect = NSOffsetRect(milestoneLabelGraphicsToTranslate[idx].rect,dX, dY)
-        }
-            
-        
-        
-/*        for anOverlappable in milestoneLabelGraphicsToTranslate {
-            let dX: CGFloat = deltaXIconsAndLabels - (boundsOfMilestoneLabelGraphicsToTranslate.size.width / 2)
-            let dY: CGFloat = 0
-            anOverlappable.rect = NSOffsetRect(anOverlappable.rect,dX, dY)
-        }
-  */
-        /*Graphic.translate(graphics: milestoneLabelGraphicsToTranslate,
-                          byX: deltaXIconsAndLabels - (boundsOfMilestoneLabelGraphicsToTranslate.size.width / 2),
-                          byY: 0)*/
-
-
-
-/*        lineGraphics.removeAll()
-        lineGraphics.append(contentsOf: lineForGraphics(atIndices: indicesOfTranslatedGraphics))
-*/
-    }
- */
 
     // first index always smaller than second index
     private func recursivelyCorrectForOverlap(indexOfFirstOverlappable: Int,
