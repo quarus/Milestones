@@ -39,7 +39,7 @@ class LabelView: GraphicView, Overlappable {
     
     private func setup() {
         labelGraphic.bounds.size = frame.size
-        labelGraphic.fillColor = NSColor.yellow
+        labelGraphic.fillColor = NSColor.white
         labelGraphic.isDrawingFill = true
         labelGraphic.textAlignment = .left
         
