@@ -17,8 +17,7 @@ protocol Overlappable: AnyObject {
 
 class OverlapCorrector {
 
-    var overlappables :[Overlappable] = [Overlappable]()
-    var lineGraphics :[Graphic] = [Graphic]()
+    private var overlappables :[Overlappable] = [Overlappable]()
     private var indicesOfTranslatedOverlappables = [Int]()
     
     func horizontallyCorrectOverlapFor(_ overlappables: inout [Overlappable]) {
