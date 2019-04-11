@@ -51,8 +51,6 @@ class TimeGraph: GraphicView {
 
     private var currentTrackingArea: NSTrackingArea?
     
-    private var msgcDict: [MilestoneGraphicController:IndexPath] = [MilestoneGraphicController:IndexPath]()
-    private var msgcArray: [[MilestoneGraphicController]] = [[MilestoneGraphicController]]()
     
     private(set) var absoluteX: CGFloat = 0.0
     private(set) var startDate: Date = Date() {
@@ -63,8 +61,6 @@ class TimeGraph: GraphicView {
     
     var markedDate: Date?
     var indexOfMarkedTimeline: Int?
-    
-    var markedMilestoneGC: MilestoneGraphicController?
     
     var delegate: TimeGraphDelegate?
     var dataSource: TimeGraphDataSource?
@@ -79,7 +75,8 @@ class TimeGraph: GraphicView {
     
     var milestoneViews: [GraphicView] = [GraphicView]()
     var milestoneLabelViews: [GraphicView] = [GraphicView]()
-    
+    private var viewDict: [IndexPath:GraphicView] = [IndexPath:GraphicView]()
+
     //MARK: Life cycle
     init(withLength length: CGFloat,
          horizontalCalculator :HorizontalCalculator,
@@ -107,13 +104,21 @@ class TimeGraph: GraphicView {
     
     //MARK: Mouse Handling
     override func mouseDown(with event: NSEvent) {
-        
+
         let mouselocation = self.convert(event.locationInWindow, from: nil)
-        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
+        print ("\(mouselocation)")
+
+        if let hitView = hitTest(mouselocation) as? GraphicView {
+            if let indexPath = hitView.context as? IndexPath {
+                print ("\(indexPath)")
+            }
+        }
+/*        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
             
             guard let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController else {return}
             guard let indexPath = msgcDict[milestoneGraphicController] else {return}
             delegate?.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
+
             
             
         } else {
@@ -124,6 +129,7 @@ class TimeGraph: GraphicView {
                                 didSelectDate: date,
                                 inTimelineAtIndex: indexOfTimeline)
         }
+ */
     }
     
     override func mouseMoved(with event: NSEvent) {
@@ -132,7 +138,7 @@ class TimeGraph: GraphicView {
 
         func updateMilestoneLabel() {
             
-            if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
+    /*        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
                 if let milestoneGC = graphicUnderPointer.userInfo as? MilestoneGraphicController {
                     if let milestone = dataSource?.timeGraph(graph: self,
                                                                  milstoneAt: msgcDict[milestoneGC]!) {
@@ -152,6 +158,7 @@ class TimeGraph: GraphicView {
             }
             
             labelView?.frame.origin = mouselocation
+ */
         }
         
         updateDateMarkerFor(mouseLocation: lastMouseLocation)
@@ -169,10 +176,6 @@ class TimeGraph: GraphicView {
     func selectMilestoneAt(indexPath: IndexPath? ) {
         
         func deselectCurrentMilestone() {
-            if markedMilestoneGC != nil {
-                markedMilestoneGC?.isSelected = false
-                setNeedsDisplay(markedMilestoneGC!.bounds)
-            }
         }
         
         guard let path = indexPath else {
@@ -181,11 +184,6 @@ class TimeGraph: GraphicView {
         }
         
         if path.count == 2 {
-    /*        deselectCurrentMilestone()
-            markedMilestoneGC = msgcArray[path[0]][path[1]]
-            markedMilestoneGC!.isSelected = true
-            setNeedsDisplay(markedMilestoneGC!.bounds)
- */
         }
     }
     
@@ -226,6 +224,7 @@ class TimeGraph: GraphicView {
         for aView in milestoneLabelViews {
             aView.removeFromSuperview()
         }
+        viewDict.removeAll()
         
         let bgGraphics = graphicsSource?.timeGraph(graph: self,
                                   backgroundGraphicsStartingAt: startDate,
@@ -237,36 +236,24 @@ class TimeGraph: GraphicView {
             graphics.append(contentsOf: bgGraphics!)
         }
         
-        msgcDict = [MilestoneGraphicController:IndexPath]()
-        msgcArray = [[MilestoneGraphicController]]()
-
         for timelineIdx in 0..<numberOfTimelines {
             var labelViews: [Overlappable] = [Overlappable]()
             let numberOfMilestones = delegate?.timeGraph(graph: self,
                                                          numberOfMilestonesForTimelineAt: timelineIdx) ?? 0
-            var msgArray = [MilestoneGraphicController]()
             for milestoneIdx in 0..<numberOfMilestones {
                 if let info = dataSource?.timeGraph(graph: self, milstoneAt: IndexPath(indexes:[timelineIdx, milestoneIdx])) {
                    
                     let currentIndexPath = IndexPath(indexes: [timelineIdx, milestoneIdx])
                     //initiate a MilestoneGraphic and append it to all graphics
-                    let milestoneGraphicController = MilestoneGraphicController(info)
                     let relativeX =  relativePositionForAbsolute(xPosition: xPositionCalculator.centerXPositionFor(date: info.date))
                     let relativeY = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
-                    
-                    milestoneGraphicController.position.x = relativeX
-                    milestoneGraphicController.position.y = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
-
                     let position = CGPoint(x: relativeX, y: relativeY)
-
-//                    graphics.append(contentsOf: milestoneGraphicController.graphics)
-                    
-                  
                     
                     let milestoneView = MilestoneView(milestone: info)
                     milestoneView.frame.origin = position
                     milestoneView.centerHorizontally()
                     milestoneViews.append(milestoneView)
+                    viewDict[currentIndexPath] = milestoneView
 
                     let milestoneLabelView = LabelView(frame: NSMakeRect(0, 0, 100, 0))
                     milestoneLabelView.text = info.name
@@ -276,13 +263,13 @@ class TimeGraph: GraphicView {
                     milestoneLabelView.centerHorizontally()
                     labelViews.append(milestoneLabelView)
                     milestoneLabelViews.append(milestoneLabelView)
-
+                    viewDict[currentIndexPath] = milestoneLabelView
 
                     addSubview(milestoneView)
                     addSubview(milestoneLabelView)
-                    
-                    msgcDict[milestoneGraphicController] = currentIndexPath
-                    msgArray.append(milestoneGraphicController)
+
+                    milestoneLabelView.context = currentIndexPath
+                    milestoneView.context = currentIndexPath
                     
                     //get all adjustment graphic
                     if let adjustments = dataSource?.timeGraph(graph: self,
@@ -301,8 +288,6 @@ class TimeGraph: GraphicView {
                 overlapCorrector.correctOverlapFor(&labelViews)
 
             } // timelines
-            
-            msgcArray.append(msgArray)
         }
         
         setNeedsDisplay(bounds)
