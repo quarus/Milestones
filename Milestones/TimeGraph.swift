@@ -106,21 +106,11 @@ class TimeGraph: GraphicView {
     override func mouseDown(with event: NSEvent) {
 
         let mouselocation = self.convert(event.locationInWindow, from: nil)
-        print ("\(mouselocation)")
 
-        if let hitView = hitTest(mouselocation) as? GraphicView {
-            if let indexPath = hitView.context as? IndexPath {
-                print ("\(indexPath)")
+        if let view = graphicViewForPoint(mouselocation) {
+            if let indexPath = view.context as? IndexPath {
+                delegate?.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
             }
-        }
-/*        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
-            
-            guard let milestoneGraphicController = graphicUnderPointer.userInfo as? MilestoneGraphicController else {return}
-            guard let indexPath = msgcDict[milestoneGraphicController] else {return}
-            delegate?.timeGraph(graph: self, didSelectMilestoneAt: indexPath)
-
-            
-            
         } else {
             guard let xCalculator = timelineHorizontalCalculator else {return}
             let indexOfTimeline = timelineVerticalCalculator?.timelineIndexForYPosition(yPosition: mouselocation.y) ?? 0
@@ -129,7 +119,6 @@ class TimeGraph: GraphicView {
                                 didSelectDate: date,
                                 inTimelineAtIndex: indexOfTimeline)
         }
- */
     }
     
     override func mouseMoved(with event: NSEvent) {
@@ -370,6 +359,23 @@ class TimeGraph: GraphicView {
         } else {
             return false
         }
+    }
+    
+    private func graphicViewForPoint(_ point: CGPoint) -> GraphicView? {
+        
+        // there are problems with NView.hitTest. Therefore this helper method
+        
+        var foundView: GraphicView?
+        var combinedViews = [GraphicView]()
+        combinedViews.append(contentsOf: milestoneLabelViews)
+        combinedViews.append(contentsOf: milestoneViews)
+        
+        for aView in combinedViews {
+            if NSPointInRect(point, aView.frame) {
+                foundView = aView
+            }
+        }
+        return foundView
     }
 }
 
