@@ -88,7 +88,6 @@ class TimeGraph: GraphicView {
         staticDateMarker = DateMarkerView(withHeight: 800)
         todayIndicatorView = TodayIndicatorView(withHeight: 800)
         labelView = LabelView(frame: NSMakeRect(0, 0, 200, 200))
-        
         super.init(frame: NSRect(x: 0, y: 0, width: length, height: 800))
         
         addSubview(dateMarker!)
@@ -126,11 +125,10 @@ class TimeGraph: GraphicView {
         let mouselocation = self.convert(event.locationInWindow, from: nil)
 
         func updateMilestoneLabel() {
-            
-    /*        if let graphicUnderPointer = self.graphicUnderPoint(mouselocation) {
-                if let milestoneGC = graphicUnderPointer.userInfo as? MilestoneGraphicController {
+            if let view = graphicViewForPoint(mouselocation) {
+                if let indexPath = view.context as? IndexPath {
                     if let milestone = dataSource?.timeGraph(graph: self,
-                                                                 milstoneAt: msgcDict[milestoneGC]!) {
+                                                             milstoneAt: indexPath) {
                         if milestone.info.count > 0 {
                             if let label = labelView {
                                 label.text = milestone.info
@@ -140,14 +138,11 @@ class TimeGraph: GraphicView {
                             }
                         }
                     }
-                } else {
                 }
             } else {
                 labelView?.removeFromSuperview()
             }
-            
             labelView?.frame.origin = mouselocation
- */
         }
         
         updateDateMarkerFor(mouseLocation: lastMouseLocation)
