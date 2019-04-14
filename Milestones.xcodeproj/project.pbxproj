@@ -53,7 +53,6 @@
 		AC4D24641FE66B2A005F6CCB /* TimelineCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D24631FE66B2A005F6CCB /* TimelineCalculator.swift */; };
 		AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */; };
 		AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
-		AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */; };
 		AC52A2232234F4FE00B7A44E /* TimeGraphBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */; };
 		AC52A22822351F3300B7A44E /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A22722351F3300B7A44E /* MilestoneView.swift */; };
 		AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */; };
@@ -79,7 +78,6 @@
 		AC8DD2CF1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */; };
 		AC8DD2D11E1C182900FDA246 /* GroupsmanagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */; };
 		ACAACD7F20668EBC00AAB6F6 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */; };
-		ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */; };
 		ACB5929A1E06F52E003945FE /* MilestoneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */; };
 		ACB7A7951CE87048005F4872 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7941CE87048005F4872 /* AppDelegate.swift */; };
 		ACB7A7971CE87048005F4872 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB7A7961CE87048005F4872 /* Document.swift */; };
@@ -153,7 +151,6 @@
 		AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCalculationTests.swift; sourceTree = "<group>"; };
 		AC4D246D1FE66EEE005F6CCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC5246E91CEC19A9003B4978 /* Graphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Graphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = TextGraphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphBackground.swift; sourceTree = "<group>"; };
 		AC52A22722351F3300B7A44E /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 		AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationProtocols.swift; sourceTree = "<group>"; };
@@ -178,7 +175,6 @@
 		AC8DD2CE1E1AB7BA00FDA246 /* TimelinesManagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelinesManagementViewController.swift; sourceTree = "<group>"; };
 		AC8DD2D01E1C182900FDA246 /* GroupsmanagementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupsmanagementViewController.swift; sourceTree = "<group>"; };
 		ACAACD7E20668EBC00AAB6F6 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
-		ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneGraphicController.swift; sourceTree = "<group>"; };
 		ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestoneTableViewCell.swift; sourceTree = "<group>"; };
 		ACB7A7911CE87048005F4872 /* Milestones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Milestones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACB7A7941CE87048005F4872 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -244,12 +240,10 @@
 				AC1337AF1D293BBB00637527 /* LineGraphic.swift */,
 				AC46310F2081EF4C00312012 /* ArrowGraphic.swift */,
 				AC6FA6721DBD1107004C5137 /* IconGraphic.swift */,
-				AC5246ED1CF03F0B003B4978 /* TextGraphic.swift */,
 				AC1337B31D3257F700637527 /* LabelGraphic.swift */,
 				AC235CAB1FEC10B9001B25E9 /* RectGraphic.swift */,
 				ACEC7EC821DD42600055A803 /* GraphicController.swift */,
 				AC463111208286F400312012 /* LineGraphicController.swift */,
-				ACAACD84206954D900AAB6F6 /* MilestoneGraphicController.swift */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -523,6 +517,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -583,7 +578,6 @@
 				AC61CFE3222C194100397607 /* MonthAndWeekGraphicsSource.swift in Sources */,
 				AC2A1FD31FA4B41F00B3BF26 /* GraphViewController.swift in Sources */,
 				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
-				ACAACD85206954D900AAB6F6 /* MilestoneGraphicController.swift in Sources */,
 				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
 				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
 				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
@@ -638,7 +632,6 @@
 				AC00F191201BD3160057EF3F /* Config.swift in Sources */,
 				AC235CAE1FED6E13001B25E9 /* TimeGraph.swift in Sources */,
 				AC477CBB1D4385A100FB225C /* Group+CoreDataClass.swift in Sources */,
-				AC5246EE1CF03F0B003B4978 /* TextGraphic.swift in Sources */,
 				AC2A1FD11FA4978C00B3BF26 /* SplitViewController.swift in Sources */,
 				725B56911E3E166B00B86662 /* TimelineViewController.swift in Sources */,
 				AC4D24641FE66B2A005F6CCB /* TimelineCalculator.swift in Sources */,
