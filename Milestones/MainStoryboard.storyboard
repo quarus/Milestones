@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -246,22 +246,6 @@
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="OEz-JO-l5i"/>
-                                <toolbarItem implicitItemIdentifier="72E57E3B-7786-49C6-8BA1-A2DA1280EAD5" label="Custom View" paletteLabel="Custom View" id="gUC-An-0Tw">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="82" height="32"/>
-                                    <size key="maxSize" width="82" height="32"/>
-                                    <button key="view" verticalHuggingPriority="750" id="6g5-nm-z2I">
-                                        <rect key="frame" x="0.0" y="14" width="82" height="32"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="push" title="Export" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gyb-0S-4qf">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="onClickOfExportButton:" target="48w-aO-OKx" id="H36-mM-vIL"/>
-                                        </connections>
-                                    </button>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="B4B5D953-D330-4AAA-941F-4D8C048B466F" label="Custom View" paletteLabel="Custom View" id="iZr-Fj-qFJ">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
@@ -282,7 +266,6 @@
                                 <toolbarItem reference="OEz-JO-l5i"/>
                                 <toolbarItem reference="tjd-fo-oPI"/>
                                 <toolbarItem reference="OEz-JO-l5i"/>
-                                <toolbarItem reference="gUC-An-0Tw"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1725,7 +1708,7 @@
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                             <prototypeCellViews>
                                                                 <tableCellView identifier="OrphanCell" id="ml2-YH-HDB">
-                                                                    <rect key="frame" x="258.5" y="1" width="80" height="40"/>
+                                                                    <rect key="frame" x="259" y="1" width="80" height="40"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KbA-U6-dew">
