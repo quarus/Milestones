@@ -73,6 +73,7 @@ class TimeGraph: GraphicView {
     var dateMarker: DateMarkerView?
     var staticDateMarker: DateMarkerView?
     
+    var markedMilestoneView: MilestoneView?
     var milestoneViews: [GraphicView] = [GraphicView]()
     var milestoneLabelViews: [GraphicView] = [GraphicView]()
     private var viewDict: [IndexPath:GraphicView] = [IndexPath:GraphicView]()
@@ -160,6 +161,7 @@ class TimeGraph: GraphicView {
     func selectMilestoneAt(indexPath: IndexPath? ) {
         
         func deselectCurrentMilestone() {
+            markedMilestoneView?.isSelected = false
         }
         
         guard let path = indexPath else {
@@ -168,6 +170,11 @@ class TimeGraph: GraphicView {
         }
         
         if path.count == 2 {
+            if let milestoneView = viewDict[indexPath!] as? MilestoneView{
+                deselectCurrentMilestone()
+                milestoneView.isSelected = true
+                markedMilestoneView = milestoneView
+            }
         }
     }
     
@@ -200,6 +207,7 @@ class TimeGraph: GraphicView {
         let numberOfTimelines = delegate?.timeGraphNumberOfTimelines(graph: self) ?? 0
         updateFrameFor(numberOfTimelines: numberOfTimelines)
         
+        
         graphics.removeAll()
         for aView in milestoneViews {
             aView.removeFromSuperview()
@@ -219,6 +227,8 @@ class TimeGraph: GraphicView {
         if bgGraphics != nil {
             graphics.append(contentsOf: bgGraphics!)
         }
+        
+        markedMilestoneView = nil
         
         for timelineIdx in 0..<numberOfTimelines {
             var labelViews: [Overlappable] = [Overlappable]()
@@ -247,7 +257,7 @@ class TimeGraph: GraphicView {
                     milestoneLabelView.centerHorizontally()
                     labelViews.append(milestoneLabelView)
                     milestoneLabelViews.append(milestoneLabelView)
-                    viewDict[currentIndexPath] = milestoneLabelView
+//                    viewDict[currentIndexPath] = milestoneLabelView
 
                     addSubview(milestoneView)
                     addSubview(milestoneLabelView)

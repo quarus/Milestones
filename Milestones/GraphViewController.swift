@@ -96,8 +96,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             clipView.registerForBoundsChangedNotifications()
             clipView.delegate = self
         }
-        
         applyZoomLevel(.month)
+        
     }
     
     func updateViews() {
@@ -108,6 +108,12 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         verticalRulerView?.updateFor(timelines: timelines)
         
         timelinesAndGraphicsView?.reloadData()
+                
+        if let selectedMilestone = dataModel()?.selectedMilestone {
+            if let path = dataModel()?.selectedGroup?.indexPathFor(milestone: selectedMilestone) {
+                timelinesAndGraphicsView?.selectMilestoneAt(indexPath: path)
+            }
+        }
     }
     
     
@@ -117,7 +123,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         //This casting chain is a workaround (?): https://bugs.swift.org/browse/SR-3871
         guard let dependencies = representedObject as? AnyObject as? Dependencies else {return nil}
         return dependencies.stateModel
-        
     }
     
     private func timelineHorizontalCalculator() -> HorizontalCalculator? {
@@ -125,7 +130,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         //This casting chain is a workaround (?): https://bugs.swift.org/browse/SR-3871
         var dependencies = representedObject as? AnyObject as? Dependencies
         return dependencies?.xCalculator
-
     }
     
     private func timelineVerticalCalculator() -> VerticalCalculator? {
@@ -133,7 +137,6 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
         //This casting chain is a workaround (?): https://bugs.swift.org/browse/SR-3871
         var dependencies = representedObject as? AnyObject as? Dependencies
         return dependencies?.yCalculator
-        
     }
 
     //MARK: DataObserverProtocol
@@ -148,19 +151,8 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
     func didChangeSelectedTimeline(_ selectedTimelines: [Timeline]) {}
     
     func didChangeSelectedMilestone(_ milestone :Milestone?){
-        guard let model = pageModel else {return}
-        
-        if let date = milestone?.date {
-            if !model.clipViewContains(date: date) {
-                centerAroundDate(date)
-            }
 
-            if milestone != nil {
-                if let path = dataModel()?.selectedGroup?.indexPathFor(milestone: milestone!) {
-                    timelinesAndGraphicsView?.selectMilestoneAt(indexPath: path)
-                }
-            }
-        }
+        selectAndCenterMilestone()
     }
     
     func didChangeMarkedTimeline(_ markedTimeline: Timeline?) {
@@ -253,6 +245,21 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
 
         //Update all views
         centerAroundDate(currentCenterDate)
+    }
+    
+    func selectAndCenterMilestone() {
+        guard let model = pageModel else {return}
+        guard let selectedMilestone = dataModel()?.selectedMilestone else {return}
+        
+        if let date = selectedMilestone.date {
+            if !model.clipViewContains(date: date) {
+                centerAroundDate(date)
+            }
+        }
+            
+        if let path = dataModel()?.selectedGroup?.indexPathFor(milestone: selectedMilestone) {
+                timelinesAndGraphicsView?.selectMilestoneAt(indexPath: path)
+        }
     }
 }
 

@@ -16,6 +16,13 @@ class MilestoneView: GraphicView {
     private(set) var iconGraphic: IconGraphic = IconGraphic()
     private(set) var dateLabel: LabelGraphic = LabelGraphic()
     
+    var isSelected: Bool = false {
+        didSet {
+            iconGraphic.isSelected = isSelected
+            self.needsDisplay = true
+        }
+    }
+    
     init(milestone: MilestoneProtocol) {
         super.init(frame: NSMakeRect(0, 0, length, 50))
         backgroundColor = .clear
