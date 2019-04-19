@@ -308,8 +308,16 @@ extension GraphViewController: TimeGraphDataSource, TimeGraphDelegate {
     
     func timeGraph(graph: TimeGraph, didSelectMilestoneAt indexPath: IndexPath) {
         guard let selectedGroup = dataModel()?.selectedGroup else {return}
+
+        var selectedTimeline: Timeline?
+        if indexPath.count > 1 {
+            selectedTimeline = selectedGroup.timelines?.array[indexPath[0]] as? Timeline
+        }
+
         if let milestone = selectedGroup.milestoneAt(indexPath: indexPath) {
             dataModel()?.selectedMilestone = milestone
+            dataModel()?.markedDate = milestone.date
+            dataModel()?.markedTimeline = selectedTimeline
             timelinesAndGraphicsView?.selectMilestoneAt(indexPath: indexPath)
         }
     }
