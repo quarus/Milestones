@@ -32,7 +32,7 @@ class MilestoneView: GraphicView {
         iconView.backgroundColor = .clear
         iconView.graphics.append(iconGraphic)
         
-        setupDateLabelFor(date: Date())
+        setupDateLabelFor(date: milestone.date)
         let labelView = GraphicView(frame: NSMakeRect(length/2.0 - dateLabel.bounds.size.width/2.0,
                                                       iconSize,
                                                       dateLabel.bounds.size.width,
