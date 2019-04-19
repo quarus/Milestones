@@ -118,10 +118,4 @@ class OverlapCorrector {
     }
 }
 
-extension OverlapCorrector {
-    
-    func correctOverlapFor(_ overlappables: inout [Overlappable]) {
-        horizontallyCorrectOverlapFor(&overlappables)
-    }
-}
 

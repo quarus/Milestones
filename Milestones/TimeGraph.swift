@@ -279,7 +279,7 @@ class TimeGraph: GraphicView {
                     }
                 } //milestones
                 let overlapCorrector = OverlapCorrector()
-                overlapCorrector.correctOverlapFor(&labelViews)
+                overlapCorrector.horizontallyCorrectOverlapFor(&labelViews)
 
             } // timelines
         }
