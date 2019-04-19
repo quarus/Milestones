@@ -16,7 +16,6 @@
 		AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F1932025F71F0057EF3F /* Exporter.swift */; };
 		AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */; };
 		AC0FCB9F1FA3902300E803A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */; };
-		AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC10BEF92039B75700D4552A /* Zoom.swift */; };
 		AC1181591FFEC22D00BBC024 /* TimelineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */; };
 		AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12813921BD7238006952D8 /* PageModelTests.swift */; };
 		AC12813D21BD73FC006952D8 /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC12813C21BD73FC006952D8 /* PageModel.swift */; };
@@ -55,7 +54,6 @@
 		AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5246E91CEC19A9003B4978 /* Graphic.swift */; };
 		AC52A2232234F4FE00B7A44E /* TimeGraphBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */; };
 		AC52A22822351F3300B7A44E /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC52A22722351F3300B7A44E /* MilestoneView.swift */; };
-		AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */; };
 		AC535A441FEECC6600DE5505 /* TimelinePositioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */; };
 		AC546B40203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */; };
 		AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */; };
@@ -112,7 +110,6 @@
 		AC00F1932025F71F0057EF3F /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
 		AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfoViewController.swift; sourceTree = "<group>"; };
 		AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		AC10BEF92039B75700D4552A /* Zoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zoom.swift; sourceTree = "<group>"; };
 		AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInfoViewController.swift; sourceTree = "<group>"; };
 		AC12813921BD7238006952D8 /* PageModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageModelTests.swift; sourceTree = "<group>"; };
 		AC12813C21BD73FC006952D8 /* PageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageModel.swift; sourceTree = "<group>"; };
@@ -153,7 +150,6 @@
 		AC5246E91CEC19A9003B4978 /* Graphic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Graphic.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC52A2222234F4FE00B7A44E /* TimeGraphBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeGraphBackground.swift; sourceTree = "<group>"; };
 		AC52A22722351F3300B7A44E /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
-		AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationProtocols.swift; sourceTree = "<group>"; };
 		AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelinePositioner.swift; sourceTree = "<group>"; };
 		AC546B3E203B5C4A007B9E30 /* ExportInfo+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		AC546B3F203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExportInfo+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -212,22 +208,24 @@
 		72A2ECB51E3E33A20056C8EF /* Milestones */ = {
 			isa = PBXGroup;
 			children = (
+				AC46310D207E7F3000312012 /* MilestoneTabViewController.swift */,
 				ACB592991E06F52E003945FE /* MilestoneTableViewCell.swift */,
 				AC1D7C4F21D0BC30009DBACE /* MilestoneTableCellModell.swift */,
 				AC7419821E17DAE100B4E00A /* MilestonesViewController.swift */,
 				AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */,
-				AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */,
 			);
 			name = Milestones;
 			sourceTree = "<group>";
 		};
-		72A2ECB61E3E33E10056C8EF /* Graphic */ = {
+		72A2ECB61E3E33E10056C8EF /* Timegraph & Timegraph related Views */ = {
 			isa = PBXGroup;
 			children = (
-				AC3A21851D65018800C0C682 /* GraphicView.swift */,
 				AC52A21E2234EFDA00B7A44E /* Timegraph */,
+				AC52A2242234FC7000B7A44E /* GraphicsSource */,
+				AC52A21F2234F02900B7A44E /* Markers & Labels */,
+				AC6B6867222A637400E3DA8A /* Rulers */,
 			);
-			name = Graphic;
+			name = "Timegraph & Timegraph related Views";
 			sourceTree = "<group>";
 		};
 		AC008B871D3BBF970086B54B /* Graphics */ = {
@@ -260,6 +258,7 @@
 		AC46310A207E6BC400312012 /* Adjustment */ = {
 			isa = PBXGroup;
 			children = (
+				AC3231841FAE17720046E940 /* MilestoneAdjustmentViewController.swift */,
 				AC46310B207E6BF500312012 /* AddAdjustmentViewController.swift */,
 			);
 			name = Adjustment;
@@ -279,21 +278,21 @@
 			path = TimelineCalculationTests;
 			sourceTree = "<group>";
 		};
-		AC5246E21CEC0F8B003B4978 /* Views & Windows */ = {
+		AC5246E21CEC0F8B003B4978 /* Views & ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC3A21851D65018800C0C682 /* GraphicView.swift */,
 				AC459EAA1E1709040073D657 /* MainWindowController.swift */,
 				AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */,
-				AC46310D207E7F3000312012 /* MilestoneTabViewController.swift */,
 				AC00F1922025D92D0057EF3F /* Export */,
 				72A2ECB51E3E33A20056C8EF /* Milestones */,
 				AC46310A207E6BC400312012 /* Adjustment */,
 				AC8B2EE21E1AA3DC00F9605E /* Groupsmanagement */,
 				AC8B2EE11E1AA33C00F9605E /* Timelines  */,
-				72A2ECB61E3E33E10056C8EF /* Graphic */,
+				72A2ECB61E3E33E10056C8EF /* Timegraph & Timegraph related Views */,
 				72CFD31D1E348E15002C6481 /* ProtocolsAndEnums.swift */,
 			);
-			name = "Views & Windows";
+			name = "Views & ViewControllers";
 			sourceTree = "<group>";
 		};
 		AC52A21E2234EFDA00B7A44E /* Timegraph */ = {
@@ -304,9 +303,6 @@
 				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
 				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
 				AC12813C21BD73FC006952D8 /* PageModel.swift */,
-				AC52A2242234FC7000B7A44E /* GraphicsSource */,
-				AC52A21F2234F02900B7A44E /* Markers & Labels */,
-				AC6B6867222A637400E3DA8A /* Rulers */,
 			);
 			name = Timegraph;
 			sourceTree = "<group>";
@@ -402,8 +398,8 @@
 			isa = PBXGroup;
 			children = (
 				AC00F190201BD3160057EF3F /* Config.swift */,
-				ACEBBCC11D28EFD600474B81 /* Grid */,
-				AC5246E21CEC0F8B003B4978 /* Views & Windows */,
+				ACEBBCC11D28EFD600474B81 /* Calculators */,
+				AC5246E21CEC0F8B003B4978 /* Views & ViewControllers */,
 				ACB7A7A61CE879A4005F4872 /* Datamodel */,
 				AC008B871D3BBF970086B54B /* Graphics */,
 				ACB7A7941CE87048005F4872 /* AppDelegate.swift */,
@@ -442,15 +438,13 @@
 			name = Datamodel;
 			sourceTree = "<group>";
 		};
-		ACEBBCC11D28EFD600474B81 /* Grid */ = {
+		ACEBBCC11D28EFD600474B81 /* Calculators */ = {
 			isa = PBXGroup;
 			children = (
 				AC4D24631FE66B2A005F6CCB /* TimelineCalculator.swift */,
 				AC535A431FEECC6600DE5505 /* TimelinePositioner.swift */,
-				AC535A411FEEC72800DE5505 /* CalculationProtocols.swift */,
-				AC10BEF92039B75700D4552A /* Zoom.swift */,
 			);
-			name = Grid;
+			name = Calculators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -571,7 +565,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41D6952D1E86C02B001FFD3E /* GroupViewController.swift in Sources */,
-				AC535A421FEEC72800DE5505 /* CalculationProtocols.swift in Sources */,
 				AC459EAB1E1709040073D657 /* MainWindowController.swift in Sources */,
 				AC758E9D21D4CDD1005B9A57 /* DateInterval+Extensions.swift in Sources */,
 				AC61CFE5222C26C600397607 /* TodayIndicatorView.swift in Sources */,
@@ -580,7 +573,6 @@
 				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
 				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
 				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
-				AC10BEFA2039B75700D4552A /* Zoom.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,
