@@ -18,11 +18,8 @@ class MilestoneTabViewController: NSTabViewController {
     override var representedObject: Any? {
         
         didSet {
-            for anItem in tabViewItems {
-                
-                if let vc = anItem.viewController {
-                    vc.representedObject = representedObject
-                }
+            tabViewItems.forEach { [unowned self] (item) in
+                item.viewController?.representedObject = self.representedObject
             }
         }
     }
