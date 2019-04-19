@@ -231,7 +231,6 @@
 		AC008B871D3BBF970086B54B /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */,
 				ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */,
 				AC1A588922358E0F004A166D /* NSView+Extension.swift */,
 				AC5246E91CEC19A9003B4978 /* Graphic.swift */,
@@ -298,6 +297,7 @@
 		AC52A21E2234EFDA00B7A44E /* Timegraph */ = {
 			isa = PBXGroup;
 			children = (
+				AC6E14BA1D846E09001B3AB6 /* OverlapCorrector.swift */,
 				AC2A1FD21FA4B41F00B3BF26 /* GraphViewController.swift */,
 				ACF15B8C1FC06CA200D9E136 /* ClipView.swift */,
 				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
