@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class LabelView: GraphicView, Overlappable {
+class LabelView: GraphicView {
     
     private var labelGraphic: LabelGraphic = LabelGraphic()
 
@@ -45,7 +45,9 @@ class LabelView: GraphicView, Overlappable {
         
         graphics.append(labelGraphic)
     }
-    
+}
+
+extension LabelView: Overlappable {
     //MARK. Overlappable Protocol
     var rect: NSRect {
         get {
@@ -54,5 +56,12 @@ class LabelView: GraphicView, Overlappable {
         set(newRect) {
             frame = newRect
         }
+    }
+}
+
+extension LabelView: LineGeneratorProtocol {
+    var position: CGPoint {        
+        return CGPoint(x: frame.origin.x + frame.size.width / 2.0,
+                       y: frame.origin.y + frame.size.height / 2.0)
     }
 }

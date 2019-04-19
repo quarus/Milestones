@@ -73,3 +73,10 @@ class MilestoneView: GraphicView {
         dateLabel.userInfo = self
     }
 }
+
+extension MilestoneView: LineGeneratorProtocol {    
+    var position: CGPoint {            
+        return CGPoint(x: frame.origin.x + frame.size.width / 2.0,
+                        y: frame.origin.y + frame.size.height / 2.0)
+    }
+}

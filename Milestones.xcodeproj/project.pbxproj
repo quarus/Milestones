@@ -14,6 +14,8 @@
 		AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */; };
 		AC00F191201BD3160057EF3F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F190201BD3160057EF3F /* Config.swift */; };
 		AC00F1942025F71F0057EF3F /* Exporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00F1932025F71F0057EF3F /* Exporter.swift */; };
+		AC02C2562269B554006FE274 /* LineGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02C2552269B554006FE274 /* LineGeneratorTests.swift */; };
+		AC02C2582269B726006FE274 /* LineGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC02C2572269B726006FE274 /* LineGenerator.swift */; };
 		AC0F4AF01FA7CB45003AA390 /* MilestoneInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */; };
 		AC0FCB9F1FA3902300E803A3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */; };
 		AC1181591FFEC22D00BBC024 /* TimelineInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */; };
@@ -108,6 +110,8 @@
 		AC008B8A1D3FEAD70086B54B /* VerticalRulerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VerticalRulerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		AC00F190201BD3160057EF3F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		AC00F1932025F71F0057EF3F /* Exporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exporter.swift; sourceTree = "<group>"; };
+		AC02C2552269B554006FE274 /* LineGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGeneratorTests.swift; sourceTree = "<group>"; };
+		AC02C2572269B726006FE274 /* LineGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineGenerator.swift; sourceTree = "<group>"; };
 		AC0F4AEF1FA7CB45003AA390 /* MilestoneInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneInfoViewController.swift; sourceTree = "<group>"; };
 		AC0FCB9E1FA3902300E803A3 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		AC1181581FFEC22D00BBC024 /* TimelineInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineInfoViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				AC12813921BD7238006952D8 /* PageModelTests.swift */,
 				AC4D246B1FE66EEE005F6CCB /* TimelineCalculationTests.swift */,
 				AC1D7C4D21D016AE009DBACE /* MilestoneTableViewModelTests.swift */,
+				AC02C2552269B554006FE274 /* LineGeneratorTests.swift */,
 				AC7BC6CA21D22BF100BD471D /* TimeIntervalFormatterTest.swift */,
 				AC711FEA223EA313006AB19A /* OverlapTests.swift */,
 			);
@@ -303,6 +308,7 @@
 				ACF15B8E1FCB26BD00D9E136 /* DocumentView.swift */,
 				AC235CAD1FED6E13001B25E9 /* TimeGraph.swift */,
 				AC12813C21BD73FC006952D8 /* PageModel.swift */,
+				AC02C2572269B726006FE274 /* LineGenerator.swift */,
 			);
 			name = Timegraph;
 			sourceTree = "<group>";
@@ -555,6 +561,7 @@
 				AC4D246C1FE66EEE005F6CCB /* TimelineCalculationTests.swift in Sources */,
 				AC12813B21BD7238006952D8 /* PageModelTests.swift in Sources */,
 				AC1D7C4E21D016AE009DBACE /* MilestoneTableViewModelTests.swift in Sources */,
+				AC02C2562269B554006FE274 /* LineGeneratorTests.swift in Sources */,
 				AC7BC6CB21D22BF100BD471D /* TimeIntervalFormatterTest.swift in Sources */,
 				AC235CA81FE83581001B25E9 /* DateTests.swift in Sources */,
 			);
@@ -573,6 +580,7 @@
 				AC008B8B1D3FEAD70086B54B /* VerticalRulerView.swift in Sources */,
 				AC235CAC1FEC10B9001B25E9 /* RectGraphic.swift in Sources */,
 				AC3A21861D65018800C0C682 /* GraphicView.swift in Sources */,
+				AC02C2582269B726006FE274 /* LineGenerator.swift in Sources */,
 				AC546B41203B5C4A007B9E30 /* ExportInfo+CoreDataProperties.swift in Sources */,
 				AC5246EA1CEC19A9003B4978 /* Graphic.swift in Sources */,
 				AC46310C207E6BF500312012 /* AddAdjustmentViewController.swift in Sources */,

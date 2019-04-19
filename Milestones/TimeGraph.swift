@@ -74,8 +74,8 @@ class TimeGraph: GraphicView {
     var staticDateMarker: DateMarkerView?
     
     var markedMilestoneView: MilestoneView?
-    var milestoneViews: [GraphicView] = [GraphicView]()
-    var milestoneLabelViews: [GraphicView] = [GraphicView]()
+    var milestoneViews: [MilestoneView] = [MilestoneView]()
+    var milestoneLabelViews: [LabelView] = [LabelView]()
     private var viewDict: [IndexPath:GraphicView] = [IndexPath:GraphicView]()
 
     //MARK: Life cycle
@@ -206,16 +206,19 @@ class TimeGraph: GraphicView {
 
         let numberOfTimelines = delegate?.timeGraphNumberOfTimelines(graph: self) ?? 0
         updateFrameFor(numberOfTimelines: numberOfTimelines)
-        
-        
+                
         graphics.removeAll()
+        
         for aView in milestoneViews {
             aView.removeFromSuperview()
         }
+        milestoneViews.removeAll()
         
         for aView in milestoneLabelViews {
             aView.removeFromSuperview()
         }
+        milestoneLabelViews.removeAll()
+        
         viewDict.removeAll()
         
         let bgGraphics = graphicsSource?.timeGraph(graph: self,
@@ -280,10 +283,18 @@ class TimeGraph: GraphicView {
                 } //milestones
                 let overlapCorrector = OverlapCorrector()
                 overlapCorrector.horizontallyCorrectOverlapFor(&labelViews)
-
+                
+                
+                
             } // timelines
         }
         
+        let lineGenerator = LineGenerator()
+        if let lineGraphics = lineGenerator.graphicsForStartPoints(milestoneLabelViews,
+                                                                   endPoints: milestoneViews) {
+            graphics.append(contentsOf: lineGraphics)
+        }
+
         setNeedsDisplay(bounds)
         
         checkAndPlaceStaticDateMarker()
