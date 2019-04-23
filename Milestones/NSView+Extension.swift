@@ -40,4 +40,8 @@ extension NSView {
         }
         return bounds
     }
+    
+    func removeAllSubViews() {
+        subviews.forEach({$0.removeFromSuperview()})
+    }
 }

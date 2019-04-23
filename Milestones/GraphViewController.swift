@@ -259,6 +259,7 @@ class GraphViewController :NSViewController, StateObserverProtocol, CoreDataNoti
             
         if let path = dataModel()?.selectedGroup?.indexPathFor(milestone: selectedMilestone) {
                 timelinesAndGraphicsView?.selectMilestoneAt(indexPath: path)
+            
         }
     }
 }

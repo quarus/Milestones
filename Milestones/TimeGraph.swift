@@ -141,7 +141,9 @@ class TimeGraph: GraphicView {
                     }
                 }
             } else {
-                labelView?.removeFromSuperview()
+                if labelView?.superview != nil {
+                    labelView?.removeFromSuperview()
+                }
             }
             labelView?.frame.origin = mouselocation
         }
@@ -206,7 +208,8 @@ class TimeGraph: GraphicView {
 
         let numberOfTimelines = delegate?.timeGraphNumberOfTimelines(graph: self) ?? 0
         updateFrameFor(numberOfTimelines: numberOfTimelines)
-                
+        
+        labelView?.removeFromSuperview()
         graphics.removeAll()
         
         for aView in milestoneViews {

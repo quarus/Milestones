@@ -236,7 +236,6 @@
 			isa = PBXGroup;
 			children = (
 				ACE6E2721D3814F100D0C0F7 /* NSRect+Extension.swift */,
-				AC1A588922358E0F004A166D /* NSView+Extension.swift */,
 				AC5246E91CEC19A9003B4978 /* Graphic.swift */,
 				AC1337AF1D293BBB00637527 /* LineGraphic.swift */,
 				AC46310F2081EF4C00312012 /* ArrowGraphic.swift */,
@@ -285,6 +284,7 @@
 		AC5246E21CEC0F8B003B4978 /* Views & ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC1A588922358E0F004A166D /* NSView+Extension.swift */,
 				AC3A21851D65018800C0C682 /* GraphicView.swift */,
 				AC459EAA1E1709040073D657 /* MainWindowController.swift */,
 				AC2A1FD01FA4978C00B3BF26 /* SplitViewController.swift */,
