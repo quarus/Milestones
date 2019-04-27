@@ -59,7 +59,13 @@ struct MilestoneTableCellModel : MilestoneTableCellDataSourceProtocol {
             cwString = "KW " + calendarWeekDateFormatter.string(from: date)
             
             if let date2 = nextDate {
-                let dateInterval = DateInterval(start: date, end: date2)
+                let dateInterval: DateInterval
+                if date < date2 {
+                    dateInterval = DateInterval(start: date, end: date2)
+                } else {
+                    dateInterval = DateInterval(start: date2, end: date)
+                }
+
                 if dateInterval.isDurationLongerThanOneDay() {
                     needsExpandedCell = true
                     timeIntervallString = DateInterval(start: date, end: date2).intervalString()
