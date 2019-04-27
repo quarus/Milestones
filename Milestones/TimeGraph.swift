@@ -279,8 +279,12 @@ class TimeGraph: GraphicView {
                                                                            adjustmentGraphicsFor: info, adjustments: adjustments,
                                                                            startDate: startDate,
                                                                            usingCalculator: xPositionCalculator)
-                        if adjustmentGraphics != nil {
-                            graphics.append(contentsOf: adjustmentGraphics!)
+                        if let adjGraphics = adjustmentGraphics{
+                            let yPosition = yPositionCalculator.yPositionForTimelineAt(index: timelineIdx)
+                            Graphic.translate(graphics: adjGraphics,
+                                            byX: 0.0,
+                                            byY: yPosition)
+                            graphics.append(contentsOf: adjGraphics)
                         }
                     }
                 } //milestones
