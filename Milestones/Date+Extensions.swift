@@ -47,7 +47,7 @@ extension Date {
         var dateComponents = calendar.dateComponents(requestedComponents, from: self)
 
         guard let month = dateComponents.month else {return nil}
-        dateComponents.month = month + 1
+        dateComponents.month = month.advanced(by: 1)
         dateComponents.day = 0
 
         return calendar.date(from: dateComponents)?.normalized()
