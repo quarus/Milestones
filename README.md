@@ -12,7 +12,7 @@ Track and visualize Milestone delays.
 ![Adjustments](/Images/Adjustments.png)
 
 ## Please Note
-Milestones is a little side project of mine and _very much_ "Work In Progess". Even though I use it for my own project management duties it still has quite a few bugs and issues. So, use at your own risk! Feedback and code contributions are welcome 🙂.
+Milestones is a little side project of mine and _very much_ "Work In Progess". Even though I use it for some of my own project management duties it still has quite a few bugs and issues. So, use at your own risk! Feedback and code contributions are welcome 🙂.
 
 ## License
 Milestones is released under the Mozilla Public License (MPL) 2.0.
