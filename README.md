@@ -1,11 +1,11 @@
 # Milestones
 A simple tool to keep track of milestones in a visual way. 
 
-![Timelines]!(/Images/Timeline.png)
+![Timelines](/Images/Timeline.png)
 
-![Timeline Management]!(/Images/TimelineManagement.png)
+![Timeline Management](/Images/TimelineManagement.png)
 
-![Adjustments]!(/Images/Adjustments.png)
+![Adjustments](/Images/Adjustments.png)
 
 ## Features
 * Put Milestones into different timelines, which can then be organized into one or more groups.
